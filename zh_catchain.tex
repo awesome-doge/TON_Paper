@@ -83,7 +83,8 @@
 \hfuzz=0.8pt
 
 \title{Catchain Consensus: An Outline}
-\author{Nikolai Durov}
+\author{Nikolai Durov\\
+TL: Dr Awesome Doge}
 \begin{document}
 
 %\pagestyle{myheadings}
@@ -303,90 +304,90 @@ f\bigl(f(\sigma_S,m),m'\bigr)=f\bigl(f(\sigma_S,m'),m\bigr)
 當 $S$ 是錐體且 $m$ 和 $m'$ 是兩個消息，滿足 $D_m\subset S$、$D_{m'}\subset S$、$m\not\in S$ 且 $m'\not\in S$ 時。因為在這種情況下，$S\cup{m}$、$S\cup{m'}$ 和 $S\cup{m,m'}$ 也是錐體，且 \eqref{eq:state.rec.x} 意味著 \eqref{eq:step.upd.comm} 兩側均等於 $\sigma_{S\cup{m,m'}}$。類似於 \ptref{sp:g.assoc}，$f$ 通常在更大的狀態類似值 $\tilde\Sigma$ 和消息類似值集合的乘積上被定義或部分定義；在更大的集合上，它可能展現出“可交換性”特徵 \eqref{eq:step.upd.comm}，也可能不展現。如果它有這個特徵，這可能對於依賴於 $\sigma_S$ 的算法的形式分析是有用的，但這個特性不是嚴格必要的。
 
 \nxsubpoint\emb{The state update algorithm}
-The state update algorithm (independently executed by each process $i$) employed by the catchain (actually by the higher-level BCP) uses $\sigma_\emptyset$, $f$ and $g$ as follows:
+Catchain（實際上是高級 BCP）使用 $\sigma_\emptyset$、$f$ 和 $g$ 來執行狀態更新算法（由每個進程 $i$ 獨立執行），其運作方式如下：
 \begin{itemize}
-\item The algorithm keeps track of all $\sigma_{D^+_m}$ for all messages $m$ delivered so far.
-\item The algorithm keeps track of $\sigma_{C_i}$, where $C_i$ is the current dependence cone, i.e., the set of all messages $m$ delivered (to the current process $i$). The initial value of $\sigma_{C_i}$ is $\sigma_\emptyset$.
-\item When a new message $m$ is delivered, the value of $\sigma_{D^m}$ is computed by a repeated application of $g$ since $D_m=\bigcup_{m'\in D_m}D^+_{m'}=\bigcup_{m'\in\Max(D_m)}D^+_{m'}$; therefore, if $\Max(D_m)=\{m'_1,\ldots,m'_k\}$, then
-  \begin{equation}\label{eq:merge.many}
-    \sigma_{D_m}=g\Bigl(\ldots g\bigl(g(\sigma_{D^+_{m'_1}},\sigma_{D^+_{m'_2}}),\sigma_{D^+_{m'_3}}\bigr),\ldots \sigma_{D^+_{m'_k}}\Bigr)\quad. 
-  \end{equation}
-The set $\Max(D_m)$ is explicitly listed in the header of message $m$ in some fixed order $m'_1$, \dots, $m'_k$; the above formula is applied with respect to this order (so the computation of $D_m$ is deterministic). The first element in this list always is the previous message of the sender of $m$, i.e., if $m=m_{i,s+1}$, then $m'_1=m_{i,s}$.
-\item After that, the value of $\sigma_{D^+_m}$ is computed by an application of $f$: $\sigma_{D^+_m}=f(\sigma_{D_m},m)$. This value is memorized for future use.
-\item Finally, when a new message $m$ is delivered to the current process $i$, thus updating $C_i$ to $C'_i:=C_i\cup\{m\}$, the algorithm uses the computed value $\sigma_{D^+_m}$ to update the current state
-  \begin{equation}
-    \sigma_{C'_i}=g(\sigma_{C_i},\sigma_{D^+_m})
-  \end{equation}
-  This state, however, is ``virtual'' in the sense that it can be slightly changed later (especially if $g$ is not commutative). Nevertheless, it is used to make some important decisions by the higher-level algorithm (BCP).
-\item Once a new message $m$ is generated and locally delivered, so that $C_i$ becomes equal to $D^+_m$, the previously computed value of $\sigma_{C_i}$ is discarded and replaced with $\sigma_{D^+_m}$ computed according to the general algorithm described above. If $g$ is not commutative or not associative (for example, it may happen that $g(x,y)$ and $g(y,x)$ are different but equivalent representations of the same state), then this might lead to a slight change of the current ``virtual'' state of process $i$.
-\item If the lower-level (catchain) protocol reports to the higher-level protocol that a certain process $j\not\in i$ is ``bad'' (i.e., $j$ is found out to have created a fork, cf.~\ptref{sp:bad.proc.set}, or to have knowingly endorsed a fork by another process, cf.~\ptref{sp:no.bad.accept}), then the current (virtual) state $\sigma_{C_i}$ is recomputed from scratch using the new set $C'_i=\bigcup_{\text{$m\in C_i$, $m$ was created by ``good'' process $k$}}D^+_m$ and the ``merge'' function $g$ applied to the set of $\sigma_{D^+_m}$ where $m$ runs through the set of last messages of the processes known to be good (or through the set of maximal elements of this set). The next created outbound message will depend only on the messages from $C'_i$.
+\item 算法跟踪到目前為止已經傳遞的所有消息 $m$ 的 $\sigma_{D^+m}$。
+\item 算法跟踪到 $\sigma{C_i}$，其中 $C_i$ 是當前依賴錐體，即所有傳遞給當前進程 $i$ 的消息 $m$ 的集合。$\sigma_{C_i}$ 的初始值為 $\sigma_\emptyset$。
+\item 當一個新的消息 $m$ 被傳遞時，由於 $D_m=\bigcup_{m'\in D_m}D^+{m'}=\bigcup{m'\in\Max(D_m)}D^+{m'}$，所以可以通過重複應用 $g$ 來計算 $\sigma{D^m}$。因此，如果 $\Max(D_m)={m'1,\ldots,m'k}$，則
+\begin{equation}\label{eq:merge.many}
+\sigma{D_m}=g\Bigl(\ldots g\bigl(g(\sigma{D^+{m'1}},\sigma{D^+{m'2}}),\sigma{D^+{m'3}}\bigr),\ldots \sigma{D^+{m'_k}}\Bigr)\quad.
+\end{equation}
+在某個固定的順序 $m'_1$，\dots，$m'k$ 中，消息 $m$ 的標題明確地列出了集合 $\Max(D_m)$，上述公式是針對此順序進行的（因此計算 $D_m$ 是確定性的）。此列表中的第一個元素始終是消息發送方的前一個消息，即如果 $m=m{i,s+1}$，則 $m'1=m{i,s}$。
+\item 然後，通過應用 $f$，計算 $\sigma_{D^+m}$ 的值：$\sigma{D^+m}=f(\sigma{D_m},m)$。此值被記錄下來以供將來使用。
+\item 最後，當一個新的消息 $m$ 被傳遞給當前進程 $i$，從而將 $C_i$ 更新為 $C'i:=C_i\cup{m}$ 時，算法使用計算出的值 $\sigma{D^+m}$ 來更新當前狀態
+\begin{equation}
+\sigma{C'i}=g(\sigma{C_i},\sigma_{D^+m})
+\end{equation}
+然而，這個狀態是“虛擬的”，因為稍後可能會稍微更改它（尤其是如果 $g$ 不是可交換的）。儘管如此，高級算法（BCP）仍然使用它來做出一些重要的決策。
+\item 當一個新的消息 $m$ 被生成並在本地傳遞，從而 $C_i$ 變為 $D^+m$，則先前計算出的 $\sigma{C_i}$ 的值被丟棄並替換為根據上述通用算法計算出的 $\sigma{D^+_m}$。如果 $g$ 不是可交換的或不是結合的（例如，可能發生 $g(x,y)$ 和 $g(y,x)$ 是不同但等效的表示同一個狀態的情況），則這可能會導致稍微更改進程 $i$ 的當前“虛擬”狀態。
+\item 若低層級（catchain）協議向高層級協議報告某個進程$j\not\in i$是「不良的」（即發現$j$已經建立分叉，參見\ptref{sp:bad.proc.set}，或者$j$明知其他進程建立分叉而予以支持，參見\ptref{sp:no.bad.accept}），那麼當前（虛擬）狀態$\sigma_{C_i}$會使用新的集合$C'i=\bigcup{\text{$m\in C_i$, $m$由「良好」進程$k$建立}}D^+m$重新計算，並將「合併」函數$g$應用於良好進程的最後消息集合（或該集合的極大元素集合）中的$\sigma{D^+_m}$集合。下一個創建的出站消息僅會取決於$C'_i$中的消息。
 \end{itemize}
   
 \nxsubpoint\emb{Necessity to know the internal state of the other processes}
-Formula \eqref{eq:merge.many} implies that process~$i$ must also keep track of $\sigma_{D^+_m}$ for all messages $m$, created by this process or not. However, this is possible since these internal states are also computed by appropriate applications of the update algorithm. Therefore, BCP computes and remembers all $\sigma_{D^+_m}$ as well.
+公式\eqref{eq:merge.many}意味著進程$i$必須跟踪所有由該進程創建的消息$m$的$\sigma_{D^+m}$，以及其他進程創建的消息的$\sigma{D^+m}$。然而，由於這些內部狀態也是通過更新算法的適當應用來計算的，因此這是可能的。因此，BCP也會計算和記憶所有的$\sigma{D^+_m}$。
 
 \nxsubpoint\emb{Function $f$ would suffice}
-Notice that the update algorithm applies $g$ only to compute $\sigma_{S\cup D^+_m}=g(\sigma_S,\sigma_{D^+_m})$ when $S$ is a cone containing $D_m$, but not containing~$m$. Therefore, every actual application of $g$ could have been replaced by an application of~$f$ satisfying the extended property \eqref{eq:state.rec.x}:
+請注意，更新算法只在$S$是包含$D_m$但不包含$m$的錐時才應用$g$來計算$\sigma_{S\cup D^+m}=g(\sigma_S,\sigma{D^+m})$。因此，每次實際應用$g$都可以被滿足擴展性質\eqref{eq:state.rec.x}的$f$所替代：
 \begin{equation}
-  \sigma_{S\cup D^+_m}=g(\sigma_S,\sigma_{D^+_m})=f(\sigma_S,m)
+\sigma{S\cup D^+m}=g(\sigma_S,\sigma{D^+_m})=f(\sigma_S,m)
 \end{equation}
-However, the update algorithm does not use this ``optimization'', because it would disable the more important optimizations described below in \ptref{sp:share.substr} and \ptref{sp:memoize}.
+但是，更新算法不使用這種「優化」，因為它會禁用下面在\ptref{sp:share.substr}和\ptref{sp:memoize}中描述的更重要的優化。
 
 \nxpoint\emb{The structure of the internal state}
-The structure of the internal state is optimized to make the {\em transition function\/ $f$} of~\eqref{eq:state.rec} and the {\em merge function\/ $g$} of~\eqref{eq:state.merge} as efficiently computable as possible, preferably without the need of potentially unbounded recursion (just some loops). This motivates the inclusion of additional components into the internal state (even if these components are computable from the remainder of the internal state), which have to be stored and updated as well. This process of including additional components is similar to that employed while solving problems using dynamic programming, or to that used while proving statements by mathematical (or structural) induction.
+內部狀態的結構被優化，以使得\eqref{eq:state.rec}中的{\em 過渡函數$f$}和\eqref{eq:state.merge}中的{\em 合併函數$g$}能夠盡可能高效地計算，最好不需要可能無限遞迴的過程（僅需要一些迴圈）。這促使將額外的組件納入內部狀態中（即使這些組件可以從內部狀態的其餘部分計算出來），這些組件也必須被存儲和更新。這個包含額外組件的過程類似於使用動態規劃求解問題時所使用的過程，或者類似於通過數學（或結構）歸納來證明陳述的過程。
 
 \nxsubpoint\emb{The internal state is a representation of a value of an abstract algebraic data type}\label{sp:state.node.tree}
-The internal representation of the internal state is essentially a (directed) tree (or rather a directed acyclic graph) or a collection of nodes; each node contains some immediate (usually integer) values and several pointers to other (previously constructed) nodes. If necessary, an extra {\em constructor tag\/} (a small integer) is added at the beginning of a node to distinguish between several possibilities. This structure is very similar to that used to represent values of abstract algebraic data types in functional programming languages such as Haskell.
+內部狀態的內部表示本質上是一棵（有向）樹（或者說是一個有向無環圖）或者一個節點集合；每個節點包含一些立即的（通常是整數）值和指向其他（之前建立的）節點的幾個指針。如果需要，可以在節點開頭添加一個額外的{\em 構造標籤/}（一個小整數）來區分幾種可能性。這個結構非常類似於用於表示抽象代數數據類型值的結構化編程語言（如Haskell）中的結構。
 
 \nxsubpoint\emb{The internal state is persistent}
-The internal state is {\em persistent}, in the sense that the memory used to allocate the nodes which are part of the internal state is never freed up while the catchain is active. Furthermore, the internal state of a catchain is actually allocated inside a huge contiguous memory buffer, and new nodes are always allocated at the end of the used portion of this buffer by advancing a pointer. In this way the references to other nodes from a node inside this buffer may be represented by an integer offset from the start of the buffer. Every internal state is represented by a pointer to its root node inside this buffer; this pointer can be also represented by an integer offset from the start of the buffer.
+內部狀態是{\em 持久的}，意味著在catchain活動期間，用於分配內部狀態中的節點的內存永遠不會被釋放。此外，catchain的內部狀態實際上是分配在一個巨大的連續內存緩衝區內，新節點總是在該緩衝區已使用部分的末尾進行分配，並通過移動指針進行。這樣，該緩衝區內一個節點對其他節點的引用可以由該節點與緩衝區開始處的整數偏移量來表示。每個內部狀態都是由一個指向其在此緩衝區內的根節點的指針來表示的；這個指針也可以用從緩衝區開始處的整數偏移量來表示。
 
 \nxsubpoint\emb{The internal state of a catchain is flushed to an append-only file}\label{sp:state.apponly.file}
-The consequence of the structure of the buffer used to store the internal states of a catchain explained above is that it is updated only by appending some new data at its end. This means that the internal state (or rather the buffer containing all the required internal states) of a catchain can be flushed to an append-only file, and easily recovered after a restart. The only other data that needs to be stored before restarts is the offset (from the start of the buffer, i.e., of this file) of the current state of the catchain. A simple key-value database can be used for this purpose.
+根據上述用於存儲catchain內部狀態的緩衝區結構，其結果是只有在其末尾添加一些新數據時才會更新。這意味著catchain的內部狀態（或者說包含所有所需內部狀態的緩衝區）可以刷新到僅追加的文件中，在重新啟動後很容易恢復。在重新啟動之前唯一需要存儲的其他數據是catchain當前狀態的偏移量（從緩衝區開始處或該文件的開始處測量）。可以使用簡單的鍵值數據庫來實現這個目的。
 
 \nxsubpoint\label{sp:share.substr}\emb{Sharing data between different states}
-It turns out that the tree (or rather the dag) representing the new state $\sigma_{S\cup\{m\}}=f(\sigma_S,m)$ shares large subtrees with the previous state $\sigma_S$, and, similarly, $\sigma_{S\cup T}=g(\sigma_S,\sigma_T)$ shares large subtrees with $\sigma_S$ and $\sigma_T$. The persistent structure used for representing the states in BCP makes it possible to reuse the same pointers inside the buffer for representing such shared data structures instead of duplicating them.
+結果發現，表示新狀態$\sigma_{S\cup{m}}=f(\sigma_S,m)$的樹（或者說是dag）與先前狀態$\sigma_S$共享大的子樹，同樣地，$\sigma_{S\cup T}=g(\sigma_S,\sigma_T)$與$\sigma_S$和$\sigma_T$共享大的子樹。在BCP中用於表示狀態的持久結構使得可以重複使用相同的指針來表示這些共享的數據結構，而不是將它們複製一份。
 
 \nxsubpoint\label{sp:memoize}\emb{Memoizing nodes}
-Another technique employed while computing new states (i.e., the values of function~$f$) is that of {\em memoizing new nodes}, also borrowed from functional programming languages. Namely, whenever a new node is constructed (inside the huge buffer containing all states for a specific catchain), its hash is computed, and a simple hash table is used to look up the latest node with the same hash. If a node with this hash is found, and it has the same contents, then the newly-constructed node is discarded and a reference to the old node with the same contents is returned instead. On the other hand, if no copy of the new node is found, then the hash table is updated, the end-of-buffer (allocation) pointer is advanced, and the pointer to the new node is returned to the caller.
+在計算新狀態（即函數$f$的值）時，使用的另一種技術是{\em 記憶化新節點}，這也是從功能編程語言中借鑒過來的。具體而言，每當構造一個新節點（在包含特定catchain所有狀態的巨大緩衝區內部），都會計算它的哈希值，並使用簡單的哈希表來查找具有相同哈希值的最新節點。如果找到具有相同內容的該哈希值的節點，則新構造的節點將被丟棄，而返回對具有相同內容的舊節點的引用。另一方面，如果沒有找到新節點的副本，那麼哈希表將被更新，緩衝區（分配）指針將被推進，並將新節點的指針返回給調用者。
 
-In this way if different processes end up making similar computations and having similar states, large portions of these states will be shared even if they are not directly related by application of function~$f$ as explained in~\ptref{sp:share.substr}.
+這樣，即使不直接通過應用函數$f$如\ptref{sp:share.substr}中所述相關，如果不同的進程最終進行相似的計算並具有相似的狀態，那麼這些狀態的大部分將被共享。
 
 \nxsubpoint\emb{Importance of optimization techniques}
-The optimization techniques \ptref{sp:share.substr} and \ptref{sp:memoize} used for sharing parts of different internal states inside the same catchain are drastically important for improving the memory profile and the performance of BCM in a large process group. The improvement is several orders of magnitude in groups of $N\approx100$ processes. Without these optimizations BCM would not be fit for its intended purpose (BFT consensus on new blocks generated by validators in the TON Blockchain).
+用於在同一個catchain內部共享不同內部狀態的部分的優化技術\ptref{sp:share.substr}和\ptref{sp:memoize}對於改善BCM在大型進程組中的內存占用和性能具有極其重要的作用。在$N\approx100$的進程組中，改進的幅度可以達到數個數量級。如果沒有這些優化，BCM將無法適用於其預定的目的（在TON區塊鏈中由驗證器生成新塊的BFT共識）。
 
 \nxsubpoint\emb{Message $m$ contains a hash of state $\sigma_{D^+_m}$}
-Every message $m$ contains a (Merkle) hash of (the abstract representation of) the corresponding state $\sigma_{D^+_m}$. Very roughly, this hash is computed recursively using the tree of nodes representation of~\ptref{sp:state.node.tree}: all node references inside a node are replaced with (recursively computed) hashes of the referred nodes, and a simple 64-bit hash of the resulting byte sequence is computed. This hash is also used for memoization as described in \ptref{sp:memoize}.
+每個消息$m$都包含相應狀態$\sigma_{D^+_m}$的（Merkle）哈希值。粗略地說，使用\ptref{sp:state.node.tree}中的節點樹表示遞歸地計算此哈希值：節點內的所有節點引用都被替換為所引用節點的（遞歸計算的）哈希值，然後計算結果字節序列的簡單64位哈希值。這個哈希值也用於如\ptref{sp:memoize}所述的記憶化。
 
-The purpose of this field in messages is to provide a sanity check for the computations of $\sigma_{D^+_m}$ performed by different processes (and possibly by different implementations of the state update algorithm): once $\sigma_{D^+_m}$ is computed for a newly-delivered message $m$, the hash of computed $\sigma_{D^+_m}$ is compared to the value stored in the header of~$m$. If these values are not equal, an error message is output into an error log (and no further actions are taken by the software). These error logs can be examined to detect bugs or incompatibilities between different versions of BCP.
+消息中此字段的目的是對不同進程（以及可能是狀態更新算法的不同實現）對$\sigma_{D^+m}$的計算進行健全性檢查：一旦為新交付的消息$m$計算了$\sigma{D^+m}$，則比較計算出的$\sigma{D^+_m}$的哈希值與$m$的標頭中存儲的值是否相等。如果這些值不相等，則在錯誤日誌中輸出錯誤消息（軟件不再執行其他操作）。可以檢查這些錯誤日誌以檢測BCP不同版本之間的錯誤或不兼容性。
 
 \nxpoint\emb{State recovery after restart or crashes}
-A catchain is typically used by the BCP for several minutes; during this period, the program (the validator software) running the Catchain protocol may be terminated and restarted, either deliberately (e.g., because of a scheduled software update) or unintentionally (the program might crash because of a bug in this or some other subsystem, and be restarted afterwards). One way of dealing with this situation would be to ignore all catchains not created after the last restart. However, this would lead to some validators not participating in creating any blocks for several minutes (until the next catchain instances are created), which is undesirable. Therefore, a catchain state recovery protocol is run instead after every restart, so that the validator can continue participating in the same catchain.
+Catchain通常由BCP使用幾分鐘；在此期間，運行Catchain協議的程序（驗證器軟件）可能會被終止並重新啟動，無論是故意（例如，因為計劃中的軟件更新）還是意外地（該程序可能會因此或某些其他子系統中的錯誤而崩潰，然後重新啟動）。處理這種情況的一種方法是忽略所有在上次重新啟動之後未創建的catchain。但是，這將導致一些驗證器在幾分鐘內不參與任何塊的創建（直到創建下一個catchain實例），這是不希望的。因此，在每次重新啟動後，運行catchain狀態恢復協議，以便驗證器可以繼續參與同一個catchain。
 
 \nxsubpoint\emb{Database of all delivered messages}\label{sp:msg.db}
-To this end, a special database is created for each active catchain. This database contains all known and delivered messages, indexed by their identifiers (hashes). A simple key-value database suffices for this purpose. The hash of the most recent outbound message $m=m_{i,s}$ generated by the current process $i$ is also stored in this database. After restart, all messages up to $m$ are recursively delivered in proper order (in the same way as if all these messages had been just received from the network in an arbitrary order) and processed by the higher-level protocol, until $m$ finally is delivered, thus recovering the current state.
+為此，為每個活動的catchain創建一個特殊的數據庫。此數據庫包含所有已知和傳遞的消息，按其標識符（哈希值）進行索引。為此，一個簡單的鍵值數據庫就足夠了。還將存儲在此數據庫中的當前進程$i$生成的最新出站消息$m=m_{i,s}$的哈希值。重新啟動後，所有直到$m$的消息都按正確的順序遞歸性地傳遞（就像如果這些消息剛從網絡以任意順序接收到一樣），並由更高級別的協議進行處理，直到$m$最終被傳遞，從而恢復當前狀態。
 
 \nxsubpoint\emb{Flushing new messages to disk}\label{sp:new.msg.flush}
-We have already explained in~\ptref{sp:cc.msg.prop} that newly-created messages are stored in the database of all delivered messages (cf.~\ptref{sp:msg.db}) and the database is flushed to disk before the new message is sent to all network neighbors. In this way we can be sure that the message cannot be lost if the system crashes and is restarted, thus avoiding the creation of involuntary forks.
+如\ptref{sp:cc.msg.prop}所述，新創建的消息存儲在所有已傳遞消息的數據庫中（參見\ptref{sp:msg.db}），並在將新消息發送到所有網絡鄰居之前將數據庫刷新到磁盤上。通過這種方式，我們可以確保如果系統崩潰並重新啟動，消息不會丟失，從而避免意外創建分支。
 
 \nxsubpoint\emb{Avoiding the recomputation of states $\sigma_{D^+_m}$}
-An implementation might use an append-only file containing all previously computed states as described in~\ptref{sp:state.apponly.file} to avoid recomputing all states after restart, trading off disk space for computational power. However, the current implementation does not use this optimization.
+實現可以使用包含所有先前計算狀態的追加文件，如\ptref{sp:state.apponly.file}所述，以避免在重新啟動後重新計算所有狀態，以犧牲磁盤空間換取計算能力。然而，當前的實現沒有使用這種優化。
 
 \nxpoint\emb{High-level description of Block Consensus Protocol}\label{p:bcp.descr}
-Now we are ready to present a high-level description of the Block Consensus Protocol employed by TON Blockchain validators to generate and achieve consensus on new blockchain blocks. Essentially, it is a three-phase commit protocol that runs over a catchain (an instance of the Catchain protocol), which is used as a ``hardened'' message broadcast system in a process group.
+現在我們準備介紹 TON 區塊鏈驗證器使用的區塊共識協議的高級描述，以生成並在新區塊鏈塊上實現共識。基本上，這是一個三階段提交協議，運行在一個 Catchain 上（Catchain 協議的一個實例），它被用作一個在一個進程組中“硬化”的消息廣播系統。
 
 \nxsubpoint\emb{Creation of new catchain messages}
-Recall that the lower-level Catchain protocol does not create broadcast messages on its own (with the only exception being service broadcasts with fork proofs, cf.~\ptref{sp:no.bad.accept}). Instead, when a new message needs to be created, the higher-level protocol (BCP) is asked to do this by invoking a callback. Apart from that, the creation of new messages may be triggered by changes in the current virtual state and by timer alarms.
+回想一下，低級 Catchain 協議不會自己創建廣播消息（唯一的例外是具有分叉證明的服務廣播，參見\ptref{sp:no.bad.accept}）。相反，當需要創建新消息時，通過調用回調來請求高級協議（BCP）進行此操作。此外，新消息的創建可能會受到當前虛擬狀態的變化和定時器警報的觸發。
 
 \nxsubpoint\emb{Payload of catchain messages}\label{sp:payload}
-In this way the payload of catchain messages is always determined by the higher level protocol, such as BCP. For BCP, this payload consists of
+這樣，catchain 消息的有效負載始終由更高層級的協議（例如 BCP）確定。對於 BCP，該有效負載包括以下內容：
 \begin{itemize}
-\item Current Unix time. It must be non-decreasing on subsequent messages of the same process. (If this restriction is violated, all processes processing this message will tacitly replace this Unix time by the maximum Unix time seen in previous messages of the same sender.)
-\item Several (zero or more) {\em BCP events\/} of one of the admissible types listed below.
+\item 當前的 Unix 時間。在同一進程的後續消息中，它必須不斷增加。（如果違反此限制，處理此消息的所有進程將默認地將此 Unix 時間替換為相同發送者的先前消息中看到的最大 Unix 時間。）
+\item 一個或多個 {\em BCP 事件}，可以是以下任一類型。
 \end{itemize}
 
 \nxsubpoint\emb{BCP events}
-We have just explained that the payload of a catchain message contains several (possibly zero) BCP events. Now we list all admissible BCP event types.
+我們剛剛解釋了 catchain 消息的有效負載包含幾個（可能為零）BCP事件。現在我們列出所有允許的BCP事件類型。
 \begin{itemize}
 \item $\Submit(\wround,\wcandidate)$ --- suggest a new block candidate
 \item $\Approve(\wround,\wcandidate,\wsignature)$ --- a block candidate has passed local validation
