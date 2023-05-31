@@ -3,7 +3,7 @@ name: Build and Release PDFs
 on:
   push:
     branches:
-      - main  # or the name of your default branch
+      - main  # change this to your default branch if it's not 'main'
 
 jobs:
   build_and_release:
@@ -13,19 +13,19 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Setup LaTeX
-      uses: dante-ev/latex-action@latest
-      with:
-        root_file: main.tex  # This is not used but required by the action
+    - name: Install TeX Live
+      run: |
+        sudo apt-get -y update
+        sudo apt-get -y install texlive texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
 
     - name: Compile all tex files
       run: |
-        mkdir pdfs
-        for texfile in $(find . -name "*.tex"); do
+        mkdir output
+        for texfile in en_catchain.tex en_fiftbase.tex en_tblkch.tex en_ton.tex en_tvm.tex zh_catchain.tex zh_fiftbase.tex zh_tblkch.tex zh_ton.tex zh_tvm.tex; do
           # Get the name without the extension
           base_name=$(basename $texfile .tex)
-          pdflatex -output-directory=pdfs -interaction=nonstopmode -halt-on-error $texfile
-          mv pdfs/$base_name.pdf pdfs/${base_name}_$(date +%Y%m%d).pdf
+          pdflatex -output-directory=output -interaction=nonstopmode -halt-on-error $texfile
+          mv output/$base_name.pdf output/${base_name}_$(git rev-parse --short HEAD).pdf
         done
 
     - name: Create Release
@@ -34,17 +34,19 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        tag_name: v${{ github.run_number }}
+        release_name: Release ${{ github.run_number }}
         draft: false
         prerelease: false
 
-    - name: Upload Release Assets
+    - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} 
-        asset_path: pdfs/*.pdf
-        asset_name: ${{ steps.compile.outputs.name }}
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object.
+        asset_path: output/en_catchain_$(git rev-parse --short HEAD).pdf
+        asset_name: en_catchain_$(git rev-parse --short HEAD).pdf
         asset_content_type: application/pdf
+
+    # Repeat the above step for each of your tex files, changing the asset_path and asset_name accordingly
