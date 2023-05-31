@@ -13,10 +13,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Setup TeX Live
-      uses: xu-cheng/latex-action@v2
+    - name: Setup LaTeX
+      uses: dante-ev/latex-action@2.0.0
       with:
-        profile: minimal
+        root_file: main.tex  # This is not used but required by the action
 
     - name: Compile all tex files
       run: |
