@@ -1,4 +1,4 @@
-name: Build and Release
+name: Build LaTeX and Release PDF
 
 on:
   push:
@@ -13,23 +13,25 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install dependencies
+    - name: Install TeX dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-science
+        sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-science texlive-xetex texlive-fonts-recommended texlive-lang-chinese
+        sudo apt-get install -y fonts-wqy-microhei  # 安裝一些中文字體
 
-    - name: Compile tex files
+    - name: Compile tex files to pdf
       run: |
-        pdflatex en_ton.tex
-        pdflatex en_tvm.tex
-        pdflatex en_tblkch.tex
-        pdflatex en_catchain.tex
-        pdflatex en_fiftbase.tex
-        pdflatex zh_ton.tex
-        pdflatex zh_tvm.tex
-        pdflatex zh_tblkch.tex
-        pdflatex zh_catchain.tex
-        pdflatex zh_fiftbase.tex
+        for file in en_ton en_tvm en_tblkch en_catchain en_fiftbase zh_ton zh_tvm zh_tblkch zh_catchain zh_fiftbase; do
+            pdflatex "$file.tex"
+        done
+
+    - name: Commit PDF files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add *.pdf
+        git commit -m "Add generated PDFs" || echo "No changes to commit"
+        git push
 
     - name: Create Release
       id: create_release
@@ -37,12 +39,12 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        tag_name: release-${{ github.sha }}
+        release_name: Release ${{ github.sha }}
         draft: false
         prerelease: false
 
-    - name: Upload PDF to Release
+    - name: Upload PDFs to Release
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -51,5 +53,4 @@ jobs:
         asset_path: ./en_ton.pdf
         asset_name: en_ton.pdf
         asset_content_type: application/pdf
-        # Add similar steps for other PDF files
-
+        # Add similar steps for other PDF files. You can loop them in a similar manner or add them manually.
