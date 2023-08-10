@@ -13,28 +13,26 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install TeX dependencies
+    - name: Install TeX and fonts
       run: |
         sudo apt-get update
-        sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-science texlive-xetex texlive-fonts-recommended texlive-lang-chinese
-        sudo apt-get install -y fonts-wqy-microhei  # 安裝一些中文字體   
-    - name: Install SimSun font
-      run: |
+        sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-science texlive-xetex texlive-fonts-recommended texlive-lang-chinese fonts-wqy-microhei
         sudo mkdir -p /usr/share/fonts/truetype/custom
         sudo cp fonts/SimSun.ttf /usr/share/fonts/truetype/custom/
         sudo fc-cache -fv
+      
     - name: Compile tex files to pdf
       run: |
         for file in en_ton en_tvm en_tblkch en_catchain en_fiftbase zh_ton zh_tvm zh_tblkch zh_catchain zh_fiftbase; do
-          xelatex "$file.tex"  # First pass for auxiliary files
-          xelatex "$file.tex"  # Second pass for ToC and final PDF
+          if git diff --name-only HEAD~1 | grep "$file.tex"; then
+            xelatex "$file.tex"
+            xelatex "$file.tex"
+          fi
         done
 
     - name: Remove auxiliary LaTeX files
       run: |
-        for file in en_ton en_tvm en_tblkch en_catchain en_fiftbase zh_ton zh_tvm zh_tblkch zh_catchain zh_fiftbase; do
-          rm -f "$file.aux" "$file.log" "$file.out" "$file.toc"
-        done
+        rm -f *.aux *.log *.out *.toc
 
     - name: Commit PDF files
       run: |
@@ -44,7 +42,6 @@ jobs:
         git commit -m "Add generated PDFs" || echo "No changes to commit"
         git push
   
-
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
