@@ -1,6 +1,12 @@
 # The Open Network 白皮書翻譯專案
 
 [![建立並發布PDF](https://github.com/awesome-doge/TON_Paper/actions/workflows/build_and_release.yml/badge.svg)](https://github.com/awesome-doge/TON_Paper/actions/workflows/build_and_release.yml)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/awesome-doge/TON_Paper)
+![GitHub contributors](https://img.shields.io/github/contributors/awesome-doge/TON_Paper)
+![GitHub issues](https://img.shields.io/github/issues/awesome-doge/TON_Paper)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/awesome-doge/TON_Paper)
+![GitHub license](https://img.shields.io/github/license/awesome-doge/TON_Paper)
+
 
 此專案旨在為 The Open Network 白皮書提供高品質的翻譯和編譯版本，以促進全球社群的接觸和了解。
 
