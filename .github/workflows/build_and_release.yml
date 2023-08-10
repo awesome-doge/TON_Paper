@@ -18,7 +18,14 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-science texlive-xetex texlive-fonts-recommended texlive-lang-chinese
         sudo apt-get install -y fonts-wqy-microhei  # 安裝一些中文字體
-
+    
+    - name: Install SimSun font
+      run: |
+        sudo mkdir -p /usr/share/fonts/truetype/custom
+        sudo cp fonts/SimSun.ttf /usr/share/fonts/truetype/custom/
+        sudo fc-cache -fv
+      
+      
     - name: Compile tex files to pdf
       run: |
         for file in en_ton en_tvm en_tblkch en_catchain en_fiftbase zh_ton zh_tvm zh_tblkch zh_catchain zh_fiftbase; do
