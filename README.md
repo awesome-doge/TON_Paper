@@ -1,41 +1,29 @@
-# The Open Network Paper Translation Project
+#  The Open Network 論文翻譯專案
 
-[![Build and Release PDFs](https://github.com/awesome-doge/TON_Paper/actions/workflows/main.yml/badge.svg)](https://github.com/awesome-doge/TON_Paper/actions/workflows/main.yml)
+[![建立並發布PDF](https://github.com/awesome-doge/TON_Paper/actions/workflows/main.yml/badge.svg)](https://github.com/awesome-doge/TON_Paper/actions/workflows/main.yml)
 
-Welcome to the repository for the translation and compilation of The Open Network's whitepapers. The goal of this project is to make these foundational documents more accessible to the global community by providing high-quality translations and PDF compilations.
+歡迎來到 The Open Network 白皮書的翻譯和編譯資料庫。此專案的目標是通過提供高品質的翻譯和PDF編譯版本，使這些基礎文件更容易被全球社群所接觸和了解。
 
-## Available Documents
+## 可用文件
 
-In this repository, we provide both the original English documents and their Chinese translations. The list of documents includes:
+|  文件名稱  |   英文版本   |   中文版本   |
+|:---------:|:-----------:|:-----------:|
+| Catchain  | [連結](https://github.com/awesome-doge/TON_Paper/blob/main/en_catchain.tex) | [連結](https://github.com/awesome-doge/TON_Paper/blob/main/zh_catchain.tex) |
+| Fiftbase  | [連結](https://github.com/awesome-doge/TON_Paper/blob/main/en_fiftbase.tex) | [連結](https://github.com/awesome-doge/TON_Paper/blob/main/zh_fiftbase.tex) |
+| Tblkch    | [連結](https://github.com/awesome-doge/TON_Paper/blob/main/en_tblkch.tex) | [連結](https://github.com/awesome-doge/TON_Paper/blob/main/zh_tblkch.tex) |
+| TON       | [連結](https://github.com/awesome-doge/TON_Paper/blob/main/en_ton.tex) | [連結](https://github.com/awesome-doge/TON_Paper/blob/main/zh_ton.tex) |
+| TVM       | [連結](https://github.com/awesome-doge/TON_Paper/blob/main/en_tvm.tex) | [連結](https://github.com/awesome-doge/TON_Paper/blob/main/zh_tvm.tex) |
 
-- Catchain
-  - [English Version](https://github.com/awesome-doge/TON_Paper/blob/main/en_catchain.tex)
-  - [Chinese Version](https://github.com/awesome-doge/TON_Paper/blob/main/zh_catchain.tex)
-- Fiftbase
-  - [English Version](https://github.com/awesome-doge/TON_Paper/blob/main/en_fiftbase.tex)
-  - [Chinese Version](https://github.com/awesome-doge/TON_Paper/blob/main/zh_fiftbase.tex)
-- Tblkch
-  - [English Version](https://github.com/awesome-doge/TON_Paper/blob/main/en_tblkch.tex)
-  - [Chinese Version](https://github.com/awesome-doge/TON_Paper/blob/main/zh_tblkch.tex)
-- TON
-  - [English Version](https://github.com/awesome-doge/TON_Paper/blob/main/en_ton.tex) ㄎ
-  - [Chinese Version](https://github.com/awesome-doge/TON_Paper/blob/main/zh_ton.tex)
-- TVM
-  - [English Version](https://github.com/awesome-doge/TON_Paper/blob/main/en_tvm.tex)
-  - [Chinese Version](https://github.com/awesome-doge/TON_Paper/blob/main/zh_tvm.tex)
+每個文件的`.tex`檔案在推送到主分支時，都會自動由我們的GitHub Actions工作流程編譯成PDF版本。
 
-Each document's `.tex` file is compiled into a PDF version automatically by our GitHub Actions workflow whenever changes are pushed to the main branch.
+## 已編譯的PDFs
 
-## Compiled PDFs
+每份文件的編譯PDF可以在這個資料庫的[發布區域](https://github.com/awesome-doge/TON_Paper/releases)找到。
 
-The compiled PDFs of each document can be found in the [Releases section](https://github.com/awesome-doge/TON_Paper/releases) of this repository.
+## 如何貢獻
 
-## Contributing
+歡迎各種貢獻！我們非常重視任何改善這些文件的翻譯或佈局的努力。要開始貢獻，請參考我們的[貢獻指南](CONTRIBUTING.md)。
 
-Contributions are welcome! We value any efforts to improve the translation or layout of these documents. To get started, please refer to our [Contribution Guide](CONTRIBUTING.md).
+## 授權
 
-## License
-
-All documents in this repository are licensed under the [MIT License](LICENSE).
-
-
+此資料庫中的所有文件都在[MIT授權](LICENSE)下授權。
