@@ -22,7 +22,7 @@ jobs:
     - name: Compile tex files to pdf
       run: |
         for file in en_ton en_tvm en_tblkch en_catchain en_fiftbase zh_ton zh_tvm zh_tblkch zh_catchain zh_fiftbase; do
-            pdflatex "$file.tex"
+          xelatex "$file.tex"
         done
 
     - name: Commit PDF files
