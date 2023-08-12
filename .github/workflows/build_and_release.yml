@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Install TeX and fonts
       run: |
@@ -24,10 +24,8 @@ jobs:
     - name: Compile tex files to pdf
       run: |
         for file in en_ton en_tvm en_tblkch en_catchain en_fiftbase zh_ton zh_tvm zh_tblkch zh_catchain zh_fiftbase; do
-          if git diff --name-only HEAD~1 | grep -q "$file.tex"; then
-            xelatex "$file.tex"
-            xelatex "$file.tex" # Compile twice to handle references correctly
-          fi
+          xelatex "$file.tex"  # First pass for auxiliary files
+          xelatex "$file.tex"  # Second pass for ToC and final PDF
         done
 
     - name: Remove auxiliary LaTeX files
