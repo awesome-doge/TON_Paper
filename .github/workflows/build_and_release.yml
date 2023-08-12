@@ -42,114 +42,16 @@ jobs:
         git commit -m "Add generated PDFs" || echo "No changes to commit"
         git push
   
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y%m%d%H%M%S')"
+      
+    - name: Create Release and Upload Assets
+      uses: ncipollo/release-action@v1
       with:
-        tag_name: release-${{ github.run_id }}
-        release_name: Release for ${{ github.run_number }} on ${{ github.event.commits[0].timestamp }}
-        draft: false
-        prerelease: false
-
-    - name: Upload en_ton.pdf to Release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./en_ton.pdf
-        asset_name: en_ton.pdf
-        asset_content_type: application/pdf
-
-    - name: Upload en_tvm.pdf to Release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./en_tvm.pdf
-        asset_name: en_tvm.pdf
-        asset_content_type: application/pdf
-
-    - name: Upload en_tblkch.pdf to Release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./en_tblkch.pdf
-        asset_name: en_tblkch.pdf
-        asset_content_type: application/pdf
-
-    - name: Upload en_catchain.pdf to Release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./en_catchain.pdf
-        asset_name: en_catchain.pdf
-        asset_content_type: application/pdf
-
-    - name: Upload en_fiftbase.pdf to Release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./en_fiftbase.pdf
-        asset_name: en_fiftbase.pdf
-        asset_content_type: application/pdf
-
-    - name: Upload zh_ton.pdf to Release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./zh_ton.pdf
-        asset_name: zh_ton.pdf
-        asset_content_type: application/pdf
-
-    - name: Upload zh_tvm.pdf to Release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./zh_tvm.pdf
-        asset_name: zh_tvm.pdf
-        asset_content_type: application/pdf
-
-    - name: Upload zh_tblkch.pdf to Release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./zh_tblkch.pdf
-        asset_name: zh_tblkch.pdf
-        asset_content_type: application/pdf
-
-    - name: Upload zh_catchain.pdf to Release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./zh_catchain.pdf
-        asset_name: zh_catchain.pdf
-        asset_content_type: application/pdf
-
-    - name: Upload zh_fiftbase.pdf to Release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./zh_fiftbase.pdf
-        asset_name: zh_fiftbase.pdf
-        asset_content_type: application/pdf
-  
+        body: "Release for latest PDFs."
+        artifacts: "pdf_output/*.pdf"
+        token: ${{ secrets.GITHUB_TOKEN }}
+        allowUpdates: true
+        tag: ${{ steps.date.outputs.date }}
+    
