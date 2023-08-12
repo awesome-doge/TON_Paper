@@ -1889,262 +1889,99 @@ TON基礎設施允許專門的輕量客戶端錢包和``ton-browser''桌面和�
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \appendix
-\myappendix{The TON Coin, or the Gram}\label{app:coins}
+\myappendix{TON Coin，又名Gram}\label{app:coins}
 
-The principal cryptocurrency of the TON Blockchain, and in particular
-of its masterchain and basic workchain, is the {\em TON Coin}, also
-known as the {\em Gram\/} (GRM). It is used to make deposits required
-to become a validator; transaction fees, gas payments (i.e.,
-smart-contract message processing fees) and persistent storage
-payments are also usually collected in Grams.
+TON區塊鏈的主要加密貨幣，特別是其主鏈和基本工作鏈，是{\em TON Coin}，也被稱為{\em Gram\/} (GRM)。它被用於進行成為驗證者所需的存款；交易費、gas支付（即，智能合約消息處理費）和持久存儲支付通常也以Gram收取。
 
-\nxpoint \embt(Subdivision and terminology.)  A {\em Gram\/} is
-subdivided into one billion ($10^9$) smaller units, called {\em
-  nanograms}, {\em ngrams} or simply {\em nanos}. All transfers and
-account balances are expressed as non-negative integer multiples of
-nanos. Other units include:
+\nxpoint \embt(Subdivision and terminology.)  一個{\em Gram\/}被細分為十億 ($10^9$) 更小的單位，稱為{\em nanograms}、{\em ngrams}或簡單地稱為{\em nanos}。所有的轉賬和賬戶餘額都表示為nanos的非負整數倍。其他單位包括：
 \begin{itemize}
-\item A {\em nano}, {\em ngram} or {\em nanogram} is the smallest
-  unit, equal to $10^{-9}$ Grams.
-\item A {\em micro\/} or {\em microgram\/} equals one thousand
-  ($10^3$) nanos.
-\item A {\em milli\/} is one million ($10^6$) nanos, or one thousandth
-  part ($10^{-3}$) of a Gram.
-\item A {\em Gram\/} equals one billion ($10^9$) nanos.
-\item A {\em kilogram}, or {\em kGram}, equals one thousand ($10^3$)
-  Grams.
-\item A {\em megagram}, or {\em MGram}, equals one million ($10^6$)
-  Grams, or $10^{15}$ nanos.
-\item Finally, a {\em gigagram}, or {\em GGram}, equals one billion
-  ($10^9$) Grams, or $10^{18}$ nanos.
+\item 一個{\em nano}、{\em ngram}或{\em nanogram}是最小的單位，等於 $10^{-9}$ Grams。
+\item 一個{\em micro\/}或{\em microgram\/}等於一千($10^3$) nanos。
+\item 一個{\em milli\/}等於一百萬 ($10^6$) nanos，或一個Gram的千分之一 ($10^{-3}$)。
+\item 一個{\em Gram\/}等於十億 ($10^9$) nanos。
+\item 一個{\em kilogram}、或{\em kGram}，等於一千 ($10^3$) Grams。
+\item 一個{\em megagram}、或{\em MGram}，等於一百萬 ($10^6$) Grams，或 $10^{15}$ nanos。
+\item 最後，一個{\em gigagram}、或{\em GGram}，等於十億 ($10^9$) Grams，或 $10^{18}$ nanos。
 \end{itemize}
 
-There will be no need for larger units, because the initial supply of
-Grams will be limited to five billion ($5\cdot10^9$) Grams (i.e., 5
-Gigagrams).
+不需要更大的單位，因為Gram的初始供應量將限制為五十億 ($5\cdot10^9$) Grams (即，5 Gigagrams)。
 
-\nxpoint \embt(Smaller units for expressing gas prices.)  If the
-necessity for smaller units arises, ``specks'' equal to $2^{-16}$
-nanograms will be used. For example, gas prices may be indicated in
-specks. However, the actual fee to be paid, computed as the product of
-the gas price and the amount of gas consumed, will be always rounded
-down to the nearest multiple of $2^{16}$ specks and expressed as an
-integer number of nanos.
+\nxpoint \embt(Smaller units for expressing gas prices.)  如果出現需要更小單位的必要性，將使用等於 $2^{-16}$ nanograms的``specks''。例如，gas價格可能以specks表示。然而，實際要支付的費用，計算為gas價格和消耗的gas量的乘積，將始終四捨五入到最接近的 $2^{16}$ specks的倍數，並表示為nanos的整數。
 
-\nxpoint \embt(Original supply, mining rewards and inflation.)  The
-total supply of Grams is originally limited to $5$ Gigagrams (i.e.,
-five billion Grams or $5\cdot10^{18}$ nanos).
 
-This supply will increase very slowly, as rewards to validators for
-mining new masterchain and shardchain blocks accumulate. These rewards
-would amount to approximately $20\%$ (the exact number may be adjusted
-in future) of the validator's stake per year, provided the validator
-diligently performs its duties, signs all blocks, never goes offline
-and never signs invalid blocks. In this way, the validators will have
-enough profit to invest into better and faster hardware needed to
-process the ever growing quantity of users' transactions.
+\nxpoint \embt(Original supply, mining rewards and inflation.)  Grams的總供應量原本限制為$5$ Gigagrams (即，五十億的Grams或$5\cdot10^{18}$ nanos)。
 
-We expect that at most $10\%$\footnote{The maximum total amount of
-  validator stakes is a configurable parameter of the blockchain, so
-  this restriction can be enforced by the protocol if necessary.} of
-the total supply of Grams, on average, will be bound in validator
-stakes at any given moment. This will produce an inflation rate of
-$2\%$ per year, and as a result, will double the total supply of Grams
-(to ten Gigagrams) in 35 years. Essentially, this inflation represents
-a payment made by all members of the community to the validators for
-keeping the system up and running.
+這一供應量將非常緩慢地增加，因為獎勵給驗證者挖掘新的主鏈和分片鏈區塊積累。這些獎勵大約會達到$20\%$ (確切的數字可能在未來進行調整)的驗證者的每年股份，只要驗證者努力履行其職責，簽署所有區塊，從不離線並且從不簽署無效的區塊。這樣，驗證者將有足夠的利潤投資於更好更快的硬體，以處理不斷增加的用戶交易量。
 
-On the other hand, if a validator is caught misbehaving, a part or all
-of its stake will be taken away as a punishment, and a larger portion
-of it will subsequently be ``burned'', decreasing the total supply of
-Grams. This would lead to deflation. A smaller portion of the fine may
-be redistributed to the validator or the ``fisherman'' who committed a
-proof of the guilty validator's misbehavior.
+我們預計最多$10\%$\footnote{驗證者股份的最大總量是區塊鏈的一個可配置參數，因此如果需要，該協議可以強制執行此限制。}的Grams總供應量，平均下來，將在任何給定時刻被驗證者股份綁定。這將產生一個$2\%$的每年的通脹率，並因此，在35年內將Grams的總供應量加倍(到十個Gigagrams)。從本質上講，這種通脹代表了由社區的所有成員支付給驗證者的款項，用於保持系統正常運行。
 
-\nxpoint\label{sp:gram.price} \embt(Original price of Grams.)  The
-price of the first Gram to be sold will equal approximately
-$\$0.1$ (USD). Every subsequent Gram to be sold (by the TON Reserve,
-controlled by the TON Foundation) will be priced one billionth higher
-than the previous one. In this way, the $n$-th Gram to be put into
-circulation will be sold at approximately
+另一方面，如果一個驗證者被抓到有不正當行為，其部分或全部的股份將被作為懲罰而扣除，並且其中的較大部分隨後將被“銷毀”，從而減少Grams的總供應量。這將導致通貨緊縮。罰款的一小部分可能會重新分配給驗證者或提交有罪驗證者不當行為證明的“漁夫”。
+
+\nxpoint\label{sp:gram.price} \embt(Original price of Grams.)  第一個要出售的Gram的價格將約等於$\$0.1$ (USD)。每一個接下來要被賣出的Gram (由TON儲備，由TON基金會控制) 都將比前一個價格高十億分之一。這樣，要放入流通的第$n$個Gram將以大約
 \begin{equation}\label{eq:gram.price}
   p(n)\approx 0.1\cdot (1+10^{-9})^n\quad\text{USD},
 \end{equation}
-or an approximately equivalent (because of quickly changing market
-exchange rates) amount of other (crypto)currencies, such as BTC or
-ETH.
+或其他(加密)貨幣的大約相等的金額（由於市場匯率迅速變化），如BTC或ETH，出售。
 
-\nxsubpoint\label{sp:exp.priced} \embt(Exponentially priced
-cryptocurrencies.)  We say that the Gram is an {\em exponentially
-  priced cryptocurrency}, meaning that the price of the $n$-th Gram to
-be put into circulation is approximately $p(n)$ given by the formula
+\nxsubpoint\label{sp:exp.priced} \embt(Exponentially priced cryptocurrencies.)  我們稱Gram為一種{\em exponentially priced cryptocurrency}，意思是將要流通的第$n$個Gram的價格大約為$p(n)$，由以下公式給出
 \begin{equation}
   p(n)=p_0\cdot e^{\alpha n}
 \end{equation}
-with specific values $p_0=0.1$ USD and $\alpha=10^{-9}$.
+具體值為$p_0=0.1$ USD 和 $\alpha=10^{-9}$。
 
-More precisely, a small fraction $dn$ of a new coin is worth
-$p(n)\,dn$ dollars, once $n$ coins are put into circulation. (Here $n$
-is not necessarily an integer.)
+更精確地說，一個新硬幣的小部分$dn$價值為$p(n)\,dn$美元，一旦$n$個硬幣流通。(這裡的$n$不必然是整數。)
 
-Other important parameters of such a cryptocurrency include $n$, the
-total number of coins in circulation, and $N\geq n$, the total number
-of coins that can exist. For the Gram, $N=5\cdot 10^9$.
+這種加密貨幣的其他重要參數包括$n$，流通中的硬幣總數，和$N\geq n$，可以存在的硬幣總數。對於Gram，$N=5\cdot 10^9$。
 
-\nxsubpoint \embt(Total price of first $n$ coins.)  The total price
-$T(n)=\int_0^n p(n)\,dn\approx p(0)+p(1)+\cdots+p(n-1)$ of the first
-$n$ coins of an exponentially priced cryptocurrency (e.g., the Gram)
-to be put into circulation can be computed by
+\nxsubpoint \embt(Total price of first $n$ coins.)  第一個$n$個以指數方式定價的加密貨幣(例如，Gram)要流通的總價$T(n)=\int_0^n p(n)\,dn\approx p(0)+p(1)+\cdots+p(n-1)$可以通過以下方式計算
 \begin{equation}
   T(n)=p_0\cdot\alpha^{-1}(e^{\alpha n}-1)\quad.
 \end{equation}
 
-\nxsubpoint \embt(Total price of next $\Delta n$ coins.)  The total
-price $T(n+\Delta n)-T(n)$ of $\Delta n$ coins put into circulation
-after $n$ previously existing coins can be computed by
+\nxsubpoint \embt(Total price of next $\Delta n$ coins.)  在先前存在的$n$個硬幣之後流通的$\Delta n$個硬幣的總價$T(n+\Delta n)-T(n)$可以通過以下方式計算
 \begin{equation}\label{eq:T.m.n}
   T(n+\Delta n)-T(n)=p_0\cdot\alpha^{-1}(e^{\alpha(n+\Delta n)}-e^{\alpha n})
   =p(n)\cdot\alpha^{-1}(e^{\alpha\,\Delta n}-1)\quad.
 \end{equation}
 
-\nxsubpoint \embt(Buying next coins with total value $T$.)  Suppose
-that $n$ coins have already been put into circulation, and that one
-wants to spend $T$ (dollars) on buying new coins. The quantity of
-newly-obtained coins $\Delta n$ can be computed by putting $T(n+\Delta
-n)-T(n)=T$ into \eqref{eq:T.m.n}, yielding
+\nxsubpoint \embt(Buying next coins with total value $T$.)  假設已經有$n$個硬幣流通，並且有人想花$T$ (美元)購買新硬幣。新獲得的硬幣數量$\Delta n$可以通過將$T(n+\Delta n)-T(n)=T$放入\eqref{eq:T.m.n}中來計算，得到
 \begin{equation}\label{eq:new.coins}
   \Delta n=\alpha^{-1}\log\left(1+\frac{T\cdot\alpha}{p(n)}\right)\quad.
 \end{equation}
-Of course, if $T\lll p(n)\alpha^{-1}$, then $\Delta n\approx T/p(n)$.
+當然，如果$T\lll p(n)\alpha^{-1}$，那麼$\Delta n\approx T/p(n)$。
 
-\nxsubpoint \embt(Market price of Grams.)  Of course, if the free
-market price falls below $p(n):=0.1\cdot (1+10^{-9})^n$, once $n$
-Grams are put into circulation, nobody would buy new Grams from the
-TON Reserve; they would choose to buy their Grams on the free market
-instead, without increasing the total quantity of Grams in
-circulation. On the other hand, the market price of a Gram cannot
-become much higher than $p(n)$, otherwise it would make sense to
-obtain new Grams from the TON Reserve. This means that the market
-price of Grams would not be subject to sudden spikes (and drops); this
-is important because stakes (validator deposits) are frozen for at
-least one month, and gas prices cannot change too fast either. So, the
-overall economic stability of the system requires some mechanism that
-would prevent the exchange rate of the Gram from changing too
-drastically, such as the one described above.
 
-\nxsubpoint \embt(Buying back the Grams.)  If the market price of the
-Gram falls below $0.5\cdot p(n)$, when there are a total of $n$ Grams
-in circulation (i.e., not kept on a special account controlled by the
-TON Reserve), the TON Reserve reserves the right to buy some Grams
-back and decrease $n$, the total quantity of Grams in
-circulation. This may be required to prevent sudden falls of the
-Gram exchange rate.
+\nxsubpoint \embt(Market price of Grams.)  當然，如果自由市場價格跌破$p(n):=0.1\cdot (1+10^{-9})^n$，一旦$n$個Gram流通，沒有人會從TON Reserve購買新的Gram；他們會選擇在自由市場上購買Gram，而不增加Gram的總流通量。另一方面，一個Gram的市場價格不能比$p(n)$高得多，否則從TON Reserve獲得新的Gram是有意義的。這意味著Gram的市場價格不會受到突如其來的劇烈波動(和下跌)；這很重要，因為賭注(validator deposits)至少被凍結了一個月，而且gas價格也不能改變得太快。所以，系統的整體經濟穩定性需要一個機制，防止Gram的匯率發生過於劇烈的變化，就像上面描述的那樣。
 
-\nxsubpoint \embt(Selling new Grams at a higher price.)  The TON
-Reserve will sell only up to one half (i.e., $2.5\cdot10^9$ Grams) of
-the total supply of Grams according to the price
-formula~\eqref{eq:gram.price}.  It reserves the right not to sell any
-of the remaining Grams at all, or to sell them at a higher price than
-$p(n)$, but never at a lower price (taking into account the uncertainty
-of quickly changing exchange rates). The rationale here is that once
-at least half of all Grams have been sold, the total value of the Gram
-market will be sufficiently high, and it will be more difficult for outside forces to manipulate the exchange rate than it may be at the very
-beginning of the Gram's deployment.
+\nxsubpoint \embt(Buying back the Grams.)  如果Gram的市場價格跌到$0.5\cdot p(n)$以下，當總共有$n$個Gram流通(即，不保留在TON Reserve控制的特殊帳戶上)，TON Reserve保留購回一些Gram並減少$n$，即Gram的總流通量的權利。這可能是為了防止Gram匯率突然下跌。
 
-\nxpoint\label{sp:unalloc.gr} \embt(Using unallocated Grams.)  The TON
-Reserve will use the bulk of ``unallocated'' Grams (approximately
-$5\cdot10^9-n$ Grams)---i.e., those residing in the special account of
-the TON Reserve and some other accounts explicitly linked to it---only
-as validator stakes (because the TON Foundation itself will likely
-have to provide most of the validators during the first deployment
-phase of the TON Blockchain), and for voting in the masterchain for or
-against proposals concerning changes in the ``configurable
-parameters'' and other protocol changes, in the way determined by the
-TON Foundation (i.e., its creators---the development team). This also
-means that the TON Foundation will have a majority of votes during the
-first deployment phase of the TON Blockchain, which may be useful if a
-lot of parameters end up needing to be adjusted, or if the need arises
-for hard or soft forks. Later, when less than half of all Grams remain
-under control of the TON Foundation, the system will become more
-democratic. Hopefully it will have become more mature by then, without
-the need to adjust parameters too frequently.
+\nxsubpoint \embt(Selling new Grams at a higher price.)  TON Reserve將只根據價格公式~\eqref{eq:gram.price}銷售最多一半(即，$2.5\cdot10^9$ Gram)的Gram總供應量。它保留不銷售任何剩餘的Gram，或以高於$p(n)$的價格出售它們，但永遠不會以較低的價格出售(考慮到匯率快速變化的不確定性)。這裡的道理是，一旦至少一半的Gram都被賣出，Gram市場的總價值將足夠高，外部力量操縱匯率比在Gram部署初期可能更困難。
+
+\nxpoint\label{sp:unalloc.gr} \embt(Using unallocated Grams.)  TON Reserve將使用大部分的``未分配''Gram(大約$5\cdot10^9-n$ Gram)---即，那些存在於TON Reserve的特殊帳戶和與之明確關聯的其他帳戶中的Gram---只作為validator stakes (因為TON基金會本身可能必須在TON區塊鏈的第一個部署階段提供大部分的validators)，和在主鏈上投票支持或反對有關``可配置參數''和其他協議更改的提案，由TON基金會決定(即，其創建者---開發團隊)。這也意味著在TON Blockchain的第一個部署階段，TON基金會將擁有大多數的票。希望那時系統會變得更加成熟，不需要太頻繁地調整參數。
 
 \nxsubpoint\label{sp:dev.grams} \embt(Some unallocated Grams will be
-given to developers.)  A predefined (relatively small) quantity of
-``unallocated'' Grams (e.g., 200 Megagrams, equal to 4\% of the total
-supply) will be transferred during the deployment of the TON
-Blockchain to a special account controlled by the TON Foundation, and
-then some ``rewards'' may be paid from this account to the developers
-of the open source TON software, with a minimum two-year vesting
-period.
+given to developers.)  一預定的（相對較少的）「未分配」的Grams數量（例如，200 Megagrams，相當於總供應的4％）將在TON Blockchain的部署期間轉移到由TON Foundation控制的特殊賬戶，然後某些「獎勵」可能會從此賬戶支付給開源TON軟體的開發者，並有最少兩年的鑲嵌期。
 
 \nxsubpoint\label{sp:TON.own.grams} \embt(The TON Foundation needs
-Grams for operational purposes.)  Recall that the TON Foundation will
-receive the fiat and cryptocurrency obtained by selling Grams from the
-TON Reserve, and will use them for the development and deployment of
-the TON Project. For instance, the original set of validators, as well
-as an initial set of TON Storage and TON Proxy nodes may be installed
-by the TON Foundation.
+Grams for operational purposes.)  請記住，TON Foundation將收到由TON Reserve出售的Grams所得的法定貨幣和加密貨幣，並將其用於TON Project的開發和部署。例如，原始的驗證器集合以及TON Storage和TON Proxy節點的初始集合可能由TON Foundation安裝。
 
-While this is necessary for the quick start of the project, the
-ultimate goal is to make the project as decentralized as possible. To
-this end, the TON Foundation may need to encourage installation of
-third-party validators and TON Storage and TON Proxy nodes---for
-example, by paying them for storing old blocks of the TON Blockchain
-or proxying network traffic of a selected subset of services. Such
-payments will be made in Grams; therefore, the TON Foundation will
-need a significant amount of Grams for operational purposes.
+雖然這對於項目的快速啟動是必要的，但最終目標是使該項目盡可能去中心化。為此，TON Foundation可能需要鼓勵安裝第三方驗證器以及TON Storage和TON Proxy節點 - 例如，通過支付他們存儲TON Blockchain的舊區塊或代理所選服務子集的網絡流量。此類付款將以Grams進行；因此，TON Foundation將需要大量的Grams用於操作目的。
 
-\nxsubpoint \embt(Taking a pre-arranged amount from the Reserve.) The
-TON Foundation will transfer to its account a small part of the TON
-Reserve---say, 10\% of all coins (i.e.\ 500 Megagrams) after the end
-of the initial sale of Grams---to be used for its own purposes as
-outlined in~\ptref{sp:TON.own.grams}. This is best done simultaneously
-with the transfer of the funds intended for TON developers, as
-mentioned in~\ptref{sp:dev.grams}.
+\nxsubpoint \embt(Taking a pre-arranged amount from the Reserve.) TON Foundation將從TON Reserve轉賬到其賬戶的一小部分 - 說，所有硬幣的10％（即500 Megagrams）在Grams的初次銷售結束後 - 用於其自己的目的，如在~\ptref{sp:TON.own.grams}中概述的。最好是與為TON開發人員提供的資金轉賬同時完成，如在~\ptref{sp:dev.grams}中提到的。
 
-After the transfers to the TON Foundation and the TON developers, the
-TON Reserve price $p(n)$ of the Gram will immediately rise by a
-certain amount, known in advance. For example, if 10\% of all coins
-are transferred for the purposes of the TON Foundation, and 4\% are
-transferred for the encouragement of the developers, then the total
-quantity $n$ of coins in circulation will immediately increase by
-$\Delta n=7\cdot10^8$, with the price of the Gram multiplying by
-$e^{\alpha\,\Delta n}=e^{0.7}\approx 2$ (i.e, doubling).
+在轉移到TON Foundation和TON開發人員之後，TON Reserve價格$p(n)$的Gram將立即上升一定量，這一量是提前知道的。例如，如果所有硬幣的10％被轉移用於TON Foundation的目的，而4％被轉移以鼓勵開發者，則流通中的硬幣總數量$n$將立即增加$\Delta n=7\cdot10^8$，Gram的價格乘以$e^{\alpha\,\Delta n}=e^{0.7}\approx 2$（即，加倍）。
 
-The remainding ``unallocated'' Grams will be used by the TON Reserve
-as explained above in~\ptref{sp:unalloc.gr}. If the TON Foundation
-needs any more Grams thereafter, it will simply convert into Grams
-some of the funds it had previously obtained during the sale of the
-coins, either on the free market or by buying Grams from the TON
-Reserve.  To prevent excessive centralization, the TON Foundation will
-never endeavour to have more than 10\% of the total amount of Grams
-(i.e., 500 Megagrams) on its account.
 
-\nxpoint\label{sp:bulk.sales} \embt(Bulk sales of Grams.)  When a lot
-of people simultaneously want to buy large amounts of Grams from the
-TON Reserve, it makes sense not to process their orders immediately,
-because this would lead to results very dependent on the timing of
-specific orders and their processing sequence.
+剩餘的「未分配」Grams將由TON Reserve使用，如上面的~\ptref{sp:unalloc.gr}所解釋。如果TON Foundation之後還需要更多的Grams，它將簡單地將其在硬幣銷售期間先前獲得的部分資金轉換為Grams，無論是在自由市場還是從TON Reserve購買Grams。為了防止過度中心化，TON Foundation永遠不會努力在其帳戶上擁有超過總Grams數量的10％（即500 Megagrams）。
 
-Instead, orders for buying Grams may be collected during some
-pre-defined period of time (e.g., a day or a month) and then processed
-all together at once. If $k$ orders with $i$-th order worth $T_i$
-dollars arrive, then the total amount $T=T_1+T_2+\cdots+T_k$ is used
-to buy $\Delta n$ new coins according to \eqref{eq:new.coins}, and the
-sender of the $i$-th order is allotted $\Delta n\cdot T_i/T$ of these
-coins. In this way, all buyers obtain their Grams at the same average
-price of $T/\Delta n$ USD per Gram.
+\nxpoint\label{sp:bulk.sales} \embt(Bulk sales of Grams.) 當很多人同時想從TON Reserve購買大量Grams時，最好不要立即處理他們的訂單，因為這將導致結果非常依賴於特定訂單的時機和他們的處理順序。
 
-After that, a new round of collecting orders for buying new Grams
-begins.
+相反，購買Grams的訂單可能在某個預定的時間段（例如，一天或一個月）內收集，然後一次全部處理。如果收到$k$個訂單，第$i$個訂單價值$T_i$美元，則總金額$T=T_1+T_2+\cdots+T_k$用於根據\eqref{eq:new.coins}購買$\Delta n$新硬幣，並且第$i$個訂單的發送者分配了這些硬幣的$\Delta n\cdot T_i/T$。這樣，所有買家都以每Gram $T/\Delta n$ USD的相同平均價格獲得他們的Grams。
 
-When the total value of Gram buying orders becomes low enough, this
-system of ``bulk sales'' may be replaced with a system of immediate
-sales of Grams from the TON Reserve according to
-formula~\eqref{eq:new.coins}.
+之後，收集購買新Grams的訂單的新一輪開始。
 
-The ``bulk sales'' mechanism will probably be used extensively during
-the initial phase of collecting investments in the TON Project.
+當Gram購買訂單的總價值變得足夠低時，這種「批量銷售」系統可能會被一個根據公式~\eqref{eq:new.coins}從TON Reserve立即銷售Grams的系統所替代。
+
+「批量銷售」機制可能在收集TON Project投資的初始階段得到廣泛使用。
 
 \end{document}
