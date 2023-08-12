@@ -49,7 +49,7 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         body: "Release for latest PDFs."
-        artifacts: "pdf_output/*.pdf"
+        artifacts: "*.pdf"
         token: ${{ secrets.GITHUB_TOKEN }}
         allowUpdates: true
         tag: ${{ steps.date.outputs.date }}
