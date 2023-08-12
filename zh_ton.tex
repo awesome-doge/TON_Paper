@@ -181,7 +181,7 @@ TON 區塊鏈的一個重要特點是它實現了{\em dynamic sharding}，這意
 
 最初，只為工作鏈 $w$ 創建了一個分片 $(w,\emptyset)$。稍後，當這變得必要時，它被細分為更多的分片 (cf.~\ptref{sp:split.necess} and~\ptref{sp:merge.necess})。
 
-\nxsubpoint\label{sp:basic.workchain} \embt(Basic workchain or Workchain Zero.) 雖然可以定義高達 $2^{32}$ 的工作鏈(workchains)並有其特定的規則和交易，但我們一開始只定義一個，即 $\workchainid=0$。這個工作鏈被稱為Workchain Zero或基礎工作鏈，它是用於操作{\em TON smart contracts\/} 和轉移{\em TON coins}，也稱為{\em Toncoin\/} (cf.\ Appendix~\ref{app:coins})。大多數應用可能只需要Workchain Zero。基礎工作鏈的分片鏈會被稱為{\em basic shardchains}。
+\nxsubpoint\label{sp:basic.workchain} \embt(Basic workchain or Workchain Zero.) 雖然可以定義高達 $2^{32}$ 的工作鏈(workchains)並有其特定的規則和交易，但我們一開始只定義一個，即 $\workchainid=0$。這個工作鏈被稱為Workchain Zero或基礎工作鏈，它是用於操作{\em TON smart contracts\/} 和轉移{\em Toncoin}，也稱為{\em Toncoin\/} (cf.\ Appendix~\ref{app:coins})。大多數應用可能只需要Workchain Zero。基礎工作鏈的分片鏈會被稱為{\em basic shardchains}。
 
 \nxsubpoint \embt(Block generation intervals.) 我們預計每個分片鏈和主鏈大約每五秒會生成一個新的區塊。這將導致相對較小的交易確認時間。所有分片鏈的新區塊大約同時生成；主鏈的新區塊大約在一秒後生成，因為它必須包含所有分片鏈的最新區塊的雜湊值。
 
@@ -191,7 +191,7 @@ TON 區塊鏈的一個重要特點是它實現了{\em dynamic sharding}，這意
 
 \nxsubpoint \embt(Masterchain block hash as a global state.) 根據~\ptref{sp:sc.hash.mc}，最後一個主鏈區塊的雜湊完全確定了外部觀察者的整體系統狀態。人們不需要單獨監視所有分片鏈的狀態。
 
-\nxsubpoint \embt(Generation of new blocks by validators; cf.~\ptref{sect:validators}.) TON 區塊鏈使用 Proof-of-Stake (PoS) 方法在分片鏈和主鏈中生成新的區塊。這意味著有一組，例如，多達幾百個的{\em validators}---特殊的節點，透過特殊的主鏈交易存放{\em stakes\/}（大量的 TON coins）以符合生成和驗證新區塊的資格。
+\nxsubpoint \embt(Generation of new blocks by validators; cf.~\ptref{sect:validators}.) TON 區塊鏈使用 Proof-of-Stake (PoS) 方法在分片鏈和主鏈中生成新的區塊。這意味著有一組，例如，多達幾百個的{\em validators}---特殊的節點，透過特殊的主鏈交易存放{\em stakes\/}（大量的 Toncoin）以符合生成和驗證新區塊的資格。
 
 然後，小部分的validator被分配給每一個分片 $(w,s)$，這是以決定性的偽隨機方式進行的，每1024個區塊大約會改變一次。這部分的validator建議並在下一個分片鏈區塊應是什麼上達成共識，通過從客戶端收集適當的建議交易到新的有效的區塊候選。對於每個區塊，validator上有一個偽隨機選定的順序，以確定誰的區塊候選在每一輪中有最高的優先順序被提交。
 
@@ -228,13 +228,13 @@ TON 區塊鏈通過使每個分片鏈和主鏈的每個「區塊」（「水平�
 
 Masterchain狀態隱含地定義了一個映射，將每個“垂直”區塊鏈的第一個區塊的雜湊轉換為其最新版本的雜湊。這使客戶端可以通過其第一個（通常是唯一的）區塊的雜湊識別和定位任何垂直區塊鏈。
 
-\nxsubpoint \embt(TON coins and multi-currency workchains.)  TON區塊鏈支持多達$2^{32}$種不同的“加密貨幣”、“硬幣”或“代幣”，通過32位的$\currencyid$加以區分。新的加密貨幣可以通過主鏈中的特殊交易來添加。每個工作鏈都有一種基本加密貨幣，並且可以有幾種其他加密貨幣。
+\nxsubpoint \embt(Toncoin and multi-currency workchains.)  TON區塊鏈支持多達$2^{32}$種不同的“加密貨幣”、“硬幣”或“代幣”，通過32位的$\currencyid$加以區分。新的加密貨幣可以通過主鏈中的特殊交易來添加。每個工作鏈都有一種基本加密貨幣，並且可以有幾種其他加密貨幣。
 
 有一種特殊的加密貨幣，$\currencyid=0$，即{\em TON幣}，也稱為{\em Toncoin}（參見附錄~\ref{app:coins}）。這是工作鏈零的基本加密貨幣。它也用於交易費和validator的權益股份。
 
 原則上，其他工作鏈可能會以其他代幣收取交易費。在這種情況下，應該提供一些智能合約，用於將這些交易費自動轉換為Toncoin。
 
-\nxsubpoint \embt(Messaging and value transfer.) 屬於相同或不同工作鏈的分片鏈可以互相傳送{\em messages\/}。儘管允許的訊息的確切形式取決於接收工作鏈和接收帳戶（智能合約），但有一些共同的欄位使跨工作鏈的訊息成為可能。特別是，每條訊息可能會有一些{\em value}，以一定數量的Toncoin（TON coins）和/或其他註冊的加密貨幣的形式附加，前提是它們被接收工作鏈宣布為可接受的加密貨幣。
+\nxsubpoint \embt(Messaging and value transfer.) 屬於相同或不同工作鏈的分片鏈可以互相傳送{\em messages\/}。儘管允許的訊息的確切形式取決於接收工作鏈和接收帳戶（智能合約），但有一些共同的欄位使跨工作鏈的訊息成為可能。特別是，每條訊息可能會有一些{\em value}，以一定數量的Toncoin（Toncoin）和/或其他註冊的加密貨幣的形式附加，前提是它們被接收工作鏈宣布為可接受的加密貨幣。
 
 這種訊息的最簡單形式是從一個（通常不是智能合約）帳戶到另一個帳戶的價值轉移。
 
@@ -1890,9 +1890,9 @@ TON基礎設施允許專門的輕量客戶端錢包和``ton-browser''桌面和�
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \appendix
-\myappendix{TON Coin，又名Toncoin}\label{app:coins}
+\myappendix{Toncoin，又名TON}\label{app:coins}
 
-TON區塊鏈的主要加密貨幣，特別是其主鏈和基本工作鏈，是{\em TON Coin}，也被稱為{\em Toncoin\/} (GRM)。它被用於進行成為驗證者所需的存款；交易費、gas支付（即，智能合約消息處理費）和持久儲存支付通常也以Toncoin收取。
+TON區塊鏈的主要加密貨幣，特別是其主鏈和基本工作鏈，是{\em Toncoin}，也被稱為{\em Toncoin\/} (TON)。它被用於進行成為驗證者所需的存款；交易費、gas支付（即，智能合約消息處理費）和持久儲存支付通常也以Toncoin收取。
 
 \nxpoint \embt(Subdivision and terminology.)  一個{\em Toncoin\/}被細分為十億 ($10^9$) 更小的單位，稱為{\em nanograms}、{\em ngrams}或簡單地稱為{\em nanos}。所有的轉賬和賬戶餘額都表示為nanos的非負整數倍。其他單位包括：
 \begin{itemize}
