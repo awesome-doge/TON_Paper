@@ -1663,507 +1663,135 @@ parameters.)  超連結URL可能不僅包含所述服務的(TON) DNS域或抽象
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\mysection{TON Payments}\label{sect:payments}
+\mysection{TON 支付}\label{sect:payments}
 
-The last component of the TON Project we will briefly discuss in this
-text is {\em TON Payments}, the platform for (micro)payment channels
-and ``lightning network'' value transfers. It would enable ``instant''
-payments, without the need to commit all transactions into the
-blockchain, pay the associated transaction fees (e.g., for the gas
-consumed), and wait five seconds until the block containing the
-transactions in question is confirmed.
+我們在這篇文章中將簡短討論的 TON 專案的最後一個組件是 {\em TON Payments}，這是用於 (微型) 支付通道和 "lightning network" 值轉移的平台。它可以使支付「即時」完成，無需將所有交易提交到區塊鏈，支付相關的交易費用（例如，消耗的 gas），並等待五秒鐘，直到包含所涉交易的區塊被確認。
 
-The overall overhead of such instant payments is so small that one can
-use them for micropayments. For example, a TON file-storing service
-might charge the user for every 128 KiB of downloaded data, or a paid
-TON Proxy might require some tiny micropayment for every 128 KiB of
-traffic relayed.
+這樣的即時支付的總體開銷非常小，所以可以用於微支付。例如，TON 文件存儲服務可能會向用戶收取每下載 128 KiB 數據的費用，或者付費的 TON Proxy 可能需要對每 128 KiB 的中繼流量支付微小的費用。
 
-While {\em TON Payments\/} is likely to be released later than the
-core components of the TON Project, some considerations need to be
-made at the very beginning. For example, the TON Virtual Machine (TON
-VM; cf.~\ptref{sp:tonvm}), used to execute the code of TON Blockchain
-smart contracts, must support some special operations with Merkle
-proofs. If such support is not present in the original design, adding
-it at a later stage might become problematic
-(cf.~\ptref{sp:genome.change.never}). We will see, however, that the
-TON VM comes with natural support for ``smart'' payment channels
-(cf.~\ptref{sp:ton.smart.pc.supp}) out of the box.
+雖然 {\em TON Payments\/} 可能比 TON 專案的核心組件晚些時候發布，但需要從一開始就進行一些考慮。例如，用於執行 TON 區塊鏈智能合約的代碼的 TON 虛擬機 (TON VM; cf.~\ptref{sp:tonvm})，必須支持與 Merkle 證明的一些特殊操作。如果這樣的支持在原始設計中不存在，那麼在後期加入可能會變得有問題(cf.~\ptref{sp:genome.change.never})。但是，我們會看到，TON VM 本身就支持「智能」支付通道(cf.~\ptref{sp:ton.smart.pc.supp})。
 
-\mysubsection{Payment Channels}
+\mysubsection{支付通道}
 
-We start with a discussion of point-to-point payment channels, and how they can be implemented in the TON Blockchain.
+我們首先討論點對點支付通道，以及它們如何在 TON 區塊鏈中實施。
 
-\nxsubpoint \embt(The idea of a payment channel.)  Suppose two
-parties, $A$ and $B$, know that they will need to make a lot of
-payments to each other in the future. Instead of committing each
-payment as a transaction in the blockchain, they create a shared
-``money pool'' (or perhaps a small private bank with exactly two
-accounts), and contribute some funds to it: $A$ contributes $a$
-coins, and $B$ contributes $b$ coins. This is achieved by creating a
-special smart contract in the blockchain, and sending the money to it.
+\nxsubpoint \embt(The idea of a payment channel.) 假設有兩個參與者，$A$ 和 $B$，他們知道在未來他們需要彼此進行大量的支付。他們不是將每筆付款作為一筆交易提交到區塊鏈，而是創建一個共享的「money pool」（或者也許是一個只有兩個帳戶的小型私人銀行），並向其中投入一些資金：$A$ 投入 $a$ 個幣，$B$ 投入 $b$ 個幣。這是通過在區塊鏈中創建一個特殊的智能合約，並向其發送資金來實現的。
 
-Before creating the ``money pool'', the two sides agree to a certain
-protocol. They will keep track of the {\em state\/} of the pool---that
-is, of their balances in the shared pool. Originally, the state is
-$(a,b)$, meaning that $a$ coins actually belong to~$A$, and $b$ coins
-belong to~$B$. Then, if $A$ wants to pay $d$ coins to $B$, they can
-simply agree that the new state is $(a',b')=(a-d,b+d)$. Afterwards,
-if, say, $B$ wants to pay $d'$ coins to $A$, the state will become
-$(a'',b'')=(a'+d',b'-d')$, and so on.
+在創建「money pool」之前，雙方同意某個協議。他們將跟踪 pool 的{\em 狀態}，即他們在共享 pool 中的餘額。原始的狀態是 $(a,b)$，意味著 $a$ 個幣實際上屬於 $A$，$b$ 個幣屬於 $B$。然後，如果 $A$ 想支付 $d$ 個幣給 $B$，他們可以簡單地同意新的狀態是 $(a',b')=(a-d,b+d)$。之後，如果，例如，$B$ 想支付 $d'$ 個幣給 $A$，那麼狀態將變成 $(a'',b'')=(a'+d',b'-d')$，依此類推。
 
-All this updating of balances inside the pool is done completely
-off-chain. When the two parties decide to withdraw their due funds
-from the pool, they do so according to the final state of the
-pool. This is achieved by sending a special message to the smart
-contract, containing the agreed-upon final state $(a^*,b^*)$ along
-with the signatures of both~$A$ and $B$. Then the smart contract sends
-$a^*$ coins to $A$, $b^*$ coins to $B$ and self-destructs.
+所有這些在 pool 內部的餘額更新都是完全離鏈的。當雙方決定從 pool 中提取他們應得的資金時，他們會根據 pool 的最終狀態這樣做。這是通過向智能合約發送一條特殊的消息來實現的，該消息包含經 $A$ 和 $B$ 雙方簽名同意的最終狀態 $(a^*,b^*)$。然後，智能合約向 $A$ 發送 $a^*$ 個幣，向 $B$ 發送 $b^*$ 個幣，並自毀。
 
-This smart contract, along with the network protocol used by $A$ and
-$B$ to update the state of the pool, is a simple {\em payment channel
-  between $A$ and~$B$.} According to the classification described
-in~\ptref{sp:on.off.chain}, it is a {\em mixed\/} service: part of its
-state resides in the blockchain (the smart contract), but most of its
-state updates are performed off-chain (by the network protocol). If
-everything goes well, the two parties will be able to perform as many
-payments to each other as they want (with the only restriction being
-that the ``capacity'' of the channel is not overrun---i.e., their
-balances in the payment channel both remain non-negative), committing
-only two transactions into the blockchain: one to open (create) the
-payment channel (smart contract), and another to close (destroy) it.
+這個智能合約，以及 $A$ 和 $B$ 用於更新 pool 狀態的網絡協議，是一個簡單的 {\em 在 $A$ 和~$B$ 之間的支付通道}。根據在~\ptref{sp:on.off.chain}中描述的分類，它是一個 {\em 混合} 服務：它的部分狀態位於區塊鏈中（智能合約），但大部分的狀態更新是離鏈的（由網絡協議完成）。如果一切順利，雙方將能夠互相支付他們想要的金額（唯一的限制是通道的「容量」沒有超出——也就是說，他們在支付通道中的餘額都保持非負），只需要在區塊鏈中提交兩筆交易：一筆用於打開（創建）支付通道（智能合約），另一筆用於關閉（銷毀）它。
 
-\nxsubpoint \embt(Trustless payment channels.)  The previous example
-was somewhat unrealistic, because it assumes that both parties are
-willing to cooperate and will never cheat to gain some
-advantage. Imagine, for example, that $A$ will choose not to sign the
-final balance $(a',b')$ with $a'<a$. This would put $B$ in a difficult
-situation.
+\nxsubpoint \embt(Trustless payment channels.)  先前的例子有些不切實際，因為它假設兩個參與者都願意合作，且永遠不會為了某些優勢而作弊。例如，想像$A$選擇不簽署最終的餘額$(a',b')$，其中$a'<a$。這將使$B$陷入困境。
 
-To protect against such scenarios, one usually tries to develop {\em
-  trustless\/} payment channel protocols, which do not require the
-parties to trust each other, and make provisions for punishing any
-party who would attempt to cheat.
+為了防止這種情況，人們通常試圖開發{\em trustless\/}支付通道協議，這不需要參與者互相信任，且對試圖作弊的任何一方進行處罰。
 
-This is usually achieved with the aid of signatures. The payment
-channel smart contract knows the public keys of $A$ and $B$, and it
-can check their signatures if needed. The payment channel protocol
-requires the parties to sign the intermediate states and send the
-signatures to each other. Then, if one of the parties cheats---for
-instance, pretends that some state of the payment channel never
-existed---its misbehavior can be proved by showing its signature on
-that state. The payment channel smart contract acts as an ``on-chain
-arbiter'', able to process complaints of the two parties about each
-other, and punish the guilty party by confiscating all of its money
-and awarding it to the other party.
+這通常是在簽名的幫助下達到的。支付通道智能合約知道$A$和$B$的公鑰，且在需要時可以檢查其簽名。支付通道協議要求參與者簽署中間狀態並互相發送簽名。然後，如果參與者之一作弊——例如，假裝支付通道的某個狀態從未存在——可以通過顯示該狀態的簽名來證明其不正當行為。支付通道智能合約充當“on-chain arbiter”，能夠處理兩個參與者關於彼此的投訴，並通過沒收有罪一方的所有資金並授予給另一方來懲罰有罪一方。
 
-\nxsubpoint\label{sp:simple.sync.pc} \embt(Simple bidirectional
-synchronous trustless payment channel.)  Consider the following, more
-realistic example: Let the state of the payment channel be described
-by triple $(\delta_i,i,o_i)$, where $i$ is the sequence number of the
-state (it is originally zero, and then it is increased by one when a
-subsequent state appears), $\delta_i$ is the {\em channel imbalance\/}
-(meaning that $A$ and $B$ own $a+\delta_i$ and $b-\delta_i$ coins,
-respectively), and $o_i$ is the party allowed to generate the next
-state (either $A$ or $B$). Each state must be signed both by $A$ and
-$B$ before any further progress can be made.
+\nxsubpoint\label{sp:simple.sync.pc} \embt(Simple bidirectional synchronous trustless payment channel.)  考慮以下更為真實的例子：讓支付通道的狀態由三元組$(\delta_i,i,o_i)$描述，其中$i$是狀態的序列號（最初為零，然後當後續狀態出現時增加一），$\delta_i$是{\em channel imbalance\/}（意味著$A$和$B$分別擁有$a+\delta_i$和$b-\delta_i$的硬幣），且$o_i$是被允許生成下一個狀態的參與者（$A$或$B$）。每個狀態必須在進一步進展之前由$A$和$B$簽名。
 
-Now, if $A$ wants to transfer $d$ coins to $B$ inside the payment
-channel, and the current state is $S_i=(\delta_i,i,o_i)$ with $o_i=A$,
-then it simply creates a new state $S_{i+1}=(\delta_i-d,i+1,o_{i+1})$,
-signs it, and sends it to $B$ along with its signature. Then $B$
-confirms it by signing and sending a copy of its signature to
-$A$. After that, both parties have a copy of the new state with both
-of their signatures, and a new transfer may occur.
+現在，如果$A$想要在支付通道內部將$d$個硬幣轉移到$B$，且當前狀態為$S_i=(\delta_i,i,o_i)$，其中$o_i=A$，那麼它只需創建一個新狀態$S_{i+1}=(\delta_i-d,i+1,o_{i+1})$，簽名並將其及其簽名發送給$B$。然後，$B$通過簽名並發送其簽名的副本給$A$來確認。之後，雙方都有一個帶有他們兩者簽名的新狀態的副本，且可能會發生新的轉賬。
 
-If $A$ wants to transfer coins to $B$ in a state $S_i$ with $o_i=B$,
-then it first asks $B$ to commit a subsequent state $S_{i+1}$ with the
-same imbalance $\delta_{i+1}=\delta_i$, but with $o_{i+1}=A$. After
-that, $A$ will be able to make its transfer.
+如果$A$在$o_i=B$的$S_i$狀態下想要將硬幣轉移到$B$，那麼它首先要求$B$提交具有相同不平衡$\delta_{i+1}=\delta_i$的後續狀態，但$o_{i+1}=A$。之後，$A$將能夠進行其轉賬。
 
-When the two parties agree to close the payment channel, they both put
-their special {\em final\/} signatures on the state $S_k$ they believe
-to be final, and invoke the {\em clean\/} or {\em two-sided
-finalization method\/} of the payment channel smart contract by sending
-it the final state along with both final signatures.
+當兩個參與者同意關閉支付通道時，他們都在他們認為是最後的狀態$S_k$上放置他們特殊的{\em final\/}簽名，並通過將最終狀態及兩個最終簽名發送給支付通道智能合約來調用{\em clean\/}或{\em two-sided finalization method\/}。
 
-If the other party does not agree to provide its final signature, or
-simply if it stops responding, it is possible to close the channel
-unilaterally. For this, the party wishing to do so will invoke the
-{\em unilateral finalization\/} method, sending to the smart contract
-its version of the final state, its final signature, and the most
-recent state having a signature of the other party. After that, the
-smart contract does not immediately act on the final state
-received. Instead, it waits for a certain period of time (e.g., one
-day) for the other party to present its version of the final
-state. When the other party submits its version and it turns out to be
-compatible with the already submitted version, the ``true'' final
-state is computed by the smart contract and used to distribute the
-money accordingly. If the other party fails to present its version of
-the final state to the smart contract, then the money is redistributed
-according to the only copy of the final state presented.
+如果另一方不同意提供其最終簽名，或者僅僅是停止回應，則可以單方面關閉該通道。為此，希望這麼做的一方將調用 {\em unilateral finalization\/} 方法，將其對於最終狀態的版本、其最終簽名，以及另一方最近的簽名狀態，發送到智能合約。在此之後，智能合約不會立即根據接收到的最終狀態採取行動。相反，它會等待一段特定的時間（例如，一天），讓另一方呈現其對於最終狀態的版本。當另一方提交其版本並且與已提交版本相容時，智能合約會計算"真正的"最終狀態並相應地分配資金。如果另一方未能向智能合約呈現其對於最終狀態的版本，那麼資金將根據呈現的最終狀態的唯一副本重新分配。
 
-If one of the two parties cheats---for example, by signing two
-different states as final, or by signing two different next
-states $S_{i+1}$ and $S'_{i+1}$, or by signing an invalid new state
-$S_{i+1}$ (e.g., with imbalance $\delta_{i+1}<-a$ or $>b$)---then the
-other party may submit proof of this misbehavior to a third method of
-the smart contract. The guilty party is punished immediately by losing
-its share in the payment channel completely.
+如果兩方之一作弊，例如，將兩個不同的狀態簽名為最終的，或者簽署兩個不同的下一個狀態 $S_{i+1}$ 和 $S'_{i+1}$，或者簽署一個無效的新狀態 $S_{i+1}$（例如，與不平衡 $\delta_{i+1}<-a$ 或 $>b$），那麼另一方可以將此行為的證據提交給智能合約的第三種方法。有罪的一方將立即被處罰，並完全失去其在支付通道中的份額。
 
-This simple payment channel protocol is {\em fair\/} in the sense that
-any party can always get its due, with or without the cooperation of
-the other party, and is likely to lose all of its funds committed to
-the payment channel if it tries to cheat.
+這個簡單的支付通道協議是 {\em fair\/}，意味著任何一方都可以總是獲得其應得的，無論另一方是否合作，並且如果試圖欺騙，很可能失去其承諾給支付通道的所有資金。
 
-\nxsubpoint\label{sp:sync.pc.as.blockch} \embt(Synchronous payment
-channel as a simple virtual blockchain with two validators.)  The
-above example of a simple synchronous payment channel can be recast as
-follows. Imagine that the sequence of states $S_0$, $S_1$, \dots,
-$S_n$ is actually the sequence of blocks of a very simple
-blockchain. Each block of this blockchain contains essentially only
-the current state of the blockchain, and maybe a reference to the
-previous block (i.e., its hash). Both parties $A$ and $B$ act as
-validators for this blockchain, so every block must collect both of
-their signatures. The state $S_i$ of the blockchain defines the
-designated producer $o_i$ for the next block, so there is no race
-between $A$ and $B$ for producing the next block. Producer $A$ is
-allowed to create blocks that transfer funds from $A$ to $B$ (i.e.,
-decrease the imbalance: $\delta_{i+1}\leq\delta_i$), and $B$ can only
-transfer funds from $B$ to $A$ (i.e., increase $\delta$).
+\nxsubpoint\label{sp:sync.pc.as.blockch} \embt(Synchronous payment channel as a simple virtual blockchain with two validators.) 上面的簡單同步支付通道的示例可以這樣重新描述。想像一下，狀態序列 $S_0$、$S_1$、...、$S_n$ 實際上是一個非常簡單區塊鏈的區塊序列。這個區塊鏈的每個區塊基本上只包含區塊鏈的當前狀態，也許還有對前一個區塊（即其hash）的引用。$A$ 和 $B$ 兩方都作為此區塊鏈的驗證者，所以每個區塊必須收集他們兩人的簽名。區塊鏈的狀態 $S_i$ 定義了下一個區塊的指定生產者 $o_i$，所以 $A$ 和 $B$ 在生產下一個區塊時沒有競爭。生產者 $A$ 只能創建將資金從 $A$ 轉移到 $B$ 的區塊（即減少不平衡：$\delta_{i+1}\leq\delta_i$），$B$ 則只能將資金從 $B$ 轉移到 $A$（即增加 $\delta$）。
 
-If the two validators agree on the final block (and the final state)
-of the blockchain, it is finalized by collecting special ``final''
-signatures of the two parties, and submitting them along with the
-final block to the channel smart contract for processing and
-re-distributing the money accordingly.
+如果兩個驗證者同意區塊鏈的最後一個區塊（和最終狀態），則可以通過收集兩方的特殊“最終”簽名並與最終區塊一起提交到通道智能合約進行處理和相應地重新分配資金來確定它。
 
-If a validator signs an invalid block, or creates a fork, or signs two
-different final blocks, it can be punished by presenting a proof of
-its misbehavior to the smart contract, which acts as an ``on-chain
-arbiter'' for the two validators; then the offending party will lose
-all its money kept in the payment channel, which is analogous to a
-validator losing its stake.
+如果驗證者簽署一個無效的區塊，或者創建一個分叉，或者簽署兩個不同的最終區塊，它可以通過將其不端行為的證據提交給智能合約，這相當於一個驗證者失去其股份。
+
 
 \nxsubpoint\label{sp:async.pc} \embt(Asynchronous payment channel as a
-virtual blockchain with two workchains.)  The synchronous payment
-channel discussed in \ptref{sp:simple.sync.pc} has a certain
-disadvantage: one cannot begin the next transaction (money transfer
-inside the payment channel) before the previous one is confirmed by
-the other party. This can be fixed by replacing the single virtual
-blockchain discussed in~\ptref{sp:sync.pc.as.blockch} by a system of
-two interacting virtual workchains (or rather shardchains).
+virtual blockchain with two workchains.) 先前討論的同步支付通道在\ptref{sp:simple.sync.pc}中有某些缺點：在前一筆交易被對方確認之前，不能開始下一筆交易（支付通道內的資金轉移）。這可以通過將\ptref{sp:sync.pc.as.blockch}中討論的單一虛擬區塊鏈替換為兩個互動的虛擬工作鏈（或碎片鏈）來解決。
 
-The first of these workchains contains only transactions by $A$, and
-its blocks can be generated only by~$A$; its states are
-$S_i=(i,\phi_i,j,\psi_j)$, where $i$ is the block sequence number
-(i.e., the count of transactions, or money transfers, performed by $A$
-so far), $\phi_i$ is the total amount transferred from $A$ to $B$ so
-far, $j$ is the sequence number of the most recent valid block in
-$B$'s blockchain that $A$ is aware of, and $\psi_j$ is the amount of
-money transferred from $B$ to $A$ in its $j$ transactions. A signature
-of $B$ put onto its $j$-th block should also be a part of this
-state. Hashes of the previous block of this workchain and of the
-$j$-th block of the other workchain may be also included. Validity
-conditions for $S_i$ include $\phi_i\geq 0$, $\phi_i\geq\phi_{i-1}$ if
-$i>0$, $\psi_j\geq0$, and $-a\leq\psi_j-\phi_i\leq b$.
+第一個工作鏈只包含$A$的交易，且其區塊只能由$A$生成；它的狀態是$S_i=(i,\phi_i,j,\psi_j)$，其中$i$是區塊序列號（即$A$到目前為止執行的交易或資金轉移的計數）、$\phi_i$是到目前為止從$A$轉移到$B$的總額、$j$是$A$知道的$B$的區塊鏈中最近有效區塊的序列號，而$\psi_j$是在其$j$次交易中從$B$轉移到$A$的金額。$B$放在其第$j$-th區塊上的簽名也應該是此狀態的一部分。這個工作鏈的前一個區塊和另一個工作鏈的$j$-th區塊的hash也可能被包括。$S_i$的有效性條件包括$\phi_i\geq 0$、若$i>0$則$\phi_i\geq\phi_{i-1}$、$\psi_j\geq0$、以及$-a\leq\psi_j-\phi_i\leq b$。
 
-Similarly, the second workchain contains only transactions by $B$, and
-its blocks are generated only by~$B$; its states are
-$T_j=(j,\psi_j,i,\phi_i)$, with similar validity conditions.
+相似地，第二個工作鏈只包含$B$的交易，且其區塊只能由$B$生成；它的狀態是$T_j=(j,\psi_j,i,\phi_i)$，具有相似的有效性條件。
 
-Now, if $A$ wants to transfer some money to $B$, it simply creates a
-new block in its workchain, signs it, and sends to $B$, without
-waiting for confirmation.
+現在，如果$A$想要將一些錢轉移給$B$，它只需在其工作鏈中創建一個新區塊，簽名，然後發送給$B$，無需等待確認。
 
-The payment channel is finalized by $A$ signing (its version of) the
-final state of its blockchain (with its special ``final signature''),
-$B$ signing the final state of its blockchain, and presenting these
-two final states to the clean finalization method of the payment
-channel smart contract. Unilateral finalization is also possible, but
-in that case the smart contract will have to wait for the other party
-to present its version of the final state, at least for some grace
-period.
+支付通道是通過$A$簽名（其版本的）其區塊鏈的最終狀態（帶有其特殊的「最終簽名」）、$B$簽名其區塊鏈的最終狀態，並將這兩個最終狀態呈現給支付通道智能合約的清潔結算方法來完成的。單方面的終結也是可能的，但在那種情況下，智能合約將必須等待另一方呈現其最終狀態的版本，至少要有一些寬限期。
 
-\nxsubpoint \embt(Unidirectional payment channels.)  If only $A$ needs
-to make payments to $B$ (e.g., $B$ is a service provider, and $A$ its
-client), then a unilateral payment channel can be
-created. Essentially, it is just the first workchain described
-in~\ptref{sp:async.pc} without the second one. Conversely, one can say
-that the asynchronous payment channel described in \ptref{sp:async.pc}
-consists of two unidirectional payment channels, or ``half-channels'',
-managed by the same smart contract.
+\nxsubpoint \embt(Unidirectional payment channels.) 如果只有$A$需要向$B$支付（例如，$B$是服務提供者，$A$是其客戶），則可以創建一個單方向的支付通道。本質上，它只是在\ptref{sp:async.pc}中描述的第一個工作鏈，沒有第二個。反之，可以說在\ptref{sp:async.pc}中描述的異步支付通道由兩個單向支付通道或「半通道」組成，由相同的智能合約管理。
 
 \nxsubpoint\label{sp:pc.promises} \embt(More sophisticated payment
-channels. Promises.)  We will see later in~\ptref{sp:ch.money.tr} that
-the ``lightning network'' (cf.~\ptref{sect:lightning}), which enables
-instant money transfers through chains of several payment channels,
-requires higher degrees of sophistication from the payment channels
-involved.
+channels. Promises.) 我們稍後將在\ptref{sp:ch.money.tr}看到，「閃電網路」（參見\ptref{sect:lightning}）允許通過多個支付通道的鏈進行即時資金轉帳，這需要涉及的支付通道具有更高的複雜度。
 
-In particular, we want to be able to commit ``promises'', or
-``conditional money transfers'': $A$ agrees to send $c$ coins to $B$,
-but $B$ will get the money only if a certain condition is fulfilled,
-for instance, if $B$ can present some string $u$ with $\Hash(u)=v$ for
-a known value of $v$. Otherwise, $A$ can get the money back after a
-certain period of time.
+具體來說，我們希望能夠承諾「promises」，或者說「條件性資金轉移」：$A$同意發送$c$硬幣給$B$，但只有在滿足某個條件時$B$才會得到錢，例如，如果$B$可以提供某個字串$u$並滿足$\Hash(u)=v$，其中$v$的值是已知的。否則，$A$可以在一段時間後取回錢。
 
-Such a promise could easily be implemented on-chain by a simple smart
-contract. However, we want promises and other kinds of conditional
-money transfers to be possible off-chain, in the payment channel,
-because they considerably simplify money transfers along a chain of
-payment channels existing in the ``lightning network''
-(cf.~\ptref{sp:ch.money.tr}).
+這樣的承諾可以輕鬆地在區塊鏈上通過一個簡單的智能合約來實現。但是，我們希望在支付通道中，即off-chain，能夠實現promises和其他類型的條件性資金轉移，因為它們大大簡化了存在於「閃電網路」中的支付通道鏈的資金轉移（參見\ptref{sp:ch.money.tr}）。
 
-The ``payment channel as a simple blockchain'' picture outlined
-in~\ptref{sp:sync.pc.as.blockch} and~\ptref{sp:async.pc} becomes
-convenient here. Now we consider a more complicated virtual
-blockchain, the state of which contains a set of such unfulfilled
-``promises'', and the amount of funds locked in such promises. This
-blockchain---or the two workchains in the asynchronous case---will
-have to refer explicitly to the previous blocks by their
-hashes. Nevertheless, the general mechanism remains the same.
+在\ptref{sp:sync.pc.as.blockch}和\ptref{sp:async.pc}中概述的「作為一個簡單區塊鏈的支付通道」在這裡變得很方便。現在，我們考慮一個更複雜的虛擬區塊鏈，其狀態包含一組這樣的未實現的「promises」，以及在這些承諾中鎖定的資金數額。無論是在異步情況下的兩個工作鏈，都必須明確地引用前一個區塊的hash。然而，總體機制仍然保持不變。
 
 \nxsubpoint\label{sp:sm.pc.chal} \embt(Challenges for the
-sophisticated payment channel smart contracts.)  Notice that, while
-the final state of a sophisticated payment channel is still small, and
-the ``clean'' finalization is simple (if the two sides have agreed on
-their amounts due, and both have signed their agreement, nothing else
-remains to be done), the unilateral finalization method and the method
-for punishing fraudulent behavior need to be more complex. Indeed, they
-must be able to accept Merkle proofs of misbehavior, and to check
-whether the more sophisticated transactions of the payment channel
-blockchain have been processed correctly.
+sophisticated payment channel smart contracts.) 請注意，雖然一個複雜的支付通道的最終狀態仍然很小，而且「清潔」的終結很簡單（如果雙方都同意他們的應付金額，且雙方都已簽署他們的協議，那麼就沒有其他事情要做），但是單方面的終結方法和懲罰欺詐行為的方法需要更為複雜。實際上，它們必須能夠接受不當行為的Merkle證明，並檢查支付通道區塊鏈的更複雜交易是否已被正確處理。
 
-In other words, the payment channel smart contract must be able to
-work with Merkle proofs, to check their ``hash validity'', and must
-contain an implementation of $\evtrans$ and $\evblock$ functions
-(cf.~\ptref{sp:blk.transf}) for the payment channel (virtual)
-blockchain.
+換句話說，支付通道的智能合約必須能夠使用Merkle證明，檢查它們的「hash有效性」，並且必須包含$\evtrans$和$\evblock$功能的實現（參見\ptref{sp:blk.transf}）對於支付通道的（虛擬）區塊鏈。
 
 \nxsubpoint\label{sp:ton.smart.pc.supp} \embt(TON VM support for
-``smart'' payment channels.)  The TON VM, used to run the code of TON
-Blockchain smart contracts, is up to the challenge of executing the
-smart contracts required for ``smart'', or sophisticated, payment
-channels (cf.~\ptref{sp:sm.pc.chal}).
+"smart" payment channels.) TON VM，用於運行TON Blockchain智能合約的代碼，能夠應對執行所需的"smart"或複雜支付通道的智能合約（參見\ptref{sp:sm.pc.chal}）。
 
-At this point the ``everything is a bag of cells'' paradigm
-(cf.~\ptref{sp:everything.is.BoC}) becomes extremely convenient. Since
-all blocks (including the blocks of the ephemeral payment channel
-blockchain) are represented as bags of cells (and described by some
-algebraic data types), and the same holds for messages and Merkle
-proofs as well, a Merkle proof can easily be embedded into an inbound
-message sent to the payment channel smart contract. The ``hash
-condition'' of the Merkle proof will be checked automatically, and
-when the smart contract accesses the ``Merkle proof'' presented, it
-will work with it as if it were a value of the corresponding algebraic
-data type---albeit incomplete, with some subtrees of the tree replaced
-by special nodes containing the Merkle hash of the omitted
-subtree. Then the smart contract will work with that value, which
-might represent, for instance, a block of the payment channel
-(virtual) blockchain along with its state, and will evaluate the
-$\evblock$ function (cf.~\ptref{sp:blk.transf}) of that blockchain on
-this block and the previous state. Then either the computation
-finishes, and the final state can be compared with that asserted in
-the block, or an ``absent node'' exception is thrown while attempting
-to access an absent subtree, indicating that the Merkle proof is
-invalid.
+此時，「一切皆為bag of cells」的模式（參見\ptref{sp:everything.is.BoC}）變得非常方便。由於所有的區塊（包括短暫支付通道區塊鏈的區塊）都被表示為bag of cells（並由一些代數資料類型描述），對於訊息和Merkle證明也是如此，Merkle證明可以輕易地嵌入到發送到支付通道智能合約的入站訊息中。Merkle證明的「hash條件」將自動被檢查，當智能合約訪問呈現的「Merkle證明」時，它將像使用相應代數資料類型的值一樣工作，儘管它是不完整的，樹的一些子樹被替換為包含省略子樹的Merkle hash的特殊節點。然後智能合約將使用該值，該值可能代表支付通道（虛擬）區塊鏈及其狀態的一個區塊，並將該區塊鏈的$\evblock$函數（參見\ptref{sp:blk.transf}）評估為這個區塊和前一個狀態。然後，計算要麼完成，並且最終狀態可以與區塊中的聲明相比，要麼在嘗試訪問缺失的子樹時拋出「absent node」異常，表示Merkle證明是無效的。
 
-In this way, the implementation of the verification code for smart
-payment channel blockchains turns out to be quite straightforward
-using TON Blockchain smart contracts. One might say that {\em the TON
-  Virtual Machine comes with built-in support for checking the
-  validity of other simple blockchains.} The only limiting factor is
-the size of the Merkle proof to be incorporated into the inbound
-message to the smart contract (i.e., into the transaction).
+以這種方式，使用TON Blockchain智能合約實現智能支付通道區塊鏈的驗證代碼變得相對直接。可以說，{\em TON 虛擬機內建了檢查其他簡單區塊鏈有效性的支持。}唯一的限制因素是要合併到智能合約的入站訊息中的Merkle證明的大小（即交易）。
 
 \nxsubpoint\label{sp:pc.within.pc} \embt(Simple payment channel within
-a smart payment channel.)  We would like to discuss the possibility of
-creating a simple (synchronous or asynchronous) payment channel inside
-an existing payment channel.
+a smart payment channel.) 我們想討論在現有支付通道內創建一個簡單的（同步或非同步）支付通道的可能性。
 
-While this may seem somewhat convoluted, it is not much harder to
-understand and implement than the ``promises'' discussed
-in~\ptref{sp:pc.promises}. Essentially, instead of promising to pay
-$c$ coins to the other party if a solution to some hash problem is
-presented, $A$ promises to pay up to $c$ coins to $B$ according to the
-final settlement of some other (virtual) payment channel
-blockchain. Generally speaking, this other payment channel blockchain
-need not even be between $A$ and $B$; it might involve some other
-parties, say, $C$ and $D$, willing to commit $c$ and $d$ coins into
-their simple payment channel, respectively. (This possibility is
-exploited later in~\ptref{sp:virt.pc}.)
+雖然這可能看起來有點複雜，但它與\ptref{sp:pc.promises}中討論的「promises」相比，理解和實現並不困難。本質上，$A$承諾根據一些其他（虛擬）支付通道區塊鏈的最終結算向$B$支付最多$c$個硬幣，而不是承諾如果提供了一些hash問題的解決方案，則支付$c$個硬幣給另一方。一般來說，這個其他的支付通道區塊鏈甚至不需要在$A$和$B$之間；它可能涉及一些其他的參與者，例如$C$和$D$，分別希望將$c$和$d$個硬幣承諾到他們的簡單支付通道中。（這個可能性在\ptref{sp:virt.pc}中後來被利用。）
 
-If the encompassing payment channel is asymmetric, two promises need
-to be committed into the two workchains: $A$ will promise to pay
-$-\delta$ coins to $B$ if the final settlement of the ``internal''
-simple payment channel yields a negative final imbalance $\delta$ with
-$0\leq-\delta\leq c$; and $B$ will have to promise to pay $\delta$ to
-$A$ if $\delta$ is positive. On the other hand, if the encompassing
-payment channel is symmetric, this can be done by committing a single
-``simple payment channel creation'' transaction with parameters
-$(c,d)$ into the single payment channel blockchain by~$A$ (which would
-freeze $c$ coins belonging to~$A$), and then committing a special
-``confirmation transaction'' by~$B$ (which would freeze $d$ coins
-of~$B$).
+如果包圍的支付通道是不對稱的，那麼需要在兩個工作鏈中承諾兩個promises：如果「內部」簡單支付通道的最終結算產生了一個與$0\leq-\delta\leq c$的負最終不平衡值$\delta$，$A$將承諾支付$-\delta$個硬幣給$B$；如果$\delta$是正的，$B$將不得不承諾支付$\delta$個硬幣給$A$。另一方面，如果包圍的支付通道是對稱的，那麼可以通過$A$提交一個帶有參數$(c,d)$的「簡單支付通道創建」交易到單一支付通道區塊鏈（這將凍結屬於$A$的$c$個硬幣），然後由$B$提交一個特殊的「確認交易」（這將凍結屬於$B$的$d$個硬幣）。
 
-We expect the internal payment channel to be extremely simple (e.g.,
-the simple synchronous payment channel discussed
-in~\ptref{sp:simple.sync.pc}), to minimize the size of Merkle proofs
-to be submitted. The external payment channel will have to be
-``smart'' in the sense described in~\ptref{sp:pc.promises}.
+我們期望內部支付通道非常簡單（例如，在\ptref{sp:simple.sync.pc}中討論的簡單同步支付通道），以最小化要提交的Merkle證明的大小。外部支付通道將必須是\ptref{sp:pc.promises}中描述的那種「smart」。
 
-\mysubsection{Payment Channel Network, or ``Lightning
-  Network''}\label{sect:lightning}
 
-Now we are ready to discuss the ``lightning network'' of TON Payments
-that enables instant money transfers between any two participating
-nodes.
+\mysubsection{支付通道網路，或「閃電網路」}\label{sect:lightning}
 
-\nxsubpoint \embt(Limitations of payment channels.)  A payment channel
-is useful for parties who expect a lot of money transfers between
-them. However, if one needs to transfer money only once or twice to a
-particular recipient, creating a payment channel with her would be
-impractical. Among other things, this would imply freezing a
-significant amount of money in the payment channel, and would require
-at least two blockchain transactions anyway.
+現在，我們準備討論TON支付的「閃電網路」，該網路使得任何兩個參與節點之間能夠實時進行金錢轉賬。
 
-\nxsubpoint \embt(Payment channel networks, or ``lightning
-networks''.)  Payment channel networks overcome the limitations of
-payment channels by enabling money transfers along {\em chains} of
-payment channels. If $A$ wants to transfer money to $E$, she does not
-need to establish a payment channel with $E$. It would be sufficient
-to have a chain of payment channels linking $A$ with $E$ through
-several intermediate nodes---say, four payment channels: from $A$ to
-$B$, from $B$ to $C$, from $C$ to $D$ and from $D$ to $E$.
+\nxsubpoint \embt(Limitations of payment channels.)  一個支付通道對於那些期望在他們之間有大量的金錢轉賬的雙方是有用的。但是，如果一個人只需要向特定的接收者轉賬一兩次，則與她建立支付通道將是不切實際的。除其他外，這將意味著在支付通道中凍結大量的金錢，而且還需要至少兩次區塊鏈交易。
 
-\nxsubpoint \embt(Overview of payment channel networks.)  Recall that
-a {\em payment channel network}, known also as a ``lightning
-network'', consists of a collection of participating nodes, some of
-which have established long-lived payment channels between them. We
-will see in a moment that these payment channels will have to be
-``smart'' in the sense of~\ptref{sp:pc.promises}. When a
-participating node $A$ wants to transfer money to any other
-participating node $E$, she tries to find a path linking $A$ to $E$
-inside the payment channel network. When such a path is found, she
-performs a ``chain money transfer'' along this path.
+\nxsubpoint \embt(Payment channel networks, or ``lightning networks''.)  支付通道網絡通過使金錢沿著{\em chains}的支付通道進行轉賬，來克服支付通道的局限性。如果$A$想要向$E$轉賬，她不需要與$E$建立支付通道。擁有一條通過幾個中間節點連接$A$和$E$的支付通道鏈就足夠了---比如說，四個支付通道：從$A$到$B$，從$B$到$C$，從$C$到$D$，以及從$D$到$E$。
 
-\nxsubpoint\label{sp:ch.money.tr} \embt(Chain money transfers.)
-Suppose that there is a chain of payment channels from $A$ to $B$,
-from $B$ to $C$, from $C$ to $D$, and from $D$ to $E$. Suppose,
-further, that $A$ wants to transfer $x$ coins to $E$.
+\nxsubpoint \embt(Overview of payment channel networks.)  回想一下，一個{\em 支付通道網絡}，也被稱為「閃電網路」，由一系列參與節點組成，其中一些節點之間建立了長時間存在的支付通道。我們稍後將看到，這些支付通道必須是\ptref{sp:pc.promises}意義上的「smart」。當一個參與節點$A$想要向任何其他參與節點$E$轉賬時，她會嘗試在支付通道網絡內找到連接$A$和$E$的路徑。當找到這樣的路徑時，她沿著這條路徑進行「鏈金錢轉賬」。
 
-A simplistic approach would be to transfer $x$ coins to $B$ along
-the existing payment channel, and ask him to forward the money further
-to $C$. However, it is not evident why $B$ would not simply take the
-money for himself. Therefore, one must employ a more sophisticated
-approach, not requiring all parties involved to trust each other.
+\nxsubpoint\label{sp:ch.money.tr} \embt(Chain money transfers.) 假設存在一條從$A$到$B$，從$B$到$C$，從$C$到$D$，以及從$D$到$E$的支付通道鏈。進一步假設$A$想要轉賬$x$個硬幣給$E$。
 
-This can be achieved as follows. $A$ generates a large random number
-$u$ and computes its hash $v=\Hash(u)$. Then she creates a promise to
-pay $x$ coins to $B$ if a number $u$ with hash $v$ is presented
-(cf.~\ptref{sp:pc.promises}), inside her payment channel
-with~$B$. This promise contains $v$, but not $u$, which is still kept
-secret.
+一個簡單的方法是沿著現有的支付通道向$B$轉賬$x$個硬幣，並要求他將錢進一步轉發給$C$。但是，不清楚為什麼$B$不簡單地為自己取走錢。因此，必須採用一種更複雜的方法，不需要所有參與方互相信任。
 
-After that, $B$ creates a similar promise to $C$ in their payment
-channel. He is not afraid to give such a promise, because he is aware
-of the existence of a similar promise given to him by $A$. If $C$ ever
-presents a solution of the hash problem to collect $x$ coins promised
-by $B$, then $B$ will immediately submit this solution to $A$ to
-collect $x$ coins from $A$.
+這可以如下實現。$A$生成一個大的隨機數$u$並計算其hash值$v=\Hash(u)$。然後她在與$B$的支付通道內創建一個承諾，如果出示一個帶有hash值$v$的數字$u$，她將支付$x$個硬幣給$B$（參見\ptref{sp:pc.promises}）。這個承諾包含$v$，但不包含$u$，這仍然是保密的。
 
-Then similar promises of $C$ to $D$ and of $D$ to $E$ are
-created. When the promises are all in place, $A$ triggers the transfer
-by communicating the solution $u$ to all parties involved---or just to
-$E$.
+之後，$B$在他們的支付通道中對$C$創建了一個類似的承諾。他不害怕給出這樣的承諾，因為他知道$A$給他的一個類似的承諾存在。如果$C$曾經出示hash問題的解決方案來收集$B$承諾的$x$個硬幣，那麼$B$將立即將此解決方案提交給$A$，以收集來自$A$的$x$個硬幣。
 
-Some minor details are omitted in this description. For example, these
-promises must have different expiration times, and the amount promised
-might slightly differ along the chain ($B$ might promise only
-$x-\epsilon$ coins to $C$, where $\epsilon$ is a small pre-agreed
-transit fee). We ignore such details for the time being, because they
-are not too relevant for understanding how payment channels work and
-how they can be implemented in TON.
+然後創建$C$對$D$和$D$對$E$的類似承諾。當所有承諾都到位時，$A$通過將解決方案$u$通告給所有參與方來觸發轉賬---或僅通告給$E$。
 
-\nxsubpoint\label{sp:virt.pc} \embt(Virtual payment channels inside a
-chain of payment channels.)  Now suppose that $A$ and $E$ expect to
-make a lot of payments to each other. They might create a new payment
-channel between them in the blockchain, but this would still be quite
-expensive, because some funds would be locked in this payment
-channel. Another option would be to use chain money transfers
-described in~\ptref{sp:ch.money.tr} for each payment. However, this
-would involve a lot of network activity and a lot of transactions in
-the virtual blockchains of all payment channels involved.
+這個描述中省略了一些次要的細節。例如，這些承諾必須有不同的到期時間，且沿著鏈上承諾的金額可能會略有不同（$B$可能只承諾$x-\epsilon$個硬幣給$C$，其中$\epsilon$是一個事先約定的小過境費）。我們暫時忽略這些細節，因為它們對於理解支付通道如何工作以及它們如何在TON中實現並不太相關。
 
-An alternative is to create a virtual payment channel inside the chain
-linking $A$ to $E$ in the payment channel network. For this, $A$ and
-$E$ create a (virtual) blockchain for their payments, as if they were
-going to create a payment channel in the blockchain. However, instead
-of creating a payment channel smart contract in the blockchain, they
-ask all intermediate payment channels---those linking $A$ to $B$, $B$
-to $C$, etc.---to create simple payment channels inside them, bound
-to the virtual blockchain created by $A$ and $E$
-(cf.~\ptref{sp:pc.within.pc}). In other words, now a promise to
-transfer money according to the final settlement between $A$ and~$E$
-exists inside every intermediate payment channel.
 
-If the virtual payment channel is unidirectional, such promises can be
-implemented quite easily, because the final imbalance $\delta$ is
-going to be non-positive, so simple payment channels can be created
-inside intermediate payment channels in the same order as described
-in~\ptref{sp:ch.money.tr}. Their expiration times can also be set in
-the same way.
+\nxsubpoint\label{sp:virt.pc} \embt(Virtual payment channels inside a chain of payment channels.) 考慮以下情境：假設$A$和$E$預計會互相進行大量的付款。他們可以在區塊鏈(blockchain)之間創建一個新的支付通道(payment channel)，但這仍然會相當昂貴，因為某些資金會被鎖定在這個支付通道中。另一種選擇是對於每筆付款使用在~\ptref{sp:ch.money.tr}中描述的鏈錢轉移(chain money transfers)。但是，這會涉及大量的網路活動和所有參與的支付通道中的大量虛擬區塊鏈(virtual blockchain)交易。
 
-If the virtual payment channel is bidirectional, the situation is
-slightly more complicated. In that case, one should split the promise
-to transfer $\delta$ coins according to the final settlement into two
-half-promises, as explained in \ptref{sp:pc.within.pc}: to transfer
-$\delta^-=\max(0,-\delta)$ coins in the forward direction, and to
-transfer $\delta^+=\max(0,\delta)$ in the backward direction. These
-half-promises can be created in the intermediate payment channels
-independently, one chain of half-promises in the direction from $A$
-to~$E$, and the other chain in the opposite direction.
+另一種方法是在連接$A$至$E$的支付通道網路(payment channel network)中建立一個虛擬支付通道(virtual payment channel)。為此，$A$和$E$為他們的付款創建一個(虛擬的)區塊鏈，好像他們要在區塊鏈中創建一個支付通道一樣。但是，他們不是在區塊鏈中創建支付通道智能合約(smart contract)，而是要求所有中間支付通道---連接$A$至$B$、$B$至$C$等的通道---在其中創建簡單的支付通道，並綁定到$A$和$E$創建的虛擬區塊鏈(參考~\ptref{sp:pc.within.pc})。換句話說，現在每個中間支付通道內都存在根據$A$和$E$之間的最終結算來轉移資金的承諾。
 
-\nxsubpoint\label{sp:lnet.find.path} \embt(Finding paths in the
-lightning network.)  One point remains undiscussed so far: how will
-$A$ and $E$ find a path connecting them in the payment network?  If
-the payment network is not too large, an OSPF-like protocol can be
-used: all nodes of the payment network create an overlay network
-(cf.~\ptref{sp:net.within.net}), and then every node propagates all
-available link (i.e., participating payment channel) information to
-its neighbors by a gossip protocol. Ultimately, all nodes will have a
-complete list of all payment channels participating in the payment
-network, and will be able to find the shortest paths by
-themselves---for example, by applying a version of Dijkstra's
-algorithm modified to take into account the ``capacities'' of the
-payment channels involved (i.e., the maximal amounts that can be
-transferred along them). Once a candidate path is found, it can be
-probed by a special ADNL datagram containing the full path, and asking
-each intermediate node to confirm the existence of the payment channel
-in question, and to forward this datagram further according to the
-path. After that, a chain can be constructed, and a protocol for chain
-transfers (cf.~\ptref{sp:ch.money.tr}), or for creating a virtual
-payment channel inside a chain of payment channels
-(cf.~\ptref{sp:virt.pc}), can be run.
+如果虛擬支付通道是單向的，那麼可以很容易地實施這些承諾，因為最終的失衡值$\delta$將是非正值，因此可以按照在~\ptref{sp:ch.money.tr}中描述的相同順序在中間支付通道中創建簡單的支付通道。他們的到期時間也可以以相同的方式設定。
 
-\nxsubpoint \embt(Optimizations.)  Some optimizations might be done
-here. For example, only transit nodes of the lightning network need to
-participate in the OSPF-like protocol discussed
-in~\ptref{sp:lnet.find.path}. Two ``leaf'' nodes wishing to connect
-through the lightning network would communicate to each other the
-lists of transit nodes they are connected to (i.e., with which they
-have established payment channels participating in the payment
-network). Then paths connecting transit nodes from one list to transit
-nodes from the other list can be inspected as outlined above
-in~\ptref{sp:lnet.find.path}.
+如果虛擬支付通道是雙向的，情況就稍微複雜了。在這種情況下，應該將根據最終結算轉移$\delta$個硬幣的承諾分成兩個半承諾，如\ptref{sp:pc.within.pc}中所解釋的那樣：轉移$\delta^-=\max(0,-\delta)$個硬幣到前向方向，和轉移$\delta^+=\max(0,\delta)$到反向方向。這些半承諾可以在中間支付通道中獨立創建，一個半承諾鏈在從$A$到$E$的方向，另一個半承諾鏈在相反的方向。
 
-\nxsubpoint \embt(Conclusion.)  We have outlined how the blockchain
-and network technologies of the TON project are adequate to the task
-of creating {\em TON Payments}, a platform for off-chain instant money
-transfers and micropayments. This platform can be extremely useful
-for services residing in the TON ecosystem, allowing them to easily
-collect micropayments when and where required.
+
+\nxsubpoint\label{sp:lnet.find.path} \embt(Finding paths in the lightning network.) 關於在支付網路(payment network)中如何找到連接$A$和$E$的路徑，這一點到目前為止還沒有討論。如果支付網路不是太大，可以使用類似OSPF的協議：所有支付網路的節點創建一個覆蓋網路(overlay network)（參考~\ptref{sp:net.within.net}），然後每個節點都通過gossip協議將所有可用鏈接（即，參與的支付通道）信息傳播給其鄰居。最終，所有節點都將擁有支付網路中所有參與的支付通道的完整列表，並且將能夠自己找到最短的路徑---例如，應用一個修改過的Dijkstra算法版本，以考慮到涉及的支付通道的"容量"（即，可以沿著它們傳輸的最大金額）。一旦找到了一個候選路徑，它可以被一個特殊的ADNL數據包探測，該數據包包含完整的路徑，並要求每個中間節點確認所涉及的支付通道的存在，並根據路徑將此數據包進一步轉發。之後，可以構建一條鏈，並可以運行鏈轉移（參考~\ptref{sp:ch.money.tr}）或在支付通道鏈中創建虛擬支付通道的協議（參考~\ptref{sp:virt.pc}）。
+
+\nxsubpoint \embt(Optimizations.) 在此處可以進行一些優化。例如，只有閃電網絡(lightning network)的中繼節點需要參與在~\ptref{sp:lnet.find.path}中討論的類似OSPF的協議。兩個“葉子”節點希望通過閃電網絡連接，將他們連接到的中繼節點列表（即，他們已建立的參與支付網絡的支付通道）通告給對方。然後，可以如上所述檢查從一個列表中的中繼節點到另一個列表中的中繼節點的路徑~\ptref{sp:lnet.find.path}。
+
+\nxsubpoint \embt(Conclusion.) 我們已經概述了如何使用TON項目的區塊鏈和網絡技術來創建{\em TON Payments}，這是一個用於鏈外即時金錢轉賬和小額支付的平台。對於居住在TON生態系中的服務，這個平台可能非常有用，允許它們在需要的時候和地方輕鬆收集小額支付。
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -2174,51 +1802,17 @@ collect micropayments when and where required.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
-\section*{Conclusion}
+\section*{結論}
 \markbothsame{\textsc{Conclusion}}
-\addcontentsline{toc}{section}{Conclusion}
+\addcontentsline{toc}{section}{結論}
 
-We have proposed a scalable multi-blockchain architecture capable of
-supporting a massively popular cryptocurrency and decentralized
-applications with user-friendly interfaces.
+我們已提出一個可擴展的多區塊鏈架構，能夠支持大量流行的加密貨幣和具有用戶友好界面的去中心化應用程式。
 
-To achieve the necessary scalability, we proposed the {\em TON
-  Blockchain}, a ``tightly-coupled'' multi-blockchain system
-(cf.~\ptref{sp:blkch.interact}) with bottom-up approach to sharding
-(cf.~\ptref{sp:shard.supp} and~\ptref{sp:ISP}). To further increase
-potential performance, we introduced the 2-blockchain mechanism for
-replacing invalid blocks (cf.~\ptref{sp:inv.sh.blk.corr}) and Instant
-Hypercube Routing for faster communication between shards
-(cf.~\ptref{sp:instant.hypercube}). A brief comparison of the TON
-Blockchain to existing and proposed blockchain projects
-(cf.~\ptref{sect:class.blkch} and~\ptref{sect:compare.blkch})
-highlights the benefits of this approach for systems that seek to
-handle millions of transactions per second.
+為了達到必要的可擴展性，我們提出了{\em TON Blockchain}，一個``密切結合''的多區塊鏈系統（參見~\ptref{sp:blkch.interact}），該系統採用了自下而上的分片方法（參見~\ptref{sp:shard.supp}和~\ptref{sp:ISP}）。為了進一步提高潛在性能，我們引入了2區塊鏈機制來替換無效的區塊（參見~\ptref{sp:inv.sh.blk.corr}）以及Instant Hypercube Routing以實現分片之間的更快通訊（參見~\ptref{sp:instant.hypercube}）。與現有和提議的區塊鏈項目的簡短比較（參見~\ptref{sect:class.blkch}和~\ptref{sect:compare.blkch}）突顯了這種方法對於尋求每秒處理百萬交易的系統的好處。
 
-The {\em TON Network}, described in Chapter~\ptref{sect:network},
-covers the networking demands of the proposed multi-blockchain
-infrastructure. This network component may also be used in combination
-with the blockchain to create a wide spectrum of applications and
-services, impossible using the blockchain alone
-(cf.~\ptref{sp:blockchain.facebook}). These services, discussed in
-Chapter~\ptref{sect:services}, include {\em TON DNS}, a service for
-translating human-readable object identifiers into their addresses;
-{\em TON Storage}, a distributed platform for storing arbitrary files;
-{\em TON Proxy}, a service for anonymizing network access and
-accessing TON-powered services; and {\em TON Payments\/}
-(cf. Chapter~\ptref{sect:payments}), a platform for instant off-chain
-money transfers across the TON ecosystem that applications may use for
-micropayments.
+在第~\ptref{sect:network}章中描述的{\em TON Network}，滿足了所提議的多區塊鏈基礎設施的網絡需求。此網絡組件還可與區塊鏈結合使用，以創建一系列應用程式和服務，僅使用區塊鏈無法實現（參見~\ptref{sp:blockchain.facebook}）。在第~\ptref{sect:services}章中討論的這些服務包括{\em TON DNS}，一個用於將人類可讀的對象識別符翻譯成其地址的服務；{\em TON Storage}，一個用於存儲任意文件的分佈式平台；{\em TON Proxy}，一個用於匿名化網絡訪問和訪問TON驅動服務的服務；以及{\em TON Payments\/}（參見第~\ptref{sect:payments}章），這是一個用於在TON生態系統中進行即時鏈下資金轉移的平台，應用程式可用於小額支付。
 
-The TON infrastructure allows for specialized light client wallet and
-``ton-browser'' desktop and smartphone applications that enable a
-browser-like experience for the end user (cf.~\ptref{sp:ton.www}),
-making cryptocurrency payments and interaction with smart contracts
-and other services on the TON Platform accessible to the mass
-user. Such a light client can be integrated into the Telegram
-Messenger client (cf.~\ptref{sp:telegram.integr}), thus eventually
-bringing a wealth of blockchain-based applications to hundreds of
-millions of users.
+TON基礎設施允許專門的輕量客戶端錢包和``ton-browser''桌面和智能手機應用程式，為最終用戶提供類似瀏覽器的體驗（參見~\ptref{sp:ton.www}），使加密貨幣支付以及與TON平台上的智能合約和其他服務的互動對大眾用戶來說是可訪問的。這樣的輕量客戶端可以集成到Telegram Messenger客戶端中（參見~\ptref{sp:telegram.integr}），從而最終將基於區塊鏈的應用程式帶給數以億計的用戶。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
