@@ -1468,656 +1468,192 @@ overlay network.) 在一個節點學到它想要加入的overlay網絡的網絡�
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\mysection{TON Services and Applications}\label{sect:services}
+\mysection{TON 服務與應用程式}\label{sect:services}
 
-We have discussed the TON Blockchain and TON Networking technologies
-at some length. Now we explain some ways in which they can be combined
-to create a wide range of services and applications, and discuss some
-of the services that will be provided by the TON Project itself,
-either from the very beginning or at a later time.
+我們已經詳細討論了 TON 區塊鏈和 TON 網絡技術。現在我們將解釋它們如何可以組合起來創建各種服務和應用程式，並討論 TON 項目本身將提供的一些服務，無論是從一開始還是在稍後的時間。
 
-\mysubsection{TON Service Implementation Strategies}%
+\mysubsection{TON 服務實施策略}%
 \label{sect:ton.service.impl}
 
-We start with a discussion of how different blockchain and
-network-related applications and services may be implemented inside
-the TON ecosystem. First of all, a simple classification is in order:
+我們首先討論如何在 TON 生態系統內實施不同的區塊鏈和網絡相關應用程式和服務。首先，一個簡單的分類是必要的：
 
-\nxsubpoint \embt(Applications and services.)  We will use the words
-``application'' and ``service'' interchangeably. However, there is a
-subtle and somewhat vague distinction: an {\em application\/} usually
-provides some services directly to human users, while a {\em
-  service\/} is usually exploited by other applications and
-services. For example, TON Storage is a service, because it is
-designed to keep files on behalf of other applications and services,
-even though a human user might use it directly as well. A hypothetical
-``Facebook in a blockchain'' (cf.~\ptref{sp:blockchain.facebook}) or
-Telegram messenger, if made available through the TON Network (i.e.,
-implemented as a ``ton-service''; cf.~\ptref{sp:telegram.ton.serv}),
-would rather be an {\em application}, even though some ``bots'' might
-access it automatically without human intervention.
+\nxsubpoint \embt(Applications and services.) 我們將``應用程式''和``服務''這兩個詞互換使用。但是，其中有一個微妙且有點模糊的區別：一個 {\em 應用程式\/} 通常直接向人類用戶提供一些服務，而一個 {\em 服務\/} 通常被其他應用程式和服務所利用。例如，TON Storage 是一個服務，因為它是代表其他應用程式和服務保存文件的，即使人類用戶也可能直接使用它。一個假設的``在區塊鏈中的Facebook'' (參見~\ptref{sp:blockchain.facebook}) 或 Telegram 訊息傳遞應用，如果通過 TON 網絡提供 (即，作為一個``ton-service''實施；參見~\ptref{sp:telegram.ton.serv})，則更像是一個 {\em 應用程式}，即使一些``機器人''可能在沒有人工干預的情況下自動訪問它。
 
-\nxsubpoint\label{sp:on.off.chain} \embt(Location of the application:
-on-chain, off-chain or mixed.)  A service or an application designed
-for the TON ecosystem needs to keep its data and process that data
-somewhere. This leads to the following classification of applications
-(and services):
+\nxsubpoint\label{sp:on.off.chain} \embt(Location of the application: on-chain, off-chain or mixed.) 為 TON 生態系設計的服務或應用程式需要將其數據保存並在某處處理該數據。這導致了以下應用程式（和服務）的分類：
 \begin{itemize}
-\item {\em On-chain\/} applications (cf.~\ptref{sp:pure.blockchain}):
-  All data and processing are in the TON Blockchain.
-\item {\em Off-chain\/} applications (cf.~\ptref{sp:pure.net.serv}):
-  All data and processing are outside the TON Blockchain, on servers
-  available through the TON Network.
-\item {\em Mixed\/} applications (cf.~\ptref{sp:mixed.serv}): Some,
-  but not all, data and processing are in the TON Blockchain; the rest
-  are on off-chain servers available through the TON Network.
+\item {\em On-chain\/} 應用程式 (參見~\ptref{sp:pure.blockchain})：所有數據和處理都在 TON 區塊鏈中。
+\item {\em Off-chain\/} 應用程式 (參見~\ptref{sp:pure.net.serv})：所有數據和處理都在 TON 區塊鏈之外，在通過 TON 網絡提供的服務器上。
+\item {\em Mixed\/} 應用程式 (參見~\ptref{sp:mixed.serv})：部分，但不是所有，數據和處理都在 TON 區塊鏈中；其餘的都在通過 TON 網絡提供的off-chain服務器上。
 \end{itemize}
 
-\nxsubpoint \embt(Centralization: centralized and decentralized, or
-distributed, applications.)  Another classification criterion is
-whether the application (or service) relies on a centralized server
-cluster, or is really ``distributed'' (cf.~\ptref{sp:fog}). All
-on-chain applications are automatically decentralized and
-distributed. Off-chain and mixed applications may exhibit different
-degrees of centralization.
+\nxsubpoint \embt(Centralization: centralized and decentralized, or distributed, applications.) 另一個分類標準是應用程式（或服務）是否依賴於集中的伺服器集群，或者真的是``分佈式'' (參見~\ptref{sp:fog})。所有on-chain應用程式都自動地是去中心化和分佈式的。Off-chain和混合應用程式可能呈現出不同程度的集中化。
 
 \medbreak
-Now let us consider the above possibilities in more detail.
+現在讓我們更詳細地考慮上述可能性。
 
-\nxsubpoint\label{sp:pure.blockchain} \embt(Pure ``on-chain''
-applications: distributed applications, or ``dapps'', residing in the
-blockchain.)  One of the possible approaches, mentioned
-in~\ptref{sp:on.off.chain}, is to deploy a ``distributed application''
-(commonly abbreviated as ``dapp'') completely in the TON Blockchain,
-as one smart contract or a collection of smart contracts. All data
-will be kept as part of the permanent state of these smart contracts,
-and all interaction with the project will be done by means of (TON
-Blockchain) messages sent to or received from these smart contracts.
+\nxsubpoint\label{sp:pure.blockchain} \embt(Pure ``on-chain'' applications: distributed applications, or ``dapps'', residing in the blockchain.) 其中一種可能的方法，如在~\ptref{sp:on.off.chain}中提到的，是將一個「分散式應用程式」（通常縮寫為「dapp」）完全部署在TON區塊鏈中，作為一個智慧合約或一組智慧合約。所有數據都將作為這些智慧合約的永久狀態部分保存，並且所有與該項目的交互都將通過發送到或從這些智慧合約接收的(TON區塊鏈)消息來完成。
 
-We have already discussed in~\ptref{sp:blockchain.facebook} that this
-approach has its drawbacks and limitations. It has its advantages,
-too: such a distributed application needs no servers to run on or to
-store its data (it runs ``in the blockchain''---i.e., on the
-validators' hardware), and enjoys the blockchain's extremely high
-(Byzantine) reliability and accessibility. The developer of such a
-distributed application does not need to buy or rent any hardware; all
-she needs to do is develop some software (i.e., the code for the smart
-contracts). After that, she will effectively rent the computing power
-from the validators, and will pay for it in Grams, either herself or
-by putting this burden on the shoulders of her users.
+我們已經在~\ptref{sp:blockchain.facebook}中討論過這種方法有其缺點和限制。它也有其優點：這樣的分散式應用程式不需要伺服器來運行或存儲其數據（它運行在「區塊鏈中」---即在驗證者的硬體上），並享有區塊鏈極高的(拜占庭)可靠性和可訪問性。這種分散式應用的開發者不需要購買或租用任何硬體；她需要做的只是開發一些軟體（即智慧合約的代碼）。之後，她將有效地從驗證者那裡租用計算能力，並用Grams支付，要麼由她自己支付，要麼由她的用戶承擔。
 
-\nxsubpoint\label{sp:pure.net.serv} \embt(Pure network services:
-``ton-sites'' and ``ton-services''.)  Another extreme option is to
-deploy the service on some servers and make it available to the users
-through the ADNL protocol described in~\ptref{sect:ANL}, and maybe
-some higher level protocol such as the RLDP discussed
-in~\ptref{sp:RLDP}, which can be used to send RPC queries to the
-service in any custom format and obtain answers to these queries. In
-this way, the service will be totally off-chain, and will reside in
-the TON Network, almost without using the TON Blockchain.
+\nxsubpoint\label{sp:pure.net.serv} \embt(Pure network services: ``ton-sites'' and ``ton-services''.) 另一個極端選擇是將服務部署在一些伺服器上，並通過在~\ptref{sect:ANL}中描述的ADNL協議使其供用戶使用，也許還有一些更高級的協議，如在~\ptref{sp:RLDP}中討論的RLDP，該協議可以用於以任何自訂格式向服務發送RPC查詢並獲得這些查詢的答案。這樣，該服務將完全在鏈外，並將駐留在TON網絡中，幾乎不使用TON區塊鏈。
 
-The TON Blockchain might be used only to locate the abstract address
-or addresses of the service, as outlined in~\ptref{sp:loc.serv},
-perhaps with the aid of a service such as the TON DNS
-(cf.~\ptref{sp:ton.dns}) to facilitate translation of domain-like
-human-readable strings into abstract addresses.
+TON區塊鏈可能只用於查找服務的抽象地址或地址，如在~\ptref{sp:loc.serv}中概述的，也許還可以利用像TON DNS這樣的服務（參見~\ptref{sp:ton.dns}）來幫助將類似域的人類可讀字符串翻譯成抽象地址。
 
-To the extent the ADNL network (i.e., the TON Network) is similar to
-the Invisible Internet Project ($I^2P$), such (almost) purely network
-services are analogous to the so-called ``eep-services'' (i.e.,
-services that have an $I^2P$-address as their entry point, and are
-available to clients through the $I^2P$ network). We will say that
-such purely network services residing in the TON Network are
-``ton-services''.
+在ADNL網絡（即TON網絡）類似於Invisible Internet Project（$I^2P$）的程度上，這樣的（幾乎）純網絡服務類似於所謂的「eep-services」（即，有一個$I^2P$-地址作為他們的入口點的服務，並通過$I^2P$網絡提供給客戶）。我們會說，駐留在TON網絡中的這些純網絡服務是「ton-services」。
 
-An ``eep-service'' may implement HTTP as its client-server protocol;
-in the TON Network context, a ``ton-service'' might simply use RLDP
-(cf.~\ptref{sp:RLDP}) datagrams to transfer HTTP queries and responses
-to them. If it uses the TON DNS to allow its abstract address to be
-looked up by a human-readable domain name, the analogy to a web site
-becomes almost perfect. One might even write a specialized browser, or
-a special proxy (``ton-proxy'') that is run locally on a user's
-machine, accepts arbitrary HTTP queries from an ordinary web browser
-the user employs (once the local IP address and the TCP port of the
-proxy are entered into the browser's configuration), and forwards
-these queries through the TON Network to the abstract address of the
-service. Then the user would have a browsing experience similar to
-that of the World Wide Web (WWW).
+「eep-service」可以實現HTTP作為其客戶端-伺服器協議；在TON網絡上下文中，「ton-service」可能只是使用RLDP（參見~\ptref{sp:RLDP}）數據報來傳輸HTTP查詢和響應。如果它使用TON DNS允許其抽象地址被一個人類可讀的域名查找，那麼與網站的類比就幾乎完美了。甚至可以寫一個專門的瀏覽器，或一個在用戶的機器上本地運行的特殊代理（「ton-proxy」），該代理接受來自用戶使用的普通網絡瀏覽器的任意HTTP查詢（一旦代理的本地IP地址和TCP端口輸入到瀏覽器的配置中），並將這些查詢通過TON網絡轉發到服務的抽象地址。然後用戶將擁有類似於世界寬網（WWW）的瀏覽體驗。
 
-In the $I^2P$ ecosystem, such ``eep-services'' are called
-``eep-sites''. One can easily create ``ton-sites'' in the TON
-ecosystem as well. This is facilitated somewhat by the existence of
-services such as the TON DNS, which exploit the TON Blockchain and the
-TON DHT to translate (TON) domain names into abstract addresses.
+在$I^2P$生態系中，這樣的「eep-services」被稱為「eep-sites」。在TON生態系中也可以輕鬆創建「ton-sites」。這在某種程度上得到了TON DNS這類服務的幫助，它利用TON區塊鏈和TON DHT將(TON)域名翻譯成抽象地址。
 
-\nxsubpoint\label{sp:telegram.ton.serv} \embt(Telegram Messenger as a
-ton-service; MTProto over RLDP.)  We would like to mention in passing
-that the MTProto
-protocol,\footnote{\url{https://core.telegram.org/mtproto}} used by
-Telegram Messenger\footnote{\url{https://telegram.org/}} for
-client-server interaction, can be easily embedded into the RLDP
-protocol discussed in~\ptref{sp:RLDP}, thus effectively transforming
-Telegram into a ton-service. Because the TON Proxy technology can be
-switched on transparently for the end user of a ton-site or a
-ton-service, being implemented on a lower level than the RLDP and ADNL
-protocols (cf.~\ptref{sp:tunnels}), this would make Telegram
-effectively unblockable. Of course, other messaging and social
-networking services might benefit from this technology as well.
+\nxsubpoint\label{sp:telegram.ton.serv} \embt(Telegram Messenger as a ton-service; MTProto over RLDP.) 我們想順便提到MTProto協議\footnote{\url{https://core.telegram.org/mtproto}}，Telegram Messenger\footnote{\url{https://telegram.org/}}用於客戶端-伺服器交互，可以輕鬆嵌入到在\ptref{sp:RLDP}中討論的RLDP協議，從而實質上將Telegram轉化為ton-service。由於TON Proxy技術可以為ton-site或ton-service的終端用戶透明地開啟，並在RLDP和ADNL協議的下一級實施（參見\ptref{sp:tunnels}），這將使Telegram實質上不可封鎖。當然，其他消息和社交網絡服務也可能從這項技術中受益。
 
-\nxsubpoint\label{sp:mixed.serv} \embt(Mixed services: partly
-off-chain, partly on-chain.)  Some services might use a mixed
-approach: do most of the processing off-chain, but also have some
-on-chain part (for example, to register their obligations towards
-their users, and vice versa). In this way, part of the state would
-still be kept in the TON Blockchain (i.e., an immutable public
-ledger), and any misbehavior of the service or of its users could be
-punished by smart contracts.
+\nxsubpoint\label{sp:mixed.serv} \embt(Mixed services: partly off-chain, partly on-chain.) 一些服務可能使用混合方法：大部分處理在鏈外，但也有一些鏈上的部分（例如，為了登記他們對用戶的義務，反之亦然）。通過這種方式，狀態的一部分仍然會被保存在TON Blockchain中（即，不可變的公共分類帳），並且服務或其用戶的任何不當行為可以由智慧合約進行懲罰。
 
-\nxsubpoint\label{sp:ex.ton.storage} \embt(Example: keeping files
-off-chain; TON Storage.)  An example of such a service is given by
-{\em TON Storage}. In its simplest form, it allows users to store
-files off-chain, by keeping on-chain only a hash of the file to be
-stored, and possibly a smart contract where some other parties agree
-to keep the file in question for a given period of time for a
-pre-negotiated fee. In fact, the file may be subdivided into chunks of
-some small size (e.g., 1 kilobyte), augmented by an erasure code such
-as a Reed--Solomon or a fountain code, a Merkle tree hash may be
-constructed for the augmented sequence of chunks, and this Merkle tree
-hash might be published in the smart contract instead of or along with
-the usual hash of the file. This is somewhat reminiscent of the way
-files are stored in a torrent.
+\nxsubpoint\label{sp:ex.ton.storage} \embt(Example: keeping files off-chain; TON Storage.) 這樣的服務的一個例子是由TON Storage提供的。在其最簡單的形式中，它允許用戶在鏈外存儲文件，只在鏈上保留要存儲的文件的哈希值，可能還有一個智慧合約，其中一些其他方同意在給定的時間段內為預先協商的費用保存該文件。實際上，文件可以被細分為一些小的大小（例如，1千字節），由擦除代碼如Reed--Solomon或噴泉代碼進行增強，可以為增強的塊序列構建一個Merkle tree哈希值，並且這個Merkle tree哈希值可能在智慧合約中發布，而不是或與文件的通常哈希一起。這有點讓人想起文件在torrent中的存儲方式。
 
-An even simpler form of storing files is completely off-chain: one
-might essentially create a ``torrent'' for a new file, and use TON DHT
-as a ``distributed torrent tracker'' for this torrent
-(cf.~\ptref{sp:distr.torr.tr}). This might actually work pretty well
-for popular files. However, one does not get any availability
-guarantees. For example, a hypothetical ``blockchain Facebook''
-(cf.~\ptref{sp:blockchain.facebook}), which would opt to keep the
-profile photographs of its users completely off-chain in such
-``torrents'', might risk losing photographs of ordinary (not
-especially popular) users, or at least risk being unable to present
-these photographs for prolonged periods. The TON Storage technology,
-which is mostly off-chain, but uses an on-chain smart contract to
-enforce availability of the stored files, might be a better match for
-this task.
+存儲文件的更簡單形式完全是在鏈外：人們可能基本上為新文件創建一個「torrent」，並使用TON DHT作為此torrent的「分散式torrent追踪器」（參見\ptref{sp:distr.torr.tr}）。這對於受歡迎的文件可能實際上工作得很好。但是，您不會得到任何可用性保證。例如，一個假設的「區塊鏈Facebook」（參見\ptref{sp:blockchain.facebook}），它選擇在這種「torrents」中完全保留其用戶的個人資料照片，可能會冒著失去普通（不是特別受歡迎）的用戶的照片的風險，或者至少冒著在很長時間內無法顯示這些照片的風險。主要是在鏈外，但使用在鏈上的智慧合約來強制執行存儲的文件的可用性的TON存儲技術，可能更適合這項任務。
 
-\nxsubpoint\label{sp:fog} \embt(Decentralized mixed services, or ``fog
-services''.)  So far, we have discussed {\em centralized\/} mixed
-services and applications. While their on-chain component is processed
-in a decentralized and distributed fashion, being located in the
-blockchain, their off-chain component relies on some servers
-controlled by the service provider in the usual centralized
-fashion. Instead of using some dedicated servers, computing power
-might be rented from a cloud computing service offered by one of the
-large companies. However, this would not lead to decentralization of
-the off-chain component of the service.
+\nxsubpoint\label{sp:fog} \embt(Decentralized mixed services, or ``fog services''.) 到目前為止，我們已經討論了{\em centralized\/}混合服務和應用程式。雖然它們的鏈上組件是以去中心化和分散的方式進行處理的，位於區塊鏈中，但它們的鏈下組件依賴於某些由服務提供商以常見的集中方式控制的伺服器。而不是使用一些專用伺服器，計算能力可能會從其中一家大公司提供的雲計算服務中租用。但是，這不會導致服務的鏈下組件的去中心化。
 
-A decentralized approach to implementing the off-chain component of a
-service consists in creating a {\em market}, where anybody possessing
-the required hardware and willing to rent their computing power or
-disk space would offer their services to those needing them.
+實現服務的鏈下組件的去中心化方法在於創建一個{\em 市場}，任何擁有所需硬體並願意出租其計算能力或磁碟空間的人都可以向需要它們的人提供服務。
 
-For example, there might exist a registry (which might also be called
-a ``market'' or an ``exchange'') where all nodes interested in keeping
-files of other users publish their contact information, along with
-their available storage capacity, availability policy, and
-prices. Those needing these services might look them up there, and, if
-the other party agrees, create smart contracts in the blockchain and
-upload files for off-chain storage. In this way a service like {\em
-  TON Storage\/} becomes truly decentralized, because it does not need
-to rely on any centralized cluster of servers for storing files.
+例如，可能存在一個註冊表（也可以稱為「市場」或「交換所」），所有有興趣保存其他用戶文件的節點都在那裡發佈他們的聯繫信息，以及他們的可用存儲容量、可用性政策和價格。需要這些服務的人可能會在那裡查找它們，如果另一方同意，則在區塊鏈中創建智慧合約並上傳文件進行鏈下存儲。這樣，像{\em TON Storage\/}這樣的服務就真正成為去中心化的，因為它不需要依賴任何集中的伺服器集群來存儲文件。
 
-\nxsubpoint \embt(Example: ``fog computing'' platforms as
-decentralized mixed services.)  Another example of such a
-decentralized mixed application arises when one wants to perform some
-specific computations (e.g., 3D rendering or training neural
-networks), often requiring specific and expensive hardware. Then those
-having such equipment might offer their services through a similar
-``exchange'', and those needing such services would rent them, with
-the obligations of the sides registered by means of smart
-contracts. This is similar to what ``fog computing'' platforms, such
-as Golem (\url{https://golem.network/}) or SONM
-(\url{https://sonm.io/}), promise to deliver.
+\nxsubpoint \embt(Example: ``fog computing'' platforms as decentralized mixed services.) 這種去中心化混合應用的另一個例子是當人們想執行一些特定計算（例如，3D渲染或訓練神經網絡），通常需要特定且昂貴的硬體。然後擁有這種設備的人可能會通過類似的「交換所」提供他們的服務，需要這種服務的人則會租用它們，並通過智慧合約註冊雙方的義務。這類似於``fog computing''平台，如Golem (\url{https://golem.network/}) 或 SONM (\url{https://sonm.io/})，所承諾提供的。
 
-\nxsubpoint\label{sp:ex.ton.proxy} \embt(Example: TON Proxy is a fog
-service.)  {\em TON Proxy\/} provides yet another example of a fog
-service, where nodes wishing to offer their services (with or without
-compensation) as tunnels for ADNL network traffic might register,
-and those needing them might choose one of these nodes depending on
-the price, latency and bandwidth offered. Afterwards, one might use
-payment channels provided by {\em TON Payments\/} for processing
-micropayments for the services of those proxies, with payments
-collected, for instance, for every 128~KiB transferred.
+\nxsubpoint\label{sp:ex.ton.proxy} \embt(Example: TON Proxy is a fog service.) {\em TON Proxy\/} 提供了一個fog服務的另一個例子，希望提供其服務的節點（有償或無償）作為ADNL網絡流量的隧道可能會註冊，需要它們的人可能會根據提供的價格、延遲和帶寬選擇其中一個節點。之後，人們可能會使用由{\em TON Payments\/}提供的支付通道來處理代理服務的微支付，例如，每傳輸128~KiB收取的付款。
 
-\nxsubpoint \embt(Example: TON Payments is a fog service.)  The TON
-Payments platform (cf.~\ptref{sect:payments}) is also an example of
-such a decentralized mixed application.
 
-\mysubsection{Connecting Users and Service
-  Providers}\label{sect:reg.markt}
+\nxsubpoint \embt(Example: TON Payments is a fog service.) TON Payments平台(cf.~\ptref{sect:payments})也是這種去中心化混合應用的一個例子。
 
-We have seen in~\ptref{sp:fog} that ``fog services'' (i.e., mixed
-decentralized services) will usually need some {\em markets}, {\em
-  exchanges\/} or {\em registries}, where those needing specific
-services might meet those providing them.
+\mysubsection{連接使用者和服務提供者}\label{sect:reg.markt}
 
-Such markets are likely to be implemented as on-chain, off-chain or
-mixed services themselves, centralized or distributed.
+我們在~\ptref{sp:fog}中看到「fog services」(即混合去中心化服務)通常需要一些{\em 市場}、{\em 交易所\/}或{\em 註冊表}，在那裡需要特定服務的人可以遇到提供這些服務的人。
 
-\nxsubpoint \embt(Example: connecting to TON Payments.)  For example,
-if one wants to use TON Payments (cf.~\ptref{sect:payments}), the
-first step would be to find at least some existing transit nodes of
-the ``lightning network'' (cf.~\ptref{sect:lightning}), and establish
-payment channels with them, if they are willing. Some nodes can be
-found with the aid of the ``encompassing'' overlay network, which is
-supposed to contain all transit lightning network nodes
-(cf.~\ptref{sp:net.within.net}). However, it is not clear whether
-these nodes will be willing to create new payment channels. Therefore,
-a registry is needed where nodes ready to create new links can publish
-their contact information (e.g., their abstract addresses).
+這些市場很可能作為鏈上、鏈下或混合服務本身被實現，無論是集中式還是分散式。
 
-\nxsubpoint \embt(Example: uploading a file into TON Storage.)
-Similarly, if one wants to upload a file into the TON Storage, she
-must locate some nodes willing to sign a smart contract binding them
-to keep a copy of that file (or of any file below a certain size
-limit, for that matter). Therefore, a registry of nodes offering their
-services for storing files is needed.
+\nxsubpoint \embt(Example: connecting to TON Payments.) 例如，如果某人想使用TON Payments(cf.~\ptref{sect:payments})，第一步是找到至少一些現有的「lightning network」(cf.~\ptref{sect:lightning})的轉接節點，並與它們建立支付通道，如果它們願意的話。可以使用「包圍」的覆蓋網絡找到一些節點，該網絡應該包含所有的轉接lightning network節點(cf.~\ptref{sp:net.within.net})。但是，這些節點是否願意創建新的支付通道還不清楚。因此，需要一個註冊表，那些準備創建新連接的節點可以在其中發佈他們的聯繫信息（例如，他們的抽象地址）。
 
-\nxsubpoint \embt(On-chain, mixed and off-chain registries.)  Such a
-registry of service providers might be implemented completely
-on-chain, with the aid of a smart contract which would keep the
-registry in its permanent storage. However, this would be quite slow
-and expensive. A mixed approach is more efficient, where the
-relatively small and rarely changed on-chain registry is used only to
-point out some nodes (by their abstract addresses, or by their public
-keys, which can be used to locate actual abstract addresses as
-described in~\ptref{sp:loc.serv}), which provide off-chain
-(centralized) registry services.
+\nxsubpoint \embt(Example: uploading a file into TON Storage.) 同樣，如果某人想將文件上傳到TON Storage，她必須找到一些願意簽署智慧合約的節點，將它們綁定到保留該文件的副本（或任何低於某個大小限制的文件）。因此，需要一個提供存儲文件服務的節點註冊表。
 
-Finally, a decentralized, purely off-chain approach might consist of a
-public overlay network (cf.~\ptref{sect:overlay}), where those willing
-to offer their services, or those looking to buy somebody's services,
-simply broadcast their offers, signed by their private keys. If the
-service to be provided is very simple, even broadcasting the offers
-might be not necessary: the approximate membership of the overlay
-network itself might be used as a ``registry'' of those willing to
-provide a particular service. Then a client requiring this service
-might locate (cf.~\ptref{sp:loc.many.mem}) and query some nodes of
-this overlay network, and then query their neighbors, if the nodes
-already known are not ready to satisfy its needs.
+\nxsubpoint \embt(On-chain, mixed and off-chain registries.) 這種服務提供者註冊表可能完全在鏈上實現，借助一個智慧合約來在其永久存儲中保留註冊表。但是，這將是相當緩慢和昂貴的。一種混合方法更為高效，其中相對較小且很少更改的鏈上註冊表只用於指出某些節點（通過它們的抽象地址，或者通過它們的公鑰，如在~\ptref{sp:loc.serv}中描述的那樣，可以用來查找實際的抽象地址），這些節點提供鏈下（集中式）的註冊服務。
+
+最後，一種去中心化的、純鏈下的方法可能包括一個公共的覆蓋網絡(cf.~\ptref{sect:overlay})，在那裡願意提供他們的服務的人，或者那些尋求購買某人服務的人，只需廣播由他們的私鑰簽名的優惠。如果要提供的服務非常簡單，甚至可能不需要廣播優惠：覆蓋網絡本身的大致成員資格可以用作願意提供特定服務的人的「註冊表」。然後，需要此服務的客戶可以定位(cf.~\ptref{sp:loc.many.mem})並查詢此覆蓋網絡的一些節點，然後查詢其鄰居，如果已知的節點不準備滿足其需求。
+
 
 \nxsubpoint\label{sp:side.chain.reg} \embt(Registry or exchange in a
-side-chain.)  Another approach to implementing decentralized mixed
-registries consists in creating an independent specialized blockchain
-(``side-chain''), maintained by its own set of self-proclaimed
-validators, who publish their identities in an on-chain smart contract
-and provide network access to all interested parties to this
-specialized blockchain, collecting transaction candidates and
-broadcasting block updates through dedicated overlay networks
-(cf.~\ptref{sect:overlay}). Then any full node for this sidechain can
-maintain its own copy of the shared registry (essentially equal to the
-global state of this side-chain), and process arbitrary queries
-related to this registry.
+side-chain.)  另一種實現去中心化混合註冊表的方法是創建一個獨立的專用區塊鏈（「side-chain」），由其自己的一組自稱為驗證者的人維護，他們在on-chain智能合約中發佈他們的身份，並為所有感興趣的方提供網絡訪問這個專用的區塊鏈，通過專用覆蓋網絡收集交易候選人和廣播塊更新（cf.~\ptref{sect:overlay}）。然後，這個sidechain的任何完整節點都可以維護其自己的共享註冊表副本（本質上等於此side-chain的全局狀態），並處理與此註冊表相關的任意查詢。
 
-\nxsubpoint \embt(Registry or exchange in a workchain.)  Another
-option is to create a dedicated workchain inside the TON Blockchain,
-specialized for creating registries, markets and exchanges. This might
-be more efficient and less expensive than using smart contracts
-residing in the basic workchain
-(cf.~\ptref{sp:basic.workchain}). However, this would still be more
-expensive than maintaining registries in side-chains
-(cf.~\ptref{sp:side.chain.reg}).
+\nxsubpoint \embt(Registry or exchange in a workchain.) 另一個選擇是在TON區塊鏈內創建一個專用的workchain，專門用於創建註冊表、市場和交易所。這可能比使用位於基本workchain中的智能合約更有效率和更便宜(cf.~\ptref{sp:basic.workchain})。但是，這仍然比在side-chains中維護註冊表更昂貴(cf.~\ptref{sp:side.chain.reg}）。
 
-\mysubsection{Accessing TON Services}
+\mysubsection{訪問TON服務}
 
-We have discussed in~\ptref{sect:ton.service.impl} the different
-approaches one might employ for creating new services and applications
-residing in the TON ecosystem. Now we discuss how these services might
-be accessed, and some of the ``helper services'' that will be provided
-by TON, including {\em TON DNS\/} and {\em TON Storage}.
+我們已經在~\ptref{sect:ton.service.impl}中討論了創建居於TON生態系中的新服務和應用程序的不同方法。現在，我們討論如何訪問這些服務，以及TON將提供的一些「輔助服務」，包括{\em TON DNS\/}和{\em TON Storage}。
 
 \nxsubpoint\label{sp:ton.dns} \embt(TON DNS: a mostly on-chain
-hierarchical domain name service.)  The {\em TON DNS\/} is a
-predefined service, which uses a collection of smart contracts to keep
-a map from human-readable domain names to (256-bit) addresses of ADNL
-network nodes and TON Blockchain accounts and smart contracts.
+hierarchical domain name service.) {\em TON DNS\/}是一個預定義的服務，它使用一系列的智能合約來從人類可讀的域名映射到ADNL網絡節點和TON區塊鏈賬戶和智能合約的（256位）地址。
 
-While anybody might in principle implement such a service using the
-TON Blockchain, it is useful to have such a predefined service with a
-well-known interface, to be used by default whenever an application or
-a service wants to translate human-readable identifiers into
-addresses.
+雖然原則上任何人都可以使用TON區塊鏈實現這樣的服務，但擁有這樣一個預定義的服務，並具有一個眾所周知的界面，當一個應用程序或服務希望將人類可讀的標識符轉換為地址時，將其用作默認選擇是很有用的。
 
-\nxsubpoint \embt(TON DNS use cases.)  For example, a user looking to
-transfer some cryptocurrency to another user or to a merchant may
-prefer to remember a TON DNS domain name of the account of that user
-or merchant, instead of keeping their 256-bit account identifiers at
-hand and copy-pasting them into the recipient field in their light
-wallet client.
+\nxsubpoint \embt(TON DNS use cases.) 例如，希望將一些加密貨幣轉移給另一個用戶或商家的用戶可能更喜歡記住該用戶或商家賬戶的TON DNS域名，而不是手頭保留他們的256位賬戶識別碼並將它們複製粘貼到他們的輕錢包客戶端的收件人字段中。
 
-Similarly, TON DNS may be used to locate account identifiers of smart
-contracts or entry points of ton-services and ton-sites
-(cf.~\ptref{sp:pure.net.serv}), enabling a specialized client
-(``ton-browser''), or a usual internet browser combined with a
-specialized ton-proxy extension or stand-alone application, to deliver
-a WWW-like browsing experience to the user.
+同樣地，TON DNS可以用來查找智能合約的賬戶識別碼或ton-services和ton-sites的入口點（cf.~\ptref{sp:pure.net.serv}），使得一個專用客戶端（「ton-browser」）或一個與專用ton-proxy擴展或獨立應用程序結合的常見互聯網瀏覽器，能夠為用戶提供一個類似WWW的瀏覽體驗。
 
-\nxsubpoint \embt(TON DNS smart contracts.)  The TON DNS is
-implemented by means of a tree of special (DNS) smart contracts. Each
-DNS smart contract is responsible for registering subdomains of some
-fixed domain. The ``root'' DNS smart contract, where level one domains
-of the TON DNS system will be kept, is located in the masterchain. Its
-account identifier must be hardcoded into all software that wishes to
-access the TON DNS database directly.
+\nxsubpoint \embt(TON DNS smart contracts.)  TON DNS是通過一系列特殊的(DNS)智能合約來實現的。每一個DNS智能合約都負責註冊某固定域的子域名。``根'' DNS智能合約，即TON DNS系統的一級域名所在的位置，位於masterchain中。所有希望直接訪問TON DNS數據庫的軟件都必須將其帳戶標識符硬編碼。
 
-Any DNS smart contract contains a hashmap, mapping variable-length
-null-terminated UTF-8 strings into their ``values''. This hashmap is
-implemented as a binary Patricia tree, similar to that described
-in~\ptref{sp:patricia} but supporting variable-length bitstrings as
-keys.
+任何DNS智能合約都包含一個hashmap，將可變長度的以null結尾的UTF-8字符串映射到它們的``值''。這個hashmap是作為一個二進制的Patricia樹來實現的，與在~\ptref{sp:patricia}中描述的類似，但支持可變長度的bitstrings作為鍵。
 
-\nxsubpoint \embt(Values of the DNS hashmap, or TON DNS records.)  As
-to the values, they are ``TON DNS records'' described by a TL-scheme
-(cf.~\ptref{sp:TL}). They consist of a ``magic number'', selecting one
-of the options supported, and then either an account identifier, or a
-smart-contract identifier, or an abstract network address
-(cf.~\ptref{sect:ANL}), or a public key used to locate abstract
-addresses of a service (cf.~\ptref{sp:loc.serv}), or a description of
-an overlay network, and so on. An important case is that of another
-DNS smart contract: in such a case, that smart contract is used to
-resolve subdomains of its domain. In this way, one can create separate
-registries for different domains, controlled by the owners of those
-domains.
+\nxsubpoint \embt(Values of the DNS hashmap, or TON DNS records.)  至於值，它們是由TL-scheme描述的``TON DNS記錄'' (cf.~\ptref{sp:TL})。它們包括一個``魔數''，選擇其中的一個支持的選項，然後是一個帳戶標識符、或一個智能合約標識符、或一個抽象網絡地址(cf.~\ptref{sect:ANL})，或一個用於查找服務的抽象地址的公鑰 (cf.~\ptref{sp:loc.serv})，或一個覆蓋網絡的描述，等等。一個重要的情況是另一個DNS智能合約：在這種情況下，該智能合約用於解析其域的子域名。通過這種方式，可以為不同的域創建單獨的註冊表，由這些域的所有者控制。
 
-These records may also contain an expiration time, a caching time
-(usually very large, because updating values in a blockchain too often
-is expensive), and in most cases a reference to the owner of the
-subdomain in question. The owner has the right to change this record
-(in particular, the owner field, thus transferring the domain to
-somebody else's control), and to prolong it.
+這些記錄還可以包含一個到期時間、一個緩存時間（通常非常大，因為在區塊鏈中太經常更新值是昂貴的），並且在大多數情況下引用所問子域名的所有者。所有者有權更改此記錄（尤其是所有者字段，從而將域名轉移給其他人的控制），並對其進行延長。
 
-\nxsubpoint \embt(Registering new subdomains of existing domains.)  In
-order to register a new subdomain of an existing domain, one simply
-sends a message to the smart contract, which is the registrar of that
-domain, containing the subdomain (i.e., the key) to be registered, the
-value in one of several predefined formats, an identity of the owner,
-an expiration date, and some amount of cryptocurrency as determined by
-the domain's owner.
+\nxsubpoint \embt(Registering new subdomains of existing domains.)  為了註冊一個現有域的新子域，只需向該域的註冊者，即智能合約，發送一條消息，該消息包含要註冊的子域名（即鍵）、一個預定義格式之一的值、所有者的身份、一個到期日期，以及由該域的所有者確定的某個加密貨幣金額。
 
-Subdomains are registered on a ``first-come, first-served'' basis.
+子域名是按照``先到先得''的原則註冊的。
 
 \nxsubpoint\label{sp:dns.get} \embt(Retrieving data from a DNS smart
-contract.)  In principle, any full node for the masterchain or
-shardchain containing a DNS smart contract might be able to look up
-any subdomain in the database of that smart contract, if the structure
-and the location of the hashmap inside the persistent storage of the
-smart contract are known.
+contract.)  原則上，對於包含DNS智能合約的masterchain或shardchain的任何完整節點，只要知道智能合約的持久存儲中hashmap的結構和位置，就可以查找該智能合約數據庫中的任何子域。
 
-However, this approach would work only for certain DNS smart
-contracts. It would fail miserably if a non-standard DNS smart
-contract were used.
+然而，這種方法只適用於某些DNS智能合約。如果使用的是非標準的DNS智能合約，它將徹底失效。
 
-Instead, an approach based on {\em general smart contract
-  interfaces\/} and {\em get methods\/} (cf.~\ptref{sp:get.methods})
-is used. Any DNS smart contract must define a ``get method'' with a
-``known signature'', which is invoked to look up a key. Since this
-approach makes sense for other smart contracts as well, especially
-those providing on-chain and mixed services, we explain it in some
-detail in~\ptref{sp:get.methods}.
+相反，我們使用基於{\em general smart contract
+  interfaces\/}和{\em get methods\/}(cf.~\ptref{sp:get.methods})的方法。任何DNS智能合約都必須定義一個帶有``已知簽名''的``get method''，用於查找一個鍵。由於這種方法也適用於其他智能合約，尤其是那些提供on-chain和混合服務的合約，我們在~\ptref{sp:get.methods}中詳細解釋了它。
 
-\nxsubpoint \embt(Translating a TON DNS domain.)  Once any full node,
-acting by itself or on behalf of some light client, can look up
-entries in the database of any DNS smart contract, arbitrary TON DNS
-domain names can be recursively translated, starting from the
-well-known and fixed root DNS smart contract (account) identifier.
+\nxsubpoint \embt(Translating a TON DNS domain.)  一旦任何完整節點，無論是獨立操作還是代表某個輕客戶端，都可以在任何DNS智能合約的數據庫中查找條目，就可以從已知的和固定的根DNS智能合約(帳戶)標識符遞歸地轉譯任意的TON DNS域名。
 
-For example, if one wants to translate \texttt{A.B.C}, one looks up
-keys \texttt{.C}, \texttt{.B.C}, and \texttt{A.B.C} in the root domain
-database. If the first of them is not found, but the second is, and
-its value is a reference to another DNS smart contract, then
-\texttt{A} is looked up in the database of that smart contract and the
-final value is retrieved.
+例如，如果想要轉譯\texttt{A.B.C}，可以在根域數據庫中查找鍵\texttt{.C}、\texttt{.B.C}和\texttt{A.B.C}。如果第一個鍵沒有找到，但第二個鍵找到了，且它的值是另一個DNS智能合約的引用，那麼就在該智能合約的數據庫中查找\texttt{A}，並檢索最終值。
 
-\nxsubpoint \embt(Translating TON DNS domains for light nodes.)  In
-this way, a full node for the masterchain---and also for all
-shardchains involved in the domain look-up process---might translate
-any domain name into its current value without external help. A light
-node might request a full node to do this on its behalf and return the
-value, along with a Merkle proof
-(cf.~\ptref{sp:merkle.query.resp}). This Merkle proof would enable the
-light node to verify that the answer is correct, so such TON DNS
-responses cannot be ``spoofed'' by a malicious interceptor, in
-contrast to the usual DNS protocol.
+\nxsubpoint \embt(Translating TON DNS domains for light nodes.)  這樣，對於masterchain的完整節點---以及參與域查找過程的所有shardchains---都可以在不需要外部幫助的情況下將任何域名轉譯為其當前值。輕節點可能會要求一個完整節點代替它執行這一操作，並返回值以及一個Merkle證明(cf.~\ptref{sp:merkle.query.resp})。這個Merkle證明使得輕節點可以驗證答案是正確的，因此這樣的TON DNS響應不能被惡意攔截器``偽造''，這與通常的DNS協議形成了鮮明的對比。
 
-Because no node can be expected to be a full node with respect to all
-shardchains, actual TON DNS domain translation would involve a
-combination of these two strategies.
+因為不能期望任何節點都是對所有shardchains的完整節點，實際的TON DNS域轉譯將涉及這兩種策略的組合。
 
-\nxsubpoint \embt(Dedicated ``TON DNS servers''.)  One might provide a
-simple ``TON DNS server'', which would receive RPC ``DNS'' queries
-(e.g., via the ADNL or RLDP protocols described in~\ptref{sect:ANL}),
-requesting that the server translate a given domain, process these
-queries by forwarding some subqueries to other (full) nodes if
-necessary, and return answers to the original queries, augmented by
-Merkle proofs if required.
+\nxsubpoint \embt(Dedicated ``TON DNS servers''.)  人們可以提供一個簡單的``TON DNS伺服器''，它會接收RPC ``DNS'' 查詢（例如，通過在~\ptref{sect:ANL}中描述的ADNL或RLDP協議），請求伺服器轉譯給定的域名，如果需要，通過將某些子查詢轉發到其他（完整）節點來處理這些查詢，並返回對原始查詢的答案，如果需要，還可以增加Merkle證明。
 
-Such ``DNS servers'' might offer their services (for free or not) to
-any other nodes and especially light clients, using one of the methods
-described in~\ptref{sect:reg.markt}. Notice that these servers, if
-considered part of the TON DNS service, would effectively transform it
-from a distributed on-chain service into a distributed mixed service
-(i.e., a ``fog service'').
+這樣的``DNS伺服器''可能會使用在~\ptref{sect:reg.markt}中描述的其中一種方法，向任何其他節點，特別是輕型客戶端提供他們的服務（免費或付費）。請注意，如果這些伺服器被認為是TON DNS服務的一部分，它們將有效地將其從分佈式on-chain服務轉化為分佈式混合服務（即``fog service''）。
 
-This concludes our brief overview of the TON DNS service, a scalable
-on-chain registry for human-readable domain names of TON Blockchain
-and TON Network entities.
+這結束了我們對TON DNS服務的簡短概述，這是一個可擴展的on-chain註冊表，用於TON Blockchain和TON Network實體的人類可讀域名。
 
-\nxsubpoint \embt(Accessing data kept in smart contracts.)  We have
-already seen that it is sometimes necessary to access data stored in a
-smart contract without changing its state.
+\nxsubpoint \embt(Accessing data kept in smart contracts.)  我們已經看到，有時需要訪問存儲在智能合約中的數據，而不改變其狀態。
 
-If one knows the details of the smart-contract implementation, one can
-extract all the needed information from the smart contract's
-persistent storage, available to all full nodes of the shardchain the
-smart contract resides in. However, this is quite an inelegant way of
-doing things, depending very much on the smart-contract
-implementation.
+如果知道智能合約實施的詳細信息，可以從智能合約的持久存儲中提取所有所需的信息，所有shardchain的完整節點都可以使用該智能合約。然而，這是一種相當不雅的做事方式，非常依賴於智能合約的實施。
 
 \nxsubpoint\label{sp:get.methods} \embt(``Get methods'' of smart
-contracts.)  A better way would be to define some {\em get methods\/}
-in the smart contract, that is, some types of inbound messages that do
-not affect the state of the smart contract when delivered, but
-generate one or more output messages containing the ``result'' of the
-get method. In this way, one can obtain data from a smart contract,
-knowing only that it implements a get method with a known signature
-(i.e., a known format of the inbound message to be sent and outbound
-messages to be received as a result).
+contracts.)  一個更好的方法是在智能合約中定義一些{\em get methods\/}，即一些類型的入站消息，當交付時不會影響智能合約的狀態，但會生成一個或多個包含``結果''的輸出消息的get方法。這樣，只要知道它實現了具有已知簽名的get方法（即已知要發送的入站消息的格式以及作為結果接收的出站消息的格式），就可以從智能合約中獲取數據。
 
-This way is much more elegant and in line with object oriented
-programming (OOP). However, it has an obvious defect so far: one must
-actually commit a transaction into the blockchain (sending the get
-message to the smart contract), wait until it is committed and
-processed by the validators, extract the answer from a new block, and
-pay for gas (i.e., for executing the get method on the validators'
-hardware). This is a waste of resources: get methods do not change the
-state of the smart contract anyways, so they need not be executed in
-the blockchain.
+這種方法更加優雅，並符合面向對象編程（OOP）。然而，到目前為止，它有一個明顯的缺陷：必須實際將交易提交到區塊鏈（將get消息發送到智能合約），等待它被提交並由驗證者處理，從新塊中提取答案，並支付燃氣費（即在驗證者的硬件上執行get方法）。這是資源的浪費：get方法無論如何都不會改變智能合約的狀態，所以它們不需要在區塊鏈中執行。
 
 \nxsubpoint\label{sp:tent.exec.get} \embt(Tentative execution of get
-methods of smart contracts.)  We have already remarked
-(cf.~\ptref{sp:ext.msg}) that any full node can tentatively execute
-any method of any smart contract (i.e., deliver any message to a smart
-contract), starting from a given state of the smart contract, without
-actually committing the corresponding transaction. The full node can
-simply load the code of the smart contract under consideration into
-the TON VM, initialize its persistent storage from the global state of
-the shardchain (known to all full nodes of the shardchain), and
-execute the smart-contract code with the inbound message as its input
-parameter. The output messages created will yield the result of this
-computation.
+methods of smart contracts.)  我們已經提到
+(cf.~\ptref{sp:ext.msg})任何完整節點都可以嘗試執行任何智能合約的任何方法（即，將任何消息交付給智能合約），從智能合約的給定狀態開始，而無需實際提交相應的交易。完整節點可以簡單地將正在考慮的智能合約的代碼加載到TON VM中，從shardchain的全局狀態（shardchain的所有完整節點都知道）初始化其持久存儲，並使用入站消息作為其輸入參數執行智能合約代碼。所創建的輸出消息將產生此計算的結果。
 
-In this way, any full node can evaluate arbitrary get methods of
-arbitrary smart contracts, provided their signature (i.e., the format
-of inbound and outbound messages) is known. The node may keep track of
-the cells of the shardchain state accessed during this evaluation, and
-create a Merkle proof of the validity of the computation performed,
-for the benefit of a light node that might have asked the full node to
-do so (cf.~\ptref{sp:merkle.query.resp}).
+通過這種方式，任何完整節點都可以評估任意智能合約的任意get方法，只要它們的簽名（即入站和出站消息的格式）是已知的。該節點可以跟踪在此評估期間訪問的shardchain狀態的cell，並為可能要求完整節點這樣做的輕型節點創建Merkle證明，證明所執行的計算的有效性（cf.~\ptref{sp:merkle.query.resp}）。
 
-\nxsubpoint \embt(Smart-contract interfaces in TL-schemes.)  Recall
-that the methods implemented by a smart contract (i.e., the input
-messages accepted by it) are essentially some TL-serialized objects,
-which can be described by a TL-scheme (cf.~\ptref{sp:TL}). The
-resulting output messages can be described by the same TL-scheme as
-well. In this way, the interface provided by a smart contract to other
-accounts and smart contracts may be formalized by means of a
-TL-scheme.
+\nxsubpoint \embt(Smart-contract interfaces in TL-schemes.)  回憶一下，由智能合約實現的方法（即它接受的輸入消息）基本上是一些TL序列化對象，這些對象可以由TL-scheme描述（cf.~\ptref{sp:TL}）。所得到的輸出消息也可以由相同的TL-scheme描述。通過這種方式，智能合約提供給其他帳戶和智能合約的接口可以通過TL-scheme進行正式化。
 
-In particular, (a subset of) get methods supported by a smart
-contract can be described by such a formalized smart-contract
-interface.
+特別是，可以通過這樣一個正式化的智能合約接口描述智能合約支持的（一部分）get方法。
 
 \nxsubpoint\label{sp:pub.int.smartc} \embt(Public interfaces of a
-smart contract.)  Notice that a formalized smart-contract interface,
-either in form of a TL-scheme (represented as a TL source file;
-cf.~\ptref{sp:TL}) or in serialized form,\footnote{TL-schemes can be
-  TL-serialized themselves;
-  cf.\ \url{https://core.telegram.org/mtproto/TL-tl}.} can be
-published---for example, in a special field in the smart-contract
-account description, stored in the blockchain, or separately, if this
-interface will be referred to many times. In the latter case a hash of
-the supported public interface may be incorporated into the
-smart-contract description instead of the interface description
-itself.
+smart contract.)  注意，一個正式化的智能合約接口，無論是以TL-scheme的形式（表示為TL源文件；cf.~\ptref{sp:TL}）還是以序列化形式，都可以發布---例如，在區塊鏈中存儲的智能合約帳戶描述的特殊字段中，或者單獨發布，如果這個接口將被多次引用。在後一種情況下，支持的公共接口的hash可能會被合併到智能合約描述中，而不是接口描述本身。
 
-An example of such a public interface is that of a DNS smart contract,
-which is supposed to implement at least one standard get method for
-looking up subdomains (cf.~\ptref{sp:dns.get}). A standard method for
-registering new subdomains can be also included in the standard public
-interface of DNS smart contracts.
+這樣一個公共接口的例子是DNS智能合約的接口，它應該至少實現一個用於查找子域的標準get方法（cf.~\ptref{sp:dns.get}）。在DNS智能合約的標準公共接口中也可以包括用於註冊新子域的標準方法。
 
 \nxsubpoint\label{sp:ui.smartc} \embt(User interface of a smart
-contract.)  The existence of a public interface for a smart contract
-has other benefits, too. For example, a wallet client application may
-download such an interface while examining a smart contract on the
-request of a user, and display a list of public methods (i.e., of
-available actions) supported by the smart contract, perhaps with some
-human-readable comments if any are provided in the formal
-interface. After the user selects one of these methods, a form may be
-automatically generated according to the TL-scheme, where the user
-will be prompted for all fields required by the chosen method and for
-the desired amount of cryptocurrency (e.g., Grams) to be attached to
-this request. Submitting this form will create a new blockchain
-transaction containing the message just composed, sent from the user's
-blockchain account.
+contract.)  智能合約的公共介面存在還有其他好處。例如，當用戶請求查看一個智能合約時，一個錢包客戶端應用程序可以下載這樣的介面，並顯示智能合約支持的公共方法（即，可用的操作）列表，如果在正式介面中提供了一些人類可讀的評論，也許會顯示出來。在用戶選擇其中一種方法後，可以根據TL-scheme自動生成一個表單，在其中用戶將被提示選擇所需的所有字段和要附加到此請求的加密貨幣（例如，Grams）的所需金額。提交此表單將創建一個新的區塊鏈交易，其中包含剛剛組成的消息，從用戶的區塊鏈帳戶發送。
 
-In this way, the user will be able to interact with arbitrary smart
-contracts from the wallet client application in a user-friendly way by
-filling and submitting certain forms, provided these smart contracts
-have published their interfaces.
+通過這種方式，只要這些智能合約已經發布了它們的介面，用戶將能夠通過填寫和提交某些表格以用戶友好的方式從錢包客戶端應用程序與任意智能合約進行互動。
 
 \nxsubpoint\label{sp:ui.ton.serv} \embt(User interface of a
-``ton-service''.)  It turns out that ``ton-services'' (i.e., services
-residing in the TON Network and accepting queries through the ADNL and
-RLDP protocols of~\ptref{sect:network}; cf.~\ptref{sp:pure.net.serv})
-may also profit from having public interfaces, described by TL-schemes
-(cf.~\ptref{sp:TL}). A client application, such as a light wallet or a
-``ton-browser'', might prompt the user to select one of the methods
-and to fill in a form with parameters defined by the interface,
-similarly to what has just been discussed in~\ptref{sp:ui.smartc}. The
-only difference is that the resulting TL-serialized message is not
-submitted as a transaction in the blockchain; instead, it is sent as
-an RPC query to the abstract address of the ``ton-service'' in
-question, and the response to this query is parsed and displayed
-according to the formal interface (i.e., a TL-scheme).
+``ton-service''.)  事實證明，“ton-services”（即，居住在TON Network中並通過~\ptref{sect:network}的ADNL和RLDP協議接受查詢的服務；cf.~\ptref{sp:pure.net.serv}）也可能從擁有公共介面中獲益，由TL-schemes描述（cf.~\ptref{sp:TL}）。一個客戶端應用程序，例如一個輕型錢包或一個“ton-browser”，可能會提示用戶選擇其中一個方法，並使用由介面定義的參數填寫一個表單，這與剛剛在~\ptref{sp:ui.smartc}中討論的類似。唯一的區別是，結果的TL-serialized消息不作為區塊鏈中的交易提交；相反，它作為一個RPC查詢發送到“ton-service”的抽象地址，並根據正式介面（即，一個TL-scheme）解析和顯示此查詢的響應。
 
 \nxsubpoint\label{sp:ui.ton.dns} \embt(Locating user interfaces via
-TON DNS.)  The TON DNS record containing an abstract address of a
-ton-service or a smart-contract account identifier might also contain
-an optional field describing the public (user) interface of that
-entity, or several supported interfaces. Then the client application
-(be it a wallet, a ton-browser or a ton-proxy) will be able to
-download the interface and interact with the entity in question (be it
-a smart contract or a ton-service) in a uniform way.
+TON DNS.)  包含ton-service或智能合約帳戶標識符的抽象地址的TON DNS記錄還可能包含描述該實體的公共（用戶）介面的可選字段，或幾個支持的介面。然後，客戶端應用程序（無論是錢包、ton-browser還是ton-proxy）將能夠下載介面並以統一的方式與相應的實體（無論是智能合約還是ton-service）進行互動。
 
 \nxsubpoint \embt(Blurring the distinction between on-chain and off-chain
-services.)  In this way, the distinction between on-chain, off-chain
-and mixed services (cf.~\ptref{sp:on.off.chain}) is blurred for the
-end user: she simply enters the domain name of the desired service
-into the address line of her ton-browser or wallet, and the rest is
-handled seamlessly by the client application.
+services.)  這樣，對於最終用戶，區塊鏈上、區塊鏈下和混合服務之間的區別變得模糊（cf.~\ptref{sp:on.off.chain}）：她只需將所需服務的域名輸入到她的ton-browser或錢包的地址線中，其餘的工作由客戶端應用程序無縫處理。
 
 \nxsubpoint\label{sp:telegram.integr} \embt(A light wallet and TON
-entity explorer can be built into Telegram Messenger clients.)  An
-interesting opportunity arises at this point. A light wallet and TON
-entity explorer, implementing the above functionality, can be embedded
-into the Telegram Messenger smartphone client application, thus
-bringing the technology to more than 200 million people. Users would
-be able to send hyperlinks to TON entities and resources by including
-TON URIs (cf.~\ptref{sp:ton.uri}) in messages; such hyperlinks, if
-selected, will be opened internally by the Telegram client application
-of the receiving party, and interaction with the chosen entity will
-begin.
+entity explorer can be built into Telegram Messenger clients.)  在此階段出現了一個有趣的機會。可以將實現上述功能的輕量錢包和TON實體瀏覽器嵌入到Telegram Messenger智能手機客戶端應用程序中，從而將技術帶給超過2億人。用戶可以通過在消息中包含TON URIs（參見~\ptref{sp:ton.uri}）來發送指向TON實體和資源的超連結；如果選擇了這些超連結，接收方的Telegram客戶端應用程序將在內部打開它，並開始與選定的實體互動。
 
 \nxsubpoint \embt(``ton-sites'' as ton-services supporting an HTTP
-interface.)  A {\em ton-site\/} is simply a ton-service that supports
-an HTTP interface, perhaps along with some other interfaces. This
-support may be announced in the corresponding TON DNS record.
+interface.)  一個{\em ton-site\/}簡單地說就是一個支持HTTP介面的ton-service，也許還有其他一些介面。這種支持可以在相應的TON DNS記錄中宣布。
 
-\nxsubpoint \embt(Hyperlinks.)  Notice that the HTML pages returned by
-ton-sites may contain {\em ton-hyperlinks}---that is, references to
-other ton-sites, smart contracts and accounts by means of specially
-crafted URI schemes (cf.~\ptref{sp:ton.uri})---containing either
-abstract network addresses, account identifiers, or human-readable TON
-DNS domains. Then a ``ton-browser'' might follow such a hyperlink when
-the user selects it, detect the interface to be used, and display a
-user interface form as outlined in \ptref{sp:ui.smartc}
-and~\ptref{sp:ui.ton.serv}.
+\nxsubpoint \embt(Hyperlinks.)  請注意，由ton-sites返回的HTML頁面可能包含{\em ton-hyperlinks} --- 也就是，通過特殊製作的URI方案（參見~\ptref{sp:ton.uri}）引用其他ton-sites、智能合約和帳戶的參考 --- 包含抽象網絡地址、帳戶識別符或可讀的TON DNS域。然後，當用戶選擇它時，``ton-browser''可能會遵循這樣的超連結，檢測要使用的介面，並顯示一個用戶介面表單，如\ptref{sp:ui.smartc}和~\ptref{sp:ui.ton.serv}中所述。
 
 \nxsubpoint\label{sp:ton.uri} \embt(Hyperlink URLs may specify some
-parameters.)  The hyperlink URLs may contain not only a (TON) DNS
-domain or an abstract address of the service in question, but also the
-name of the method to be invoked and some or all of its parameters. A
-possible URI scheme for this might look as follows:
+parameters.)  超連結URL可能不僅包含所述服務的(TON) DNS域或抽象地址，還包含要調用的方法名稱以及部分或所有的參數。這種URI方案可能如下所示：
 \begin{quote}
 \texttt{ton://}\textit{<domain>}\texttt{/}\textit{<method>}\texttt{?}%
 \textit{<field1>}\texttt{=}\textit{<value1>}\texttt{\&}%
 \textit{<field2>}\texttt{=}\dots
 \end{quote}
-When the user selects such a link in a ton-browser, either the action
-is performed immediately (especially if it is a get method of a smart
-contract, invoked anonymously), or a partially filled form is
-displayed, to be explicitly confirmed and submitted by the user (this
-may be required for payment forms).
+當用戶在ton-browser中選擇這樣的鏈接時，要么立即執行該操作（特別是如果它是匿名調用的智能合約的get方法），要么顯示一個部分填充的表格，由用戶明確確認和提交（對於支付表格可能需要這樣做）。
 
-\nxsubpoint \embt(POST actions.)  A ton-site may embed into the HTML
-pages it returns some usual-looking POST forms, with POST actions
-referring either to ton-sites, ton-services or smart contracts by
-means of suitable (TON) URLs. In that case, once the user fills and
-submits that custom form, the corresponding action is taken, either
-immediately or after an explicit confirmation.
+\nxsubpoint \embt(POST actions.)  ton-site可以將它返回的HTML頁面嵌入到一些常見的POST表格中，其中的POST操作通過適當的(TON) URLs引用ton-sites、ton-services或智能合約。在這種情況下，一旦用戶填寫並提交了該自定義表單，就會採取相應的操作，無論是立即還是在明確確認後。
 
-\nxsubpoint\label{sp:ton.www} \embt(TON WWW.)  All of the above will
-lead to the creation of a whole web of cross-referencing entities,
-residing in the TON Network, which would be accessible to the end user
-through a ton-browser, providing the user with a WWW-like browsing
-experience. For end users, this will finally make blockchain
-applications fundamentally similar to the web sites they are already
-accustomed to.
 
-\nxsubpoint \embt(Advantages of TON WWW.)  This ``TON WWW'' of
-on-chain and off-chain services has some advantages over its
-conventional counterpart. For example, payments are inherently
-integrated in the system. User identity can be always presented to the
-services (by means of automatically generated signatures on the
-transactions and RPC requests generated), or hidden at will. Services
-would not need to check and re-check user credentials; these
-credentials can be published in the blockchain once and for all. User
-network anonymity can be easily preserved by means of TON Proxy, and
-all services will be effectively unblockable. Micropayments are also
-possible and easy, because ton-browsers can be integrated with the TON
-Payments system.
+\nxsubpoint\label{sp:ton.www} \embt(TON WWW.)  上述所有內容都將導致在TON Network中建立一整個相互參照的實體網絡，終端用戶可以通過ton-browser訪問它，為用戶提供類似WWW的瀏覽體驗。對於終端用戶來說，這將最終使區塊鏈應用基本上與他們已經習慣的網站相似。
+
+\nxsubpoint \embt(Advantages of TON WWW.)  這個包括on-chain和off-chain服務的``TON WWW''相比於其常規對應物具有一些優勢。例如，支付在系統中是固有集成的。用戶身份可以始終呈現給服務（通過自動生成的交易和生成的RPC請求上的簽名），或者可以隱藏。服務不需要檢查和重新檢查用戶憑證；這些憑證可以一勞永逸地在區塊鏈中發布。可以很容易地通過TON Proxy保留用戶網絡匿名性，並且所有服務都將有效地無法被封鎖。由於ton-browsers可以與TON支付系統集成，所以也可能並且容易進行小額支付。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
