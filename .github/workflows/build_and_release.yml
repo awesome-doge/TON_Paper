@@ -25,7 +25,8 @@ jobs:
       run: |
         for file in en_ton en_tvm en_tblkch en_catchain en_fiftbase zh_ton zh_tvm zh_tblkch zh_catchain zh_fiftbase; do
           xelatex "$file.tex"  # First pass for auxiliary files
-          xelatex "$file.tex"  # Second pass for ToC and final PDF
+          xelatex "$file.tex"  # Second pass for ToC
+          xelatex "$file.tex"  # Third pass for final PDF
         done
 
     - name: Remove auxiliary LaTeX files
