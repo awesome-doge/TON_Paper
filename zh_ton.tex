@@ -1090,380 +1090,121 @@ Sharding是擴展區塊鏈系統的自然方法，因為，如果正確實施，
 當然，建立一個「鬆散耦合」的系統要簡單得多；但是，快速和高效的分片（參見~\ptref{sp:shard.supp}）要求系統是「緊密耦合」的。
 
 \nxsubpoint\label{sp:blkch.gen} \embt(Simplified
-classification. Generations of blockchain projects.)  The
-classification we have suggested so far splits all blockchain projects
-into a large number of classes. However, the classification criteria
-we use happen to be quite correlated in practice. This enables us to
-suggest a simplified ``generational'' approach to the classification
-of blockchain projects, as a very rough approximation of reality,
-with some examples. Projects that have not been implemented and
-deployed yet are shown in {\em italics}; the most important
-characteristics of a generation are shown in {\bf bold}.
+classification. Generations of blockchain projects.)  我們到目前為止建議的分類方式將所有區塊鏈項目分割成多個類別。然而，我們使用的分類準則在實踐中確實具有很大的相關性。這使我們能夠提議一種簡化的「世代」方式來分類區塊鏈項目，作為現實的一個大略的估計，並給出一些例子。尚未被實施和部署的項目以{\em italics}表示；每一代的最重要特徵都用{\bf bold}顯示。
 \begin{itemize}
-\item First generation: Single-chain, {\bf PoW}, no support for smart
-  contracts. Examples: Bitcoin (2009) and a lot of otherwise
-  uninteresting imitators (Litecoin, Monero, \dots).
-\item Second generation: Single-chain, PoW, {\bf smart-contract
-  support}. Example: Ethereum (2013; deployed in 2015), at least in
-  its original form.
-\item Third generation: Single-chain, {\bf PoS}, smart-contract
-  support. Example: {\em future Ethereum} (2018 or later).
-\item Alternative third ($3'$) generation: {\bf Multi-chain}, PoS, no
-  support for smart contracts, loosely-coupled. Example: Bitshares
-  (2013--2014; uses DPOS).
-\item Fourth generation: {\bf Multi-chain, PoS, smart-contract
-  support}, loosely-coupled. Examples: {\em EOS\/} (2017; uses DPOS),
-  {\em PolkaDot\/} (2016; uses BFT).
-\item Fifth generation: Multi-chain, PoS with BFT, smart-contract
-  support, {\bf tightly-coupled, with sharding}. Examples: {\em TON\/}
-  (2017).
+\item 第一代：單鏈，{\bf PoW}，不支持智能合約。範例：Bitcoin (2009) 和許多其他不那麼有趣的仿造者（如Litecoin、Monero等）。
+\item 第二代：單鏈，PoW，{\bf 支援智能合約}。範例：Ethereum (2013; 2015年部署)，至少在它的原始形式中。
+\item 第三代：單鏈，{\bf PoS}，支援智能合約。範例：{\em 未來的Ethereum} (2018或之後)。
+\item 替代的第三代($3'$)：{\bf 多鏈}，PoS，不支持智能合約，鬆散結合。範例：Bitshares (2013--2014; 使用DPOS)。
+\item 第四代：{\bf 多鏈，PoS，支持智能合約}，鬆散結合。範例：{\em EOS\/} (2017; 使用DPOS)，{\em PolkaDot\/} (2016; 使用BFT)。
+\item 第五代：多鏈，使用BFT的PoS，支援智能合約，{\bf 緊密結合，具有分片功能}。範例：{\em TON\/} (2017)。
 \end{itemize}
-While not all blockchain projects fall precisely into one of these
-categories, most of them do.
+儘管並非所有區塊鏈項目都確切地落入這些類別中，但大多數確實如此。
+
 
 \nxsubpoint\label{sp:genome.change.never} \embt(Complications of
-changing the ``genome'' of a blockchain project.)  The above
-classification defines the ``genome'' of a blockchain project. This
-genome is quite ``rigid'': it is almost impossible to change it once
-the project is deployed and is used by a lot of people. One would need
-a series of hard forks (which would require the approval of the
-majority of the community), and even then the changes would need to be
-very conservative in order to preserve backward compatibility (e.g.,
-changing the semantics of the virtual machine might break existing
-smart contracts). An alternative would be to create new ``sidechains''
-with their different rules, and bind them somehow to the blockchain
-(or the blockchains) of the original project. One might use the
-blockchain of the existing single-blockchain project as an external
-masterchain for an essentially new and separate project.\footnote{For
-  example, the Plasma project plans to use the Ethereum blockchain as
-  its (external) masterchain; it does not interact much with Ethereum
-  otherwise, and it could have been suggested and implemented by a
-  team unrelated to the Ethereum project.}
+changing the ``genome'' of a blockchain project.) 上述分類定義了區塊鏈項目的「基因組」。這個基因組非常「固定」：一旦項目部署並被許多人使用，就幾乎不可能更改它。更改它需要一系列的硬分叉（這需要社區的大部分人批准），即使如此，更改還需要非常保守，以保持向後兼容性（例如，更改虛擬機的語義可能會破壞現有的智能合約）。另一種方法是創建具有不同規則的新「側鏈」，並將它們以某種方式綁定到原始項目的區塊鏈（或區塊鏈）。人們可能使用現有單區塊鏈項目的區塊鏈作為本質上新的和獨立項目的外部主鏈。\footnote{例如，Plasma項目計劃使用Ethereum區塊鏈作為其（外部）主鏈；它與Ethereum的其他部分互動不多，且可能由與Ethereum項目無關的團隊提議和實施。}
 
-Our conclusion is that the genome of a project is very hard to change
-once it has been deployed. Even starting with PoW and planning to
-replace it with PoS in the future is quite complicated.\footnote{As of
-  2017, Ethereum is still struggling to transition from PoW to a
-  combined PoW+PoS system; we hope it will become a truly PoS system
-  someday.} Adding shards to a project originally designed without
-support for them seems almost impossible.\footnote{There are sharding
-  proposals for Ethereum dating back to 2015; it is unclear how they
-  might be implemented and deployed without disrupting Ethereum or
-  creating an essentially independent parallel project.} In fact,
-adding support for smart contracts into a project (namely, Bitcoin)
-originally designed without support for such features has been deemed
-impossible (or at least undesirable by the majority of the Bitcoin
-community) and eventually led to the creation of a new blockchain
-project, Ethereum.
+我們的結論是，一旦部署了項目的基因組，就很難更改它。即使從PoW開始，並計劃在未來用PoS替換它，也相當複雜。\footnote{到2017年為止，Ethereum仍在努力從PoW過渡到結合的PoW+PoS系統；我們希望它將來會成為一個真正的PoS系統。} 為原始設計不支持它們的項目添加分片似乎幾乎不可能。\footnote{Ethereum的分片提議可以追溯到2015年；目前還不清楚它們如何被實施和部署，而不會破壞Ethereum或創建一個本質上獨立的平行項目。} 實際上，將智能合約的支持添加到一個（即Bitcoin）原始設計不支持這些功能的項目中被認為是不可能的（或至少被Bitcoin社區的大多數人認為是不受期望的），最終導致了一個新的區塊鏈項目，Ethereum。
 
-\nxsubpoint \embt(Genome of the TON Blockchain.)  Therefore, if one
-wants to build a scalable blockchain system, one must choose its
-genome carefully from the very beginning. If the system is meant to
-support some additional specific functionality in the future not known
-at the time of its deployment, it should support ``heterogeneous''
-workchains (having potentially different rules) from the start. For
-the system to be truly scalable, it must support sharding from the
-very beginning; sharding makes sense only if the system is
-``tightly-coupled'' (cf.~\ptref{sp:blkch.interact}), so this in turn
-implies the existence of a masterchain, a fast system of
-inter-blockchain messaging, usage of BFT PoS, and so on.
 
-When one takes into account all these implications, most of the design
-choices made for the TON Blockchain project appear natural, and almost
-the only ones possible.
+\nxsubpoint \embt(Genome of the TON Blockchain.) 因此，如果想建立一個可擴展的區塊鏈系統，必須從一開始就仔細選擇其基因組。如果系統在部署時未知但預期在未來支持一些特定功能，那麼它應該從一開始就支持「異質」工作鏈（可能具有不同的規則）。為了讓系統真正可擴展，它必須從一開始就支持分片；只有當系統是「緊密結合」時，分片才有意義（參考\ptref{sp:blkch.interact}），因此這反過來意味著存在主鏈，快速的區塊鏈間消息系統，BFT PoS的使用等。
 
-\mysubsection{Comparison to Other Blockchain
-  Projects}\label{sect:compare.blkch}
+考慮到所有這些含義，為TON區塊鏈項目做出的大多數設計選擇似乎都是自然的，幾乎是唯一可能的選擇。
 
-We conclude our brief discussion of the TON Blockchain and its most
-important and unique features by trying to find a place for it on a
-map containing existing and proposed blockchain projects. We use the
-classification criteria described in~\ptref{sect:class.blkch} to
-discuss different blockchain projects in a uniform way and construct
-such a ``map of blockchain projects''. We represent this map as
-Table~\ref{tab:blkch.proj}, and then briefly discuss a few projects
-separately to point out their peculiarities that may not fit into the
-general scheme.
+\mysubsection{與其他區塊鏈項目的比較}\label{sect:compare.blkch}
+
+我們試圖在包含現有和建議的區塊鏈項目的地圖上為其找到位置，從而總結對TON區塊鏈及其最重要和獨特功能的簡要討論。我們使用在\ptref{sect:class.blkch}中描述的分類標準以統一的方式討論不同的區塊鏈項目，並建構這樣一個「區塊鏈項目地圖」。我們將此地圖表示為Table~\ref{tab:blkch.proj}，然後簡要地單獨討論幾個項目，以指出它們可能不適合一般計劃的特殊性。
 
 \begin{table}
   \captionsetup{font=scriptsize}
   \begin{tabular}{|c|cc|ccc|ccc|}
-    \hline Project & Year & G. & Cons. & Sm. & Ch. & R. & Sh. &
-    Int. \\ \hline Bitcoin & 2009 & 1 & PoW & no & 1 \\ Ethereum &
-    2013, 2015 & 2 & PoW & yes & 1 \\ NXT & 2014 & 2+ & PoS & no & 1
-    \\ Tezos & 2017, ? & 2+ & PoS & yes & 1 \\ Casper & 2015, (2017) &
-    3 & PoW/PoS & yes & 1 \\ \hline BitShares & 2013, 2014 & $3'$ &
-    DPoS & no & m & ht. & no & L \\ EOS & 2016, (2018) & 4 & DPoS &
-    yes & m & ht. & no & L \\ PolkaDot & 2016, (2019) & 4 & PoS BFT & yes &
-    m & ht. & no & L \\ Cosmos & 2017, ?  & 4 & PoS BFT & yes & m &
-    ht. & no & L \\ TON & 2017, (2018) & 5 & PoS BFT & yes & m & mix &
-    dyn. & T \\ \hline
+    \hline 項目 & 年份 & 世代 & 共識 & 智能 & 鏈 & 類型 & 分片 & 交互 \\ 
+    \hline Bitcoin & 2009 & 1 & PoW & 無 & 1 \\ 
+    Ethereum & 2013, 2015 & 2 & PoW & 是 & 1 \\ 
+    NXT & 2014 & 2+ & PoS & 無 & 1 \\ 
+    Tezos & 2017, ? & 2+ & PoS & 是 & 1 \\ 
+    Casper & 2015, (2017) & 3 & PoW/PoS & 是 & 1 \\ 
+    \hline BitShares & 2013, 2014 & $3'$ & DPoS & 無 & m & ht. & 無 & L \\ 
+    EOS & 2016, (2018) & 4 & DPoS & 是 & m & ht. & 無 & L \\ 
+    PolkaDot & 2016, (2019) & 4 & PoS BFT & 是 & m & ht. & 無 & L \\ 
+    Cosmos & 2017, ?  & 4 & PoS BFT & 是 & m & ht. & 無 & L \\ 
+    TON & 2017, (2018) & 5 & PoS BFT & 是 & m & 混合 & dyn. & T \\ 
+    \hline
   \end{tabular}
-  \caption{A summary of some notable blockchain projects. The columns
-    are: {\em Project} -- project name; {\em Year} -- year announced
-    and year deployed; {\em G.} -- generation
-    (cf.~\ptref{sp:blkch.gen}); {\em Cons.} -- consensus algorithm
-    (cf.~\ptref{sp:pow.pos} and~\ptref{sp:dpos.bft}); {\em Sm.} --
-    support for arbitrary code (smart contracts;
-    cf.~\ptref{sp:smartc.supp}); {\em Ch.} -- single/multiple
-    blockchain system (cf.~\ptref{sp:single.multi}); {\em R.} --
-    heterogeneous/homogeneous multichain systems
-    (cf.~\ptref{sp:blkch.hom.het}); {\em Sh.} -- sharding support
-    (cf.~\ptref{sp:shard.supp}); {\em Int.} -- interaction between
-    blockchains, (L)oose or (T)ight (cf.~\ptref{sp:blkch.interact}).
-  }\label{tab:blkch.proj}
+  \caption{一些值得注意的區塊鏈項目的摘要。各列分別為：{\em 項目} — 項目名稱；{\em 年份} — 宣布年份和部署年份；{\em 世代} — 世代 (參考\ptref{sp:blkch.gen})；{\em 共識} — 共識算法 (參考\ptref{sp:pow.pos} 和\ptref{sp:dpos.bft})；{\em 智能} — 支持任意程式碼（智能合約；參考\ptref{sp:smartc.supp}）；{\em 鏈} — 單/多區塊鏈系統 (參考\ptref{sp:single.multi})；{\em 類型} — 異質/同質多鏈系統 (參考\ptref{sp:blkch.hom.het})；{\em 分片} — 支持分片 (參考\ptref{sp:shard.supp})；{\em 交互} — 區塊鏈間的交互，(L)緩和 或 (T)緊密 (參考\ptref{sp:blkch.interact})。}
+  \label{tab:blkch.proj}
 \end{table}
 
+
 \nxsubpoint \embt(Bitcoin \cite{BitcWP}; \url{https://bitcoin.org/}.)
-            {\em Bitcoin\/} (2009) is the first and the most famous
-            block\-chain project. It is a typical {\em
-              first-generation} blockchain project: it is
-            single-chain, it uses Proof-of-Work with a
-            ``longest-fork-wins'' fork selection algorithm, and it
-            does not have a Turing-complete scripting language
-            (however, simple scripts without loops are supported). The
-            Bitcoin blockchain has no notion of an account; it uses
-            the UTXO (Unspent Transaction Output) model instead.
+            {\em Bitcoin\/} (2009) 是第一個且最知名的區塊鏈項目。它是典型的{\em 第一代}區塊鏈項目：它是單一鏈，使用工作量證明(Proof-of-Work)與「最長分支勝出」的分支選擇算法，並且沒有圖靈完整的腳本語言（但是，支持沒有循環的簡單腳本）。Bitcoin的區塊鏈沒有帳戶的概念；它使用UTXO（未花費的交易輸出）模型。
 
 \nxsubpoint \embt(Ethereum \cite{EthWP}; \url{https://ethereum.org/}.)
-            {\em Ethereum\/} (2015) is the first blockchain with
-            support for Turing-complete smart contracts. As such, it
-            is a typical {\em second-generation\/} project, and the
-            most popular among them. It uses Proof-of-Work on a single
-            blockchain, but has smart contracts and accounts.
+            {\em Ethereum\/} (2015) 是第一個支持圖靈完整智能合約的區塊鏈。因此，它是典型的{\em 第二代\/}項目，且是其中最受歡迎的。它在單一區塊鏈上使用工作量證明，但擁有智能合約和帳戶。
 
 \nxsubpoint \embt(NXT; \url{https://nxtplatform.org/}.)  {\em NXT\/}
-(2014) is the first PoS-based blockchain and currency. It is still
-single-chain, and has no smart contract support.
+(2014) 是第一個基於權益證明(PoS)的區塊鏈和貨幣。它仍然是單鏈，並且不支持智能合約。
 
 \nxsubpoint \embt(Tezos; \url{https://www.tezos.com/}.)  {\em Tezos\/}
-(2018 or later) is a proposed PoS-based single-blockchain project. We
-mention it here because of its unique feature: its block
-interpretation function $\evblock$ (cf.~\ptref{sp:blk.transf}) is not
-fixed, but is determined by an OCaml module, which can be upgraded by
-committing a new version into the blockchain (and collecting some
-votes for the proposed change). In this way, one will be able to
-create custom single-chain projects by first deploying a ``vanilla''
-Tezos blockchain, and then gradually changing the block interpretation
-function in the desired direction, without any need for hard forks.
+(2018或之後) 是一個建議的基於PoS的單一區塊鏈項目。我們在這裡提到它是因為它的獨特功能：其區塊解釋函數$\evblock$（參考\ptref{sp:blk.transf}）不是固定的，而是由一個OCaml模組決定，該模組可以通過在區塊鏈中提交一個新版本（並為所提議的更改收集一些票據）來升級。通過這種方式，一個人將能夠通過首先部署一個「原始」的Tezos區塊鏈，然後逐步地將區塊解釋函數更改為所需的方向，而無需硬分支。
 
-This idea, while intriguing, has the obvious drawback that it forbids
-any optimized implementations in other languages like C++, so a
-Tezos-based blockchain is destined to have lower performance. We think
-that a similar result might have been obtained by publishing a formal
-{\em specification\/} of the proposed block interpretation function
-$\evtrans$, without fixing a particular {\em implementation}.
+這個想法，儘管引人入勝，但它有一個明顯的缺點，那就是它禁止在其他語言（如C++）中的任何優化實現，因此基於Tezos的區塊鏈註定性能較低。我們認為，可能已經通過發布所提議的區塊解釋函數$\evtrans$的正式{\em 規範}來獲得類似的結果，而不是確定特定的{\em 實現}。
 
 \nxsubpoint
 \embt(Casper.)%
 \footnote{\url{https://blog.ethereum.org/2015/08/01/introducing-casper-friendly-ghost/}}
-{\em Casper\/} is an upcoming PoS algorithm for Ethereum; its gradual
-deployment in 2017 (or 2018), if successful, will change Ethereum into
-a single-chain PoS or mixed PoW+PoS system with smart contract
-support, transforming Ethereum into a {\em third-generation\/}
-project.
+{\em Casper\/} 是Ethereum的即將到來的PoS算法；如果在2017年（或2018年）的逐步部署成功，它將使Ethereum變成一個帶有智能合約支持的單鏈PoS或混合PoW+PoS系統，將Ethereum轉化為{\em 第三代\/}項目。
 
-\nxsubpoint \embt(BitShares \cite{BitShWP};
-\url{https://bitshares.org}.)  {\em BitShares\/} (2014) is a platform
-for distributed blockchain-based exchanges. It is a heterogeneous
-multi-blockchain DPoS system without smart contracts; it achieves its
-high performance by allowing only a small set of predefined
-specialized transaction types, which can be efficiently implemented in
-C++, assuming the blockchain state fits into memory. It is also the
-first blockchain project to use Delegated Proof-of-Stake (DPoS),
-demonstrating its viability at least for some specialized purposes.
+\nxsubpoint \embt(BitShares \cite{BitShWP}; \url{https://bitshares.org}.)
+            {\em BitShares\/} (2014) 是一個為分散式基於區塊鏈的交易所提供的平台。這是一個異構的多區塊鏈DPoS系統，且不帶有智能合約；它透過僅允許一小部分預先定義的專用交易類型來實現其高性能，這些交易類型可以在C++中有效地實現，前提是區塊鏈狀態適合於內存中。這也是第一個使用委託權益證明(Delegated Proof-of-Stake, DPoS)的區塊鏈項目，至少為某些專用目的證明其可行性。
 
-\nxsubpoint\label{sp:discuss.EOS} \embt(EOS \cite{EOSWP};
-\url{https://eos.io}.)  {\em EOS\/} (2018 or later) is a proposed
-heterogeneous multi-blockchain DPoS system {\em with\/} smart contract
-support and with some minimal support for messaging (still
-loosely-coupled in the sense described
-in~\ptref{sp:blkch.interact}). It is an attempt by the same team that
-has previously successfully created the BitShares and SteemIt
-projects, demonstrating the strong points of the DPoS consensus
-algorithm. Scalability will be achieved by creating specialized
-workchains for projects that need it (e.g., a distributed exchange
-might use a workchain supporting a special set of optimized
-transactions, similarly to what BitShares did) and by creating
-multiple workchains with the same rules ({\em confederations\/} in the
-sense described in~\ptref{sp:het.confed}). The drawbacks and
-limitations of this approach to scalability have been discussed in
-{\em loc.~cit.} Cf.\ also \ptref{sp:dpos.bft.compare},
-\ptref{sp:shard.supp}, and \ptref{sp:blkch.interact} for a more
-detailed discussion of DPoS, sharding, interaction between workchains
-and their implications for the scalability of a blockchain system.
+\nxsubpoint\label{sp:discuss.EOS} \embt(EOS \cite{EOSWP}; \url{https://eos.io}.)
+            {\em EOS\/} (2018或以後) 是一個建議的異構多區塊鏈DPoS系統，{\em 並帶有\/}智能合約支持和一些最小的消息傳遞支持（在\ptref{sp:blkch.interact}描述的意義上仍然是鬆散連接的）。這是先前成功創建了BitShares和SteemIt項目的同一團隊的嘗試，展示了DPoS共識算法的強大之處。通過為需要它的項目創建專用的工作鏈（例如，一個分散式交易所可能使用一個支持一組專用的優化交易的工作鏈，類似於BitShares所做的那樣）以及創建具有相同規則的多個工作鏈來實現可伸縮性（在\ptref{sp:het.confed}描述的意義上是{\em 聯邦\/}）。這種可伸縮性方法的缺點和限制已在{\em loc.~cit.}中討論。另見\ptref{sp:dpos.bft.compare}、\ptref{sp:shard.supp}和\ptref{sp:blkch.interact}，進一步討論DPoS、分片、工作鏈之間的互動及其對區塊鏈系統的可伸縮性的影響。
 
-    At the same time, even if one will not be able to ``create a
-    Facebook inside a blockchain''
-    (cf.~\ptref{sp:blockchain.facebook}), EOS or otherwise, we think
-    that EOS might become a convenient platform for some
-    highly-specialized weakly interacting distributed applications,
-    similar to BitShares (decentralized exchange) and SteemIt
-    (decentralized blog platform).
+    與此同時，即使一個人不能在區塊鏈內「創建一個Facebook」（參見\ptref{sp:blockchain.facebook}），不論是EOS還是其他方式，我們認為EOS可能會成為某些高度專用的弱互動分散式應用程序的便利平台，類似於BitShares（去中心化交易所）和SteemIt（去中心化博客平台）。
 
-\nxsubpoint\label{sp:discuss.PolkaDot} \embt(PolkaDot \cite{PolkaWP};
-\url{https://polkadot.io/}.)  {\em PolkaDot\/} (2019 or later) is one
-of the best thought-out and most detailed proposed multichain
-Proof-of-Stake projects; its development is led by one of the
-Ethereum co-founders. This project is one of the closest projects to
-the TON Blockchain on our map. (In fact, we are indebted for our
-terminology for ``fishermen'' and ``nominators'' to the PolkaDot
-project.)
+\nxsubpoint\label{sp:discuss.PolkaDot} \embt(PolkaDot \cite{PolkaWP}; \url{https://polkadot.io/}.)
+            {\em PolkaDot\/} (2019或之後) 是最佳思考且最詳細的建議多鏈權益證明項目之一；其開發是由Ethereum的共同創始人之一領導的。此項目是我們地圖上與TON Blockchain最接近的項目。（事實上，我們的「漁民」和「提名人」術語都是歸功於PolkaDot項目。）
 
-PolkaDot is a heterogeneous loosely-coupled multichain Proof-of-Stake
-project, with Byzantine Fault Tolerant (BFT) consensus for generation
-of new blocks and a masterchain (which might be external---e.g., the
-Ethereum blockchain). It also uses hypercube routing, somewhat like
-(the slow version of) TON's as described in~\ptref{sp:hypercube}.
+PolkaDot是一個異構的鬆散連接的多鏈權益證明項目，具有用於生成新區塊的拜占庭容錯（BFT）共識和主鏈（可能是外部的，例如Ethereum區塊鏈）。它還使用超立方體路由，有點像TON的慢速版本，如\ptref{sp:hypercube}所述。
 
-Its unique feature is its ability to create not only {\em public}, but
-also {\em private\/} blockchains. These private blockchains would also
-be able to interact with other public blockchains, PolkaDot or
-otherwise.
+其獨特的功能是它不僅可以創建{\em 公共的}，而且還可以創建{\em 私人的\/}區塊鏈。這些私人區塊鏈也將能夠與其他公共區塊鏈互動，不論是PolkaDot還是其他的。
 
-As such, PolkaDot might become a platform for large-scale {\em
-  private\/} block\-chains, which might be used, for example, by bank
-consortiums to quickly transfer funds to each other, or for any other
-uses a large corporation might have for private blockchain technology.
+因此，PolkaDot可能會成為大規模{\em 私人\/}區塊鏈的平台，例如，銀行聯盟可能會使用它來快速相互轉賬，或者大型公司可能對私有區塊鏈技術有其他用途。
 
-However, PolkaDot has no sharding support and is not
-tightly-coupled. This somewhat hampers its scalability, which is
-similar to that of EOS. (Perhaps a bit better, because PolkaDot uses
-BFT PoS instead of DPoS.)
+然而，PolkaDot不支持分片且不是緊密連接的。這在某種程度上限制了其可伸縮性，與EOS相似。（或許稍好一些，因為PolkaDot使用BFT PoS而非DPoS。）
 
-\nxsubpoint \embt(Universa; \url{https://universa.io}.)  The only
-reason we mention this unusual blockchain project here is because it
-is the only project so far to make in passing an explicit reference to
-something similar to our Infinite Sharding Paradigm
-(cf.~\ptref{sp:ISP}). Its other peculiarity is that it bypasses all
-complications related to Byzantine Fault Tolerance by promising that
-only trusted and licensed partners of the project will be admitted as
-validators, hence they will never commit invalid blocks. This is an
-interesting decision; however, it essentially makes a blockchain
-project deliberately {\em centralized}, something blockchain projects
-usually want to avoid (why does one need a blockchain at all to work
-in a trusted centralized environment?).
+\nxsubpoint \embt(Universa; \url{https://universa.io}.)  
+我們之所以在此提及這個不尋常的區塊鏈項目，是因為它是到目前為止唯一隨便提到與我們的Infinite Sharding Paradigm相似的項目（參見~\ptref{sp:ISP}）。其另一個特點是它通過承諾只有項目的受信任和持有許可的夥伴才會被錄取為驗證者，因此他們永遠不會提交無效的區塊，來繞過所有與Byzantine Fault Tolerance相關的複雜性。這是一個有趣的決定；但是，它本質上使一個區塊鏈項目故意變得{\em 集中化}，這是區塊鏈項目通常想要避免的（在一個受信任的集中化環境中為什麼需要區塊鏈？）。
 
-\nxsubpoint \embt(Plasma; \url{https://plasma.io}).)  {\em Plasma\/}
-(2019?) is an unconventional blockchain project from another
-co-founder of Ethereum. It is supposed to mitigate some limitations of
-Ethereum without introducing sharding. In essence, it is a separate
-project from Ethereum, introducing a hierarchy of (heterogeneous)
-workchains, bound to the Ethereum blockchain (to be used as an
-external masterchain) at the top level. Funds can be transferred from
-any blockchain up in the hierarchy (starting from the Ethereum
-blockchain as the root), along with a description of a job to be
-done. Then the necessary computations are done in the child workchain
-(possibly requiring forwarding of parts of the original job further
-down the tree), their results are passed up, and a reward is
-collected. The problem of achieving consistency and validating these
-workchains is circumvented by a (payment channel-inspired) mechanism
-allowing users to unilaterally withdraw their funds from a misbehaving
-workchain to its parent workchain (albeit slowly), and re-allocate
-their funds and their jobs to another workchain.
+\nxsubpoint \embt(Plasma; \url{https://plasma.io}).)  
+{\em Plasma\/} (2019?)是Ethereum的另一位共同創始人的非傳統區塊鏈項目。它旨在緩解Ethereum的某些限制，而不引入sharding。本質上，它是一個與Ethereum分開的項目，引入了一系列的（異構的）workchains，與最高級別的Ethereum區塊鏈綁定（作為一個外部masterchain）。資金可以從層次結構中的任何區塊鏈轉移出去（從Ethereum區塊鏈作為根開始），並伴隨一個要完成的工作描述。然後在子workchain中進行必要的計算（可能需要將原始工作的部分進一步轉發到樹的下方），其結果被傳遞上去，並收集獎勵。通過一個（由payment channel啟發的）機制來避免實現這些workchains的一致性和驗證的問題，該機制允許用戶從一個行為不端的workchain單方面撤回他們的資金到其父workchain（儘管很慢），並重新分配他們的資金和工作到另一個workchain。
 
-In this way, Plasma might become a platform for distributed
-computations bound to the Ethereum blockchain, something like a
-``mathematical co-processor''. However, this does not seem like a way
-to achieve true general-purpose scalability.
+因此，Plasma可能成為綁定到Ethereum區塊鏈的分散式計算平台，就像一個``數學協處理器''。但是，這似乎不像是實現真正的通用可伸縮性的方法。
 
-\nxsubpoint \embt(Specialized blockchain projects.)  There are also
-some specialized blockchain projects, such as FileCoin (a system that
-incentivizes users to offer their disk space for storing the files of
-other users who are willing to pay for it), Golem (a blockchain-based
-platform for renting and lending computing power for specialized
-applications such as 3D-rendering) or SONM (another similar computing
-power-lending project). Such projects do not introduce anything
-conceptually new on the level of blockchain organization; rather, they
-are particular blockchain applications, which could be implemented by
-smart contracts running in a general-purpose blockchain, provided it
-can deliver the required performance. As such, projects of this kind
-are likely to use one of the existing or planned blockchain projects
-as their base, such as EOS, PolkaDot or TON. If a project needs
-``true'' scalability (based on sharding), it would better use TON; if
-it is content to work in a ``confederated'' context by defining a
-family of workchains of its own, explicitly optimized for its purpose,
-it might opt for EOS or PolkaDot.
+\nxsubpoint \embt(Specialized blockchain projects.)  
+還有一些專門的區塊鏈項目，如FileCoin（一個激勵用戶為存儲願意支付費用的其他用戶的文件提供磁盤空間的系統），Golem（一個基於區塊鏈的平台，用於租用和出借計算能力給專門的應用，如3D-rendering）或SONM（另一個類似的計算能力出借項目）。這類項目在區塊鏈組織的層面上沒有引入任何概念上的新事物；相反，它們是特定的區塊鏈應用，可以由運行在通用目的區塊鏈中的智能合約實現，只要它可以提供所需的性能。因此，這類項目可能會使用現有或計劃中的區塊鏈項目作為其基礎，如EOS、PolkaDot或TON。如果一個項目需要``真正的''可伸縮性（基於sharding），那麼它最好使用TON；如果它滿足於在一個``聯邦''背景下工作，通過為其目的明確定義一系列的workchains，它可能會選擇EOS或PolkaDot。
 
-\nxsubpoint \embt(The TON Blockchain.)  The TON (Telegram Open
-Network) Block\-chain (planned 2018) is the project we are describing
-in this document. It is designed to be the first fifth-generation
-blockchain project---that is, a BFT PoS-multichain project, mixed
-homogeneous/heterogeneous, with support for (shardable) custom
-workchains, with native sharding support, and tightly-coupled (in
-particular, capable of forwarding messages between shards almost
-instantly while preserving a consistent state of all shardchains). As
-such, it will be a truly scalable general-purpose blockchain project,
-capable of accommodating essentially any applications that can be
-implemented in a blockchain at all. When augmented by the other
-components of the TON Project (cf.~\ptref{sect:ton.components}), its
-possibilities expand even further.
+\nxsubpoint \embt(The TON Blockchain.)  
+TON（Telegram Open Network）Block\-chain（計劃於2018年）是我們在本文檔中描述的項目。它旨在成為第一個第五代區塊鏈項目——即BFT PoS多鏈項目，混合同質/異質性，支援（可shardable）的自定義workchains，具有原生的sharding支援，並且緊密結合（特別是，能夠在保持所有shardchains的一致狀態時，幾乎立即轉發shards之間的消息）。因此，它將是一個真正可伸縮的通用區塊鏈項目，能夠容納基本上可以在區塊鏈中實現的任何應用程序。當由TON Project的其他組件增強時（參見~\ptref{sect:ton.components}），其可能性甚至更大。
 
 \nxsubpoint\label{sp:blockchain.facebook} \embtx(Is it possible to
-``upload Facebook into a blockchain''?)  Sometimes people claim that
-it will be possible to implement a social network on the scale of
-Facebook as a distributed application residing in a
-blockchain. Usually a favorite blockchain project is cited as a
-possible ``host'' for such an application.
+``upload Facebook into a blockchain''?)  
+有時候人們聲稱，將Facebook這樣規模的社交網絡作為分佈式應用程序部署在區塊鏈中是可能的。通常會引用一個受喜愛的區塊鏈項目作為這種應用的可能“主機”。
 
-We cannot say that this is a technical impossibility. Of course, one
-needs a tightly-coupled blockchain project with true sharding (i.e.,
-TON) in order for such a large application not to work too slowly
-(e.g., deliver messages and updates from users residing in one
-shardchain to their friends residing in another shardchain with
-reasonable delays). However, we think that this is not needed and will
-never be done, because the price would be prohibitive.
+我們不能說這是技術上的不可能。當然，需要一個緊密結合的區塊鏈項目，具有真正的sharding（即TON），以便這種大型應用不會運行得太慢（例如，從一個shardchain中的用戶傳送消息和更新到另一個shardchain中的朋友，且延遲合理）。然而，我們認為這是不需要的，且永遠不會被完成，因為價格會過高。
 
-Let us consider ``uploading Facebook into a blockchain'' as a thought
-experiment; any other project of similar scale might serve as an
-example as well. Once Facebook is uploaded into a blockchain, all
-operations currently done by Facebook's servers will be serialized as
-transactions in certain blockchains (e.g., TON's shardchains), and
-will be performed by all validators of these blockchains. Each
-operation will have to be performed, say, at least twenty times, if we
-expect every block to collect at least twenty validator signatures
-(immediately or eventually, as in DPOS systems). Similarly, all data
-kept by Facebook's servers on their disks will be kept on the disks of
-all validators for the corresponding shardchain (i.e., in at least
-twenty copies).
+讓我們考慮將“將Facebook上載到區塊鏈”作為一個思考實驗；任何其他相似規模的項目也可能作為一個示例。一旦Facebook被上載到區塊鏈，目前由Facebook的伺服器完成的所有操作將被序列化為某些區塊鏈的交易（例如，TON的shardchains），並將由這些區塊鏈的所有驗證者執行。每項操作都必須執行，比如說，至少20次，如果我們希望每個區塊至少收集20個驗證者簽名（立即或最終，如在DPOS系統中）。同樣，Facebook伺服器在其磁盤上保留的所有數據將被保留在相應shardchain的所有驗證者的磁盤上（即，至少有20份副本）。
 
-Because the validators are essentially the same servers (or perhaps
-clusters of servers, but this does not affect the validity of this
-argument) as those currently used by Facebook, we see that the total
-hardware expenses associated with running Facebook in a blockchain are
-at least twenty times higher than if it were implemented in the
-conventional way.
+因為驗證者基本上是與Facebook目前使用的相同伺服器（或許是伺服器集群，但這不影響此論點的有效性），我們可以看出，將Facebook運行在blockchain中的總硬件開銷至少比傳統方式實現高出20倍。
 
-In fact, the expenses would be much higher still, because the
-blockchain's virtual machine is slower than the ``bare CPU'' running
-optimized compiled code, and its storage is not optimized for
-Facebook-specific problems. One might partially mitigate this problem
-by crafting a specific workchain with some special transactions
-adapted for Facebook; this is the approach of BitShares and EOS to
-achieving high performance, available in the TON Blockchain as
-well. However, the general blockchain design would still impose some
-additional restrictions by itself, such as the necessity to register
-all operations as transactions in a block, to organize these
-transactions in a Merkle tree, to compute and check their Merkle
-hashes, to propagate this block further, and so on.
+事實上，開銷還會更高，因為blockchain的虛擬機比運行優化編譯代碼的“裸CPU”要慢，且其存儲未針對Facebook特定的問題進行優化。通過為Facebook設計具有某些特殊交易的特定workchain，可以部分地減輕此問題；這是BitShares和EOS實現高性能的方法，也可在TON Blockchain中使用。然而，一般的blockchain設計本身仍然會帶來一些額外的限制，例如需要將所有操作註冊為block中的交易，將這些交易組織成Merkle tree，計算和檢查它們的Merkle hashes，進一步傳播這個block等。
 
-Therefore, a conservative estimate is that one would need 100 times
-more servers of the same performance as those used by Facebook now in
-order to validate a blockchain project hosting a social network of
-that scale. Somebody will have to pay for these servers, either the
-company owning the distributed application (imagine seeing 700 ads on
-each Facebook page instead of 7) or its users. Either way, this does
-not seem economically viable.
+因此，保守估計是，為了驗證承載該規模社交網絡的blockchain項目，需要的伺服器性能是Facebook現在使用的伺服器的100倍。有人將不得不為這些伺服器付錢，無論是擁有分散應用的公司（想像一下每個Facebook頁面上有700條廣告，而不是7條）還是它的用戶。無論哪種方式，這在經濟上似乎都不可行。
 
-We believe that {\em it is not true that everything should be uploaded
-  into the blockchain}. For example, it is not necessary to keep user
-photographs in the blockchain; registering the hashes of these
-photographs in the blockchain and keeping the photographs in a
-distributed off-chain storage (such as FileCoin or TON Storage) would
-be a better idea. This is the reason why TON is not just a blockchain
-project, but a collection of several components (TON P2P Network, TON
-Storage, TON Services) centered around the TON Blockchain as outlined
-in Chapters~\ptref{sect:ton.components} and~\ptref{sect:services}.
+我們認為，{\em 不是所有東西都應該上載到blockchain中}。例如，不必在blockchain中保留用戶照片；將這些照片的hashes註冊到blockchain中，並將照片保存在分散的off-chain存儲（例如FileCoin或TON Storage）中，可能是更好的選擇。這就是為什麼TON不僅僅是一個blockchain項目，而是圍繞TON Blockchain為中心的幾個組件的集合，如Chapters~\ptref{sect:ton.components}和~\ptref{sect:services}所概述的。
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -1474,816 +1215,250 @@ in Chapters~\ptref{sect:ton.components} and~\ptref{sect:services}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
-\mysection{TON Networking}\label{sect:network}
+\mysection{TON 網路協議}\label{sect:network}
 
-Any blockchain project requires not only a specification of block
-format and blockchain validation rules, but also a network protocol
-used to propagate new blocks, send and collect transaction candidates
-and so on. In other words, a specialized peer-to-peer network must be
-set up by every blockchain project. This network must be peer-to-peer,
-because blockchain projects are normally expected to be decentralized,
-so one cannot rely on a centralized group of servers and use
-conventional client-server architecture, as, for instance, classical
-online banking applications do. Even light clients (e.g., light
-cryptocurrency wallet smartphone applications), which must connect to
-full nodes in a client-server--like fashion, are actually free to
-connect to another full node if their previous peer goes down,
-provided the protocol used to connect to full nodes is standardized
-enough.
+任何 blockchain 項目不僅需要 block 格式和 blockchain 驗證規則的規範，還需要一個用於傳播新 block、發送和收集交易候選資料等的網路協議。換句話說，每個 blockchain 項目都必須設置一個專門的點對點網路。這個網路必須是點對點的，因為通常希望 blockchain 項目是分散式的，所以不能依賴於一組集中式的伺服器並使用傳統的客戶端-伺服器架構，例如，傳統的網路銀行應用程序所做的。即使是輕量級客戶端（例如，輕量級加密貨幣錢包智慧型手機應用程序），它們必須以客戶端-伺服器的方式連接到完整節點，如果先前的節點停止運作，實際上它們可以自由地連接到另一個完整節點，只要用於連接到完整節點的協議足夠標準化。
 
-While the networking demands of single-blockchain projects, such as
-Bitcoin or Ethereum, can be met quite easily (one essentially needs to
-construct a ``random'' peer-to-peer overlay network, and propagate all
-new blocks and transaction candidates by a gossip protocol),
-multi-blockchain projects, such as the TON Blockchain, are much more
-demanding (e.g., one must be able to subscribe to updates of only some
-shardchains, not necessarily all of them). Therefore, the networking
-part of the TON Blockchain and the TON Project as a whole merits at
-least a brief discussion.
+雖然如 Bitcoin 或 Ethereum 這樣的單一 blockchain 項目的網路需求可以很容易地被滿足（基本上需要構建一個“隨機”點對點的覆蓋網路，並通過一個 gossip 協議傳播所有新的 block 和交易候選資料），但像 TON Blockchain 這樣的多 blockchain 項目則要求更高（例如，人們必須能夠訂閱只有某些 shardchains 的更新，而不一定是所有的）。因此，TON Blockchain 和整個 TON 項目的網路部分至少值得簡短的討論。
 
-On the other hand, once the more sophisticated network protocols
-needed to support the TON Blockchain are in place, it turns out that
-they can easily be used for purposes not necessarily related to the
-immediate demands of the TON Blockchain, thus providing more
-possibilities and flexibility for creating new services in the TON
-ecosystem.
+另一方面，一旦需要支持 TON Blockchain 的更為複雜的網路協議到位，事實證明它們可以很容易地用於不一定與 TON Blockchain 的直接需求相關的目的，從而為 TON 生態系統中創建新服務提供了更多的可能性和靈活性。
 
-\mysubsection{Abstract Datagram Network Layer}\label{sect:ANL}
+\mysubsection{抽象數據報網路層}\label{sect:ANL}
 
-The cornerstone in building the TON networking protocols is the {\em
-  (TON) Abstract (Datagram) Network Layer}. It enables all nodes to
-assume certain ``network identities'', represented by 256-bit
-``abstract network addresses'', and communicate (send datagrams to
-each other, as a first step) using only these 256-bit network
-addresses to identify the sender and the receiver. In particular, one
-does not need to worry about IPv4 or IPv6 addresses, UDP port numbers,
-and the like; they are hidden by the Abstract Network Layer.
+建立 TON 網路協議的基石是{\em (TON) Abstract (Datagram) Network Layer}。它使所有節點能夠假設某些“網路身份”，由 256 位“抽象網路地址”表示，並僅使用這些 256 位網路地址來識別發件人和收件人進行通信（首先互相發送數據報）。尤其是，人們不需要擔心 IPv4 或 IPv6 地址、UDP 端口號等；它們由 Abstract Network Layer 隱藏。
+
+
+\clearpage
+\mysection{TON 網路協議}\label{sect:network}
 
 \nxsubpoint\label{sp:abs.addr} \embt(Abstract network addresses.)
-An {\em abstract network address}, or an {\em abstract address}, or
-just {\em address\/} for short, is a 256-bit integer, essentially
-equal to a 256-bit ECC public key. This public key can be generated
-arbitrarily, thus creating as many different network identities as the
-node likes. However, one must know the corresponding {\em private\/}
-key in order to receive (and decrypt) messages intended for such an
-address.
+一個{\em abstract network address}，或稱為{\em abstract address}，或簡稱為{\em address\/}，是一個 256 位整數，基本上等同於 256 位 ECC 公鑰。此公鑰可以任意生成，因此節點可以根據喜好創建許多不同的網路身份。但是，為了接收（和解密）針對此地址的消息，人們必須知道相對應的{\em private\/}密鑰。
 
-In fact, the address is {\em not\/} the public key itself; instead, it
-is a 256-bit hash ($\Hash=\Sha$) of a serialized TL-object
-(cf.~\ptref{sp:TL}) that can describe several types of public keys and
-addresses depending on its constructor (first four bytes). In the
-simplest case, this serialized TL-object consists just of a 4-byte
-magic number and a 256-bit elliptic curve cryptography (ECC) public
-key; in this case, the address will equal the hash of this 36-byte
-structure. One might use, however, 2048-bit RSA keys, or any other
-scheme of public-key cryptography instead.
+實際上，地址{\em 不是\/}公鑰本身；而是一個序列化 TL-object (參見~\ptref{sp:TL})的 256 位 hash（$\Hash=\Sha$），這可以根據其建構子（前四位元組）描述多種類型的公鑰和地址。在最簡單的情況下，此序列化 TL-object 僅由一個 4 位元組魔法數字和一個 256 位橢圓曲線密碼學（ECC）公鑰組成；在此情況下，地址將等於這 36 位元組結構的 hash。然而，人們也可以使用 2048 位 RSA 鑰匙或任何其他公鑰密碼學方案。
 
-When a node learns another node's abstract address, it must also
-receive its ``preimage'' (i.e., the serialized TL-object, the hash of
-which equals that abstract address) or else it will not be able to
-encrypt and send datagrams to that address.
+當一個節點獲知另一個節點的抽象地址時，它還必須接收其「原像」（即，其 hash 等於該抽象地址的序列化 TL-object）；否則，它將無法加密並發送數據報到該地址。
 
-\nxsubpoint \embt(Lower-level networks. UDP implementation.)  From the
-perspective of almost all TON Networking components, the only thing
-that exists is a network (the Abstract Datagram Networking Layer) able
-to (unreliably) send datagrams from one abstract address to
-another. In principle, the Abstract Datagram Networking Layer (ADNL)
-can be implemented over different existing network
-technologies. However, we are going to implement it over UDP in
-IPv4/IPv6 networks (such as the Internet or intranets), with an
-optional TCP fallback if UDP is not available.
+\nxsubpoint \embt(Lower-level networks. UDP implementation.)  
+從幾乎所有 TON Networking 組件的角度看，唯一存在的就是一個網路（Abstract Datagram Networking Layer），能夠（不可靠地）從一個抽象地址發送數據報到另一個抽象地址。原則上，Abstract Datagram Networking Layer (ADNL) 可以在不同的現有網路技術上實施。但是，我們打算在 IPv4/IPv6 網路（如互聯網或內部網）上實施它，並在 UDP 不可用時選用 TCP 作為備選。
 
-\nxsubpoint\label{sp:net.simple.dg} \embt(Simplest case of ADNL over
-UDP.)  The simplest case of sending a datagram from a sender's
-abstract address to any other abstract address (with known preimage)
-can be implemented as follows.
+\nxsubpoint\label{sp:net.simple.dg} \embt(Simplest case of ADNL over UDP.)  
+通過 UDP 從發送者的抽象地址發送數據報到任何其他抽象地址（已知原像）的最簡單情況可以如下實施。
 
-Suppose that the sender somehow knows the IP-address and the UDP port
-of the receiver who owns the destination abstract address, and that
-both the receiver and the sender use abstract addresses derived from
-256-bit ECC public keys.
+假設發送者以某種方式知道擁有目標抽象地址的接收者的 IP 地址和 UDP 端口，且接收者和發送者都使用從 256 位 ECC 公鑰派生的抽象地址。
 
-In this case, the sender simply augments the datagram to be sent by
-its ECC signature (done with its private key) and its source address
-(or the preimage of the source address, if the receiver is not known
-to know that preimage yet). The result is encrypted with the
-recipient's public key, embedded into a UDP datagram and sent to the
-known IP and port of the recipient. Because the first 256 bits of the
-UDP datagram contain the recipient's abstract address, the recipient
-can identify which private key should be used to decrypt the remainder
-of the datagram. Only after that is the sender's identity revealed.
+在此情況下，發送者簡單地通過其 ECC 簽名（用其私鑰完成）和其源地址（或源地址的原像，如果接收者還不知道該原像）增強要發送的數據報。結果使用收件人的公鑰加密，嵌入到一個 UDP 數據報中並發送到收件人已知的 IP 和端口。因為 UDP 數據報的前 256 位包含接收者的抽象地址，所以接收者可以確定應該使用哪個私鑰來解密數據報的其餘部分。只有在此之後，發送者的身份才被揭示。
 
 \nxsubpoint\label{sp:net.simplest.dg} \embt(Less secure way, with the
-sender's address in plaintext.)  Sometimes a less secure scheme is
-sufficient, when the recipient's and the sender's addresses are kept
-in plaintext in the UDP datagram; the sender's private key and the
-recipient's public key are combined together using ECDH (Elliptic
-Curve Diffie--Hellman) to generate a 256-bit shared secret, which is
-used afterwards, along with a random 256-bit nonce also included in
-the unencrypted part, to derive AES keys used for encryption. The
-integrity may be provided, for instance, by concatenating the hash of
-the original plaintext data to the plaintext before encryption.
+sender's address in plaintext.)  有時，一個較不安全的方案就足夠了，當收件人和寄件人的地址在UDP數據報中保持為明文；寄件人的私鑰和收件人的公鑰使用ECDH（橢圓曲線Diffie--Hellman）合併在一起，生成一個256位共享秘密，之後，該共享秘密與明文部分也包含的隨機256位nonce一起用來派生用於加密的AES密鑰。完整性可以通過在加密前將原始明文數據的hash連接到明文來提供。
 
-This approach has the advantage that, if more than one datagram is
-expected to be exchanged between the two addresses, the shared secret
-can be computed only once and then cached; then slower elliptic curve
-operations will no longer be required for encrypting or decrypting the
-next datagrams.
+這種方法的優點是，如果預計兩個地址之間將交換多個數據報，則只需計算一次共享秘密然後將其緩存；然後加密或解密下一個數據報時不再需要較慢的橢圓曲線操作。
 
 \nxsubpoint\label{sp:net.channels} \embt(Channels and channel
-identifiers.)  In the simplest case, the first 256 bits of a UDP
-datagram carrying an embedded TON ADNL datagram will be equal to the
-recipient's address. However, in general they constitute a {\em
-  channel identifier}. There are different types of channels. Some of
-them are point-to-point; they are created by two parties who wish to
-exchange a lot of data in the future and generate a shared secret by
-exchanging several packets encrypted as described
-in~\ptref{sp:net.simple.dg} or~\ptref{sp:net.simplest.dg}, by running
-classical or elliptic curve Diffie--Hellman (if extra security is
-required), or simply by one party generating a random shared secret
-and sending it to the other party.
+identifiers.)  在最簡單的情況下，攜帶內嵌TON ADNL數據報的UDP數據報的前256位將等於收件人的地址。然而，一般來說它們組成了一個{\em channel identifier}。有不同類型的channels。其中一些是點對點的；它們由希望在將來交換大量數據的兩方創建，並通過交換幾個加密數據報（如\ptref{sp:net.simple.dg}或\ptref{sp:net.simplest.dg}中所描述的那樣），運行經典或橢圓曲線Diffie--Hellman（如果需要額外的安全性），或者僅由一方生成隨機共享秘密並將其發送給另一方。
 
-After that, a channel identifier is derived from the shared secret
-combined with some additional data (such as the sender's and
-recipient's addresses), for instance by hashing, and that identifier
-is used as the first 256 bits of UDP datagrams carrying data encrypted
-with the aid of that shared secret.
+此後，channel identifier由共享秘密和一些額外數據（例如寄件人和收件人的地址）組合而來，例如通過hashing，並且該identifier用作攜帶使用該共享秘密加密的數據的UDP數據報的前256位。
 
 \nxsubpoint\label{sp:tunnels} \embt(Channel as a tunnel identifier.)
-In general, a ``channel'', or ``channel identifier'' simply selects a
-way of processing an inbound UDP datagram, known to the receiver. If
-the channel is the receiver's abstract address, the processing is done
-as outlined in~\ptref{sp:net.simple.dg} or \ptref{sp:net.simplest.dg};
-if the channel is an established point-to-point channel discussed
-in~\ptref{sp:net.channels}, the processing consists in decrypting the
-datagram with the aid of the shared secret as explained in {\em
-  loc.~cit.}, and so on.
+一般而言，``channel''或``channel identifier''僅選擇了接收者已知的處理入站UDP數據報的方法。如果channel是接收者的抽象地址，則處理的方式如\ptref{sp:net.simple.dg}或\ptref{sp:net.simplest.dg}中所述；如果channel是\ptref{sp:net.channels}中討論的已建立的點對點channel，則處理包括使用共享秘密的幫助解密數據報，如{\em loc.~cit.}中所解釋的，等等。
 
-In particular, a channel identifier can actually select a ``tunnel'',
-when the immediate recipient simply forwards the received message to
-somebody else---the actual recipient or another proxy. Some encryption
-or decryption steps (reminiscent of ``onion routing'' \cite{Onion} or
-even ``garlic
-routing''\footnote{\url{https://geti2p.net/en/docs/how/garlic-routing}})
-might be done along the way, and another channel identifier might be
-used for re-encrypted forwarded packets (for example, a peer-to-peer
-channel could be employed to forward the packet to the next recipient
-on the path).
+特別地，channel identifier實際上可以選擇一個``tunnel''，當立即的接收者僅將接收到的消息轉發給其他人---實際的接收者或另一個代理時。沿途可能會進行一些加密或解密步驟（讓人想起``onion routing'' \cite{Onion}或甚至``garlic routing''\footnote{\url{https://geti2p.net/en/docs/how/garlic-routing}}），並且可能使用另一個channel identifier用於重新加密的轉發數據包（例如，點對點channel可以用於將數據包轉發給路徑上的下一個接收者）。
 
-In this way, some support for ``tunneling'' and
-``proxying''---somewhat similar to that provided by the TOR or $I^2P$
-projects---can be added on the level of the TON Abstract Datagram
-Network Layer, without affecting the functionality of all higher-level
-TON network protocols, which would be agnostic of such an
-addition. This opportunity is exploited by the {\em TON Proxy\/}
-service (cf.~\ptref{sp:ex.ton.proxy}).
+通過這種方式，可以在TON Abstract Datagram Network Layer的層次上添加對``tunneling''和``proxying''的支持---與TOR或$I^2P$項目提供的相似---而不影響所有高級TON network protocols的功能，它們將不知道這樣的添加。此機會被{\em TON Proxy\/}服務所利用（參見\ptref{sp:ex.ton.proxy}）。
+
 
 \nxsubpoint\label{sp:net.startup} \embt(Zero channel and the bootstrap
-problem.)  Normally, a TON ADNL node will have some ``neighbor
-table'', containing information about other known nodes, such as their
-abstract addresses and their preimages (i.e., public keys) and their
-IP addresses and UDP ports. Then it will gradually extend this table
-by using information learned from these known nodes as answers to
-special queries, and sometimes prune obsolete records.
+problem.)  通常，一個TON ADNL節點會有一些``neighbor table''，其中包含有關其他已知節點的信息，例如它們的抽象地址、它們的preimages（即，公鑰）及它們的IP地址和UDP端口。然後，它將逐步擴展此表格，使用從這些已知節點作為特殊查詢的回答所學到的信息，並有時剪除過時的記錄。
 
-However, when a TON ADNL node just starts up, it may happen that it
-does not know any other node, and can learn only the IP address and
-UDP port of a node, but not its abstract address. This happens, for
-example, if a light client is not able to access any of the previously
-cached nodes and any nodes hardcoded into the software, and must ask
-the user to enter an IP address or a DNS domain of a node, to be
-resolved through DNS.
+但是，當一個TON ADNL節點剛啟動時，它可能不知道任何其他節點，只能學到一個節點的IP地址和UDP端口，但不知其抽象地址。例如，如果一個輕型客戶端無法訪問之前緩存的任何節點和硬編碼到軟件中的任何節點，並必須要求用戶輸入節點的IP地址或DNS域名，以通過DNS進行解析。
 
-In this case, the node will send packets to a special ``zero channel''
-of the node in question. This does not require knowledge of the
-recipient's public key (but the message should still contain the
-sender's identity and signature), so the message is transferred
-without encryption.  It should be normally used only to obtain an
-identity (maybe a one-time identity created especially for this
-purpose) of the receiver, and then to start communicating in a safer
-way.
+在這種情況下，節點將發送數據包到該節點的特殊``zero channel''。這不需要知道收件人的公鑰（但消息仍應包含發件人的身份和簽名），所以消息是不加密地傳輸的。它通常只用於獲取接收者的身份（也許是特別為此目的創建的一次性身份），然後開始以更安全的方式通信。
 
-Once at least one node is known, it is easy to populate the ``neighbor
-table'' and ``routing table'' by more entries, learning them from
-answers to special queries sent to the already known nodes.
+一旦至少知道一個節點，就可以通過更多的條目輕鬆填充``neighbor table''和``routing table''，從已知節點發送的特殊查詢的回答中學到它們。
 
-Not all nodes are required to process datagrams sent to the zero
-channel, but those used to bootstrap light clients should support this
-feature.
+不是所有節點都需要處理發送到zero channel的數據包，但用於啟動輕型客戶端的節點應支持此功能。
 
-\nxsubpoint \embt(TCP-like stream protocol over ADNL.)  The ADNL,
-being an unreliable (small-size) datagram protocol based on 256-bit
-abstract addresses, can be used as a base for more sophisticated
-network protocols. One can build, for example, a TCP-like stream
-protocol, using ADNL as an abstract replacement for IP. However, most
-components of the TON Project do not need such a stream protocol.
+\nxsubpoint \embt(TCP-like stream protocol over ADNL.)  ADNL，作為基於256位抽象地址的不可靠（小尺寸）數據包協議，可以用作更複雜網絡協議的基礎。例如，可以構建一個類似TCP的流協議，使用ADNL作為IP的抽象替代品。但是，TON Project的大多數組件不需要這樣的流協議。
 
 \nxsubpoint\label{sp:RLDP} \embt(RLDP, or Reliable Large Datagram
-Protocol over ADNL.)  A reliable arbitrary-size datagram protocol
-built upon the ADNL, called RLDP, is used instead of a TCP-like
-protocol. This reliable datagram protocol can be employed, for
-instance, to send RPC queries to remote hosts and receive answers from
-them (cf.~\ptref{sp:pure.net.serv}).
+Protocol over ADNL.)  一個建立在ADNL上的可靠的任意大小的數據包協議，稱為RLDP，用於代替類似TCP的協議。這種可靠的數據包協議可以用來，例如，向遠程主機發送RPC查詢並從它們那裡接收答案（參見~\ptref{sp:pure.net.serv}）。
 
 \mysubsection{TON DHT: Kademlia-like Distributed Hash
   Table}\label{sect:kademlia}
 
-The {\em TON Distributed Hash Table (DHT)\/} plays a crucial role in
-the networking part of the TON Project, being used to locate other
-nodes in the network. For example, a client wanting to commit a
-transaction into a shardchain might want to find a validator or a
-collator of that shardchain, or at least some node that might relay
-the client's transaction to a collator. This can be done by looking up
-a special key in the TON DHT. Another important application of the TON
-DHT is that it can be used to quickly populate a new node's neighbor
-table (cf.~\ptref{sp:net.startup}), simply by looking up a random key,
-or the new node's address. If a node uses proxying and tunneling for
-its inbound datagrams, it publishes the tunnel identifier and its
-entry point (e.g., IP address and UDP port) in the TON DHT; then all
-nodes wishing to send datagrams to that node will obtain this contact
-information from the DHT first.
+{\em TON 分散式雜湊表 (DHT)\/} 在TON Project的網絡部分中扮演了關鍵角色，用於定位網絡中的其他節點。例如，一個想要提交交易到某個shardchain的客戶端可能想要找到該shardchain的驗證者或collator，或至少某個可以將客戶端的交易轉發到collator的節點。這可以通過在TON DHT中查找特定的key來完成。TON DHT的另一個重要應用是，它可以快速填充新節點的鄰居表格 (參見~\ptref{sp:net.startup})，只需查找隨機key，或新節點的地址。如果節點對其入站數據報使用代理和通道，則將通道標識符和其入口點（例如，IP地址和UDP端口）發布在TON DHT中；然後，所有希望發送數據報到該節點的節點首先將從DHT獲取此聯繫信息。
 
-The TON DHT is a member of the family of {\em Kademlia-like distributed
-  hash tables\/}~\cite{Kademlia}.
+TON DHT屬於{\em Kademlia-like分散式雜湊表\/}家族~\cite{Kademlia}。
 
-\nxsubpoint \embt(Keys of the TON DHT.)  The {\em keys\/} of the TON
-DHT are simply 256-bit integers. In most cases, they are computed as
-$\Sha$ of a TL-serialized object (cf.~\ptref{sp:TL}), called {\em
-  preimage\/} of the key, or {\em key description}. In some cases, the
-abstract addresses of the TON Network nodes (cf.~\ptref{sp:abs.addr})
-can also be used as keys of the TON DHT, because they are also
-256-bit, and they are also hashes of TL-serialized objects. For
-example, if a node is not afraid of publishing its IP address, it can
-be found by anybody who knows its abstract address by simply looking
-up that address as a key in the DHT.
+\nxsubpoint \embt(Keys of the TON DHT.)  TON DHT的{\em keys\/}僅僅是256位整數。在大多數情況下，它們作為一個TL-serialized對象的$\Sha$計算出來（參見~\ptref{sp:TL}），被稱為key的{\em preimage\/}或{\em key description}。在某些情況下，TON Network節點的抽象地址（參見~\ptref{sp:abs.addr}）也可以用作TON DHT的keys，因為它們也是256位，而且它們也是TL-serialized對象的hashes。例如，如果節點不害怕公開其IP地址，任何知道其抽象地址的人都可以通過在DHT中查找該地址作為key來找到它。
 
-\nxsubpoint \embt(Values of the DHT.)  The {\em values\/} assigned to
-these 256-bit keys are essentially arbitrary byte strings of limited
-length. The interpretation of such byte strings is determined by the
-preimage of the corresponding key; it is usually known both by the
-node that looks up the key, and by the node that stores the key.
+\nxsubpoint \embt(Values of the DHT.)  分配給這些256-bit keys的{\em values\/}本質上是有限長度的任意字節串。對應key的preimage決定了這樣的字節串的解釋；通常由查找key的節點和存儲key的節點都知道它。
 
 \nxsubpoint \embt(Nodes of the DHT. Semi-permanent network
-identities.)  The key-value mapping of the TON DHT is kept on the {\em
-  nodes\/} of the DHT---essentially, all members of the TON
-Network. To this end, any node of the TON Network (perhaps with the
-exception of some very light nodes), apart from any number of
-ephemeral and permanent abstract addresses described
-in~\ptref{sp:abs.addr}, has at least one ``semi-permanent address'',
-which identifies it as a member of the TON DHT. This {\em
-  semi-permanent\/} or {\em DHT address\/} should not to be changed
-too often, otherwise other nodes would be unable to locate the keys
-they are looking for. If a node does not want to reveal its ``true''
-identity, it generates a separate abstract address to be used only for
-the purpose of participating in the DHT. However, this abstract
-address must be public, because it will be associated with the node's
-IP address and port.
+identities.)  TON DHT的key-value映射存放在DHT的{\em nodes\/}上——基本上是TON Network的所有成員。為此，TON Network的任何節點（除了某些非常輕的節點外），除了~\ptref{sp:abs.addr}中描述的任意數量的瞬態和永久抽象地址外，都至少有一個“半永久地址”，該地址將其識別為TON DHT的成員。這個{\em 半永久\/}或{\em DHT地址\/}不應該經常更改，否則其他節點將無法找到他們正在尋找的keys。如果節點不想揭露其“真實”身份，則生成一個僅用於參與DHT的單獨抽象地址。但是，這個抽象地址必須是公開的，因為它將與節點的IP地址和端口相關聯。
 
-\nxsubpoint \embt(Kademlia distance.)  Now we have both 256-bit keys
-and 256-bit (semi-permanent) node addresses. We introduce the
-so-called {\em XOR distance\/} or {\em Kademlia distance~$d_K$} on the
-set of 256-bit sequences, given by
+\nxsubpoint \embt(Kademlia distance.) 現在，我們既有256位的 keys 也有256位的 (半永久) 節點地址。我們引入所謂的 {\em XOR distance\/} 或 {\em Kademlia distance~$d_K$} 在256位序列集上，由以下公式給出
 \begin{equation}
-  d_K(x,y):=(x\oplus y)\quad\text{interpreted as an unsigned 256-bit
-    integer}
+  d_K(x,y):=(x\oplus y)\quad\text{解釋為一個無符號的256位整數}
 \end{equation}
-Here $x\oplus y$ denotes the bitwise eXclusive OR (XOR) of two bit
-sequences of the same length.
+其中 \(x\oplus y\) 表示兩個相同長度的位序列的位元對位元 eXclusive OR (XOR)。
 
-The Kademlia distance introduces a metric on the set $\st2^{256}$ of
-all 256-bit sequences. In particular, we have $d_K(x,y)=0$ if and only
-if $x=y$, $d_K(x,y)=d_K(y,x)$, and $d_K(x,z)\leq
-d_K(x,y)+d_K(y,z)$. Another important property is that {\em there is
-  only one point at any given distance from~$x$}: $d_K(x,y)=d_K(x,y')$
-implies $y=y'$.
+Kademlia distance 在所有256位序列的集合 \(\st2^{256}\) 上引入了一個度量。特別地，我們有 \(d_K(x,y)=0\) 當且僅當 \(x=y\)， \(d_K(x,y)=d_K(y,x)\)，和 \(d_K(x,z)\leq d_K(x,y)+d_K(y,z)\)。另一個重要特性是，{\em 從~\(x\) 出發的任何給定距離只有一個點}： \(d_K(x,y)=d_K(x,y')\) 意味著 \(y=y'\)。
 
-\nxsubpoint \embt(Kademlia-like DHTs and the TON DHT.)  We say that a
-distributed hash table (DHT) with 256-bit keys and 256-bit node
-addresses is a {\em Kademlia-like DHT\/} if it is expected to keep the
-value of key $K$ on $s$ Kademlia-nearest nodes to $K$ (i.e., the $s$
-nodes with smallest Kademlia distance from their addresses to $K$.)
+\nxsubpoint \embt(Kademlia-like DHTs and the TON DHT.) 如果一個擁有256位 keys 和 256位節點地址的分散式雜湊表 (DHT) 預期將 key \(K\) 的值保留在與 \(K\) 最接近的 \(s\) 個Kademlia節點上 (即，與他們的地址到 \(K\) 的Kademlia distance 最小的 \(s\) 個節點)，我們稱之為 {\em Kademlia-like DHT\/}。
 
-Here $s$ is a small parameter, say, $s=7$, needed to improve
-reliability of the DHT (if we would keep the key only on one node, the
-nearest one to~$K$, the value of that key would be lost if that only
-node goes offline).
+這裡的 \(s\) 是一個小參數，比如說，\(s=7\)，用於提高DHT的可靠性（如果我們只在一個節點上保留 key，即與 \(K\) 最接近的節點，那麼如果該節點離線，該 key 的值將會丟失）。
 
-The TON DHT is a Kademlia-like DHT, according to this definition. It
-is implemented over the ADNL protocol described in~\ptref{sect:ANL}.
+根據此定義，TON DHT 是一個Kademlia-like DHT。它是在~\ptref{sect:ANL}中描述的ADNL協議上實現的。
 
-\nxsubpoint \embt(Kademlia routing table.)  Any node participating in
-a Kademlia-like DHT usually maintains a {\em Kademlia routing
-  table}. In the case of TON DHT, it consists of $n=256$ buckets,
-numbered from $0$ to $n-1$. The $i$-th bucket will contain information
-about some known nodes (a fixed number $t$ of ``best'' nodes, and
-maybe some extra candidates) that lie at a Kademlia distance from
-$2^i$ to $2^{i+1}-1$ from the node's address $a$.\footnote{If there
-  are sufficiently many nodes in a bucket, it can be subdivided
-  further into, say, eight sub-buckets depending on the top four bits
-  of the Kademlia distance. This would speed up DHT lookups.} This
-information includes their (semi-permanent) addresses, IP addresses
-and UDP ports, and some availability information such as the time and
-the delay of the last ping.
+\nxsubpoint \embt(Kademlia routing table.) 任何參與Kademlia-like DHT的節點通常都會維護一個 {\em Kademlia routing table}。對於TON DHT，它由 \(n=256\) 個buckets組成，編號從 \(0\) 到 \(n-1\)。第 \(i\) 個bucket將包含一些已知節點的資訊（一定數量 \(t\) 的``最好的''節點，和可能一些額外的候選節點），這些節點的Kademlia distance從 \(2^i\) 到 \(2^{i+1}-1\) 與節點地址 \(a\) 之間。\footnote{如果一個bucket中有足夠多的節點，它可以進一步細分為，比如說，八個子bucket，這取決於Kademlia distance的前四位。這將加快DHT查找的速度。} 這些資訊包括他們的(半永久)地址、IP地址和UDP端口，以及一些可用性資訊，如最後一次ping的時間和延遲。
 
-When a Kademlia node learns about any other Kademlia node as a result
-of some query, it includes it into a suitable bucket of its routing
-table, first as a candidate. Then, if some of the ``best'' nodes in
-that bucket fail (e.g., do not respond to ping queries for a long
-time), they can be replaced by some of the candidates. In this way the
-Kademlia routing table stays populated.
+當一個Kademlia節點由於某個查詢得知其他Kademlia節點時，它將其包含到其路由表的適當bucket中，首先作為候選節點。然後，如果該bucket中的一些``最好的''節點失效（例如，長時間不回應ping查詢），它們可以被一些候選節點替換。通過這種方式，Kademlia routing table保持填充。
 
-New nodes from the Kademlia routing table are also included in the
-ADNL neighbor table described in~\ptref{sp:net.startup}. If a ``best''
-node from a bucket of the Kademlia routing table is used often, a
-channel in the sense described in~\ptref{sp:net.channels} can be
-established to facilitate the encryption of datagrams.
+Kademlia routing table中的新節點也被包含在~\ptref{sp:net.startup}中描述的ADNL鄰居表中。如果Kademlia routing table的一個bucket中的``最好的''節點經常被使用，可以建立一個在~\ptref{sp:net.channels}中描述的channel，以促進datagrams的加密。
 
-A special feature of the TON DHT is that it tries to select nodes with
-the smallest round-trip delays as the ``best'' nodes for the buckets
-of the Kademlia routing table.
+TON DHT的一個特殊特性是，它試圖選擇往返延遲最小的節點作為Kademlia routing table的buckets的``最好的''節點。
 
-\nxsubpoint (Kademlia network queries.)  A Kademlia node usually
-supports the following network queries:
+\nxsubpoint (Kademlia網絡查詢。) 一個Kademlia節點通常支持以下網絡查詢：
 \begin{itemize}
-\item $\Ping$ -- Checks node availability.
-\item $\Store(key,value)$ -- Asks the node to keep $value$ as a value
-  for key $key$. For TON DHT, the $\Store$ queries are slightly more
-  complicated (cf.~\ptref{sp:DHT.store}).
-\item $\FindNode(key,l)$ -- Asks the node to return $l$
-  Kademlia-nearest known nodes (from its Kademlia routing table) to
-  $key$.
-\item $\FindValue(key,l)$ -- The same as above, but if the node knows
-  the value corresponding to key $key$, it just returns that value.
+\item $\Ping$ -- 檢查節點的可用性。
+\item $\Store(key,value)$ -- 要求節點保存$value$作為$key$的值。對於TON DHT，$\Store$查詢稍微複雜一些 (參考~\ptref{sp:DHT.store})。
+\item $\FindNode(key,l)$ -- 要求節點返回$l$ Kademlia最接近的已知節點（從其Kademlia路由表中）到$key$。
+\item $\FindValue(key,l)$ -- 如上所述，但如果節點知道對應於key $key$的值，則直接返回該值。
 \end{itemize}
 
-When any node wants to look up the value of a key $K$, it first
-creates a set $S$ of $s'$ nodes (for some small value of $s'$, say,
-$s'=5$), nearest to $K$ with respect to the Kademlia distance among
-all known nodes (i.e., they are taken from the Kademlia routing
-table). Then a $\FindValue$ query is sent to each of them, and nodes
-mentioned in their answers are included in $S$. Then the $s'$ nodes
-from $S$, nearest to $K$, are also sent a $\FindValue$ query if this
-hasn't been done before, and the process continues until the value is
-found or the set $S$ stops growing. This is a sort of ``beam search''
-of the node nearest to $K$ with respect to Kademlia distance.
+當任何節點想要查找key $K$的值時，它首先創建一組$s'$節點（對於某個小的$s'$值，例如，$s'=5$），這些節點相對於所有已知節點的Kademlia距離最接近$K$（即，它們是從Kademlia路由表中取出的）。然後，$\FindValue$查詢發送給它們中的每一個，並在其答案中提到的節點包含在$S$中。然後，$S$中最接近$K$的$s'$節點也發送了$\FindValue$查詢（如果以前沒有這麼做），並且該過程繼續，直到找到該值或$S$停止增長。這是一種尋找相對於Kademlia距離最接近$K$的節點的``光束搜索''。
 
-If the value of some key $K$ is to be set, the same procedure is run
-for $s'\geq s$, with $\FindNode$ queries instead of $\FindValue$, to
-find $s$ nearest nodes to $K$. Afterwards, $\Store$ queries are sent
-to all of them.
+如果要設置某個key $K$的值，則為$s'\geq s$運行相同的過程，使用$\FindNode$查詢而不是$\FindValue$，以找到最接近$K$的$s$節點。之後，$\Store$查詢發送給它們所有人。
 
-There are some less important details in the implementation of a
-Kademlia-like DHT (for example, any node should look up $s$ nearest
-nodes to itself, say, once every hour, and re-publish all stored keys
-to them by means of $\Store$ queries). We will ignore them for the
-time being.
+在Kademlia類似的DHT的實現中還有一些不太重要的細節（例如，任何節點應該每小時查找一次最接近自己的$s$節點，並通過$\Store$查詢重新發布所有存儲的key給它們）。我們暫時忽略它們。
 
-\nxsubpoint \embt(Booting a Kademlia node.)  When a Kademlia node goes
-online, it first populates its Kademlia routing table by looking up
-its own address. During this process, it identifies the $s$ nearest
-nodes to itself. It can download from them all $(key,value)$ pairs
-known to them to populate its part of the DHT.
+\nxsubpoint \embt(Booting a Kademlia node.) 當一個Kademlia節點上線時，它首先通過查找自己的地址來填充其Kademlia路由表。在此過程中，它識別出最接近自己的$s$節點。它可以從它們那裡下載所有已知的$(key,value)$對，以填充其DHT的部分。
 
 \nxsubpoint\label{sp:DHT.store} \embt(Storing values in TON DHT.)
-Storing values in TON DHT is slightly different from a general
-Kademlia-like DHT. When someone wishes to store a value, she must
-provide not only the key $K$ itself to the $\Store$ query, but also
-its {\em preimage\/}---i.e., a TL-serialized string (with one of
-several predefined TL-constructors at the beginning) containing a
-``description'' of the key. This key description is later kept by the
-node, along with the key and the value.
+在TON DHT中存儲值與一般的Kademlia-like DHT略有不同。當某人希望存儲一個值時，她不僅必須將鍵$K$本身提供給$\Store$查詢，還必須提供其{\em preimage\/}---也就是說，一個TL序列化的字符串（在開頭有幾個預定義的TL-constructors）包含鍵的``描述''。此鍵描述稍後由節點保存，並與鍵和值一起保存。
 
-The key description describes the ``type'' of the object being stored,
-its ``owner'', and its ``update rules'' in case of future updates. The
-owner is usually identified by a public key included in the key
-description. If it is included, normally only updates signed by the
-corresponding private key will be accepted. The ``type'' of the stored
-object is normally just a byte string. However, in some cases it can
-be more sophisticated---for example, an input tunnel description
-(cf.~\ptref{sp:tunnels}), or a collection of node addresses.
+鍵描述描述了存儲的對象的``類型''、其``所有者''以及在未來更新時的``更新規則''。所有者通常由包含在鍵描述中的公鑰識別。如果包含它，通常只接受由相應的私鑰簽名的更新。存儲的對象的``類型''通常只是一個字節字符串。但是，在某些情況下，它可以更為複雜---例如，輸入隧道描述（參考~\ptref{sp:tunnels}），或節點地址的集合。
 
-The ``update rules'' can also be different. In some cases, they simply
-permit replacing the old value with the new value, provided the new
-value is signed by the owner (the signature must be kept as part of
-the value, to be checked later by any other nodes after they obtain
-the value of this key). In other cases, the old value somehow affects
-the new value. For example, it can contain a sequence number, and the
-old value is overwritten only if the new sequence number is larger (to
-prevent replay attacks).
+``更新規則''也可能不同。在某些情況下，它們僅允許使用新值替換舊值，前提是新值由所有者簽名（簽名必須作為值的一部分保存，以便稍後由其他節點在獲得此鍵的值後進行檢查）。在其他情況下，舊值以某種方式影響新值。例如，它可以包含一個序列號，並且僅當新的序列號更大時才覆蓋舊值（以防止重放攻擊）。
 
-\nxsubpoint\label{sp:distr.torr.tr} \embt(Distributed ``torrent
-trackers'' and ``network interest groups'' in TON DHT.)  Yet another
-interesting case is when the value contains a list of nodes---perhaps
-with their IP addresses and ports, or just with their abstract
-addresses---and the ``update rule'' consists in including the
-requester in this list, provided she can confirm her identity.
+\nxsubpoint\label{sp:distr.torr.tr} \embt(Distributed ``torrent trackers'' and ``network interest groups'' in TON DHT.)
+另一個有趣的情況是當值包含一個節點列表---也許是它們的IP地址和端口，或者只是它們的抽象地址---和``更新規則''包括在此列表中包括請求者，只要她可以確認她的身份。
 
-This mechanism might be used to create a distributed ``torrent
-tracker'', where all nodes interested in a certain ``torrent'' (i.e.,
-a certain file) can find other nodes that are interested in the same
-torrent, or already have a copy.
+這種機制可以用於創建一個分佈式的``torrent tracker''，在其中所有對某個``torrent''（即，某個文件）感興趣的節點可以找到對同一個torrent感興趣或已經擁有副本的其他節點。
 
-{\em TON Storage\/} (cf.~\ptref{sp:ex.ton.storage}) uses this
-technology to find the nodes that have a copy of a required file
-(e.g., a snapshot of the state of a shardchain, or an old
-block). However, its more important use is to create ``overlay
-multicast subnetworks'' and ``network interest groups''
-(cf.~\ptref{sect:overlay}). The idea is that only some nodes are
-interested in the updates of a specific shardchain. If the number of
-shardchains becomes very large, finding even one node interested in
-the same shard may become complicated. This ``distributed torrent
-tracker'' provides a convenient way to find some of these
-nodes. Another option would be to request them from a validator, but
-this would not be a scalable approach, and validators might choose not
-to respond to such queries coming from arbitrary unknown nodes.
+{\em TON Storage\/} (參考~\ptref{sp:ex.ton.storage})使用此技術來找到擁有所需文件副本的節點（例如，shardchain的狀態快照或舊的區塊）。然而，其更重要的用途是創建``overlay multicast subnetworks''和``network interest groups''（參考~\ptref{sect:overlay}）。其想法是只有一些節點對特定shardchain的更新感興趣。如果shardchains的數量變得非常大，則找到對相同shard感興趣的節點可能會變得很複雜。這個``distributed torrent tracker''提供了一種方便的方法來找到這些節點。另一個選項是從驗證者那裡請求它們，但這不會是一個可擴展的方法，驗證者可能選擇不回應來自任意未知節點的這種查詢。
 
-\nxsubpoint \embt(Fall-back keys.)  Most of the ``key types''
-described so far have an extra 32-bit integer field in their TL
-description, normally equal to zero. However, if the key obtained by
-hashing that description cannot be retrieved from or updated in the
-TON DHT, the value in this field is increased, and a new attempt is
-made. In this way, one cannot ``capture'' and ``censor'' a key (i.e.,
-perform a key retention attack) by creating a lot of abstract
-addresses lying near the key under attack and controlling the
-corresponding DHT nodes.
+\nxsubpoint \embt(Fall-back keys.) 目前描述的大多數``key types''在其TL描述中都有一個額外的32位整數字段，通常等於零。但是，如果通過hash該描述獲得的鍵不能從TON DHT中檢索或更新，則會增加此字段中的值，並進行新的嘗試。這樣，通過創建許多靠近被攻擊鍵的抽象地址並控制相應的DHT節點，就不能``capture''和``censor''一個鍵（即，進行鍵保留攻擊）。
 
-\nxsubpoint\label{sp:loc.serv} \embt(Locating services.)  Some
-services, located in the TON Network and available through the
-(higher-level protocols built upon the) TON ADNL described
-in~\ptref{sect:ANL}, may want to publish their abstract addresses
-somewhere, so that their clients would know where to find them.
+\nxsubpoint\label{sp:loc.serv} \embt(Locating services.) 一些位於TON Network中的服務，通過（基於TON ADNL的）較高級別的協議（在~\ptref{sect:ANL}中描述）提供，可能希望在某處公開其抽象地址，以便其客戶知道在哪裡找到它們。
 
-However, publishing the service's abstract address in the TON
-Blockchain may not be the best approach, because the abstract address
-might need to be changed quite often, and because it could make sense
-to provide several addresses, for reliability or load balancing
-purposes.
+但是，將服務的抽象地址發佈到TON Blockchain中可能不是最好的方法，因為可能需要經常更改抽象地址，並且可能有意義提供多個地址，出於可靠性或負載均衡的目的。
 
-An alternative is to publish a public key into the TON Blockchain, and
-use a special DHT key indicating that public key as its ``owner'' in
-the TL description string (cf.~\ptref{sp:TL}) to publish an up-to-date
-list of the service's abstract addresses. This is one of the
-approaches exploited by TON Services.
+另一種方法是將公鑰發佈到TON Blockchain中，並使用一個特殊的DHT鍵，在TL描述字符串（參考~\ptref{sp:TL}）中指示該公鑰為其``owner''，以發佈服務的抽象地址的最新列表。這是TON Services利用的方法之一。
 
-\nxsubpoint \embt(Locating owners of TON blockchain accounts.)  In
-most cases, owners of TON blockchain accounts would not like to be
-associated with abstract network addresses, and especially IP
-addresses, because this can violate their privacy. In some cases,
-however, the owner of a TON blockchain account may want to publish
-one or several abstract addresses where she could be contacted.
 
-A typical case is that of a node in the TON Payments ``lightning
-network'' (cf.~\ptref{sect:lightning}), the platform for instant
-cryptocurrency transfers. A public TON Payments node may want not only
-to establish payment channels with other peers, but also to publish an
-abstract network address that could be used to contact it at a later
-time for transferring payments along the already-established channels.
+\nxsubpoint \embt(Locating owners of TON blockchain accounts.) 在大多數情況下，TON區塊鏈賬戶的所有者不希望與抽象網絡地址，特別是IP地址相關聯，因為這可能侵犯他們的隱私。然而，在某些情況下，TON區塊鏈賬戶的所有者可能想要發佈她可以被聯繫到的一個或多個抽象地址。
 
-One option would be to include an abstract network address in the
-smart contract creating the payment channel. A more flexible option is
-to include a public key in the smart contract, and then use DHT as
-explained in~\ptref{sp:loc.serv}.
+一個典型的情況是TON Payments的“lightning network”中的節點（參考~\ptref{sect:lightning}），這是即時加密貨幣轉賬的平台。一個公開的TON Payments節點可能不僅想與其他節點建立支付通道，還想發佈一個抽象網絡地址，稍後可以用該地址聯繫它，以沿著已建立的通道進行支付。
 
-The most natural way would be to use the same private key that
-controls the account in the TON Blockchain to sign and publish updates
-in the TON DHT about the abstract addresses associated with that
-account. This is done almost in the same way as described
-in~\ptref{sp:loc.serv}; however, the DHT key employed would require a
-special key description, containing only the $\accountid$ itself,
-equal to $\Sha$ of the ``account description'', which contains the
-public key of the account. The signature, included in the value of
-this DHT key, would contain the account description as well.
+一種選擇是在創建支付通道的智能合約中包含一個抽象網絡地址。更靈活的選擇是在智能合約中包括一個公鑰，然後像在~\ptref{sp:loc.serv}中解釋的那樣使用DHT。
 
-In this way, a mechanism for locating abstract network addresses of
-some owners of the TON Blockchain accounts becomes available.
+最自然的方法是使用控制TON區塊鏈中賬戶的同一私鑰，來簽名和發佈關於與該賬戶相關的抽象地址的TON DHT中的更新。這幾乎與在~\ptref{sp:loc.serv}中描述的方式相同;但是，所使用的DHT鍵將需要一個特殊的鍵描述，只包含$\accountid$本身，等於“賬戶描述”的$\Sha$，其中包含賬戶的公鑰。該值中包含的簽名也將包含賬戶描述。
 
-\nxsubpoint\label{sp:loc.abs.addr} \embt(Locating abstract addresses.)
-Notice that the TON DHT, while being implemented over TON ADNL, is
-itself used by the TON ADNL for several purposes.
+通過這種方式，提供了一種定位某些TON區塊鏈賬戶所有者的抽象網絡地址的機制。
 
-The most important of them is to locate a node or its contact data
-starting from its 256-bit abstract address. This is necessary because
-the TON ADNL should be able to send datagrams to arbitrary 256-bit
-abstract addresses, even if no additional information is provided.
+\nxsubpoint\label{sp:loc.abs.addr} \embt(Locating abstract addresses.) 請注意，儘管TON DHT是在TON ADNL上實現的，但TON ADNL也用它來實現幾個目的。
 
-To this end, the 256-bit abstract address is simply looked up as a key
-in the DHT. Either a node with this address (i.e., using this address
-as a public semi-persistent DHT address) is found, in which case its
-IP address and port can be learned; or, an input tunnel description
-may be retrieved as the value of the key in question, signed by the
-correct private key, in which case this tunnel description would be
-used to send ADNL datagrams to the intended recipient.
+其中最重要的是從其256位抽象地址開始定位節點或其聯繫數據。這是必要的，因為TON ADNL應該能夠向任意256位抽象地址發送數據包，即使沒有提供任何其他信息。
 
-Notice that in order to make an abstract address ``public'' (reachable
-from any nodes in the network), its owner must either use it as a
-semi-permanent DHT address, or publish (in the DHT key equal to the
-abstract address under consideration) an input tunnel description with
-another of its public abstract addresses (e.g., the semi-permanent
-address) as the tunnel's entry point. Another option would be to
-simply publish its IP address and UDP port.
+為此，只需將256位抽象地址作為DHT中的鍵查找。找到使用該地址的節點（即，使用此地址作為公共半永久DHT地址），在這種情況下，可以獲知其IP地址和端口;或者，可以獲取一個由正確的私鑰簽名的問題鍵值的輸入隧道描述，在這種情況下，將使用此隧道描述將ADNL數據包發送到預期的接收者。
 
-\mysubsection{Overlay Networks and Multicasting
+請注意，為了使抽象地址“公開”（可以從網絡中的任何節點到達），其所有者必須使用它作為半永久DHT地址，或在考慮的抽象地址下的DHT鍵中發佈一個輸入隧道描述，使用其另一個公共抽象地址（例如，半永久地址）作為隧道的入口點。另一個選擇是簡單地發佈其IP地址和UDP端口。
+
+
+\mysubsection{Overlay Networks 和 Multicasting
   Messages}\label{sect:overlay}
 
-In a multi-blockchain system like the TON Blockchain, even full nodes
-would normally be interested in obtaining updates (i.e., new blocks)
-only about some shardchains. To this end, a special overlay
-(sub)network must be built inside the TON Network, on top of the ADNL
-protocol discussed in~\ptref{sect:ANL}, one for each shardchain.
+在像TON區塊鏈這樣的多區塊鏈系統中，即使是全節點
+也通常只對獲取某些shardchains的更新（即新的區塊）感興趣。為此，必須在TON Network內部構建一個特殊的overlay（子）網絡，基於在~\ptref{sect:ANL}中討論的ADNL協議，每個shardchain一個。
 
-Therefore, the need to build arbitrary overlay subnetworks, open to
-any nodes willing to participate, arises. Special gossip protocols,
-built upon ADNL, will be run in these overlay networks. In particular,
-these gossip protocols may be used to propagate (broadcast) arbitrary
-data inside such a subnetwork.
+因此，需要建立任意的overlay子網絡，對希望參與的任何節點開放。這些overlay網絡中將運行基於ADNL的特殊gossip協議。特別是，這些gossip協議可用於在這樣的子網絡內部傳播（廣播）任意數據。
 
-\nxsubpoint \embt(Overlay networks.)  An {\em overlay (sub)network\/}
-is simply a (virtual) network implemented inside some larger
-network. Usually only some nodes of the larger network participate in
-the overlay subnetwork, and only some ``links'' between these nodes,
-physical or virtual, are part of the overlay subnetwork.
+\nxsubpoint \embt(Overlay networks.) 一個{\em overlay (sub)network\/}只是在某個更大的網絡內部實現的（虛擬）網絡。通常只有較大網絡的一些節點參與overlay子網絡，並且只有這些節點之間的一些物理或虛擬“鏈接”是overlay子網絡的一部分。
 
-In this way, if the encompassing network is represented as a graph
-(perhaps a full graph in the case of a datagram network such as ADNL,
-where any node can easily communicate to any other), the overlay
-subnetwork is a {\em subgraph\/} of this graph.
+這樣，如果將包含網絡表示為圖（在像ADNL這樣的數據包網絡的情況下可能是一個完整的圖，其中任何節點都可以輕鬆地與其他節點通信），則overlay子網絡是此圖的{\em subgraph\/}。
 
-In most cases, the overlay network is implemented using some protocol
-built upon the network protocol of the larger network. It may use the
-same addresses as the larger network, or use custom addresses.
+在大多數情況下，使用構建於較大網絡的網絡協議之上的某些協議實現overlay網絡。它可以使用與較大網絡相同的地址，或使用自定義地址。
 
-\nxsubpoint\label{sp:ton.overlays} \embt(Overlay networks in TON.)
-Overlay networks in TON are built upon the ADNL protocol discussed
-in~\ptref{sect:ANL}; they use 256-bit ADNL abstract addresses as
-addresses in the overlay networks as well. Each node usually selects
-one of its abstract addresses to double as its address in the overlay
-network.
+\nxsubpoint\label{sp:ton.overlays} \embt(Overlay networks in TON.) TON中的overlay網絡基於在~\ptref{sect:ANL}中討論的ADNL協議構建;它們也使用256位ADNL抽象地址作為overlay網絡中的地址。每個節點通常選擇其抽象地址中的一個，也作為其在overlay網絡中的地址。
 
-In contrast to ADNL, the TON overlay networks usually do not support
-sending datagrams to arbitrary other nodes. Instead, some
-``semipermanent links'' are established between some nodes (called
-``neighbors'' with respect to the overlay network under
-consideration), and messages are usually forwarded along these links
-(i.e., from a node to one of its neighbors). In this way, a TON
-overlay network is a (usually not full) subgraph inside the (full)
-graph of the ADNL network.
+與ADNL相反，TON overlay網絡通常不支持向任意其他節點發送數據包。相反，一些“半永久鏈接”在某些節點之間建立（被稱為考慮的overlay網絡的“鄰居”），並且消息通常沿這些鏈接轉發（即，從一個節點到其鄰居之一）。通過這種方式，TON overlay網絡是ADNL網絡的（通常不完整的）子圖內。
 
-Links to neighbors in TON overlay networks can be implemented using
-dedicated peer-to-peer ADNL channels (cf.~\ptref{sp:net.channels}).
+TON overlay網絡中的鄰居鏈接可以使用專用的點對點ADNL通道來實現（參考~\ptref{sp:net.channels}）。
 
-Each node of an overlay network maintains a list of neighbors (with
-respect to the overlay network), containing their abstract addresses
-(which they use to identify them in the overlay network) and some link
-data (e.g., the ADNL channel used to communicate with them).
+overlay網絡的每個節點都維護一個鄰居列表（關於overlay網絡），包含它們的抽象地址（它們用於在overlay網絡中識別它們）和一些鏈接數據（例如，用於與它們通信的ADNL通道）。
 
-\nxsubpoint \embt(Private and public overlay networks.)  Some overlay
-networks are {\em public}, meaning that any node can join them at
-will. Other are {\em private}, meaning that only certain nodes can be
-admitted (e.g., those that can prove their identities as validators.)
-Some private overlay networks can even be unknown to the ``general
-public''. The information about such overlay networks is made
-available only to certain trusted nodes; for example, it can be
-encrypted with a public key, and only nodes having a copy of the
-corresponding private key will be able to decrypt this information.
 
-\nxsubpoint \embt(Centrally controlled overlay networks.)  Some
-overlay networks are {\em centrally controlled}, by one or several
-nodes, or by the owner of some widely-known public key. Others are
-{\em decentralized}, meaning that there are no specific nodes
-responsible for them.
+\nxsubpoint \embt(Private and public overlay networks.) 有些overlay網絡是{\em public}，意味著任何節點都可以隨意加入。另一些是{\em private}，意味著只有某些節點可以被允許（例如，那些可以證明他們作為驗證者的身份的節點。）一些private overlay網絡甚至可能對“一般公眾”未知。這些overlay網絡的資訊只提供給某些受信任的節點；例如，它可以使用公鑰加密，並且只有擁有相應私鑰副本的節點才能解密此資訊。
 
-\nxsubpoint \embt(Joining an overlay network.)  When a node wants to
-join an overlay network, it first must learn its 256-bit {\em network
-  identifier}, usually equal to $\Sha$ of the {\em description\/} of
-the overlay network---a TL-serialized object (cf.~\ptref{sp:TL}) which
-may contain, for instance, the central authority of the overlay
-network (i.e., its public key and perhaps its abstract
-address,\footnote{Alternatively, the abstract address might be stored
-  in the DHT as explained in~\ptref{sp:loc.serv}.}) a string with the
-name of the overlay network, a TON Blockchain shard identifier if this
-is an overlay network related to that shard, and so on.
+\nxsubpoint \embt(Centrally controlled overlay networks.) 有些overlay網絡是{\em centrally controlled}，由一個或幾個節點或某個眾所周知的公鑰的所有者控制。其他則是{\em decentralized}，意味著沒有特定節點負責它們。
 
-Sometimes it is possible to recover the overlay network description
-starting from the network identifier, simply by looking it up in the
-TON DHT. In other cases (e.g., for private overlay networks), one must
-obtain the network description along with the network identifier.
+\nxsubpoint \embt(Joining an overlay network.) 當一個節點想要加入一個overlay網絡時，它首先必須學習其256位的{\em network identifier}，通常等於overlay網絡的{\em description\/}的$\Sha$—一個TL-serialized物件（參考~\ptref{sp:TL}），這可能包含overlay網絡的中央權威（即，其公鑰和可能的抽象地址\footnote{或者，抽象地址可能存儲在DHT中，如~\ptref{sp:loc.serv}所解釋的。}）一個與overlay網絡的名稱相對應的字符串，如果這是與該shard相關的overlay網絡，TON Blockchain shard的標識符，等等。
+
+有時從網絡標識符開始可以恢復overlay網絡描述，只需在TON DHT中查找它即可。在其他情況下（例如，對於private overlay網絡），必須與網絡標識符一起獲得網絡描述。
 
 \nxsubpoint\label{sp:loc.1.mem} \embt(Locating one member of the
-overlay network.)  After a node learns the network identifier and the
-network description of the overlay network it wants to join, it must
-locate at least one node belonging to that network.
+overlay network.) 在一個節點學到它想要加入的overlay網絡的網絡標識符和網絡描述之後，它必須定位屬於該網絡的至少一個節點。
 
-This is also needed for nodes that do not want to join the overlay
-network, but want just to communicate with it; for example, there
-might be an overlay network dedicated to collecting and propagating
-transaction candidates for a specific shardchain, and a client might
-want to connect to any node of this network to suggest a transaction.
+這也適用於不想加入overlay網絡，但只是想與其通信的節點；例如，可能有一個專用於為特定shardchain收集和傳播交易候選者的overlay網絡，客戶端可能想連接到此網絡的任何節點以建議交易。
 
-The method used for locating members of an overlay network is defined
-in the description of that network. Sometimes (especially for private
-networks) one must already know a member node to be able to join. In
-other cases, the abstract addresses of some nodes are contained in the
-network description. A more flexible approach is to indicate in the
-network description only the central authority responsible for the
-network, and then the abstract addresses will be available through
-values of certain DHT keys, signed by that central authority.
+用於定位overlay網絡成員的方法在該網絡的描述中定義。有時（尤其是對於private網絡），必須已經知道一個成員節點才能加入。在其他情況下，某些節點的抽象地址包含在網絡描述中。一種更靈活的方法是在網絡描述中只指示負責網絡的中央權威，然後抽象地址將通過某些DHT鍵的值提供，由該中央權威簽名。
 
-Finally, truly decentralized public overlay networks can use the
-``distributed torrent-tracker'' mechanism described
-in~\ptref{sp:distr.torr.tr}, also implemented with the aid of the TON
-DHT.
+最後，真正的decentralized public overlay網絡可以使用描述在~\ptref{sp:distr.torr.tr}中的“分佈式torrent-tracker”機制，也使用TON DHT的幫助來實現。
 
-\nxsubpoint\label{sp:loc.many.mem} \embt(Locating more members of the
-overlay network. Creating links.)  Once one node of the overlay
-network is found, a special query may be sent to that node requesting
-a list of other members, for instance, neighbors of the node being
-queried, or a random selection thereof.
 
-This enables the joining member to populate her ``adjacency'' or
-``neighbor list'' with respect to the overlay network, by selecting
-some newly-learned network nodes and establishing links to them (i.e.,
-dedicated ADNL point-to-point channels, as outlined
-in~\ptref{sp:ton.overlays}). After that, special messages are sent to
-all neighbors indicating that the new member is ready to work in the
-overlay network. The neighbors include their links to the new member
-in their neighbor lists.
+\nxsubpoint\label{sp:loc.many.mem} \embt(Locating more members of the overlay network. Creating links.) 一旦找到overlay network的一個節點，可以向該節點發送一個特殊的查詢，要求提供其他成員的列表，例如，被查詢節點的鄰居或其隨機選擇。
 
-\nxsubpoint\label{sp:rand.mem} \embt(Maintaining the neighbor list.)
-An overlay network node must update its neighbor list from time to
-time. Some neighbors, or at least links (channels) to them, may stop
-responding; in this case, these links must be marked as ``suspended'',
-some attempts to reconnect to such neighbors must be made, and, if
-these attempts fail, the links must be destroyed.
+這使得加入的成員能夠根據overlay network填充其“相鄰性”或“鄰居列表”，通過選擇一些新學到的網絡節點並與它們建立連接（即，專用的ADNL點對點通道，如~\ptref{sp:ton.overlays}中所述）。之後，向所有鄰居發送特殊消息，表示新成員已準備好在overlay network中工作。鄰居在其鄰居列表中包含到新成員的連接。
 
-On the other hand, every node sometimes requests from a randomly
-chosen neighbor its list of neighbors (or some random selection
-thereof), and uses it to partially update its own neighbor list, by
-adding some newly-discovered nodes to it, and removing some of the old
-ones, either randomly or depending on their response times and
-datagram loss statistics.
+\nxsubpoint\label{sp:rand.mem} \embt(Maintaining the neighbor list.) Overlay network節點必須不時更新其鄰居列表。一些鄰居，或至少是到它們的連接（通道），可能停止響應；在這種情況下，這些連接必須被標記為“暫停”，必須嘗試重新連接到這些鄰居，如果這些嘗試失敗，則必須銷毀這些連接。
 
-\nxsubpoint \embt(The overlay network is a random subgraph.)  In this
-way, the overlay network becomes a random subgraph inside the ADNL
-network. If the degree of each vertex is at least three (i.e., if each
-node is connected to at least three neighbors), this random graph is
-known to be {\em connected\/} with a probability almost equal to
-one. More precisely, the probability of a random graph with $n$
-vertices being {\em dis\/}connected is exponentially small, and this
-probability can be completely neglected if, say, $n\geq20$. (Of
-course, this does not apply in the case of a global network partition,
-when nodes on different sides of the partition have no chance to learn
-about each other.) On the other hand, if $n$ is smaller than 20, it
-would suffice to require each vertex to have, say, at least ten
-neighbors.
+另一方面，每個節點有時從隨機選擇的鄰居處請求其鄰居列表（或其隨機選擇），並使用它部分地更新自己的鄰居列表，通過向其添加一些新發現的節點，並移除一些舊的節點，無論是隨機的還是依賴於其響應時間和數據包丟失統計數據。
 
-\nxsubpoint\label{sp:ov.opt.low.lat} \embt(TON overlay networks are
-optimized for lower latency.)  TON overlay networks optimize the
-``random'' network graph generated by the previous method as
-follows. Every node tries to retain at least three neighbors with the
-minimal round-trip time, changing this list of ``fast neighbors'' very
-rarely. At the same time, it also has at least three other ``slow
-neighbors'' that are chosen completely randomly, so that the overlay
-network graph would always contain a random subgraph. This is required
-to maintain connectivity and prevent splitting of the overlay network
-into several unconnected regional subnetworks. At least three
-``intermediate neighbors'', which have intermediate round-trip times,
-bounded by a certain constant (actually, a function of the round-trip
-times of the fast and the slow neighbors), are also chosen and
-retained.
+\nxsubpoint \embt(The overlay network is a random subgraph.) 這樣，overlay network在ADNL網絡內部成為一個隨機子圖。如果每個頂點的度至少為三（即，如果每個節點至少連接到三個鄰居），則這個隨機圖以接近一的概率被知道是{\em connected\/}。更確切地說，具有$n$頂點的隨機圖是{\em dis\/}connected的概率是指數級小的，如果例如$n\geq20$，這個概率可以完全忽略。（當然，如果全球網絡分區時，這不適用，當分區的不同側面的節點沒有機會了解彼此時。）另一方面，如果$n$小於20，只需要求每個頂點至少有，比如，至少十個鄰居。
 
-In this way, the graph of an overlay network still maintains enough
-randomness to be connected, but is optimized for lower latency and
-higher throughput.
+\nxsubpoint\label{sp:ov.opt.low.lat} \embt(TON overlay networks are optimized for lower latency.) TON overlay網絡按照以下方法優化前一方法生成的“隨機”網絡圖。每個節點都嘗試保留至少三個最小往返時間的鄰居，並很少更改這個“快速鄰居”列表。同時，它還具有至少其他三個完全隨機選擇的“慢鄰居”，以使overlay network圖始終包含一個隨機子圖。這是為了保持連接性並防止overlay network分裂為幾個未連接的區域子網絡。還選擇並保留至少三個“中間鄰居”，這些鄰居具有由某個常數（實際上，快鄰居和慢鄰居的往返時間的函數）界定的中間往返時間。
 
-\nxsubpoint \embt(Gossip protocols in an overlay network.)  An overlay
-network is often used to run one of the so-called {\em gossip
-  protocols}, which achieve some global goal while letting every node
-interact only with its neighbors. For example, there are gossip
-protocols to construct an approximate list of all members of a (not
-too large) overlay network, or to compute an estimate of the number of
-members of an (arbitrarily large) overlay network, using only a
-bounded amount of memory at each node (cf.~\cite[4.4.3]{DistrSys} or
-\cite{Birman} for details).
+這樣，overlay network的圖形仍然保持足夠的隨機性以保持連接，但是經過優化以實現較低的延遲和更高的吞吐量。
 
-\nxsubpoint \embt(Overlay network as a broadcast domain.)  The most
-important gossip protocol running in an overlay network is the {\em
-  broadcast protocol}, intended to propagate broadcast messages
-generated by any node of the network, or perhaps by one of the
-designated sender nodes, to all other nodes.
+\nxsubpoint \embt(Gossip protocols in an overlay network.) 在overlay network中，經常用來執行所謂的 {\em gossip protocols}，它在讓每個節點只與其鄰居互動的同時達到某個全局目標。例如，有一些gossip protocols用於構建一個(不太大) overlay network的所有成員的大致列表，或者只用每個節點有限的記憶體計算(任意大) overlay network的成員數量的估計 (參考~\cite[4.4.3]{DistrSys} 或 \cite{Birman}了解詳情)。
 
-There are in fact several broadcast protocols, optimized for different
-use cases. The simplest of them receives new broadcast messages and
-relays them to all neighbors that have not yet sent a copy of that
-message themselves.
+\nxsubpoint \embt(Overlay network as a broadcast domain.) 在overlay network中運行的最重要的gossip protocol是 {\em broadcast protocol}，旨在傳播由網絡的任何節點，或者其中一個指定的發送節點生成的廣播消息，給所有其他節點。
 
-\nxsubpoint \embt(More sophisticated broadcast protocols.)  Some
-applications may warrant more sophisticated broadcast protocols. For
-instance, for broadcasting messages of substantial size, it makes
-sense to send to the neighbors not the newly-received message itself,
-but its hash (or a collection of hashes of new messages). The neighbor
-may request the message itself after learning a previously unseen
-message hash, to be transferred, say, using the reliable large
-datagram protocol (RLDP) discussed in~\ptref{sp:RLDP}. In this way,
-the new message will be downloaded from one neighbor only.
+實際上有幾種廣播協議，為不同的使用情境進行了優化。其中最簡單的一種接收新的廣播消息，並將其轉發給尚未自己發送該消息副本的所有鄰居。
 
-\nxsubpoint \embt(Checking the connectivity of an overlay network.)
-The connectivity of an overlay network can be checked if there is a
-known node (e.g., the ``owner'' or the ``creator'' of the overlay
-network) that must be in this overlay network. Then the node in
-question simply broadcasts from time to time short messages containing
-the current time, a sequence number and its signature. Any other node
-can be sure that it is still connected to the overlay network if it
-has received such a broadcast not too long ago. This protocol can be
-extended to the case of several well-known nodes; for example, they
-all will send such broadcasts, and all other nodes will expect to
-receive broadcasts from more than half of the well-known nodes.
+\nxsubpoint \embt(More sophisticated broadcast protocols.) 某些應用程序可能需要更為複雜的廣播協議。例如，對於廣播大尺寸的消息，將新收到的消息的hash（或新消息的hash集合）而不是消息本身發送給鄰居是有意義的。在學習到先前未見過的消息hash後，鄰居可以請求消息本身，例如，使用在~\ptref{sp:RLDP}中討論的可靠的大數據包協議(RLDP)進行傳輸。這樣，新消息只會從一個鄰居下載。
 
-In the case of an overlay network used for propagating new blocks (or
-just new block headers) of a specific shardchain, a good way for a
-node to check connectivity is to keep track of the most recent block
-received so far. Because a block is normally generated every five
-seconds, if no new block is received for more than, say, thirty
-seconds, the node probably has been disconnected from the overlay
-network.
+\nxsubpoint \embt(Checking the connectivity of an overlay network.) 如果overlay network中有一個已知的節點（例如，overlay network的“擁有者”或“創建者”），則可以檢查overlay network的連接性。然後，該節點不時地廣播包含當前時間、序列號和其簽名的短消息。任何其他節點如果在不久之前收到過這樣的廣播，就可以確定它仍然連接到overlay network。此協議可以擴展到多個已知節點的情況；例如，它們都會發送這樣的廣播，所有其他節點都將期望從超過一半的已知節點那裡接收到廣播。
 
-\nxsubpoint\label{sp:streaming.multicast} \embt(Streaming broadcast
-protocol.)  Finally, there is a {\em streaming broadcast protocol\/}
-for TON overlay networks, used, for example, to propagate block
-candidates among validators of some shardchain (``shardchain task
-group''), who, of course, create a private overlay network for that
-purpose. The same protocol can be used to propagate new shardchain
-blocks to all full nodes for that shardchain.
+在用於傳播特定shardchain的新區塊（或僅新區塊頭）的overlay network的情況下，一個節點檢查連接性的好方法是追踪到目前為止收到的最新區塊。因為一個區塊通常每五秒生成一次，如果超過，比如，三十秒都沒有收到新的區塊，那麼節點可能已經從overlay network中斷開了。
 
-This protocol has already been outlined
-in~\ptref{sp:sh.blk.cand.prop}: the new (large) broadcast message is
-split into, say, $N$ one-kilobyte chunks; the sequence of these chunks
-is augmented to $M\geq N$ chunks by means of an erasure code such as
-the Reed--Solomon or a fountain code (e.g., the RaptorQ code
-\cite{RaptorQ} \cite{Raptor}), and these $M$ chunks are streamed to
-all neighbors in ascending chunk number order. The participating nodes
-collect these chunks until they can recover the original large message
-(one would have to successfully receive at least $N$ of the chunks for
-this), and then instruct their neighbors to stop sending new chunks of
-the stream, because now these nodes can generate the subsequent chunks
-on their own, having a copy of the original message. Such nodes
-continue to generate the subsequent chunks of the stream and send them
-to their neighbors, unless the neighbors in turn indicate that this is
-no longer necessary.
+\nxsubpoint\label{sp:streaming.multicast} \embt(Streaming broadcast protocol.) 終於，TON overlay network中有一個{\em streaming broadcast protocol\/}，例如，用於在某些shardchain的驗證者之間傳播區塊候選者（“shardchain task group”），當然，他們為此目的創建了一個私有的overlay network。相同的協議可以用來將新的shardchain區塊傳播給該shardchain的所有完整節點。
 
-In this way, a node does not need to download a large message in its
-entirety before propagating it further. This minimizes broadcast
-latency, especially when combined with the optimizations described
-in~\ptref{sp:ov.opt.low.lat}.
+此協議已在~\ptref{sp:sh.blk.cand.prop}中描述過：新的（大）廣播消息被分成，比如說，$N$個一千字節的片段；這些片段的序列通過像Reed-Solomon或一個噴泉碼（例如，RaptorQ碼\cite{RaptorQ} \cite{Raptor}）這樣的消除碼擴展到$M\geq N$的片段，並且這些$M$片段按升序的chunk number順序流向所有鄰居。參與的節點收集這些片段，直到它們可以恢復原始的大消息（為此，必須成功接收至少$N$的片段），然後指示其鄰居停止發送流的新片段，因為現在這些節點可以擁有原始消息的副本自己生成後續的片段。這些節點繼續生成流的後續片段並將它們發送給它們的鄰居，除非鄰居反過來指示不再需要這樣做。
 
-\nxsubpoint \embt(Constructing new overlay networks based on existing
-ones.)  Sometimes one does not want to construct an overlay network
-from scratch. Instead, one or several previously existing overlay
-networks are known, and the membership of the new overlay network is
-expected to overlap significantly with the combined membership of
-these overlay networks.
+這樣，節點在進一步傳播它之前不需要完整地下載一個大消息。這最大限度地減少了廣播延遲，尤其是當與~\ptref{sp:ov.opt.low.lat}中描述的優化相結合時。
 
-An important example arises when a TON shardchain is split in two, or
-two sibling shardchains are merged into one
-(cf.~\ptref{sect:split.merge}). In the first case, the overlay
-networks used for propagating new blocks to full nodes must be
-constructed for each of the new shardchains; however, each of these
-new overlay networks can be expected to be contained in the block
-propagation network of the original shardchain (and comprise
-approximately half its members). In the second case, the overlay
-network for propagating new blocks of the merged shardchain will
-consist approximately of the union of members of the two overlay
-networks related to the two sibling shardchains being merged.
+\nxsubpoint \embt(Constructing new overlay networks based on existing ones.) 有時，人們不想從頭開始構建一個overlay network。相反，一個或幾個先前存在的overlay network是已知的，並且新的overlay network的成員資格預計會與這些overlay network的組合成員資格重疊。
 
-In such cases, the description of the new overlay network may contain
-an explicit or implicit reference to a list of related existing
-overlay networks. A node wishing to join the new overlay network may
-check whether it is already a member of one of these existing
-networks, and query its neighbors in these networks whether they are
-interested in the new network as well. In case of a positive answer,
-new point-to-point channels can be established to such neighbors, and
-they can be included in the neighbor list for the new overlay network.
+一個重要的例子出現在TON shardchain被分成兩個，或兩個同級的shardchains合併為一（參見~\ptref{sect:split.merge}）。在第一種情況下，必須為每一個新的shardchain構建用於向完整節點傳播新區塊的overlay networks；但是，可以預期這些新的overlay network中的每一個都包含在原始shardchain的區塊傳播網絡中（並包含大約一半的成員）。在第二種情況下，合併shardchain的新區塊的傳播的overlay network將大致由與正在合併的兩個同級shardchains相關的兩個overlay network的成員組成。
 
-This mechanism does not totally supplant the general mechanism
-described in~\ptref{sp:loc.1.mem} and \ptref{sp:loc.many.mem}; rather,
-both are run in parallel and are used to populate the neighbor
-list. This is needed to prevent inadvertent splitting of the new
-overlay network into several unconnected subnetworks.
+在這些情況下，新的overlay network的描述可能包含對與一系列相關的現有overlay network的明確或隱含的參考。希望加入新的overlay network的節點可以檢查它是否已經是這些現有網絡中的一個的成員，並詢問這些網絡中的鄰居是否也對新網絡感興趣。在得到肯定答案的情況下，可以建立到這些鄰居的新的點對點通道，並且它們可以被包括在新的overlay network的鄰居列表中。
 
-\nxsubpoint\label{sp:net.within.net} \embt(Overlay networks within
-overlay networks.)  Another interesting case arises in the
-implementation of {\em TON Payments} (a ``lightning network'' for
-instant off-chain value transfers; cf.~\ptref{sect:lightning}). In
-this case, first an overlay network containing all transit nodes of
-the ``lightning network'' is constructed. However, some of these nodes
-have established payment channels in the blockchain; they must always
-be neighbors in this overlay network, in addition to any ``random''
-neighbors selected by the general overlay network algorithms described
-in~\ptref{sp:loc.1.mem}, \ptref{sp:loc.many.mem}
-and~\ptref{sp:rand.mem}. These ``permanent links'' to the neighbors
-with established payment channels are used to run specific lightning
-network protocols, thus effectively creating an overlay subnetwork
-(not necessarily connected, if things go awry) inside the encompassing
-(almost always connected) overlay network.
+這種機制並不完全取代在~\ptref{sp:loc.1.mem}和\ptref{sp:loc.many.mem}中描述的一般機制；相反，兩者都是並行運行的，並且用於填充鄰居列表。這是為了防止新的overlay network意外地分裂成幾個未連接的子網絡。
+
+\nxsubpoint\label{sp:net.within.net} \embt(Overlay networks within overlay networks.) 另一個有趣的案例出現在{\em TON Payments}的實現中（用於即時off-chain價值轉移的``lightning network''；參見~\ptref{sect:lightning}）。在這種情況下，首先構建包含所有``lightning network''的轉發節點的overlay network。但是，這些節點中的一些在區塊鏈中建立了支付通道；除了通過在~\ptref{sp:loc.1.mem}、\ptref{sp:loc.many.mem} 和~\ptref{sp:rand.mem}中描述的一般overlay network算法選擇的任何``隨機''鄰居外，它們在此overlay network中必須始終是鄰居。這些與建立支付通道的鄰居的``永久鏈接''用於運行特定的lightning network協議，從而在包含的（幾乎始終連接的）overlay network內部有效地創建了一個overlay子網絡（如果事情出錯，則不一定連接）。
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
