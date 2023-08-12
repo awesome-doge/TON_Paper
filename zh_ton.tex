@@ -13,7 +13,7 @@
 \usepackage[all]{xy}
 %\usepackage{chngcntr}
 %\CompileMatrices
-\usepackage[bookmarks=false,pdfauthor={Nikolai Durov},pdftitle={Telegram Open Network}]{hyperref}
+\usepackage[bookmarks=false,pdfauthor={Nikolai Durov},pdftitle={The Open Network}]{hyperref}
 \usepackage{fancyhdr}
 \usepackage{caption}
 %
@@ -90,7 +90,7 @@
 %
 \hfuzz=0.8pt
 
-\title{Telegram Open Network}
+\title{The Open Network}
 \author{Nikolai Durov\\
 TL: Dr Awesome Doge}% a.k.a. K.O.T.
 \begin{document}
@@ -99,13 +99,13 @@ TL: Dr Awesome Doge}% a.k.a. K.O.T.
 \maketitle
 
 \begin{abstract}
-  本論文旨在首次詳述Telegram Open Network (TON) 以及相關的區塊鏈、P2P (點對點)、分散式儲存及服務託管技術。為了確保本文件的篇幅在合理的範疇內，我們主要針對TON平台中具有獨特性和關鍵定義的功能進行探討，這些功能對於實現其明確設定的目標具有核心重要性。
+  本論文旨在首次詳述The Open Network (TON) 以及相關的區塊鏈、P2P (點對點)、分散式儲存及服務託管技術。為了確保本文件的篇幅在合理的範疇內，我們主要針對TON平台中具有獨特性和關鍵定義的功能進行探討，這些功能對於實現其明確設定的目標具有核心重要性。
 \end{abstract}
 
 \section*{緒論}
 \markbothsame{緒論}
 
-{\em Telegram Open Network (TON)} 是一個快速、安全且可擴展的區塊鏈和網路專案，如有必要，它能夠處理每秒數百萬筆交易，對使用者和服務提供者都非常友好。我們希望它能夠承載所有目前提議和構想的合理應用程式。人們可以將TON視為一個巨大的分散式超級電腦，或者更恰當地說，一個巨大的``超級伺服器''，旨在托管和提供各種服務。
+{\em The Open Network (TON)} 是一個快速、安全且可擴展的區塊鏈和網路專案，如有必要，它能夠處理每秒數百萬筆交易，對使用者和服務提供者都非常友好。我們希望它能夠承載所有目前提議和構想的合理應用程式。人們可以將TON視為一個巨大的分散式超級電腦，或者更恰當地說，一個巨大的``超級伺服器''，旨在托管和提供各種服務。
 
 本文並非關於所有實作細節的終極參考。在開發和測試階段，部分具體內容有可能發生變更。
 
@@ -115,7 +115,7 @@ TL: Dr Awesome Doge}% a.k.a. K.O.T.
 \clearpage
 \mysection{TON組件的簡要描述}\label{sect:ton.components}
 
-{\em Telegram Open Network (TON)} 結合了以下組件：
+{\em The Open Network (TON)} 結合了以下組件：
 \begin{itemize}
 \item 一個靈活的多區塊鏈平台 ({\em TON Blockchain}; 參考第~\ptref{sect:blockchain}章)，能夠處理每秒數百萬筆交易，擁有圖靈完全智能合約、可升級的正式區塊鏈規格、多加密貨幣價值轉移、支持微支付通道和鏈下支付網路。{\em TON Blockchain\/} 提供了一些新的和獨特的功能，例如「自我修復」垂直區塊鏈機制 (參考~\ptref{sp:inv.sh.blk.corr}) 和 Instant Hypercube Routing (參考~\ptref{sp:instant.hypercube})，使其同時快速、可靠、可擴展和自我一致。
 \item 一個點對點網路 ({\em TON P2P Network}, 或簡稱 {\em TON Network}; 參考第~\ptref{sect:network}章)，用於訪問TON區塊鏈、發送交易候選者，以及只接收客戶端感興趣的區塊鏈的部分更新（例如，與客戶端的賬戶和智能合約相關的部分），但也能支持任意分散服務，無論是否與區塊鏈相關。
@@ -133,7 +133,7 @@ TL: Dr Awesome Doge}% a.k.a. K.O.T.
 \clearpage
 \mysection{TON Blockchain}\label{sect:blockchain}
 
-我們從描述 Telegram Open Network (TON) Blockchain 開始，這是該專案的核心組件。我們這裡的方法是「由上而下」：我們首先給出整體的一般描述，然後提供每個組件的更多細節。
+我們從描述 The Open Network (TON) Blockchain 開始，這是該專案的核心組件。我們這裡的方法是「由上而下」：我們首先給出整體的一般描述，然後提供每個組件的更多細節。
 
 為了簡單起見，我們在此談論 {\em the/} TON Blockchain，即使原則上這種區塊鏈協議可能有多個獨立運行的實例（例如，由於硬分叉的結果）。我們只考慮其中之一。
 
@@ -1187,7 +1187,7 @@ PolkaDot是一個異構的鬆散連接的多鏈權益證明專案，具有用於
 還有一些專門的區塊鏈專案，如FileCoin（一個激勵用戶為存儲願意支付費用的其他用戶的文件提供硬碟空間的系統），Golem（一個基於區塊鏈的平台，用於租用和出借計算能力給專門的應用，如3D-rendering）或SONM（另一個類似的計算能力出借專案）。這類專案在區塊鏈組織的層面上沒有引入任何概念上的新事物；相反，它們是特定的區塊鏈應用，可以由運行在通用目的區塊鏈中的智能合約實現，只要它可以提供所需的性能。因此，這類專案可能會使用現有或計劃中的區塊鏈專案作為其基礎，如EOS、PolkaDot或TON。如果一個專案需要``真正的''可伸縮性（基於sharding），那麼它最好使用TON；如果它滿足於在一個``聯邦''背景下工作，通過為其目的明確定義一系列的workchains，它可能會選擇EOS或PolkaDot。
 
 \nxsubpoint \embt(The TON Blockchain.)  
-TON（Telegram Open Network）Block\-chain（計劃於2018年）是我們在本文檔中描述的專案。它旨在成為第一個第五代區塊鏈專案——即BFT PoS多鏈專案，混合同質/異質性，支援（可shardable）的自定義workchains，具有原生的sharding支援，並且緊密耦合（特別是，能夠在保持所有shardchains的一致狀態時，幾乎立即轉發shards之間的消息）。因此，它將是一個真正可伸縮的通用區塊鏈專案，能夠容納基本上可以在區塊鏈中實現的任何應用程序。當由TON Project的其他組件增強時（參見~\ptref{sect:ton.components}），其可能性甚至更大。
+TON（The Open Network）Block\-chain（計劃於2018年）是我們在本文檔中描述的專案。它旨在成為第一個第五代區塊鏈專案——即BFT PoS多鏈專案，混合同質/異質性，支援（可shardable）的自定義workchains，具有原生的sharding支援，並且緊密耦合（特別是，能夠在保持所有shardchains的一致狀態時，幾乎立即轉發shards之間的消息）。因此，它將是一個真正可伸縮的通用區塊鏈專案，能夠容納基本上可以在區塊鏈中實現的任何應用程序。當由TON Project的其他組件增強時（參見~\ptref{sect:ton.components}），其可能性甚至更大。
 
 \nxsubpoint\label{sp:blockchain.facebook} \embtx(Is it possible to
 ``upload Facebook into a blockchain''?)  
