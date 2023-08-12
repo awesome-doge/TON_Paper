@@ -243,7 +243,7 @@ Masterchain狀態隱含地定義了一個映射，將每個“垂直”區塊鏈
 以下我們列出了其一些特性。它們在~\ptref{sp:pec.tvm}、\ptref{sp:tvm.cells}和其他地方進一步討論。
 
 \begin{itemize}
-\item TVM 將所有資料表示為一系列的{\em (TVM) cells/} (參考~\ptref{sp:tvm.cells})。每一個 cell 包含最多 128 個資料位元組，以及最多 4 個指向其他 cells 的參考。基於“一切皆為 cell 包”的理念 (參考~\ptref{sp:everything.is.BoC})，這使得 TVM 能夠處理與 TON 區塊鏈相關的所有資料，包括必要時的區塊和區塊鏈全局狀態。
+\item TVM 將所有資料表示為一系列的{\em (TVM) cells/} (參考~\ptref{sp:tvm.cells})。每一個 cell 包含最多 128 個資料位元組，以及最多 4 個指向其他 cells 的參考。基於“一切皆為 cell 包”的理念 (參考~\ptref{sp:everything.is.BoC})，這使得 TVM 能夠處理與 TON 區塊鏈相關的所有資料，包括必要時的區塊和區塊鏈全域狀態。
 \item TVM 可以處理任意代數資料型態的值 (參考~\ptref{sp:pec.tvm})，表示為 TVM cells 的樹或有向非循環圖。但它對代數資料型態的存在是不知情的；它只是處理 cells。
 \item TVM 內建支援 hashmaps (參考~\ptref{sp:patricia})。
 \item TVM 是一個堆疊機器。它的堆疊保存 64 位元整數或 cell 參考。
@@ -256,7 +256,7 @@ Masterchain狀態隱含地定義了一個映射，將每個“垂直”區塊鏈
 \item 對於在某些橢圓曲線上的 Weil 配對的支援也存在，這對於快速實現 zk-SNARKs 很有用。
 \item 支援包括 $\Sha$ 在內的流行雜湊函數。
 \item TVM 可以處理 Merkle 證明 (參考~\ptref{sp:ton.smart.pc.supp})。
-\item TVM 提供對“大型”或“全局”智能合約的支援。這類智能合約必須知道分片 (參考~\ptref{sp:loc.glob.smct} 和 \ptref{sp:tvm.data.shard})。常規（本地）智能合約可以是不知道分片的。
+\item TVM 提供對“大型”或“全域”智能合約的支援。這類智能合約必須知道分片 (參考~\ptref{sp:loc.glob.smct} 和 \ptref{sp:tvm.data.shard})。常規（本地）智能合約可以是不知道分片的。
 \item TVM 支援閉包。
 \item 一個“無脊標籤 $G$-機器” \cite{STGM} 可以容易地在 TVM 內部實現。
 \end{itemize}
@@ -273,7 +273,7 @@ TON Block\-chain 的一個重要特性是它有許多{\em 可配置的}參數。
 \mysubsection{關於區塊鏈的概論}
 
 \nxsubpoint\label{sp:gen.blkch.def} \embt(General blockchain definition.) 
-一般來說，任何{\em (真實的) 區塊鏈\/}都是一系列的{\em 區塊}，每個區塊 \(B\) 都包含一個參考至前一個區塊的 $\blkprev(B)$ （通常是將前一個區塊的雜湊包含在當前區塊的標頭中），以及一個{\em 交易}的列表。每筆交易都描述了{\em 全球區塊鏈狀態}的某種轉換; 一個區塊中列出的交易是按順序應用的，從舊狀態開始計算新狀態，這是在評估前一個區塊後的結果狀態。
+一般來說，任何{\em (真實的) 區塊鏈\/}都是一系列的{\em 區塊}，每個區塊 \(B\) 都包含一個參考至前一個區塊的 $\blkprev(B)$ （通常是將前一個區塊的雜湊包含在當前區塊的標頭中），以及一個{\em 交易}的列表。每筆交易都描述了{\em 全域區塊鏈狀態}的某種轉換; 一個區塊中列出的交易是按順序應用的，從舊狀態開始計算新狀態，這是在評估前一個區塊後的結果狀態。
 
 \nxsubpoint \embt(Relevance for the TON Blockchain.) 
 請注意，{\em TON Block\-chain\/} 並不是真正的區塊鏈，而是 2-區塊鏈的集合（即，區塊鏈的區塊鏈集合; 參考~\ptref{sp:list.blkch.typ}），所以上述內容並不直接適用於它。然而，我們從真正的區塊鏈的這些一般性開始，用它們作為我們更複雜建構的基礎。
@@ -362,7 +362,7 @@ Blockchain.) 我們目前為TON Blockchain使用256-bit的$\Sha$雜湊。如果�
 
 \mysubsection{區塊鏈狀態、帳戶和雜湊映射}
 
-如上所述，任何區塊鏈都定義了某種全局狀態，且每個區塊和每個交易都定義了這個全局狀態的轉換。在此我們描述由TON區塊鏈使用的全局狀態。
+如上所述，任何區塊鏈都定義了某種全域狀態，且每個區塊和每個交易都定義了這個全域狀態的轉換。在此我們描述由TON區塊鏈使用的全域狀態。
 
 \nxsubpoint \embt(Account IDs.) TON區塊鏈使用的基本帳戶ID──或者至少由其主鏈和工作鏈零所使用──是256-bit整數，假設是針對特定橢圓曲線的256-bit橢圓曲線密碼學(ECC)的公鑰。這樣，
 \begin{equation}
@@ -454,13 +454,13 @@ Blockchain.) 我們目前為TON Blockchain使用256-bit的$\Sha$雜湊。如果�
 
 \nxsubpoint \embt(Recomputing Merkle tree hashes.) 這種遞迴定義 $\Hash(h)$ 的方法，稱為 {\em Merkle tree hash}，具有以下優點：如果與每個節點 $h'$ 一起明確儲存 $\Hash(h')$（結果在結構上被稱為 {\em Merkle tree}，或在我們的情況下，稱為 {\em Merkle--Patricia tree}），則當元素被添加到雜湊映射、從雜湊映射中刪除或在雜湊映射中更改時，最多只需要重新計算 $n$ 個雜湊。
 
-因此，如果將全局區塊鏈狀態表示為適當的 Merkle 樹雜湊，則在每次交易後，重新計算此狀態雜湊就變得很容易。
+因此，如果將全域區塊鏈狀態表示為適當的 Merkle 樹雜湊，則在每次交易後，重新計算此狀態雜湊就變得很容易。
 
 \nxsubpoint\label{sp:merkle.proof} \embt(Merkle proofs.) 根據所選雜湊函數 $\Hash$ 的「單射性」假設 \eqref{eq:hash.coll}，可以構造一個證明，對於 geven 值 $z$ 的 $\Hash(h)$, $h:\Hashmap(n,X)$, 存在某些 $i:\st2^n$ 和 $x:X$ 使得 $\hget(h)(i)=x$。這樣的證明將包括從對應於 $i$ 的葉子到根的 Merkle--Patricia 樹中的路徑，由此路徑上出現的所有節點的所有兄弟的雜湊增強。
 
 這樣，一個輕量節點%
 \footnote{「輕量節點」不跟踪 shardchain 的完整狀態；相反，它保留最小的資訊，例如幾個最近的區塊的雜湊，並在需要檢查完整狀態的某些部分時依賴於從完整節點獲得的資訊。} %
-只知道某些 hashmap $h$ 的 $\Hash(h)$ 值（例如，智能合約的持久儲存或全局區塊鏈狀態）可能會從完整節點%
+只知道某些 hashmap $h$ 的 $\Hash(h)$ 值（例如，智能合約的持久儲存或全域區塊鏈狀態）可能會從完整節點%
 \footnote{「完整節點」是跟踪有關 shardchain 的完整最新狀態的節點。} %
 請求不僅僅是值 $x=h[i]=\hget(h)(i)$，而是伴隨著從已知值 $\Hash(h)$ 開始的 Merkle 證明的這樣一個值。然後，在假設 \eqref{eq:hash.coll} 下，輕量節點可以自己檢查 $x$ 確實是 $h[i]$ 的正確值。
 
@@ -482,7 +482,7 @@ Merkle 樹雜湊被擴展到任意這樣的結構：要計算這樣一個結構�
 通過這種方式，對 hashmaps 的 Merkle 樹雜湊，如~\ptref{sp:merkle.patr.hash}所述，只是用於類型 $\Hashmap(n,X)$ 的兩個構造器的任意（依賴的）代數數據類型的雜湊的特殊情況。\footnote{實際上，$\leaf$ 和 $\node$ 是輔助類型 $\tp{HashmapAux}(n,X)$ 的構造器。類型 $\Hashmap(n,X)$ 有構造器 $\root$ 和 $\emptyroot$，其中 $\root$ 包含類型 $\tp{HashmapAux}(n,X)$ 的值。}
 
 \nxsubpoint \embt(Persistent storage of TON smart contracts.)
-TON 智能合約的持久性儲存主要由其「全域變數」組成，這些變數在調用智能合約之間保持不變。因此，它只是一個「產品」、「元組」或「記錄」類型，由相應於每一個全域變數的正確類型的字段組成。如果全域變數太多，由於 TON 單元大小的全局限制，它們不能放入一個 TON 單元。在這種情況下，它們被分割成幾個記錄並組織成一棵樹，基本上變成了「產品的產品」或「產品的產品的產品」類型，而不僅僅是一個產品類型。
+TON 智能合約的持久性儲存主要由其「全域變數」組成，這些變數在調用智能合約之間保持不變。因此，它只是一個「產品」、「元組」或「記錄」類型，由相應於每一個全域變數的正確類型的字段組成。如果全域變數太多，由於 TON 單元大小的全域限制，它們不能放入一個 TON 單元。在這種情況下，它們被分割成幾個記錄並組織成一棵樹，基本上變成了「產品的產品」或「產品的產品的產品」類型，而不僅僅是一個產品類型。
 
 \nxsubpoint\label{sp:tvm.cells} \embt(TVM Cells.)  最終，TON VM 在一系列的{\em (TVM) 單元}中保留所有數據。每個單元首先包含兩個描述符字節，表示此單元中有多少原始數據字節（最多 128）以及有多少對其他單元的引用（最多四個）。然後是這些原始數據字節和引用。每個單元只被引用一次，所以我們可能已經在每個單元中包括了對其「父級」的引用（唯一引用此單元的單元）。但是，這個引用不必是明確的。
 
@@ -492,7 +492,7 @@ TON 智能合約的持久性儲存主要由其「全域變數」組成，這些�
 for values of arbitrary algebraic types.)  由於 TON VM 通過由 (TVM) 單元組成的樹來表示任意代數類型的值，且每個單元都有一個明確定義的（遞歸計算的）Merkle 雜湊，實際上依賴於此單元為根的整個子樹，我們可以為任意代數類型的值（的部分）提供「一般化的 Merkle 證明」，旨在證明具有已知 Merkle 雜湊的樹的某個子樹具有特定值或具有特定雜湊的值。這概括了 \ptref{sp:merkle.proof} 的方法，其中只考慮了 $x[i]=y$ 的 Merkle 證明。
 
 \nxsubpoint\label{sp:tvm.data.shard} \embt(Support for sharding in TON VM data structures.)
-我們剛剛概述了如何在不過於複雜的情況下，TON VM 支持高級智能合約語言中的任意（依賴）代數數據類型。然而，對於大型（或全局）智能合約的分片需要在 TON VM 級別上的特殊支援。為此，系統中增加了 hashmap 類型的特殊版本，相當於一個「映射」 $\Account\dashrightarrow X$。這個「映射」可能看起來等同於 $\Hashmap(m,X)$，其中 $\Account=\st2^m$。但是，當一個分片被分成兩個，或兩個分片被合併時，這樣的 hashmaps 會自動被分成兩個，或合併回來，以保留只屬於相應分片的鍵。
+我們剛剛概述了如何在不過於複雜的情況下，TON VM 支持高級智能合約語言中的任意（依賴）代數數據類型。然而，對於大型（或全域）智能合約的分片需要在 TON VM 級別上的特殊支援。為此，系統中增加了 hashmap 類型的特殊版本，相當於一個「映射」 $\Account\dashrightarrow X$。這個「映射」可能看起來等同於 $\Hashmap(m,X)$，其中 $\Account=\st2^m$。但是，當一個分片被分成兩個，或兩個分片被合併時，這樣的 hashmaps 會自動被分成兩個，或合併回來，以保留只屬於相應分片的鍵。
 
 \nxsubpoint \embt(Payment for persistent storage.)
 TON 區塊鏈的一個值得注意的特點是從智能合約中扣除用於儲存其持久數據的支付（即，增加區塊鏈的總狀態）。它的工作原理如下：
@@ -503,19 +503,19 @@ TON 區塊鏈的一個值得注意的特點是從智能合約中扣除用於儲�
 
 一個工作鏈可能宣稱每個賬戶的一些原始數據字節是「免費的」（即，不參與持久儲存支付），以使「簡單」的賬戶，只在一兩種加密貨幣中保持它們的餘額，免於這些常數支付。
 
-請注意，如果沒有人給一個賬戶發送任何消息，它的持久儲存支付不會被收集，並且它可以無限期地存在。然而，任何人都可以發送，例如，一條空消息來銷毀這樣的賬戶。可以給發送這樣一條消息的人提供一個小的激勵，從要被銷毀的賬戶的原始餘額中收取部分資金。然而，我們預期，validator會免費銷毀這樣的無資金賬戶，僅僅是為了減少全球區塊鏈的狀態大小，並避免保持大量的數據而不得到賠償。
+請注意，如果沒有人給一個賬戶發送任何消息，它的持久儲存支付不會被收集，並且它可以無限期地存在。然而，任何人都可以發送，例如，一條空消息來銷毀這樣的賬戶。可以給發送這樣一條消息的人提供一個小的激勵，從要被銷毀的賬戶的原始餘額中收取部分資金。然而，我們預期，validator會免費銷毀這樣的無資金賬戶，僅僅是為了減少全域區塊鏈的狀態大小，並避免保持大量的數據而不得到賠償。
 
 為持久數據的保持收集的支付在 shardchain 或 masterchain 的validator之間分配（在後一種情況下按比例分配他們的股份）。
 
 \nxsubpoint\label{sp:loc.glob.smct} \embt(Local and global smart contracts; smart-contract instances.)
-一個智能合約通常只存在於一個分片中，根據智能合約的 $\accountid$ 選擇，與「普通」賬戶類似。這通常對大多數應用程序來說都是足夠的。然而，一些「高負載」的智能合約可能希望在某個工作鏈的每個分片鏈中都有一個「實例」。為了實現這一點，它們必須將它們的創建交易傳播到所有的分片鏈中，例如，通過將此交易提交到工作鏈 $w$ 的「根」分片鏈 $(w,\emptyset)$ 中，並支付一大筆佣金。\footnote{一個更昂貴的選擇是在主鏈中發布這樣一個「全球」智能合約。}
+一個智能合約通常只存在於一個分片中，根據智能合約的 $\accountid$ 選擇，與「普通」賬戶類似。這通常對大多數應用程序來說都是足夠的。然而，一些「高負載」的智能合約可能希望在某個工作鏈的每個分片鏈中都有一個「實例」。為了實現這一點，它們必須將它們的創建交易傳播到所有的分片鏈中，例如，通過將此交易提交到工作鏈 $w$ 的「根」分片鏈 $(w,\emptyset)$ 中，並支付一大筆佣金。\footnote{一個更昂貴的選擇是在主鏈中發布這樣一個「全域」智能合約。}
 
-這個動作實際上在每個分片中創建了智能合約的實例，具有單獨的餘額。原始地，創建交易中傳輸的餘額只是通過給分片 $(w,s)$ 的實例 $2^{-|s|}$ 的總餘額的部分來分配。當一個分片分裂成兩個子分片時，所有全球智能合約的實例的餘額都分裂為一半；當兩個分片合併時，餘額加在一起。
+這個動作實際上在每個分片中創建了智能合約的實例，具有單獨的餘額。原始地，創建交易中傳輸的餘額只是通過給分片 $(w,s)$ 的實例 $2^{-|s|}$ 的總餘額的部分來分配。當一個分片分裂成兩個子分片時，所有全域智能合約的實例的餘額都分裂為一半；當兩個分片合併時，餘額加在一起。
 
-在某些情況下，分裂/合併全球智能合約的實例可能涉及這些智能合約的特殊方法的（延遲）執行。默認情況下，餘額按照上述方式分裂和合併，一些特殊的「賬戶索引」的 hashmaps 也是自動分裂和合併的（參見~\ptref{sp:tvm.data.shard}）。
+在某些情況下，分裂/合併全域智能合約的實例可能涉及這些智能合約的特殊方法的（延遲）執行。默認情況下，餘額按照上述方式分裂和合併，一些特殊的「賬戶索引」的 hashmaps 也是自動分裂和合併的（參見~\ptref{sp:tvm.data.shard}）。
 
 \nxsubpoint \embt(Limiting splitting of smart contracts.)
-一個全球智能合約可以在其創建時限制其分裂深度 $d$，以使持久儲存費用更具可預測性。這意味著，如果分片鏈 $(w,s)$ 滿足 $|s|\geq d$ 被分裂成兩個，只有兩個新分片鏈中的一個繼承智能合約的實例。這個分片鏈是確定性選擇的：每個全球智能合約都有一個「$\accountid$」，本質上是其創建交易的雜湊，並且其實例具有與前 $\leq d$ 位替換為適當值的相同的 $\accountid$，以落入正確的分片。這個 $\accountid$ 選擇了分裂後哪個分片將繼承智能合約實例。
+一個全域智能合約可以在其創建時限制其分裂深度 $d$，以使持久儲存費用更具可預測性。這意味著，如果分片鏈 $(w,s)$ 滿足 $|s|\geq d$ 被分裂成兩個，只有兩個新分片鏈中的一個繼承智能合約的實例。這個分片鏈是確定性選擇的：每個全域智能合約都有一個「$\accountid$」，本質上是其創建交易的雜湊，並且其實例具有與前 $\leq d$ 位替換為適當值的相同的 $\accountid$，以落入正確的分片。這個 $\accountid$ 選擇了分裂後哪個分片將繼承智能合約實例。
 
 \nxsubpoint\label{sp:account.state} \embt(Account/Smart-contract state.)
 我們可以總結以上所有內容，得出賬戶或智能合約的狀態包括以下內容：
@@ -592,9 +592,9 @@ TON 區塊鏈的一個重要組件是{\em 區塊鏈間的消息系統\/}。這�
 
 \nxsubpoint \embt(Delivery of a message is a transaction.)  因為消息的交付更改了賬戶或智能合約的狀態，所以它在接收的 shardchain 中是一個特殊的 {\em 交易\/}，並明確地註冊為這樣。本質上，{\em 所有\/} TON 區塊鏈交易都包括將一個入站消息傳遞給其接收賬戶（智能合約），忽略一些次要技術細節。
 
-\nxsubpoint \embt(Messages between instances of the same smart contract.)  回憶一下，一個智能合約可能是 {\em 本地\/} 的（即，像任何普通賬戶一樣駐留在一個 shardchain 中）或 {\em 全局\/} 的（即，在所有的 shards 中都有實例，或至少在所有深度為 $d$ 的 shards 中；參見 \ptref{sp:loc.glob.smct}）。全球智能合約的實例可能需要交換特殊消息以在彼此之間傳遞信息和價值。在這種情況下，（不可偽造的）發件人 $\accountid$ 變得很重要（參見 \ptref{sp:msg.sender}）。
+\nxsubpoint \embt(Messages between instances of the same smart contract.)  回憶一下，一個智能合約可能是 {\em 本地\/} 的（即，像任何普通賬戶一樣駐留在一個 shardchain 中）或 {\em 全域\/} 的（即，在所有的 shards 中都有實例，或至少在所有深度為 $d$ 的 shards 中；參見 \ptref{sp:loc.glob.smct}）。全域智能合約的實例可能需要交換特殊消息以在彼此之間傳遞信息和價值。在這種情況下，（不可偽造的）發件人 $\accountid$ 變得很重要（參見 \ptref{sp:msg.sender}）。
 
-\nxsubpoint \embt(Messages to any instance of a smart contract; wildcard addresses.)  有時候一條消息（例如，客戶端請求）需要被交付給全球智能合約的任何實例，通常是最近的一個（如果有一個駐留在與發件人相同的 shardchain 中，它是明顯的候選人）。做到這一點的一種方法是使用「通配符收件人地址」，其中目標 $\accountid$ 的前 $d$ 位可以取任意值。實際上，人們通常會將這 $d$ 位設置為與發件人的 $\accountid$ 中的相同值。
+\nxsubpoint \embt(Messages to any instance of a smart contract; wildcard addresses.)  有時候一條消息（例如，客戶端請求）需要被交付給全域智能合約的任何實例，通常是最近的一個（如果有一個駐留在與發件人相同的 shardchain 中，它是明顯的候選人）。做到這一點的一種方法是使用「通配符收件人地址」，其中目標 $\accountid$ 的前 $d$ 位可以取任意值。實際上，人們通常會將這 $d$ 位設置為與發件人的 $\accountid$ 中的相同值。
 
 \nxsubpoint \embt(Input queue is absent.)  由區塊鏈接收的所有消息（通常是 shardchain；有時是 masterchain）——或基本上是駐留在某個 shardchain 內的「賬戶鏈」——都立即被交付（即，由接收賬戶處理）。因此，沒有像這樣的「輸入隊列」。相反，如果由於對區塊總大小和 gas 使用的限制，不是所有目的為特定 shardchain 的消息都可以被處理，一些消息簡單地留在原始 shardchains 的輸出隊列中積累。
 
@@ -633,7 +633,7 @@ messages from output queues of neighboring shardchains.) 當為 shardchain 提�
 
 \nxsubpoint \embt(Forwarding messages intended for other shardchains.) 通過 Hypercube 路由（參見\ptref{sp:hypercube}）有時出站訊息不是交付給包含預期收件人的分片鏈，而是交付給位於到目的地的超立方體路徑上的相鄰分片鏈。在這種情況下，"交付"包括將入站訊息移動到出站隊列。這在塊中明確地反映為一個特殊的{\em 轉發交易}，其中包含該訊息。本質上，這看起來就像該訊息已被分片鏈內的某人接收，並且生成了一個相同的訊息作為結果。
 
-\nxsubpoint \embt(Payment for forwarding and keeping a message.) 轉發交易實際上消耗了一些瓦斯（取決於被轉發的訊息的大小），因此從被轉發的訊息的值中扣除了一筆瓦斯支付，代表此分片鏈的validator。此轉發支付通常遠小於當訊息最終交付給其收件人時所確定的瓦斯支付，即使該訊息由於超立方體路由而被轉發了多次。此外，只要某個分片鏈的輸出隊列中保持有訊息，它就是分片鏈的全局狀態的一部分，因此特殊交易也可能收取長時間保持全局數據的支付。
+\nxsubpoint \embt(Payment for forwarding and keeping a message.) 轉發交易實際上消耗了一些瓦斯（取決於被轉發的訊息的大小），因此從被轉發的訊息的值中扣除了一筆瓦斯支付，代表此分片鏈的validator。此轉發支付通常遠小於當訊息最終交付給其收件人時所確定的瓦斯支付，即使該訊息由於超立方體路由而被轉發了多次。此外，只要某個分片鏈的輸出隊列中保持有訊息，它就是分片鏈的全域狀態的一部分，因此特殊交易也可能收取長時間保持全域數據的支付。
 
 \nxsubpoint \embt(Messages to and from the masterchain.) 訊息可以直接從任何分片鏈發送到主鏈，反之亦然。但是，發送訊息到主鏈以及在主鏈中處理訊息的瓦斯價格相當高，因此只有在真正需要時才會使用此功能——例如，由validator來存入他們的賭注。在某些情況下，可能會定義發送到主鏈的訊息的最小存款（附加值），只有當接收方認為該訊息是“有效”的時候才會退還。
 
@@ -650,22 +650,23 @@ messages from output queues of neighboring shardchains.) 當為 shardchain 提�
 
 在這種情況下，訊息主體不會被複製兩次。相反，起源交易和處理交易都參照訊息的共享副本。
 
-\mysubsection{Global Shardchain State. ``Bag of Cells'' Philosophy.}
+\mysubsection{全域 Shardchain 狀態。"Bag of Cells"哲學。}
 
-現在我們準備描述TON區塊鏈的全局狀態，或者至少是基本工作鏈的分片鏈。
 
-我們從“高級”或“邏輯”描述開始，即全局狀態是代數類型 $\tp{ShardchainState}$ 的值。
+現在我們準備描述TON區塊鏈的全域狀態，或者至少是基本工作鏈的分片鏈。
+
+我們從“高級”或“邏輯”描述開始，即全域狀態是代數類型 $\tp{ShardchainState}$ 的值。
 
 \nxsubpoint\label{sp:shard.state} \embt(Shardchain state as a
-collection of account-chain states.)  根據無限分片模型（參見\ptref{sp:ISP}），任何分片鏈只是虛擬“賬戶鏈”的（臨時）集合，每個賬戶鏈只包含一個賬戶。這意味著，本質上，全局分片鏈狀態必須是一個雜湊映射
+collection of account-chain states.)  根據無限分片模型（參見\ptref{sp:ISP}），任何分片鏈只是虛擬“賬戶鏈”的（臨時）集合，每個賬戶鏈只包含一個賬戶。這意味著，本質上，全域分片鏈狀態必須是一個雜湊映射
 \begin{equation}\label{eq:simple.shard.st}
   \tp{ShardchainState}:=(\Account\dashrightarrow\tp{AccountState})
 \end{equation}
 其中所有作為此雜湊映射的指數出現的 $\accountid$ 必須以前綴 $s$ 開始，如果我們正在討論分片 $(w,s)$ 的狀態（參見\ptref{sp:shard.ident}）。
 
-實際上，我們可能希望將 $\tp{AccountState}$ 分成幾個部分（例如，保持賬戶輸出訊息隊列的獨立，以簡化相鄰分片鏈的檢查），並在 $\tp{ShardchainState}$ 內部擁有幾個雜湊映射 $(\Account\dashrightarrow\tp{AccountStatePart}_i)$。我們還可能向 $\tp{ShardchainState}$ 添加少量“全局”或“整體”參數，（例如，屬於此分片的所有賬戶的總餘額，或所有輸出隊列中的訊息總數）。
+實際上，我們可能希望將 $\tp{AccountState}$ 分成幾個部分（例如，保持賬戶輸出訊息隊列的獨立，以簡化相鄰分片鏈的檢查），並在 $\tp{ShardchainState}$ 內部擁有幾個雜湊映射 $(\Account\dashrightarrow\tp{AccountStatePart}_i)$。我們還可能向 $\tp{ShardchainState}$ 添加少量“全域”或“整體”參數，（例如，屬於此分片的所有賬戶的總餘額，或所有輸出隊列中的訊息總數）。
 
-然而，\eqref{eq:simple.shard.st} 是分片鏈全局狀態的一個很好的初步近似值，至少從“邏輯”（“高級”）的角度來看。可以使用TL方案（參見\ptref{sp:TL}）的幫助來進行代數類型 $\tp{AccountState}$ 和 $\tp{ShardchainState}$ 的正式描述，該描述將在其他地方提供。
+然而，\eqref{eq:simple.shard.st} 是分片鏈全域狀態的一個很好的初步近似值，至少從“邏輯”（“高級”）的角度來看。可以使用TL方案（參見\ptref{sp:TL}）的幫助來進行代數類型 $\tp{AccountState}$ 和 $\tp{ShardchainState}$ 的正式描述，該描述將在其他地方提供。
 
 \nxsubpoint\label{sp:split.merge.state} \embt(Splitting and merging shardchain states.)
 請注意，無限分片模型描述的分片鏈狀態 \eqref{eq:simple.shard.st} 顯示了當分片被分裂或合併時，該狀態應如何被處理。實際上，這些狀態變換變得是非常簡單的雜湊映射操作。
@@ -674,9 +675,9 @@ collection of account-chain states.)  根據無限分片模型（參見\ptref{sp
 (虛擬的)賬戶鏈狀態只是一個賬戶的狀態，由類型 $\tp{AccountState}$ 描述。通常它具有在~\ptref{sp:account.state} 中列出的所有或某些字段，具體取決於使用的構造器。
 
 \nxsubpoint \embt(Global workchain state.)
-與 \eqref{eq:simple.shard.st} 類似，我們可以使用相同的公式定義全局的 {\em workchain\/} 狀態，但 $\accountid$'s 可以取任何值，不僅僅是屬於一個分片的值。在這種情況下，也適用於~\ptref{sp:shard.state} 中所做的類似備註：我們可能想要將此雜湊映射分裂成幾個雜湊映射，我們可能想要添加一些“整體”的參數，如總餘額。
+與 \eqref{eq:simple.shard.st} 類似，我們可以使用相同的公式定義全域的 {\em workchain\/} 狀態，但 $\accountid$'s 可以取任何值，不僅僅是屬於一個分片的值。在這種情況下，也適用於~\ptref{sp:shard.state} 中所做的類似備註：我們可能想要將此雜湊映射分裂成幾個雜湊映射，我們可能想要添加一些“整體”的參數，如總餘額。
 
-本質上，全局的工作鏈狀態 {\em must\/} 被給予與分片鏈狀態相同的類型 $\tp{ShardchainState}$，因為如果這個工作鏈的所有現有分片鏈突然合併成一個，我們會得到的就是這個分片鏈狀態。
+本質上，全域的工作鏈狀態 {\em must\/} 被給予與分片鏈狀態相同的類型 $\tp{ShardchainState}$，因為如果這個工作鏈的所有現有分片鏈突然合併成一個，我們會得到的就是這個分片鏈狀態。
 
 \nxsubpoint\label{sp:bag.of.cells} \embt(Low-level perspective: ``bag of cells''.)  
 存在一個「低階」描述關於賬戶鏈或shardchain狀態，這與上述的「高階」描述是互補的。此描述相當重要，因為它事實上是非常普遍的，為代表、儲存、序列化和通過網路轉移TON Blockchain（包括blocks、shardchain states、smart-contract storage、Merkle proofs等）所用的幾乎所有資料提供了一個共同的基礎。同時，一旦這樣的普遍「低階」描述被理解和實施，我們就可以集中注意力僅考慮「高階」。
@@ -689,7 +690,7 @@ cell引用的確切格式取決於它的實現，以及cell是否位於RAM、磁
 
 這樣，如果我們使用cell hashes來引用cells（例如，在其他cells的描述中），系統稍微簡化，且cell的hash開始與代表它的byte string的hash相符。
 
-現在我們看到，{\em 任何TVM可以表示的對象，包括全局shardchain狀態，都可以表示為一個「bag of cells」} ——即，{\em 一個cells的集合以及指向其中之一的「root」引用}（例如，通過hash）。請注意，重複的cells從此描述中被刪除了（「bag of cells」是cells的集合，而不是多重集），所以抽象的樹表示實際上可能變成了一個有向無環圖(dag)表示。
+現在我們看到，{\em 任何TVM可以表示的對象，包括全域shardchain狀態，都可以表示為一個「bag of cells」} ——即，{\em 一個cells的集合以及指向其中之一的「root」引用}（例如，通過hash）。請注意，重複的cells從此描述中被刪除了（「bag of cells」是cells的集合，而不是多重集），所以抽象的樹表示實際上可能變成了一個有向無環圖(dag)表示。
 
 
 人甚至可以在硬碟上使用$B$-tree或$B+$-tree來保存這個狀態，包含所有相關的cells（也許還有一些附加數據，如子樹高度或引用計數器），並由cell hash進行索引。但是，這個想法的簡單實現會導致一個智能合約的狀態被散佈在硬碟文件的遠處，這是我們想要避免的。\footnote{更好的實現方法是，如果smart contract的狀態很小，就將其保存為序列化的字符串，如果很大，則保存在另一個$B$-tree中；然後代表blockchain狀態的頂層結構將是一個$B$-tree，其葉子節點被允許包含對其他$B$-tree的引用。}
@@ -703,7 +704,7 @@ Shardchain block本身也可以用代數類型來描述，並儲存為「bag of 
 想像我們有一個以「bag of cells」表示的對象的舊版本，我們想要表示同一對象的新版本，這個新版本應該與前一個不太不同。一個方法是簡單地將新狀態表示為具有自己root的另一個「bag of cells」，{\em 並從中刪除所有在舊版本中出現的cells}。剩下的「bag of cells」基本上是對象的{\em update\/}。每個擁有此對象的舊版本和update的人都可以計算新版本，只需合併兩個bag of cells，並刪除舊的root（減少其引用計數，並在引用計數變為零時釋放cell）。
 
 \nxsubpoint \embt(Updates to the state of an account.)
-特別是，對賬戶的狀態、shardchain的全局狀態或任何hashmap的更新都可以使用在~\ptref{sp:obj.update}中描述的想法進行表示。這意味著當我們接收到一個新的shardchain block（即是「bag of cells」）時，我們不只是單獨解釋這個「bag of cells」，而是首先將其與代表shardchain先前狀態的「bag of cells」結合。從這個意義上說，每個block可能都「包含」blockchain的整體狀態。
+特別是，對賬戶的狀態、shardchain的全域狀態或任何hashmap的更新都可以使用在~\ptref{sp:obj.update}中描述的想法進行表示。這意味著當我們接收到一個新的shardchain block（即是「bag of cells」）時，我們不只是單獨解釋這個「bag of cells」，而是首先將其與代表shardchain先前狀態的「bag of cells」結合。從這個意義上說，每個block可能都「包含」blockchain的整體狀態。
 
 \nxsubpoint \embt(Updates to a block.)
 回憶一下，block本身就是一個「bag of cells」，所以，如果需要編輯block，則可以類似地將「block update」定義為「bag of cells」，並在存在該block的先前版本的「bag of cells」的情境下進行解釋。這大致上是在~\ptref{sp:inv.sh.blk.corr}中討論的「垂直blocks」背後的想法。
@@ -779,9 +780,9 @@ suggesting new blocks to validators.)  另一種不成為validator但可以獲�
 including user transactions.)  使用者可以向一些collators或validators打開micropayment通道，並支付少量的幣以換取在shardchain中包括他們的交易。
 
 \nxsubpoint\label{sp:global.valid} \embt(Global validator set
-election.)  每月一次（實際上是每$2^{19}$個masterchain blocks）選舉``global''的validators集合。此集合在一個月前確定並被全球知悉。
+election.)  每月一次（實際上是每$2^{19}$個masterchain blocks）選舉``global''的validators集合。此集合在一個月前確定並被全域知悉。
 
-要成為validator，節點必須將一些TON幣（Toncoin）轉入masterchain，然後將它們發送到特定的智能合約作為其建議的抵押金$s$。與抵押金一起發送的另一個參數是$l\geq 1$，這是此節點願意接受的相對於最小可能值的最大驗證負載。還有一個$l$的全球上限（另一個可配置參數）$L$，例如說是10。
+要成為validator，節點必須將一些TON幣（Toncoin）轉入masterchain，然後將它們發送到特定的智能合約作為其建議的抵押金$s$。與抵押金一起發送的另一個參數是$l\geq 1$，這是此節點願意接受的相對於最小可能值的最大驗證負載。還有一個$l$的全域上限（另一個可配置參數）$L$，例如說是10。
 
 然後，這個智能合約選舉global的validator集合，只需選擇最大的建議抵押金的前$T$個候選者並公布其身份。最初，validators的總數是$T=100$；隨著負載的增加，我們預期它將增長到1000。它是一個可配置參數（參見~\ptref{sp:config.param}）。
 
@@ -829,7 +830,7 @@ block candidates.)  因為shardchain任務組的成員資格提前一小時就�
 
 \nxsubpoint \embt(Validators must keep the blocks they have signed.)  在他們成為 task group 的成員期間，以及之後至少一小時（或者 $2^{10}$ blocks），validator 預期會保留他們已簽署和提交的 block。如果未能向其他 validator 提供簽署的 block，可能會受到懲罰。
 
-\nxsubpoint \embt(Propagating the headers and signatures of new shardchain blocks to all validators.)  Validator 將新生成的 shardchain block 的 headers 和簽名傳播到全局 set of validators，使用類似於為每個 task group 創建的 multicast mesh network。
+\nxsubpoint \embt(Propagating the headers and signatures of new shardchain blocks to all validators.)  Validator 將新生成的 shardchain block 的 headers 和簽名傳播到全域 set of validators，使用類似於為每個 task group 創建的 multicast mesh network。
 
 \nxsubpoint\label{sp:new.master.blk} \embt(Generation of new masterchain blocks.)  在所有（或幾乎所有）新的 shardchain block 生成之後，可以生成一個新的 masterchain block。這個程序基本上與 shardchain block 相同（參見~\ptref{sp:new.shardc.blk}），不同之處在於所有 validator（或至少三分之二的 validator）都必須參與此過程。因為新的 shardchain block 的 headers 和簽名被傳播給所有的 validator，所以每個 shardchain 中最新的 block 的 hash 可以並且必須被包含在新的 masterchain block 中。一旦這些 hash 被提交到 masterchain block，外部觀察者和其他 shardchain 可以認為新的 shardchain block 已經提交並且是不可變的（參見~\ptref{sp:sc.hash.mc}）。
 
@@ -897,7 +898,7 @@ validator被選舉的總數的上限 \(T\) （參見~\ptref{sp:global.valid}）�
 
 一個區塊的相對可靠性在提交後可能會增加——例如，當遲來的validator的簽名被添加時（參見~\ptref{sp:val.sign.depth}）。另一方面，如果其中一個validator因與其他區塊相關的不當行為而失去部分或全部權益，區塊的相對可靠性可能{\em 減少}。
 
-\nxsubpoint \embt("Strengthening" the blockchain.) 提供驅使validator提高區塊相對可靠性的激勵是很重要的。這樣做的一種方法是為validator分配小量的獎勵，以在其他shardchains的區塊上添加簽名。即使是“即將成為”的validator，他們已存入的股份不足以進入按股份排名前$T$的validator，並被包括在全局validator集合中（參見~\ptref{sp:global.valid}），也可能參與這項活動（如果他們同意在失去選舉後保持其股份凍結，而不是撤回）。這樣的validator可能同時充當漁民（參見~\ptref{sp:fish}）：如果他們必須檢查某些區塊的有效性，他們也可以選擇報告無效的區塊並收集相關獎勵。
+\nxsubpoint \embt("Strengthening" the blockchain.) 提供驅使validator提高區塊相對可靠性的激勵是很重要的。這樣做的一種方法是為validator分配小量的獎勵，以在其他shardchains的區塊上添加簽名。即使是“即將成為”的validator，他們已存入的股份不足以進入按股份排名前$T$的validator，並被包括在全域validator集合中（參見~\ptref{sp:global.valid}），也可能參與這項活動（如果他們同意在失去選舉後保持其股份凍結，而不是撤回）。這樣的validator可能同時充當漁民（參見~\ptref{sp:fish}）：如果他們必須檢查某些區塊的有效性，他們也可以選擇報告無效的區塊並收集相關獎勵。
 
 \nxsubpoint\label{sp:rec.rel} \embt(Recursive reliability of a block.) 人們也可以定義一個區塊的{\em recursive reliability\/}，這是其相對可靠性與其引用的所有區塊的遞歸可靠性之間的最小值（即，masterchain區塊、先前的shardchain區塊和一些相鄰shardchains的區塊）。換句話說，如果該區塊被證明是無效的，無論是因為它本身無效還是因為它所依賴的某個區塊無效，至少有人會失去這筆錢。如果人們真的不確定是否信任區塊中的特定交易，人們應該計算這個區塊的{\em recursive\/}可靠性，而不僅僅是{\em relative\/}的可靠性。
 
@@ -1425,13 +1426,13 @@ overlay network.) 在一個節點學到它想要加入的overlay網路的網路�
 
 另一方面，每個節點有時從隨機選擇的鄰居處請求其鄰居列表（或其隨機選擇），並使用它部分地更新自己的鄰居列表，通過向其添加一些新發現的節點，並移除一些舊的節點，無論是隨機的還是依賴於其響應時間和數據包丟失統計數據。
 
-\nxsubpoint \embt(The overlay network is a random subgraph.) 這樣，overlay network在ADNL網路內部成為一個隨機子圖。如果每個頂點的度至少為三（即，如果每個節點至少連接到三個鄰居），則這個隨機圖以接近一的概率被知道是{\em connected\/}。更確切地說，具有$n$頂點的隨機圖是{\em dis\/}connected的概率是指數級小的，如果例如$n\geq20$，這個概率可以完全忽略。（當然，如果全球網路分區時，這不適用，當分區的不同側面的節點沒有機會了解彼此時。）另一方面，如果$n$小於20，只需要求每個頂點至少有，比如，至少十個鄰居。
+\nxsubpoint \embt(The overlay network is a random subgraph.) 這樣，overlay network在ADNL網路內部成為一個隨機子圖。如果每個頂點的度至少為三（即，如果每個節點至少連接到三個鄰居），則這個隨機圖以接近一的概率被知道是{\em connected\/}。更確切地說，具有$n$頂點的隨機圖是{\em dis\/}connected的概率是指數級小的，如果例如$n\geq20$，這個概率可以完全忽略。（當然，如果全域網路分區時，這不適用，當分區的不同側面的節點沒有機會了解彼此時。）另一方面，如果$n$小於20，只需要求每個頂點至少有，比如，至少十個鄰居。
 
 \nxsubpoint\label{sp:ov.opt.low.lat} \embt(TON overlay networks are optimized for lower latency.) TON overlay網路按照以下方法優化前一方法生成的“隨機”網路圖。每個節點都嘗試保留至少三個最小往返時間的鄰居，並很少更改這個“快速鄰居”列表。同時，它還具有至少其他三個完全隨機選擇的“慢鄰居”，以使overlay network圖始終包含一個隨機子圖。這是為了保持連接性並防止overlay network分裂為幾個未連接的區域子網路。還選擇並保留至少三個“中間鄰居”，這些鄰居具有由某個常數（實際上，快鄰居和慢鄰居的往返時間的函數）界定的中間往返時間。
 
 這樣，overlay network的圖形仍然保持足夠的隨機性以保持連接，但是經過優化以實現較低的延遲和更高的吞吐量。
 
-\nxsubpoint \embt(Gossip protocols in an overlay network.) 在overlay network中，經常用來執行所謂的 {\em gossip protocols}，它在讓每個節點只與其鄰居互動的同時達到某個全局目標。例如，有一些gossip protocols用於構建一個(不太大) overlay network的所有成員的大致列表，或者只用每個節點有限的記憶體計算(任意大) overlay network的成員數量的估計 (參考~\cite[4.4.3]{DistrSys} 或 \cite{Birman}了解詳情)。
+\nxsubpoint \embt(Gossip protocols in an overlay network.) 在overlay network中，經常用來執行所謂的 {\em gossip protocols}，它在讓每個節點只與其鄰居互動的同時達到某個全域目標。例如，有一些gossip protocols用於構建一個(不太大) overlay network的所有成員的大致列表，或者只用每個節點有限的記憶體計算(任意大) overlay network的成員數量的估計 (參考~\cite[4.4.3]{DistrSys} 或 \cite{Birman}了解詳情)。
 
 \nxsubpoint \embt(Overlay network as a broadcast domain.) 在overlay network中運行的最重要的gossip protocol是 {\em broadcast protocol}，旨在傳播由網路的任何節點，或者其中一個指定的發送節點生成的廣播消息，給所有其他節點。
 
@@ -1542,7 +1543,7 @@ TON區塊鏈可能只用於查找服務的抽象地址或地址，如在~\ptref{
 
 
 \nxsubpoint\label{sp:side.chain.reg} \embt(Registry or exchange in a
-side-chain.)  另一種實現去中心化混合註冊表的方法是創建一個獨立的專用區塊鏈（「side-chain」），由其自己的一組自稱為validator的人維護，他們在on-chain智能合約中發佈他們的身份，並為所有感興趣的方提供網路訪問這個專用的區塊鏈，通過專用覆蓋網路收集交易候選人和廣播塊更新（cf.~\ptref{sect:overlay}）。然後，這個sidechain的任何完整節點都可以維護其自己的共享註冊表副本（本質上等於此side-chain的全局狀態），並處理與此註冊表相關的任意查詢。
+side-chain.)  另一種實現去中心化混合註冊表的方法是創建一個獨立的專用區塊鏈（「side-chain」），由其自己的一組自稱為validator的人維護，他們在on-chain智能合約中發佈他們的身份，並為所有感興趣的方提供網路訪問這個專用的區塊鏈，通過專用覆蓋網路收集交易候選人和廣播塊更新（cf.~\ptref{sect:overlay}）。然後，這個sidechain的任何完整節點都可以維護其自己的共享註冊表副本（本質上等於此side-chain的全域狀態），並處理與此註冊表相關的任意查詢。
 
 \nxsubpoint \embt(Registry or exchange in a workchain.) 另一個選擇是在TON區塊鏈內創建一個專用的workchain，專門用於創建註冊表、市場和交易所。這可能比使用位於基本workchain中的智能合約更有效率和更便宜(cf.~\ptref{sp:basic.workchain})。但是，這仍然比在side-chains中維護註冊表更昂貴(cf.~\ptref{sp:side.chain.reg}）。
 
@@ -1604,7 +1605,7 @@ contracts.)  一個更好的方法是在智能合約中定義一些{\em get meth
 
 \nxsubpoint\label{sp:tent.exec.get} \embt(Tentative execution of get
 methods of smart contracts.)  我們已經提到
-(cf.~\ptref{sp:ext.msg})任何完整節點都可以嘗試執行任何智能合約的任何方法（即，將任何消息交付給智能合約），從智能合約的給定狀態開始，而無需實際提交相應的交易。完整節點可以簡單地將正在考慮的智能合約的程式碼加載到TON VM中，從shardchain的全局狀態（shardchain的所有完整節點都知道）初始化其持久儲存，並使用入站消息作為其輸入參數執行智能合約程式碼。所創建的輸出消息將產生此計算的結果。
+(cf.~\ptref{sp:ext.msg})任何完整節點都可以嘗試執行任何智能合約的任何方法（即，將任何消息交付給智能合約），從智能合約的給定狀態開始，而無需實際提交相應的交易。完整節點可以簡單地將正在考慮的智能合約的程式碼加載到TON VM中，從shardchain的全域狀態（shardchain的所有完整節點都知道）初始化其持久儲存，並使用入站消息作為其輸入參數執行智能合約程式碼。所創建的輸出消息將產生此計算的結果。
 
 通過這種方式，任何完整節點都可以評估任意智能合約的任意get方法，只要它們的簽名（即入站和出站消息的格式）是已知的。該節點可以跟踪在此評估期間訪問的shardchain狀態的cell，並為可能要求完整節點這樣做的輕型節點創建Merkle證明，證明所執行的計算的有效性（cf.~\ptref{sp:merkle.query.resp}）。
 
