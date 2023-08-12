@@ -39,12 +39,13 @@ jobs:
         git add *.pdf
         git commit -m "Add generated PDFs" || echo "No changes to commit"
         git push || echo "No changes to push"
-      
+        
     - name: Get current date
       id: date
       run: echo "::set-output name=date::$(date +'%Y%m%d%H%M%S')"
       
     - name: Create Release and Upload Assets
+      if: success()
       uses: ncipollo/release-action@v1
       with:
         body: "Release for latest PDFs."
@@ -52,3 +53,8 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         allowUpdates: true
         tag: ${{ steps.date.outputs.date }}
+        name: "Release ${{ steps.date.outputs.date }}"
+        omitNameDuringUpdate: true
+        replacesArtifacts: true
+        generateReleaseNotes: true
+  
