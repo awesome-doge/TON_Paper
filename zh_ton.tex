@@ -105,7 +105,7 @@ TL: Dr Awesome Doge}% a.k.a. K.O.T.
 \section*{緒論}
 \markbothsame{緒論}
 
-{\em Telegram Open Network (TON)} 是一個快速、安全且可擴展的區塊鏈和網絡專案，如有必要，它能夠處理每秒數百萬筆交易，對使用者和服務提供者都非常友好。我們希望它能夠承載所有目前提議和構想的合理應用程式。人們可以將TON視為一個巨大的分散式超級電腦，或者更恰當地說，一個巨大的``超級伺服器''，旨在托管和提供各種服務。
+{\em Telegram Open Network (TON)} 是一個快速、安全且可擴展的區塊鏈和網路專案，如有必要，它能夠處理每秒數百萬筆交易，對使用者和服務提供者都非常友好。我們希望它能夠承載所有目前提議和構想的合理應用程式。人們可以將TON視為一個巨大的分散式超級電腦，或者更恰當地說，一個巨大的``超級伺服器''，旨在托管和提供各種服務。
 
 本文並非關於所有實作細節的終極參考。在開發和測試階段，部分具體內容有可能發生變更。
 
@@ -117,15 +117,15 @@ TL: Dr Awesome Doge}% a.k.a. K.O.T.
 
 {\em Telegram Open Network (TON)} 結合了以下組件：
 \begin{itemize}
-\item 一個靈活的多區塊鏈平台 ({\em TON Blockchain}; 參考第~\ptref{sect:blockchain}章)，能夠處理每秒數百萬筆交易，擁有圖靈完全智能合約、可升級的正式區塊鏈規格、多加密貨幣價值轉移、支持微支付通道和鏈下支付網絡。{\em TON Blockchain\/} 提供了一些新的和獨特的功能，例如「自我修復」垂直區塊鏈機制 (參考~\ptref{sp:inv.sh.blk.corr}) 和 Instant Hypercube Routing (參考~\ptref{sp:instant.hypercube})，使其同時快速、可靠、可擴展和自我一致。
-\item 一個點對點網絡 ({\em TON P2P Network}, 或簡稱 {\em TON Network}; 參考第~\ptref{sect:network}章)，用於訪問TON區塊鏈、發送交易候選者，以及只接收客戶端感興趣的區塊鏈的部分更新（例如，與客戶端的賬戶和智能合約相關的部分），但也能支持任意分散服務，無論是否與區塊鏈相關。
+\item 一個靈活的多區塊鏈平台 ({\em TON Blockchain}; 參考第~\ptref{sect:blockchain}章)，能夠處理每秒數百萬筆交易，擁有圖靈完全智能合約、可升級的正式區塊鏈規格、多加密貨幣價值轉移、支持微支付通道和鏈下支付網路。{\em TON Blockchain\/} 提供了一些新的和獨特的功能，例如「自我修復」垂直區塊鏈機制 (參考~\ptref{sp:inv.sh.blk.corr}) 和 Instant Hypercube Routing (參考~\ptref{sp:instant.hypercube})，使其同時快速、可靠、可擴展和自我一致。
+\item 一個點對點網路 ({\em TON P2P Network}, 或簡稱 {\em TON Network}; 參考第~\ptref{sect:network}章)，用於訪問TON區塊鏈、發送交易候選者，以及只接收客戶端感興趣的區塊鏈的部分更新（例如，與客戶端的賬戶和智能合約相關的部分），但也能支持任意分散服務，無論是否與區塊鏈相關。
 \item 一種分散的文件存儲技術 {\em (TON Storage);} (參考~\ptref{sp:ex.ton.storage})，通過 {\em TON Network} 訪問，由TON Blockchain用於存儲區塊和狀態數據（快照）的存檔副本，但也可以用於存儲平台上的使用者或其他服務的任意文件，使用類似於torrent的訪問技術。
-\item 一個網絡代理/匿名層 {\em (TON Proxy);} (參考~\ptref{sp:ex.ton.proxy} 和~\ptref{sp:tunnels})，類似於 $I^2P$ (Invisible Internet Project)，如有必要（例如，從擁有大量加密貨幣的賬戶提交交易的節點，或希望隱藏其確切IP地址和地理位置以對抗DDoS攻擊的高風險區塊鏈驗證器節點），用於隱藏 {\em TON Network\/} 節點的身份和IP地址。
-\item 一個類似Kademlia的分散式哈希表 ({\em TON DHT}; 參考~\ptref{sect:kademlia})，用作 {\em TON Storage} 的「torrent tracker」(參考~\ptref{sp:distr.torr.tr})，作為 {\em TON Proxy\/} 的「input tunnel locator」(參考~\ptref{sp:loc.abs.addr})，以及作為 {\em TON Services} 的服務定位器 (參考~\ptref{sp:loc.serv})。
+\item 一個網路代理/匿名層 {\em (TON Proxy);} (參考~\ptref{sp:ex.ton.proxy} 和~\ptref{sp:tunnels})，類似於 $I^2P$ (Invisible Internet Project)，如有必要（例如，從擁有大量加密貨幣的賬戶提交交易的節點，或希望隱藏其確切IP地址和地理位置以對抗DDoS攻擊的高風險區塊鏈validator節點），用於隱藏 {\em TON Network\/} 節點的身份和IP地址。
+\item 一個類似Kademlia的分散式雜湊表 ({\em TON DHT}; 參考~\ptref{sect:kademlia})，用作 {\em TON Storage} 的「torrent tracker」(參考~\ptref{sp:distr.torr.tr})，作為 {\em TON Proxy\/} 的「input tunnel locator」(參考~\ptref{sp:loc.abs.addr})，以及作為 {\em TON Services} 的服務定位器 (參考~\ptref{sp:loc.serv})。
 \item 一個提供任意服務的平台 ({\em TON Services}; 參考第~\ptref{sect:services}章)，居住在並可通過 {\em TON Network\/} 和 {\em TON Proxy} 訪問，具有正式化的界面 (參考~\ptref{sp:pub.int.smartc}) 使得瀏覽器或智能手機應用程序可以互動。這些正式界面和持久的服務入口點可以在TON Blockchain中發布 (參考~\ptref{sp:ui.ton.dns})；提供服務的實際節點可以從在TON Blockchain中發布的信息開始，通過 {\em TON DHT\/} 查找 (參考~\ptref{sp:loc.serv})。服務可以在TON Blockchain中創建智能合約，為其客戶提供一些保證 (參考~\ptref{sp:mixed.serv})。
-\item {\em TON DNS\/} (參考~\ptref{sp:ton.dns})，用於為賬戶、智能合約、服務和網絡節點分配易讀的名稱。
-\item {\em TON Payments\/} (參考第~\ptref{sect:payments}章)，一個用於微支付、微支付通道和微支付通道網絡的平台。它可用於快速的鏈下價值轉移，以及支付由 {\em TON Services} 提供的服務。
-\item TON將允許輕鬆集成第三方消息和社交網絡應用程序，從而使區塊鏈技術和分散服務終於可用且可被普通使用者訪問 (參考~\ptref{sp:ton.www})，而不僅僅是少數早期的加密貨幣採用者。我們將在我們的另一個項目中，Telegram Messenger (參考~\ptref{sp:telegram.integr})，提供這樣的集成例子。
+\item {\em TON DNS\/} (參考~\ptref{sp:ton.dns})，用於為賬戶、智能合約、服務和網路節點分配易讀的名稱。
+\item {\em TON Payments\/} (參考第~\ptref{sect:payments}章)，一個用於微支付、微支付通道和微支付通道網路的平台。它可用於快速的鏈下價值轉移，以及支付由 {\em TON Services} 提供的服務。
+\item TON將允許輕鬆集成第三方消息和社交網路應用程序，從而使區塊鏈技術和分散服務終於可用且可被普通使用者訪問 (參考~\ptref{sp:ton.www})，而不僅僅是少數早期的加密貨幣採用者。我們將在我們的另一個專案中，Telegram Messenger (參考~\ptref{sp:telegram.integr})，提供這樣的集成例子。
 \end{itemize}
 
 雖然 TON Blockchain 是 TON 專案的核心，而其他組件可能被視為對區塊鏈扮演輔助角色，但它們自身也具有有趣和實用的功能。結合使用，它們允許平台容納比僅使用 TON Blockchain 更多樣化的應用程式 (參考~\ptref{sp:blockchain.facebook} 和~\ptref{sect:ton.service.impl})。
@@ -145,8 +145,8 @@ TON Blockchain 實際上是區塊鏈的{\em 集合}（甚至是區塊鏈的區�
 \nxsubpoint\label{sp:list.blkch.typ}
 \embt(List of blockchain types.) 此系列中的區塊鏈包括：
 \begin{itemize}
-\item 唯一的{\em master blockchain}，或簡稱為{\em masterchain}，該區塊鏈包含有關協議的一般資訊、其參數的當前值、驗證者集合和他們的股份、當前活躍的工作鏈(workchains)及其"shards"，以及最重要的，所有workchains和shardchains的最近區塊的哈希集合。
-\item 數個(最多 $2^{32}$)的{\em working blockchains}，或簡稱為{\em workchains}，實際上是這系統的"工作馬"，包含價值轉移和智慧合約交易。不同的workchains可能有不同的"規則"，意味著帳戶地址的不同格式、交易的不同格式、智慧合約的不同虛擬機(VMs)、不同的基本加密貨幣等等。然而，它們都必須滿足某些基本的互操作性標準，以確保不同的workchains之間的互動簡單和可能。在這方面，TON Blockchain是{\em heterogeneous}（參考~\ptref{sp:blkch.hom.het}），類似於EOS（參考~\ptref{sp:discuss.EOS}）和PolkaDot（參考~\ptref{sp:discuss.PolkaDot}）項目。
+\item 唯一的{\em master blockchain}，或簡稱為{\em masterchain}，該區塊鏈包含有關協議的一般資訊、其參數的當前值、validator集合和他們的股份、當前活躍的工作鏈(workchains)及其"shards"，以及最重要的，所有workchains和shardchains的最近區塊的雜湊集合。
+\item 數個(最多 $2^{32}$)的{\em working blockchains}，或簡稱為{\em workchains}，實際上是這系統的"工作馬"，包含價值轉移和智能合約交易。不同的workchains可能有不同的"規則"，意味著帳戶地址的不同格式、交易的不同格式、智能合約的不同虛擬機(VMs)、不同的基本加密貨幣等等。然而，它們都必須滿足某些基本的互操作性標準，以確保不同的workchains之間的互動簡單和可能。在這方面，TON Blockchain是{\em heterogeneous}（參考~\ptref{sp:blkch.hom.het}），類似於EOS（參考~\ptref{sp:discuss.EOS}）和PolkaDot（參考~\ptref{sp:discuss.PolkaDot}）專案。
 \item 每個workchain會進一步細分為多達 $2^{60}$ 的{\em shard blockchains}，或簡稱為{\em shardchains}，它們具有與workchain本身相同的規則和區塊格式，但只對帳戶的某個子集負責，這取決於帳戶地址的幾個首位(最重要的位)。換句話說，這系統內建了一種分片(sharding)的形式（參考~\ptref{sp:shard.supp}）。因為所有這些shardchains共享通用的區塊格式和規則，TON Blockchain在這方面是{\em homogeneous}（參考~\ptref{sp:blkch.hom.het}），這與Ethereum的某個擴展建議相似。\footnote{\url{https://github.com/ethereum/wiki/wiki/Sharding-FAQ}}
 \item shardchain（和masterchain）中的每個區塊實際上不只是一個區塊，而是一個小區塊鏈。通常，這"block blockchain"或"vertical blockchain"只包含一個區塊，然後我們可能會認為這只是shardchain的相對應區塊（在這種情況下也稱為"horizontal blockchain"）。但是，如果需要修正不正確的shardchain區塊，新的區塊將被提交到"vertical blockchain"，包含無效"horizontal blockchain"區塊的替代品，或一個"block difference"，只包含該區塊先前版本中需要更改的部分的描述。這是一個TON特有的機制，用於替換檢測到的無效區塊，而不會真正地分叉所有涉及的shardchains；這將在~\ptref{sp:inv.sh.blk.corr}中詳細解釋。目前，我們只需指出，每個shardchain（和masterchain）不是一個常規的區塊鏈，而是一個{\em blockchain of blockchains}，或{\em 2D-blockchain}，或只是一個{\em 2-blockchain}。
 \end{itemize}
@@ -169,11 +169,11 @@ TON的分片方法是「自下而上」，如下所述。
 
 \nxsubpoint \embt(Identification of workchains.) 每一個工作鏈都由其{\em number\/}或{\em workchain identifier\/}（\(\workchainid:\uint_{32}\)）來識別，它只是一個無符號的32位整數。工作鏈是由主鏈中的特殊交易所創建，定義（先前未使用的）工作鏈識別符和工作鏈的正式描述，至少足以讓此工作鏈與其他工作鏈互動以及對此工作鏈的區塊進行表面驗證。
 
-\nxsubpoint \embt(Creation and activation of new workchains.) 新的工作鏈的創建可以由社區中的任何成員啟動，只要他們準備支付發佈新工作鏈的正式規範所需的（高額）主鏈交易費用。但是，為了使新的工作鏈變得活躍，需要三分之二的驗證者達成共識，因為他們需要升級他們的軟件以處理新工作鏈的區塊，並通過特殊的主鏈交易表示他們準備好與新的工作鏈一起工作。對新工作鏈的啟動感興趣的方可能會提供某些激勵，讓驗證者透過智能合約分發的某些獎勵來支持新的工作鏈。
+\nxsubpoint \embt(Creation and activation of new workchains.) 新的工作鏈的創建可以由社區中的任何成員啟動，只要他們準備支付發佈新工作鏈的正式規範所需的（高額）主鏈交易費用。但是，為了使新的工作鏈變得活躍，需要三分之二的validator達成共識，因為他們需要升級他們的軟件以處理新工作鏈的區塊，並通過特殊的主鏈交易表示他們準備好與新的工作鏈一起工作。對新工作鏈的啟動感興趣的方可能會提供某些激勵，讓validator透過智能合約分發的某些獎勵來支持新的工作鏈。
 
 \nxsubpoint\label{sp:shard.ident} \embt(Identification of shardchains.) 每個分片鏈(shardchain)都由一對 $(w,s)=(\workchainid, \shardpfx)$ 來識別，其中 $\workchainid:\uint_{32}$ 識別相應的工作鏈(workchain)，而 $\shardpfx:\st2^{0\ldots60}$ 是一個最長為60的位元串，定義此分片鏈所負責的帳戶子集。換句話說，所有以 $\shardpfx$ 開頭的帳戶 $\accountid$ （即，具有 $\shardpfx$ 作為最重要位元）都將被分配到這個分片鏈。
 
-\nxsubpoint \embt(Identification of account-chains.) 回憶一下，帳戶鏈(account-chains)只有虛擬存在 (cf.~\ptref{sp:ISP})。然而，它們有一個自然的識別符——即，$(\workchainid,\accountid)$——因為任何帳戶鏈都包含關於恰好一個帳戶（無論是簡單帳戶還是智慧合約——這裡的區別不重要）的狀態和更新的信息。
+\nxsubpoint \embt(Identification of account-chains.) 回憶一下，帳戶鏈(account-chains)只有虛擬存在 (cf.~\ptref{sp:ISP})。然而，它們有一個自然的識別符——即，$(\workchainid,\accountid)$——因為任何帳戶鏈都包含關於恰好一個帳戶（無論是簡單帳戶還是智能合約——這裡的區別不重要）的狀態和更新的信息。
 
 \nxsubpoint\label{sp:dyn.split.merge} \embt(Dynamic splitting and merging of shardchains; cf.~\ptref{sect:split.merge}.) 一個較不複雜的系統可能使用{\em static sharding}，例如，使用 $\accountid$ 的前八位來選擇256個預定義的碎片之一。
 
@@ -193,52 +193,52 @@ TON 區塊鏈的一個重要特點是它實現了{\em dynamic sharding}，這意
 
 \nxsubpoint \embt(Generation of new blocks by validators; cf.~\ptref{sect:validators}.) TON 區塊鏈使用 Proof-of-Stake (PoS) 方法在分片鏈和主鏈中生成新的區塊。這意味著有一組，例如，多達幾百個的{\em validators}---特殊的節點，透過特殊的主鏈交易存放{\em stakes\/}（大量的 TON coins）以符合生成和驗證新區塊的資格。
 
-然後，小部分的驗證器被分配給每一個分片 $(w,s)$，這是以決定性的偽隨機方式進行的，每1024個區塊大約會改變一次。這部分的驗證器建議並在下一個分片鏈區塊應是什麼上達成共識，通過從客戶端收集適當的建議交易到新的有效的區塊候選。對於每個區塊，驗證器上有一個偽隨機選定的順序，以確定誰的區塊候選在每一輪中有最高的優先順序被提交。
+然後，小部分的validator被分配給每一個分片 $(w,s)$，這是以決定性的偽隨機方式進行的，每1024個區塊大約會改變一次。這部分的validator建議並在下一個分片鏈區塊應是什麼上達成共識，通過從客戶端收集適當的建議交易到新的有效的區塊候選。對於每個區塊，validator上有一個偽隨機選定的順序，以確定誰的區塊候選在每一輪中有最高的優先順序被提交。
 
-驗證器和其他節點檢查所提議的區塊候選的有效性；如果驗證器簽署了一個無效的區塊候選，它可能會自動被懲罰，失去部分或全部的 stake，或被暫停從驗證器集合一段時間。之後，驗證器應達成對下一個區塊的選擇的共識，本質上是 BFT (Byzantine Fault Tolerant; cf.~\ptref{sp:dpos.bft}) 共識協議的高效變體，類似於 PBFT~\cite{PBFT} 或 Honey Badger BFT~\cite{HoneyBadger}。如果達到共識，將創建新的區塊，且驗證器在交易費用上進行分割，包括交易，加上一些新創建的（“鑄造的”）硬幣。
+validator和其他節點檢查所提議的區塊候選的有效性；如果validator簽署了一個無效的區塊候選，它可能會自動被懲罰，失去部分或全部的 stake，或被暫停從validator集合一段時間。之後，validator應達成對下一個區塊的選擇的共識，本質上是 BFT (Byzantine Fault Tolerant; cf.~\ptref{sp:dpos.bft}) 共識協議的高效變體，類似於 PBFT~\cite{PBFT} 或 Honey Badger BFT~\cite{HoneyBadger}。如果達到共識，將創建新的區塊，且validator在交易費用上進行分割，包括交易，加上一些新創建的（“鑄造的”）硬幣。
 
-每個驗證器可以被選舉參與多個驗證器子集；在這種情況下，預計它將平行運行所有的驗證和共識算法。
+每個validator可以被選舉參與多個validator子集；在這種情況下，預計它將平行運行所有的驗證和共識算法。
 
-在生成所有新的分片鏈區塊之後或超時之後，將生成一個新的主鏈區塊，包括所有分片鏈的最新區塊的雜湊值。這是通過{\em all\/} 驗證器的 BFT 共識完成的。\footnote{實際上，兩個三分之一的 stake 就足夠達成共識，但努力收集盡可能多的簽名。}
+在生成所有新的分片鏈區塊之後或超時之後，將生成一個新的主鏈區塊，包括所有分片鏈的最新區塊的雜湊值。這是通過{\em all\/} validator的 BFT 共識完成的。\footnote{實際上，兩個三分之一的 stake 就足夠達成共識，但努力收集盡可能多的簽名。}
 
 TON PoS 方法及其經濟模型的更多細節提供在 section~\ptref{sect:validators}。
 
-\nxsubpoint \embt(Forks of the masterchain.) 我們緊密耦合的方法帶來的一個複雜性是，切換到主鏈的不同分叉幾乎必然需要在至少一些分片鏈中切換到另一個分叉。另一方面，只要主鏈中沒有分叉，分片鏈中的分叉甚至都是不可能的，因為分片鏈的替代分叉中的沒有區塊可以通過將其哈希值納入主鏈區塊而變得「標準化」。
+\nxsubpoint \embt(Forks of the masterchain.) 我們緊密耦合的方法帶來的一個複雜性是，切換到主鏈的不同分叉幾乎必然需要在至少一些分片鏈中切換到另一個分叉。另一方面，只要主鏈中沒有分叉，分片鏈中的分叉甚至都是不可能的，因為分片鏈的替代分叉中的沒有區塊可以通過將其雜湊值納入主鏈區塊而變得「標準化」。
 
-一般的規則是，{\em 如果主鏈區塊 $B'$ 是 $B$ 的前輩，$B'$ 包括 $(w,s)$-分片鏈區塊 $B'_{w,s}$ 的哈希 $\Hash(B'_{w,s})$，且 $B$ 包括哈希 $\Hash(B_{w,s})$，那麼 $B'_{w,s}$ {\bf 必須}是 $B_{w,s}$ 的前輩; 否則，主鏈區塊 $B$ 就是無效的。}
+一般的規則是，{\em 如果主鏈區塊 $B'$ 是 $B$ 的前輩，$B'$ 包括 $(w,s)$-分片鏈區塊 $B'_{w,s}$ 的雜湊 $\Hash(B'_{w,s})$，且 $B$ 包括雜湊 $\Hash(B_{w,s})$，那麼 $B'_{w,s}$ {\bf 必須}是 $B_{w,s}$ 的前輩; 否則，主鏈區塊 $B$ 就是無效的。}
 
-我們預期主鏈分叉將會很少，幾乎不存在，因為在由 TON 區塊鏈所採用的 BFT 範疇中，它們只能在{\em 大部分\/} 驗證器行為不正確的情況下發生（參見~\ptref{sp:validators} 和~\ptref{sp:new.master.blk}），這將意味著由違反者承擔的重大的 stake 損失。因此，不應期待分片鏈中存在真正的分叉。相反，如果檢測到一個無效的分片鏈區塊，將通過 2-blockchain 的「垂直區塊鏈」機制進行修正（參見~\ptref{sp:inv.sh.blk.corr}），這可以在不分叉「水平區塊鏈」（即，分片鏈）的情況下實現此目標。同樣的機制也可以用來修正主鏈區塊中的非致命性錯誤。
+我們預期主鏈分叉將會很少，幾乎不存在，因為在由 TON 區塊鏈所採用的 BFT 範疇中，它們只能在{\em 大部分\/} validator行為不正確的情況下發生（參見~\ptref{sp:validators} 和~\ptref{sp:new.master.blk}），這將意味著由違反者承擔的重大的 stake 損失。因此，不應期待分片鏈中存在真正的分叉。相反，如果檢測到一個無效的分片鏈區塊，將通過 2-blockchain 的「垂直區塊鏈」機制進行修正（參見~\ptref{sp:inv.sh.blk.corr}），這可以在不分叉「水平區塊鏈」（即，分片鏈）的情況下實現此目標。同樣的機制也可以用來修正主鏈區塊中的非致命性錯誤。
 
-\nxsubpoint\label{sp:inv.sh.blk.corr} \embt(Correcting invalid shardchain blocks.) 通常，只有有效的分片鏈區塊會被提交，因為分配給分片鏈的驗證器在新區塊可以被提交之前必須達到三分之二的拜占庭共識。然而，系統必須允許檢測先前提交的無效區塊及其校正。
+\nxsubpoint\label{sp:inv.sh.blk.corr} \embt(Correcting invalid shardchain blocks.) 通常，只有有效的分片鏈區塊會被提交，因為分配給分片鏈的validator在新區塊可以被提交之前必須達到三分之二的拜占庭共識。然而，系統必須允許檢測先前提交的無效區塊及其校正。
 
-當然，一旦找到一個無效的分片鏈區塊 —— 不論是由一個驗證器（不一定分配到這個分片鏈）還是一個「漁夫」（系統的任何節點，它已經支付了某個存款以便對區塊有效性提出疑問；參見~\ptref{sp:fish}）—— 無效性的主張及其證明都會被提交到主鏈，而已經簽署無效區塊的驗證器將被懲罰，部分或全部扣除他們的 stake，和/或暫時從驗證器集合中被停權（後者的措施對於攻擊者竊取本質上良性的驗證器的私有簽名鍵非常重要）。
+當然，一旦找到一個無效的分片鏈區塊 —— 不論是由一個validator（不一定分配到這個分片鏈）還是一個「漁夫」（系統的任何節點，它已經支付了某個存款以便對區塊有效性提出疑問；參見~\ptref{sp:fish}）—— 無效性的主張及其證明都會被提交到主鏈，而已經簽署無效區塊的validator將被懲罰，部分或全部扣除他們的 stake，和/或暫時從validator集合中被停權（後者的措施對於攻擊者竊取本質上良性的validator的私有簽名鍵非常重要）。
 
 然而，這還不夠，因為由於先前提交的無效分片鏈區塊，系統（TON 區塊鏈）的整體狀態結果是無效的。這個無效區塊必須被一個新的有效版本替換。
 
 大多數系統會通過「回滾」到該分片鏈中的無效區塊之前的最後一個區塊，以及每個其他分片鏈中不受從無效區塊傳播的消息影響的最後區塊，並從這些區塊創建一個新的分叉來實現這一點。這種方法的缺點是，大量本來正確且已提交的交易突然被回滾，且不清楚它們是否會在稍後再次被包括。
 
-TON 區塊鏈通過使每個分片鏈和主鏈的每個「區塊」（「水平區塊鏈」）本身都成為一個小型區塊鏈（「垂直區塊鏈」），包含這個「區塊」的不同版本，或其「差異」來解決這個問題。通常，垂直區塊鏈只包含一個區塊，而分片鏈看起來像一個經典的區塊鏈。但是，一旦一個區塊的無效性被確認並提交到主鏈區塊中，該無效區塊的「垂直區塊鏈」就被允許在垂直方向上增加一個新區塊，替換或編輯無效區塊。這個新區塊是由當前問題分片鏈的驗證器子集生成的。
+TON 區塊鏈通過使每個分片鏈和主鏈的每個「區塊」（「水平區塊鏈」）本身都成為一個小型區塊鏈（「垂直區塊鏈」），包含這個「區塊」的不同版本，或其「差異」來解決這個問題。通常，垂直區塊鏈只包含一個區塊，而分片鏈看起來像一個經典的區塊鏈。但是，一旦一個區塊的無效性被確認並提交到主鏈區塊中，該無效區塊的「垂直區塊鏈」就被允許在垂直方向上增加一個新區塊，替換或編輯無效區塊。這個新區塊是由當前問題分片鏈的validator子集生成的。
 
 
 新的“垂直”區塊要有效的規則非常嚴格。特別是，如果無效區塊中包含的虛擬“帳戶鏈區塊”（參見 \ptref{sp:ISP}）本身是有效的，則它必須被新的垂直區塊保持不變。
 
-一旦在無效區塊上方提交了新的“垂直”區塊，它的哈希就會在新的Masterchain區塊中公布（或者更正確地說，在原始Masterchain區塊上方的新“垂直”區塊中公布，該區塊中最初發布了無效Shardchain區塊的哈希），並且進一步將更改傳播到任何參照此區塊的Shardchain區塊（例如，那些從不正確的區塊接收消息的區塊）。這可以通過在先前參照“不正確”區塊的所有區塊的垂直區塊鏈中提交新的“垂直”區塊來進行修正；新的垂直區塊將參照最新（已更正）的版本。同樣，嚴格的規則禁止更改未受到實際影響的帳戶鏈（即，與前一版本中收到的消息相同的帳戶鏈）。通過這種方式，修正不正確的區塊產生“漣漪”，最終傳播到所有受影響的Shardchain的最新區塊；這些更改也反映在新的“垂直”Masterchain區塊中。
+一旦在無效區塊上方提交了新的“垂直”區塊，它的雜湊就會在新的Masterchain區塊中公布（或者更正確地說，在原始Masterchain區塊上方的新“垂直”區塊中公布，該區塊中最初發布了無效Shardchain區塊的雜湊），並且進一步將更改傳播到任何參照此區塊的Shardchain區塊（例如，那些從不正確的區塊接收消息的區塊）。這可以通過在先前參照“不正確”區塊的所有區塊的垂直區塊鏈中提交新的“垂直”區塊來進行修正；新的垂直區塊將參照最新（已更正）的版本。同樣，嚴格的規則禁止更改未受到實際影響的帳戶鏈（即，與前一版本中收到的消息相同的帳戶鏈）。通過這種方式，修正不正確的區塊產生“漣漪”，最終傳播到所有受影響的Shardchain的最新區塊；這些更改也反映在新的“垂直”Masterchain區塊中。
 
 一旦“歷史重寫”的漣漪到達最新區塊，新的Shardchain區塊僅以一個版本生成，僅作為最新區塊版本的後繼者。這意味著它們將從一開始就包含對正確（最新）的垂直區塊的引用。
 
-Masterchain狀態隱含地定義了一個映射，將每個“垂直”區塊鏈的第一個區塊的哈希轉換為其最新版本的哈希。這使客戶端可以通過其第一個（通常是唯一的）區塊的哈希識別和定位任何垂直區塊鏈。
+Masterchain狀態隱含地定義了一個映射，將每個“垂直”區塊鏈的第一個區塊的雜湊轉換為其最新版本的雜湊。這使客戶端可以通過其第一個（通常是唯一的）區塊的雜湊識別和定位任何垂直區塊鏈。
 
 \nxsubpoint \embt(TON coins and multi-currency workchains.)  TON區塊鏈支持多達$2^{32}$種不同的“加密貨幣”、“硬幣”或“代幣”，通過32位的$\currencyid$加以區分。新的加密貨幣可以通過主鏈中的特殊交易來添加。每個工作鏈都有一種基本加密貨幣，並且可以有幾種其他加密貨幣。
 
-有一種特殊的加密貨幣，$\currencyid=0$，即{\em TON幣}，也稱為{\em Gram}（參見附錄~\ref{app:coins}）。這是工作鏈零的基本加密貨幣。它也用於交易費和驗證者的權益股份。
+有一種特殊的加密貨幣，$\currencyid=0$，即{\em TON幣}，也稱為{\em Gram}（參見附錄~\ref{app:coins}）。這是工作鏈零的基本加密貨幣。它也用於交易費和validator的權益股份。
 
 原則上，其他工作鏈可能會以其他代幣收取交易費。在這種情況下，應該提供一些智能合約，用於將這些交易費自動轉換為Grams。
 
-\nxsubpoint \embt(Messaging and value transfer.) 屬於相同或不同工作鏈的分片鏈可以互相傳送{\em messages\/}。儘管允許的訊息的確切形式取決於接收工作鏈和接收帳戶（智慧合約），但有一些共同的欄位使跨工作鏈的訊息成為可能。特別是，每條訊息可能會有一些{\em value}，以一定數量的Grams（TON coins）和/或其他註冊的加密貨幣的形式附加，前提是它們被接收工作鏈宣布為可接受的加密貨幣。
+\nxsubpoint \embt(Messaging and value transfer.) 屬於相同或不同工作鏈的分片鏈可以互相傳送{\em messages\/}。儘管允許的訊息的確切形式取決於接收工作鏈和接收帳戶（智能合約），但有一些共同的欄位使跨工作鏈的訊息成為可能。特別是，每條訊息可能會有一些{\em value}，以一定數量的Grams（TON coins）和/或其他註冊的加密貨幣的形式附加，前提是它們被接收工作鏈宣布為可接受的加密貨幣。
 
-這種訊息的最簡單形式是從一個（通常不是智慧合約）帳戶到另一個帳戶的價值轉移。
+這種訊息的最簡單形式是從一個（通常不是智能合約）帳戶到另一個帳戶的價值轉移。
 
-\nxsubpoint\label{sp:tonvm} \embt(TON Virtual Machine.)  {\em TON Virtual Machine}，也縮寫為{\em TON VM\/}或{\em TVM\/}，是用於在主鏈和基本工作鏈中執行智慧合約代碼的虛擬機器。其他工作鏈可能使用其他虛擬機器，與TVM一起或替代TVM。
+\nxsubpoint\label{sp:tonvm} \embt(TON Virtual Machine.)  {\em TON Virtual Machine}，也縮寫為{\em TON VM\/}或{\em TVM\/}，是用於在主鏈和基本工作鏈中執行智能合約程式碼的虛擬機器。其他工作鏈可能使用其他虛擬機器，與TVM一起或替代TVM。
 
 以下我們列出了其一些特性。它們在~\ptref{sp:pec.tvm}、\ptref{sp:tvm.cells}和其他地方進一步討論。
 
@@ -268,7 +268,7 @@ Masterchain狀態隱含地定義了一個映射，將每個“垂直”區塊鏈
 \end{itemize}
  
 \nxsubpoint\label{sp:config.param} \embt(Configurable parameters.) 
-TON Block\-chain 的一個重要特性是它有許多{\em 可配置的}參數。這意味著它們是 masterchain 狀態的一部分，且可以通過 masterchain 中的某些特殊的提議/投票/結果交易來更改，而不需要硬分叉。更改這些參數需要收集三分之二的驗證者投票，以及超過一半想要參與投票過程的所有其他參與者的投票以支持該提議。
+TON Block\-chain 的一個重要特性是它有許多{\em 可配置的}參數。這意味著它們是 masterchain 狀態的一部分，且可以通過 masterchain 中的某些特殊的提議/投票/結果交易來更改，而不需要硬分叉。更改這些參數需要收集三分之二的validator投票，以及超過一半想要參與投票過程的所有其他參與者的投票以支持該提議。
 
 \mysubsection{關於區塊鏈的概論}
 
@@ -466,12 +466,12 @@ Blockchain.) 我們目前為TON Blockchain使用256-bit的$\Sha$雜湊。如果�
 
 在某些情況下，客戶端可能希望獲得值 $y=\Hash(x)=\Hash(h[i])$，例如，如果 $x$ 本身非常大（例如，是一個 hashmap）。然後，可以提供 $(i,y)$ 的 Merkle 證明。如果 $x$ 也是一個 hashmap，那麼可以從完整節點獲得從 $y=\Hash(x)$ 開始的第二個 Merkle 證明，以提供值 $x[j]=h[i][j]$ 或僅其雜湊。
 
-\nxsubpoint \embt(Importance of Merkle proofs for a multi-chain system such as TON.) 請注意，節點通常不能為 TON 環境中存在的所有 shardchains 成為完整節點。它通常只是某些 shardchains 的完整節點——例如，包含其自己的帳戶，它感興趣的智能合約，或者該節點已被指派為其驗證者的那些。對於其他 shardchains，它必須是一個輕量節點——否則存儲、計算和網絡帶寬的要求將是禁止的。這意味著這樣的節點不能直接檢查關於其他 shardchains 狀態的斷言；它必須依賴於從那些 shardchains 的完整節點獲得的 Merkle 證明，除非 \eqref{eq:hash.coll} 失敗（即，找到一個雜湊碰撞），這同樣安全。
+\nxsubpoint \embt(Importance of Merkle proofs for a multi-chain system such as TON.) 請注意，節點通常不能為 TON 環境中存在的所有 shardchains 成為完整節點。它通常只是某些 shardchains 的完整節點——例如，包含其自己的帳戶，它感興趣的智能合約，或者該節點已被指派為其validator的那些。對於其他 shardchains，它必須是一個輕量節點——否則存儲、計算和網路帶寬的要求將是禁止的。這意味著這樣的節點不能直接檢查關於其他 shardchains 狀態的斷言；它必須依賴於從那些 shardchains 的完整節點獲得的 Merkle 證明，除非 \eqref{eq:hash.coll} 失敗（即，找到一個雜湊碰撞），這同樣安全。
 
 
-\nxsubpoint\label{sp:pec.tvm} \embt(Peculiarities of TON VM.) TON VM 或 TVM (Telegram Virtual Machine)，用於在 masterchain 和 Workchain Zero 中運行智能合約，與受到 EVM (Ethereum Virtual Machine) 啟發的常見設計有很大的不同：它不僅僅與 256 位整數工作，實際上它與（幾乎）任意的「紀錄」、「結構」或「總乘積類型」一起工作，使其更適合執行用高級（尤其是功能性）語言編寫的代碼。實際上，TVM 使用的是帶有標籤的數據類型，這與 Prolog 或 Erlang 的實現中使用的不太相同。
+\nxsubpoint\label{sp:pec.tvm} \embt(Peculiarities of TON VM.) TON VM 或 TVM (Telegram Virtual Machine)，用於在 masterchain 和 Workchain Zero 中運行智能合約，與受到 EVM (Ethereum Virtual Machine) 啟發的常見設計有很大的不同：它不僅僅與 256 位整數工作，實際上它與（幾乎）任意的「紀錄」、「結構」或「總乘積類型」一起工作，使其更適合執行用高級（尤其是功能性）語言編寫的程式碼。實際上，TVM 使用的是帶有標籤的數據類型，這與 Prolog 或 Erlang 的實現中使用的不太相同。
 
-人們首先可以想像，TVM 智能合約的狀態不僅僅是一個 hashmap $\st2^{256}\to\st2^{256}$ 或 $\Hashmap(256,\st2^{256})$，但（作為第一步）是 $\Hashmap(256,X)$，其中 $X$ 是具有幾個構造器的類型，使其除了 256 位整數之外，還能存儲其他數據結構，尤其是其他的 hashmap $\Hashmap(256,X)$。這意味著 TVM（持久或臨時）存儲的一個單元——或者一個在 TVM 智能合約代碼中的變量或數組元素——可能不僅包含一個整數，還包含一個全新的 hashmap。當然，這意味著一個單元不僅僅包含 256 位，還包含，例如，一個 8 位的標籤，描述如何解釋這 256 位。
+人們首先可以想像，TVM 智能合約的狀態不僅僅是一個 hashmap $\st2^{256}\to\st2^{256}$ 或 $\Hashmap(256,\st2^{256})$，但（作為第一步）是 $\Hashmap(256,X)$，其中 $X$ 是具有幾個構造器的類型，使其除了 256 位整數之外，還能存儲其他數據結構，尤其是其他的 hashmap $\Hashmap(256,X)$。這意味著 TVM（持久或臨時）存儲的一個單元——或者一個在 TVM 智能合約程式碼中的變量或數組元素——可能不僅包含一個整數，還包含一個全新的 hashmap。當然，這意味著一個單元不僅僅包含 256 位，還包含，例如，一個 8 位的標籤，描述如何解釋這 256 位。
 
 事實上，值不需要確切地是 256 位的。TVM 使用的值格式由原始字節和對其他結構的引用組成，這些引用以任意順序混合，並在合適的位置插入一些描述字節，以便能夠區分指針和原始數據（例如，字符串或整數）；請參見~\ptref{sp:tvm.cells}。
 
@@ -486,10 +486,10 @@ TON 智能合約的持久性儲存主要由其「全域變數」組成，這些�
 
 \nxsubpoint\label{sp:tvm.cells} \embt(TVM Cells.)  最終，TON VM 在一系列的{\em (TVM) 單元}中保留所有數據。每個單元首先包含兩個描述符字節，表示此單元中有多少原始數據字節（最多 128）以及有多少對其他單元的引用（最多四個）。然後是這些原始數據字節和引用。每個單元只被引用一次，所以我們可能已經在每個單元中包括了對其「父級」的引用（唯一引用此單元的單元）。但是，這個引用不必是明確的。
 
-通過這種方式，TON 智能合約的持久數據儲存單元被組織成一棵樹，\footnote{邏輯上；在~\ptref{sp:bag.of.cells}中描述的「單元包」表示法識別所有重複的單元，當序列化時，將此樹轉換為一個有向無環圖（dag）。} 智能合約描述中保留了對這棵樹的根的引用。如果需要，可以遞歸計算這整個持久存儲的 Merkle 樹哈希，從葉子開始，然後簡單地將一個單元中的所有引用替換為所引用的單元的遞歸計算的哈希，然後計算所得字節串的哈希。
+通過這種方式，TON 智能合約的持久數據儲存單元被組織成一棵樹，\footnote{邏輯上；在~\ptref{sp:bag.of.cells}中描述的「單元包」表示法識別所有重複的單元，當序列化時，將此樹轉換為一個有向無環圖（dag）。} 智能合約描述中保留了對這棵樹的根的引用。如果需要，可以遞歸計算這整個持久存儲的 Merkle 樹雜湊，從葉子開始，然後簡單地將一個單元中的所有引用替換為所引用的單元的遞歸計算的雜湊，然後計算所得字節串的雜湊。
 
 \nxsubpoint\label{sp:gen.merkle.proof} \embt(Generalized Merkle proofs
-for values of arbitrary algebraic types.)  由於 TON VM 通過由 (TVM) 單元組成的樹來表示任意代數類型的值，且每個單元都有一個明確定義的（遞歸計算的）Merkle 哈希，實際上依賴於此單元為根的整個子樹，我們可以為任意代數類型的值（的部分）提供「一般化的 Merkle 證明」，旨在證明具有已知 Merkle 哈希的樹的某個子樹具有特定值或具有特定哈希的值。這概括了 \ptref{sp:merkle.proof} 的方法，其中只考慮了 $x[i]=y$ 的 Merkle 證明。
+for values of arbitrary algebraic types.)  由於 TON VM 通過由 (TVM) 單元組成的樹來表示任意代數類型的值，且每個單元都有一個明確定義的（遞歸計算的）Merkle 雜湊，實際上依賴於此單元為根的整個子樹，我們可以為任意代數類型的值（的部分）提供「一般化的 Merkle 證明」，旨在證明具有已知 Merkle 雜湊的樹的某個子樹具有特定值或具有特定雜湊的值。這概括了 \ptref{sp:merkle.proof} 的方法，其中只考慮了 $x[i]=y$ 的 Merkle 證明。
 
 \nxsubpoint\label{sp:tvm.data.shard} \embt(Support for sharding in TON VM data structures.)
 我們剛剛概述了如何在不過於複雜的情況下，TON VM 支持高級智能合約語言中的任意（依賴）代數數據類型。然而，對於大型（或全局）智能合約的分片需要在 TON VM 級別上的特殊支援。為此，系統中增加了 hashmap 類型的特殊版本，相當於一個「映射」 $\Account\dashrightarrow X$。這個「映射」可能看起來等同於 $\Hashmap(m,X)$，其中 $\Account=\st2^m$。但是，當一個分片被分成兩個，或兩個分片被合併時，這樣的 hashmaps 會自動被分成兩個，或合併回來，以保留只屬於相應分片的鍵。
@@ -503,9 +503,9 @@ TON 區塊鏈的一個值得注意的特點是從智能合約中扣除用於存�
 
 一個工作鏈可能宣稱每個賬戶的一些原始數據字節是「免費的」（即，不參與持久儲存支付），以使「簡單」的賬戶，只在一兩種加密貨幣中保持它們的餘額，免於這些常數支付。
 
-請注意，如果沒有人給一個賬戶發送任何消息，它的持久儲存支付不會被收集，並且它可以無限期地存在。然而，任何人都可以發送，例如，一條空消息來銷毀這樣的賬戶。可以給發送這樣一條消息的人提供一個小的激勵，從要被銷毀的賬戶的原始餘額中收取部分資金。然而，我們預期，驗證者會免費銷毀這樣的無資金賬戶，僅僅是為了減少全球區塊鏈的狀態大小，並避免保持大量的數據而不得到賠償。
+請注意，如果沒有人給一個賬戶發送任何消息，它的持久儲存支付不會被收集，並且它可以無限期地存在。然而，任何人都可以發送，例如，一條空消息來銷毀這樣的賬戶。可以給發送這樣一條消息的人提供一個小的激勵，從要被銷毀的賬戶的原始餘額中收取部分資金。然而，我們預期，validator會免費銷毀這樣的無資金賬戶，僅僅是為了減少全球區塊鏈的狀態大小，並避免保持大量的數據而不得到賠償。
 
-為持久數據的保持收集的支付在 shardchain 或 masterchain 的驗證者之間分配（在後一種情況下按比例分配他們的股份）。
+為持久數據的保持收集的支付在 shardchain 或 masterchain 的validator之間分配（在後一種情況下按比例分配他們的股份）。
 
 \nxsubpoint\label{sp:loc.glob.smct} \embt(Local and global smart contracts; smart-contract instances.)
 一個智能合約通常只存在於一個分片中，根據智能合約的 $\accountid$ 選擇，與「普通」賬戶類似。這通常對大多數應用程序來說都是足夠的。然而，一些「高負載」的智能合約可能希望在某個工作鏈的每個分片鏈中都有一個「實例」。為了實現這一點，它們必須將它們的創建交易傳播到所有的分片鏈中，例如，通過將此交易提交到工作鏈 $w$ 的「根」分片鏈 $(w,\emptyset)$ 中，並支付一大筆佣金。\footnote{一個更昂貴的選擇是在主鏈中發布這樣一個「全球」智能合約。}
@@ -515,26 +515,26 @@ TON 區塊鏈的一個值得注意的特點是從智能合約中扣除用於存�
 在某些情況下，分裂/合併全球智能合約的實例可能涉及這些智能合約的特殊方法的（延遲）執行。默認情況下，餘額按照上述方式分裂和合併，一些特殊的「賬戶索引」的 hashmaps 也是自動分裂和合併的（參見~\ptref{sp:tvm.data.shard}）。
 
 \nxsubpoint \embt(Limiting splitting of smart contracts.)
-一個全球智能合約可以在其創建時限制其分裂深度 $d$，以使持久存儲費用更具可預測性。這意味著，如果分片鏈 $(w,s)$ 滿足 $|s|\geq d$ 被分裂成兩個，只有兩個新分片鏈中的一個繼承智能合約的實例。這個分片鏈是確定性選擇的：每個全球智能合約都有一個「$\accountid$」，本質上是其創建交易的哈希，並且其實例具有與前 $\leq d$ 位替換為適當值的相同的 $\accountid$，以落入正確的分片。這個 $\accountid$ 選擇了分裂後哪個分片將繼承智能合約實例。
+一個全球智能合約可以在其創建時限制其分裂深度 $d$，以使持久存儲費用更具可預測性。這意味著，如果分片鏈 $(w,s)$ 滿足 $|s|\geq d$ 被分裂成兩個，只有兩個新分片鏈中的一個繼承智能合約的實例。這個分片鏈是確定性選擇的：每個全球智能合約都有一個「$\accountid$」，本質上是其創建交易的雜湊，並且其實例具有與前 $\leq d$ 位替換為適當值的相同的 $\accountid$，以落入正確的分片。這個 $\accountid$ 選擇了分裂後哪個分片將繼承智能合約實例。
 
 \nxsubpoint\label{sp:account.state} \embt(Account/Smart-contract state.)
 我們可以總結以上所有內容，得出賬戶或智能合約的狀態包括以下內容：
 \begin{itemize}
 \item 區塊鏈的主要貨幣的餘額
 \item 區塊鏈其他貨幣的餘額
-\item 智能合約的代碼（或其哈希）
-\item 智能合約的持久性數據（或其 Merkle 哈希）
+\item 智能合約的程式碼（或其雜湊）
+\item 智能合約的持久性數據（或其 Merkle 雜湊）
 \item 持久性存儲單元和原始字節使用數量的統計
 \item 上次收取智能合約持久性存儲付款的時間（實際上，是主鏈區塊號）
-\item 轉移貨幣和從此賬戶發送消息所需的公鑰（可選；默認等於 $\accountid$ 本身）。在某些情況下，更為複雜的簽名檢查代碼可能位於此處，與比特幣交易輸出類似；然後，$\accountid$ 將等於此代碼的哈希。
+\item 轉移貨幣和從此賬戶發送消息所需的公鑰（可選；默認等於 $\accountid$ 本身）。在某些情況下，更為複雜的簽名檢查程式碼可能位於此處，與比特幣交易輸出類似；然後，$\accountid$ 將等於此程式碼的雜湊。
 \end{itemize}
-我們還需要在某處保存以下數據，無論是在賬戶狀態中還是在某個其他的賬戶索引的哈希圖中：
+我們還需要在某處保存以下數據，無論是在賬戶狀態中還是在某個其他的賬戶索引的雜湊圖中：
 \begin{itemize}
 \item 賬戶的輸出消息隊列（參見~\ptref{sp:out.queue}）
-\item 最近傳送消息的（哈希的）集合（參見~\ptref{sp:deliver.q}）
+\item 最近傳送消息的（雜湊的）集合（參見~\ptref{sp:deliver.q}）
 \end{itemize}
 
-並不是每個賬戶都真正需要所有這些；例如，只有智能合約需要智能合約代碼，而「簡單」的賬戶則不需要。此外，儘管任何賬戶必須在主要貨幣中有一個非零餘額（例如，基礎工作鏈的主鏈和分片鏈的Grams），但在其他貨幣中可能有零餘額。為了避免保留未使用的數據，定義了一個乘積型別（取決於工作鏈）（在工作鏈的創建期間），它使用不同的標籤字節（例如，TL 構造器；參見~\ptref{sp:TL}）來區分使用的不同「構造器」。最終，賬戶狀態本身作為TVM持久性存儲的單元集合保存。
+並不是每個賬戶都真正需要所有這些；例如，只有智能合約需要智能合約程式碼，而「簡單」的賬戶則不需要。此外，儘管任何賬戶必須在主要貨幣中有一個非零餘額（例如，基礎工作鏈的主鏈和分片鏈的Grams），但在其他貨幣中可能有零餘額。為了避免保留未使用的數據，定義了一個乘積型別（取決於工作鏈）（在工作鏈的創建期間），它使用不同的標籤字節（例如，TL 構造器；參見~\ptref{sp:TL}）來區分使用的不同「構造器」。最終，賬戶狀態本身作為TVM持久性存儲的單元集合保存。
 
 \mysubsection{分片鏈間的消息}
 
@@ -565,9 +565,9 @@ TON 區塊鏈的一個重要組件是{\em 區塊鏈間的消息系統\/}。這�
 \nxsubpoint\label{sp:ext.msg} \embt(External messages, or ``messages from nowhere''.)  
 有些消息是從「無處」來的，也就是它們並非由位於區塊鏈中的賬戶（無論是否是智能合約）生成的。最典型的例子是當用戶希望從她控制的賬戶轉移一些資金到另一個賬戶時。在這種情況下，用戶發送一個「來自無處的消息」到她自己的賬戶，要求它生成一個發送給接收賬戶的消息，帶有指定的值。如果此消息被正確簽名，她的賬戶就會接收到它並生成所需的出站消息。
 
-實際上，人們可能會認為「簡單」賬戶是帶有預定義代碼的智能合約的特例。這種智能合約只接收一種類型的消息。這種入站消息必須包含作為傳遞（處理）入站消息結果要生成的出站消息列表，以及一個簽名。智能合約檢查簽名，如果它是正確的，則生成所需的消息。
+實際上，人們可能會認為「簡單」賬戶是帶有預定義程式碼的智能合約的特例。這種智能合約只接收一種類型的消息。這種入站消息必須包含作為傳遞（處理）入站消息結果要生成的出站消息列表，以及一個簽名。智能合約檢查簽名，如果它是正確的，則生成所需的消息。
 
-當然，「來自無處的消息」和普通消息之間有所不同，因為「來自無處的消息」不能承載值，所以它們不能為自己的「gas」（即它們的處理）付款。相反，它們在甚至被建議包含在新的shardchain塊中之前，會先嘗試執行一個小的gas限制；如果執行失敗（簽名不正確），則「來自無處的消息」被視為不正確並被丟棄。如果執行在小的gas限制內不失敗，則消息可能被包含在新的shardchain塊中並完全處理，從接收者的賬戶中扣除所消耗的gas（處理能力）的付款。 「來自無處的消息」也可以定義一些交易費，這些費用在gas付款之外從接收者的賬戶中扣除，以重新分配給驗證者。
+當然，「來自無處的消息」和普通消息之間有所不同，因為「來自無處的消息」不能承載值，所以它們不能為自己的「gas」（即它們的處理）付款。相反，它們在甚至被建議包含在新的shardchain塊中之前，會先嘗試執行一個小的gas限制；如果執行失敗（簽名不正確），則「來自無處的消息」被視為不正確並被丟棄。如果執行在小的gas限制內不失敗，則消息可能被包含在新的shardchain塊中並完全處理，從接收者的賬戶中扣除所消耗的gas（處理能力）的付款。 「來自無處的消息」也可以定義一些交易費，這些費用在gas付款之外從接收者的賬戶中扣除，以重新分配給validator。
 
 在這個意義上，「來自無處的消息」或「外部消息」起到了在其他區塊鏈系統中使用的交易候選人的作用（例如，比特幣和以太坊）。
 
@@ -602,25 +602,25 @@ TON 區塊鏈的一個重要組件是{\em 區塊鏈間的消息系統\/}。這�
 
 這個shardchain輸出「隊列」只對其成員消息施加部分順序。即，在先前的區塊中生成的消息必須在隨後的區塊中生成的任何消息之前被傳遞，並且由相同賬戶生成且具有相同目的地的任何消息必須按照它們的生成順序傳遞。
 
-\nxsubpoint\label{sp:intershard.msgs} \embt(Reliable and fast inter-chain messaging.)  對於像TON這樣的可擴展多區塊鏈項目，能夠在不同的shardchains之間轉發和傳遞消息是至關重要的 (cf.~\ptref{sp:msg.IHR})，即使系統中有數百萬個。消息應該被{\em 可靠地\/}（即，消息不應該丟失或傳遞多次）和{\em 快速地}傳遞。TON區塊鏈通過使用兩種「消息路由」機制的組合來實現這一目標。
+\nxsubpoint\label{sp:intershard.msgs} \embt(Reliable and fast inter-chain messaging.)  對於像TON這樣的可擴展多區塊鏈專案，能夠在不同的shardchains之間轉發和傳遞消息是至關重要的 (cf.~\ptref{sp:msg.IHR})，即使系統中有數百萬個。消息應該被{\em 可靠地\/}（即，消息不應該丟失或傳遞多次）和{\em 快速地}傳遞。TON區塊鏈通過使用兩種「消息路由」機制的組合來實現這一目標。
 
 \nxsubpoint\label{sp:hypercube} \embt(Hypercube routing: ``slow path''
-for messages with assured delivery.)  TON Blockchain 使用「超立方體路由」作為一種緩慢，但安全可靠的方法，從一個 shardchain 傳遞消息到另一個 shardchain，如有必要，使用幾個中間的 shardchain 進行轉發。否則，任何給定的 shardchain 的驗證者都需要追踪所有其他 shardchain 的狀態（輸出隊列），隨著 shardchain 總數的增加，這將需要過多的計算能力和網絡帶寬，從而限制了系統的可擴展性。因此，無法直接從任何 shard 傳遞消息到其他每一個 shard。相反，每個 shard 只與其 $(w,s)$ shard 標識符中確切一個十六進制數位不同的 shard「連接」(cf.~\ptref{sp:shard.ident})。這樣，所有的 shardchain 構成一個「超立方體」圖，消息沿著這個超立方體的邊緣移動。
+for messages with assured delivery.)  TON Blockchain 使用「超立方體路由」作為一種緩慢，但安全可靠的方法，從一個 shardchain 傳遞消息到另一個 shardchain，如有必要，使用幾個中間的 shardchain 進行轉發。否則，任何給定的 shardchain 的validator都需要追踪所有其他 shardchain 的狀態（輸出隊列），隨著 shardchain 總數的增加，這將需要過多的計算能力和網路帶寬，從而限制了系統的可擴展性。因此，無法直接從任何 shard 傳遞消息到其他每一個 shard。相反，每個 shard 只與其 $(w,s)$ shard 標識符中確切一個十六進制數位不同的 shard「連接」(cf.~\ptref{sp:shard.ident})。這樣，所有的 shardchain 構成一個「超立方體」圖，消息沿著這個超立方體的邊緣移動。
 
 如果消息被發送到與當前的 shard 不同的 shard，當前的 shard 標識符的十六進制數字（確定地選擇）被替換為目標 shard 的相應數字，並使用所得的標識符作為轉發消息的近端目標。\footnote{這不一定是用於計算超立方體路由的下一跳的算法的最終版本。特別是，十六進制數字可能會被 $r$-位群組替換，其中 $r$ 是一個可配置的參數，不一定等於四。}
 
-超立方體路由的主要優點是區塊有效性條件意味著創建 shardchain 的區塊的驗證者必須收集和處理「鄰近」shardchain 的輸出隊列中的消息，否則將失去他們的賭注。這樣，任何消息都可以預期最終會達到其最終目的地；消息不能在過程中丟失或傳遞兩次。
+超立方體路由的主要優點是區塊有效性條件意味著創建 shardchain 的區塊的validator必須收集和處理「鄰近」shardchain 的輸出隊列中的消息，否則將失去他們的賭注。這樣，任何消息都可以預期最終會達到其最終目的地；消息不能在過程中丟失或傳遞兩次。
 
 請注意，超立方體路由帶來了一些額外的延遲和開銷，因為必須通過幾個中間的 shardchain 轉發消息。然而，這些中間的 shardchain 的數量增長非常緩慢，作為 shardchain 總數 $N$ 的對數 $\log N$（更確切地說，$\lceil\log_{16}N\rceil-1$）。例如，如果 $N\approx250$，最多只有一個中間的 hop；對於 $N\approx4000$ 的 shardchain，最多有兩個。四個中間的 hop，我們可以支持多達一百萬的 shardchain。我們認為為系統的基本無限的可擴展性支付的這個代價是非常小的。事實上，甚至不必支付這個價格：
 
 \nxsubpoint\label{sp:instant.hypercube} \embt(Instant Hypercube
 Routing: ``fast path'' for messages.) TON Blockchain 的一個新功能是它引入了一個「快速路徑」，從一個 shardchain 轉發消息到任何其他 shardchain，在大多數情況下都可以完全繞過 \ptref{sp:hypercube} 中的「慢速」超立方體路由，並在最終目的地 shardchain 的下一個區塊中傳遞消息。
 
-該思路如下。在「慢速」的超立方體路由中，消息在超立方體的邊緣上（在網絡中）旅行，但在每個中間頂點都會被延遲（大約五秒鐘），以將其提交到相應的 shardchain，然後再繼續其旅程。
+該思路如下。在「慢速」的超立方體路由中，消息在超立方體的邊緣上（在網路中）旅行，但在每個中間頂點都會被延遲（大約五秒鐘），以將其提交到相應的 shardchain，然後再繼續其旅程。
 
-為了避免不必要的延遲，可以沿著超立方體的邊緣轉發消息和一個適當的 Merkle 證明，而不用等待將其提交到中間的 shardchains。實際上，網絡消息應該從原始 shard 的「任務組」的驗證者（cf.~\ptref{sp:val.task.grp}）轉發到目的地 shard 的「任務組」的指定區塊生產者（cf.~\ptref{sp:rot.gen.prio}）；這可能可以直接完成，而不沿著超立方體的邊緣。當這條帶有 Merkle 證明的消息到達目的地 shardchain 的驗證者（更確切地說，是 collators；cf.~\ptref{sp:collators}）時，他們可以立即將其提交到一個新的區塊，而不用等待消息完成沿著「慢路徑」的旅程。然後將交付確認以及一個適當的 Merkle 證明沿著超立方體的邊緣發回，並且可以通過提交一個特殊的交易來停止消息沿著「慢路徑」的旅程。
+為了避免不必要的延遲，可以沿著超立方體的邊緣轉發消息和一個適當的 Merkle 證明，而不用等待將其提交到中間的 shardchains。實際上，網路消息應該從原始 shard 的「任務組」的validator（cf.~\ptref{sp:val.task.grp}）轉發到目的地 shard 的「任務組」的指定區塊生產者（cf.~\ptref{sp:rot.gen.prio}）；這可能可以直接完成，而不沿著超立方體的邊緣。當這條帶有 Merkle 證明的消息到達目的地 shardchain 的validator（更確切地說，是 collators；cf.~\ptref{sp:collators}）時，他們可以立即將其提交到一個新的區塊，而不用等待消息完成沿著「慢路徑」的旅程。然後將交付確認以及一個適當的 Merkle 證明沿著超立方體的邊緣發回，並且可以通過提交一個特殊的交易來停止消息沿著「慢路徑」的旅程。
 
-請注意，這種「即時交付」機制並未取代在~\ptref{sp:hypercube} 中描述的「慢速」但是不會失敗的機制。仍然需要「慢路徑」，因為驗證者不能因失去或簡單地決定不將「快速路徑」消息提交到他們區塊鏈的新區塊而受到懲罰。\footnote{然而，驗證者有一定的動機盡快這樣做，因為他們將能夠收集與消息相關的所有轉發費用，這些費用尚未在慢路徑中被消耗。}
+請注意，這種「即時交付」機制並未取代在~\ptref{sp:hypercube} 中描述的「慢速」但是不會失敗的機制。仍然需要「慢路徑」，因為validator不能因失去或簡單地決定不將「快速路徑」消息提交到他們區塊鏈的新區塊而受到懲罰。\footnote{然而，validator有一定的動機盡快這樣做，因為他們將能夠收集與消息相關的所有轉發費用，這些費用尚未在慢路徑中被消耗。}
 
 因此，兩種消息轉發方法是平行運行的，只有在「快速」機制的成功證明被提交到一個中間的 shardchain 時，「慢速」機制才會被中止。%\footnote{實際上，可以暫時或永久禁用「即時交付」機制，系統將繼續運行，但速度會慢一些。}
 
@@ -629,13 +629,13 @@ messages from output queues of neighboring shardchains.) 當為 shardchain 提�
 
 \nxsubpoint\label{sp:out.q.del} \embt(Deleting messages from output queues.)  一旦觀察到輸出隊列中的訊息已被相鄰的分片鏈交付，則通過特殊交易明確地從輸出隊列中刪除它。
 
-\nxsubpoint\label{sp:deliver.q} \embt(Preventing double delivery of messages.) 為了防止從相鄰的分片鏈的輸出隊列中雙重交付訊息，每個分片鏈（更確切地說，其中的每個賬戶鏈）作為其狀態的一部分保持最近交付的訊息的集合（或僅其哈希值）。當觀察到已交付的訊息從其源相鄰分片鏈（參見\ptref{sp:out.q.del}）的輸出隊列中被刪除時，它也從最近交付的訊息的集合中被刪除。
+\nxsubpoint\label{sp:deliver.q} \embt(Preventing double delivery of messages.) 為了防止從相鄰的分片鏈的輸出隊列中雙重交付訊息，每個分片鏈（更確切地說，其中的每個賬戶鏈）作為其狀態的一部分保持最近交付的訊息的集合（或僅其雜湊值）。當觀察到已交付的訊息從其源相鄰分片鏈（參見\ptref{sp:out.q.del}）的輸出隊列中被刪除時，它也從最近交付的訊息的集合中被刪除。
 
 \nxsubpoint \embt(Forwarding messages intended for other shardchains.) 通過 Hypercube 路由（參見\ptref{sp:hypercube}）有時出站訊息不是交付給包含預期收件人的分片鏈，而是交付給位於到目的地的超立方體路徑上的相鄰分片鏈。在這種情況下，"交付"包括將入站訊息移動到出站隊列。這在塊中明確地反映為一個特殊的{\em 轉發交易}，其中包含該訊息。本質上，這看起來就像該訊息已被分片鏈內的某人接收，並且生成了一個相同的訊息作為結果。
 
-\nxsubpoint \embt(Payment for forwarding and keeping a message.) 轉發交易實際上消耗了一些瓦斯（取決於被轉發的訊息的大小），因此從被轉發的訊息的值中扣除了一筆瓦斯支付，代表此分片鏈的驗證器。此轉發支付通常遠小於當訊息最終交付給其收件人時所確定的瓦斯支付，即使該訊息由於超立方體路由而被轉發了多次。此外，只要某個分片鏈的輸出隊列中保持有訊息，它就是分片鏈的全局狀態的一部分，因此特殊交易也可能收取長時間保持全局數據的支付。
+\nxsubpoint \embt(Payment for forwarding and keeping a message.) 轉發交易實際上消耗了一些瓦斯（取決於被轉發的訊息的大小），因此從被轉發的訊息的值中扣除了一筆瓦斯支付，代表此分片鏈的validator。此轉發支付通常遠小於當訊息最終交付給其收件人時所確定的瓦斯支付，即使該訊息由於超立方體路由而被轉發了多次。此外，只要某個分片鏈的輸出隊列中保持有訊息，它就是分片鏈的全局狀態的一部分，因此特殊交易也可能收取長時間保持全局數據的支付。
 
-\nxsubpoint \embt(Messages to and from the masterchain.) 訊息可以直接從任何分片鏈發送到主鏈，反之亦然。但是，發送訊息到主鏈以及在主鏈中處理訊息的瓦斯價格相當高，因此只有在真正需要時才會使用此功能——例如，由驗證器來存入他們的賭注。在某些情況下，可能會定義發送到主鏈的訊息的最小存款（附加值），只有當接收方認為該訊息是“有效”的時候才會退還。
+\nxsubpoint \embt(Messages to and from the masterchain.) 訊息可以直接從任何分片鏈發送到主鏈，反之亦然。但是，發送訊息到主鏈以及在主鏈中處理訊息的瓦斯價格相當高，因此只有在真正需要時才會使用此功能——例如，由validator來存入他們的賭注。在某些情況下，可能會定義發送到主鏈的訊息的最小存款（附加值），只有當接收方認為該訊息是“有效”的時候才會退還。
 
 訊息不能自動通過主鏈路由。帶有 $\workchainid\neq-1$ 的訊息（其中 $-1$ 是表示主鏈的特殊 $\workchainid$）不能交付給主鏈。
 
@@ -657,24 +657,24 @@ messages from output queues of neighboring shardchains.) 當為 shardchain 提�
 我們從“高級”或“邏輯”描述開始，即全局狀態是代數類型 $\tp{ShardchainState}$ 的值。
 
 \nxsubpoint\label{sp:shard.state} \embt(Shardchain state as a
-collection of account-chain states.)  根據無限分片模型（參見\ptref{sp:ISP}），任何分片鏈只是虛擬“賬戶鏈”的（臨時）集合，每個賬戶鏈只包含一個賬戶。這意味著，本質上，全局分片鏈狀態必須是一個哈希映射
+collection of account-chain states.)  根據無限分片模型（參見\ptref{sp:ISP}），任何分片鏈只是虛擬“賬戶鏈”的（臨時）集合，每個賬戶鏈只包含一個賬戶。這意味著，本質上，全局分片鏈狀態必須是一個雜湊映射
 \begin{equation}\label{eq:simple.shard.st}
   \tp{ShardchainState}:=(\Account\dashrightarrow\tp{AccountState})
 \end{equation}
-其中所有作為此哈希映射的指數出現的 $\accountid$ 必須以前綴 $s$ 開始，如果我們正在討論分片 $(w,s)$ 的狀態（參見\ptref{sp:shard.ident}）。
+其中所有作為此雜湊映射的指數出現的 $\accountid$ 必須以前綴 $s$ 開始，如果我們正在討論分片 $(w,s)$ 的狀態（參見\ptref{sp:shard.ident}）。
 
-實際上，我們可能希望將 $\tp{AccountState}$ 分成幾個部分（例如，保持賬戶輸出訊息隊列的獨立，以簡化相鄰分片鏈的檢查），並在 $\tp{ShardchainState}$ 內部擁有幾個哈希映射 $(\Account\dashrightarrow\tp{AccountStatePart}_i)$。我們還可能向 $\tp{ShardchainState}$ 添加少量“全局”或“整體”參數，（例如，屬於此分片的所有賬戶的總餘額，或所有輸出隊列中的訊息總數）。
+實際上，我們可能希望將 $\tp{AccountState}$ 分成幾個部分（例如，保持賬戶輸出訊息隊列的獨立，以簡化相鄰分片鏈的檢查），並在 $\tp{ShardchainState}$ 內部擁有幾個雜湊映射 $(\Account\dashrightarrow\tp{AccountStatePart}_i)$。我們還可能向 $\tp{ShardchainState}$ 添加少量“全局”或“整體”參數，（例如，屬於此分片的所有賬戶的總餘額，或所有輸出隊列中的訊息總數）。
 
 然而，\eqref{eq:simple.shard.st} 是分片鏈全局狀態的一個很好的初步近似值，至少從“邏輯”（“高級”）的角度來看。可以使用TL方案（參見\ptref{sp:TL}）的幫助來進行代數類型 $\tp{AccountState}$ 和 $\tp{ShardchainState}$ 的正式描述，該描述將在其他地方提供。
 
 \nxsubpoint\label{sp:split.merge.state} \embt(Splitting and merging shardchain states.)
-請注意，無限分片模型描述的分片鏈狀態 \eqref{eq:simple.shard.st} 顯示了當分片被分裂或合併時，該狀態應如何被處理。實際上，這些狀態變換變得是非常簡單的哈希映射操作。
+請注意，無限分片模型描述的分片鏈狀態 \eqref{eq:simple.shard.st} 顯示了當分片被分裂或合併時，該狀態應如何被處理。實際上，這些狀態變換變得是非常簡單的雜湊映射操作。
 
 \nxsubpoint \embt(Account-chain state.)
 (虛擬的)賬戶鏈狀態只是一個賬戶的狀態，由類型 $\tp{AccountState}$ 描述。通常它具有在~\ptref{sp:account.state} 中列出的所有或某些字段，具體取決於使用的構造器。
 
 \nxsubpoint \embt(Global workchain state.)
-與 \eqref{eq:simple.shard.st} 類似，我們可以使用相同的公式定義全局的 {\em workchain\/} 狀態，但 $\accountid$'s 可以取任何值，不僅僅是屬於一個分片的值。在這種情況下，也適用於~\ptref{sp:shard.state} 中所做的類似備註：我們可能想要將此哈希映射分裂成幾個哈希映射，我們可能想要添加一些“整體”的參數，如總餘額。
+與 \eqref{eq:simple.shard.st} 類似，我們可以使用相同的公式定義全局的 {\em workchain\/} 狀態，但 $\accountid$'s 可以取任何值，不僅僅是屬於一個分片的值。在這種情況下，也適用於~\ptref{sp:shard.state} 中所做的類似備註：我們可能想要將此雜湊映射分裂成幾個雜湊映射，我們可能想要添加一些“整體”的參數，如總餘額。
 
 本質上，全局的工作鏈狀態 {\em must\/} 被給予與分片鏈狀態相同的類型 $\tp{ShardchainState}$，因為如果這個工作鏈的所有現有分片鏈突然合併成一個，我們會得到的就是這個分片鏈狀態。
 
@@ -685,14 +685,14 @@ collection of account-chain states.)  根據無限分片模型（參見\ptref{sp
 
 每個這樣的cell都由兩個「descriptor bytes」組成，定義某些標誌和值$0\leq b\leq 128$，表示原始bytes的數量，以及$0\leq c\leq 4$，這是指向其他cells的引用數量。然後是$b$個原始bytes和$c$個cell引用。\footnote{可以顯示，如果經常需要儲存在cell樹中的所有資料的Merkle proofs，則應該使用$b+ch\approx 2(h+r)$的cells來最小化平均Merkle proof大小，其中$h=32$是hash在bytes中的大小，而$r\approx4$是cell引用的「byte大小」。換句話說，一個cell應該包含兩個引用和一些原始bytes，或一個引用和大約36原始bytes，或完全沒有引用但是有72原始bytes。}
 
-cell引用的確切格式取決於它的實現，以及cell是否位於RAM、磁碟、網絡封包、block等。一個有用的抽象模型是想像所有cells都存放在內容可寄存的記憶體中，cell的地址等於其($\Sha$) hash。回想一下，cell的(Merkle) hash正是通過將其子cell的引用替換為它們（遞迴計算的）hashes並hash生成的byte string來計算的。
+cell引用的確切格式取決於它的實現，以及cell是否位於RAM、磁碟、網路封包、block等。一個有用的抽象模型是想像所有cells都存放在內容可寄存的記憶體中，cell的地址等於其($\Sha$) hash。回想一下，cell的(Merkle) hash正是通過將其子cell的引用替換為它們（遞迴計算的）hashes並hash生成的byte string來計算的。
 
 這樣，如果我們使用cell hashes來引用cells（例如，在其他cells的描述中），系統稍微簡化，且cell的hash開始與代表它的byte string的hash相符。
 
 現在我們看到，{\em 任何TVM可以表示的對象，包括全局shardchain狀態，都可以表示為一個「bag of cells」} ——即，{\em 一個cells的集合以及指向其中之一的「root」引用}（例如，通過hash）。請注意，重複的cells從此描述中被刪除了（「bag of cells」是cells的集合，而不是多重集），所以抽象的樹表示實際上可能變成了一個有向無環圖(dag)表示。
 
 
-人甚至可以在硬碟上使用$B$-tree或$B+$-tree來保存這個狀態，包含所有相關的cells（也許還有一些附加數據，如子樹高度或引用計數器），並由cell hash進行索引。但是，這個想法的簡單實現會導致一個智能合約的狀態被散佈在磁盤文件的遠處，這是我們想要避免的。\footnote{更好的實現方法是，如果smart contract的狀態很小，就將其保存為序列化的字符串，如果很大，則保存在另一個$B$-tree中；然後代表blockchain狀態的頂層結構將是一個$B$-tree，其葉子節點被允許包含對其他$B$-tree的引用。}
+人甚至可以在硬碟上使用$B$-tree或$B+$-tree來保存這個狀態，包含所有相關的cells（也許還有一些附加數據，如子樹高度或引用計數器），並由cell hash進行索引。但是，這個想法的簡單實現會導致一個智能合約的狀態被散佈在硬碟文件的遠處，這是我們想要避免的。\footnote{更好的實現方法是，如果smart contract的狀態很小，就將其保存為序列化的字符串，如果很大，則保存在另一個$B$-tree中；然後代表blockchain狀態的頂層結構將是一個$B$-tree，其葉子節點被允許包含對其他$B$-tree的引用。}
 
 現在我們將詳細解釋TON Blockchain使用的幾乎所有對象如何可以表示為「bag of cells」，從而展示這種方法的普遍性。
 
@@ -712,7 +712,7 @@ Shardchain block本身也可以用代數類型來描述，並存儲為「bag of 
 注意，一個（廣義的）Merkle證明——例如，從已知的$\Hash(x)=h$開始聲稱$x[i]=y$（參見~\ptref{sp:merkle.proof}和~\ptref{sp:gen.merkle.proof}）——也可以表示為「bag of cells」。具體來說，只需要提供一組cells子集，對應從$x:\Hashmap(n,X)$的根到其所需的具有索引$i:\st2^n$和值$y:X$的葉子的路徑。在此證明中，不位於此路徑上的這些cells的子項的引用將保持「未解決」，由cell hashes表示。還可以同時提供，例如，$x[i]=y$和$x[i']=y'$的Merkle證明，通過在「bag of cells」中包括位於從$x$的根到對應於索引$i$和~$i'$的葉子的兩條路徑的聯合上的cells。
 
 \nxsubpoint\label{sp:merkle.query.resp} \embt(Merkle proofs as query responses from full nodes.)
-實質上，擁有shardchain（或account-chain）狀態完整副本的完整節點可以在被輕節點（例如，運行TON Blockchain客戶端輕版本的網絡節點）請求時提供Merkle證明，使接收者能夠僅使用此Merkle證明中提供的cells執行一些簡單的查詢，而不需要外部幫助。輕節點可以將其查詢以序列化格式發送給完整節點，並接收正確的答案和Merkle證明——或僅僅是Merkle證明，因為請求者應該能夠僅使用Merkle證明中包含的cells來計算答案。這個Merkle證明將僅由一個「bag of cells」組成，只包含屬於shardchain狀態的那些cells，在執行輕節點的查詢時由完整節點訪問。此方法尤其可用於執行智能合約的「get queries」（參見~\ptref{sp:tent.exec.get}）。
+實質上，擁有shardchain（或account-chain）狀態完整副本的完整節點可以在被輕節點（例如，運行TON Blockchain客戶端輕版本的網路節點）請求時提供Merkle證明，使接收者能夠僅使用此Merkle證明中提供的cells執行一些簡單的查詢，而不需要外部幫助。輕節點可以將其查詢以序列化格式發送給完整節點，並接收正確的答案和Merkle證明——或僅僅是Merkle證明，因為請求者應該能夠僅使用Merkle證明中包含的cells來計算答案。這個Merkle證明將僅由一個「bag of cells」組成，只包含屬於shardchain狀態的那些cells，在執行輕節點的查詢時由完整節點訪問。此方法尤其可用於執行智能合約的「get queries」（參見~\ptref{sp:tent.exec.get}）。
 
 \nxsubpoint\label{sp:aug.upd} \embt(Augmented update, or state update with Merkle proof of validity.)
 回想一下（參見~\ptref{sp:obj.update}），我們可以透過「update」來描述從舊值$x:X$到新值$x':X$的物件狀態變化，這只是一個「bag of cells」，其中包含那些位於表示新值$x'$的子樹中的cells，但不包含位於表示舊值$x$的子樹中的cells，因為假設接收者擁有舊值$x$及其所有的cells複本。
@@ -727,7 +727,7 @@ Shardchain block本身也可以用代數類型來描述，並存儲為「bag of 
 現在，如果包含在block中的所有狀態更新都是增強的，它們的有效性可以輕鬆檢查，並且其無效性也可以輕鬆顯示為違反（廣義）Merkle hashes的遞迴定義特性。
 
 \nxsubpoint\label{sp:everything.is.BoC} \embt(``Everything is a bag of cells'' philosophy.)
-前面的討論表明，我們在TON Blockchain或網絡中需要存儲或傳輸的所有內容都可以表示為「bag of cells」。這是TON Blockchain設計哲學的重要部分。一旦解釋了「bag of cells」方法並定義了一些「bags of cells」的「低階」序列化，就可以在抽象（依賴性）代數數據類型的高層次上定義所有內容（如block格式、shardchain和賬戶狀態等）。
+前面的討論表明，我們在TON Blockchain或網路中需要存儲或傳輸的所有內容都可以表示為「bag of cells」。這是TON Blockchain設計哲學的重要部分。一旦解釋了「bag of cells」方法並定義了一些「bags of cells」的「低階」序列化，就可以在抽象（依賴性）代數數據類型的高層次上定義所有內容（如block格式、shardchain和賬戶狀態等）。
 
 「一切都是bag of cells」哲學的統一效果大大簡化了看似不相關的服務的實現；有關涉及付款通道的示例，請參見~\ptref{sp:ton.smart.pc.supp}。
 
@@ -739,14 +739,14 @@ Shardchain block本身也可以用代數類型來描述，並存儲為「bag of 
 
 \mysubsection{創建和驗證新的Blocks}\label{sect:validators}
 
-TON Blockchain最終由shardchain和masterchain blocks組成。為了系統順利且正確地運作，必須創建、驗證這些blocks，並通過網絡將其傳播到所有相關方。
+TON Blockchain最終由shardchain和masterchain blocks組成。為了系統順利且正確地運作，必須創建、驗證這些blocks，並通過網路將其傳播到所有相關方。
 
 
 \nxsubpoint\label{sp:validators} \embt(Validators.)  新的blocks由特定的節點創建和驗證，這些節點被稱為{\em validators}。實質上，任何希望成為validator的節點都可以成為validator，前提是它可以在masterchain中存入足夠多的抵押金（以TON幣，即Grams；參考\ Appendix~\ptref{app:coins}）。Validators為良好的工作獲得一些「獎勵」，即所有交易、存儲和燃氣費用，以及一些新鑄造的幣，這反映了整個社群對validators的「感激」，因為它們使TON Blockchain持續運作。這筆收入按照所有參與validators的抵押金比例分配。
 
 然而，成為validator是一項重大的責任。如果validator簽署了一個無效的block，它可能會失去部分或全部的抵押金，並且可能會暫時或永久地被排除在validators之外。如果validator不參與創建block，它不會收到與該block相關的獎勵部分。如果validator長時間不創建新的blocks，它可能會失去部分的抵押金，並被暫停或永久排除在validators之外。
 
-這一切都意味著validator不是輕而易舉地獲得金錢。事實上，它必須追踪所有或某些shardchains的狀態（每個validator負責驗證和創建某一子集shardchains中的新blocks），執行這些shardchains中的智能合約所請求的所有計算，接收其他shardchains的更新等等。這項活動需要大量的磁碟空間、計算能力和網絡帶寬。
+這一切都意味著validator不是輕而易舉地獲得金錢。事實上，它必須追踪所有或某些shardchains的狀態（每個validator負責驗證和創建某一子集shardchains中的新blocks），執行這些shardchains中的智能合約所請求的所有計算，接收其他shardchains的更新等等。這項活動需要大量的磁碟空間、計算能力和網路帶寬。
 
 \nxsubpoint \embt(Validators instead of miners.)  請記住，TON Blockchain使用的是Proof-of-Stake方法，而不是Bitcoin、當前版本的Ethereum和大多數其他加密貨幣採用的Proof-of-Work方法。這意味著人們不能通過提供某些工作證明（計算大量其他無用的hashes）來「挖掘」新的block，並因此獲得一些新的幣。相反，人們必須成為validator，並花費自己的計算資源來存儲和處理TON Blockchain的請求和數據。簡而言之，{\em 要挖新幣，必須成為validator。}就這一點而言，{\em validators就是新的miners。}
 
@@ -758,7 +758,7 @@ TON Blockchain最終由shardchain和masterchain blocks組成。為了系統順�
 
 Proof-of-Stake世界中的相應概念是{\em nominator}。實質上，這是一個將其資金借給validator以增加其抵押金的節點；然後validator將其獎勵的相應部分（或之前同意的一部分，例如50\%）分配給nominator。
 
-通過這種方式，nominator也可以參與「挖掘」並獲得與其存款金額成正比的一些獎勵。它只獲得validator獎勵的一部分，因為它只提供了「資本」，但不需要購買計算能力、存儲和網絡帶寬。
+通過這種方式，nominator也可以參與「挖掘」並獲得與其存款金額成正比的一些獎勵。它只獲得validator獎勵的一部分，因為它只提供了「資本」，但不需要購買計算能力、存儲和網路帶寬。
 
 但是，如果validator因無效行為而失去其抵押金，nominator也會失去其抵押金的部分。在這種意義上，nominator {\em 分擔風險}。它必須明智地選擇其nominated validator，否則可能會損失資金。在這種意義上，nominator進行加權決策並使用其資金「投票」支持某些validator。
 
@@ -766,7 +766,7 @@ Proof-of-Stake世界中的相應概念是{\em nominator}。實質上，這是一
 
 \nxsubpoint\label{sp:fish} \embt(Fishermen: obtaining money by pointing out others' mistakes.)  另一種不成為validator而獲得一些獎勵的方式是成為一名{\em fisherman}。實質上，任何節點都可以通過在masterchain中存入少量資金成為fisherman。然後，它可以使用特殊的masterchain交易來發布某些由validators之前簽名和發布的（通常是shardchain）blocks的（Merkle）無效性證明。如果其他validators同意這個無效性證明，則違規的validators將被懲罰（失去其抵押金的一部分），fisherman則獲得一些獎勵（從違規的validators中沒收的幣的一部分）。之後，如~\ptref{sp:inv.sh.blk.corr}中所述，必須更正無效的（shardchain）block。更正無效的masterchain blocks可能需要在先前提交的masterchain blocks之上創建「垂直」blocks（參見~\ptref{sp:inv.sh.blk.corr}）；無需創建masterchain的分叉。
 
-通常，一個fisherman需要成為至少某些shardchains的完整節點，並花費一些計算資源來運行至少一些智能合約的代碼。雖然fisherman不需要像validator那麼多的計算能力，但我們認為，一個天生的fisherman是一個準備處理新blocks，但尚未被選為validator的候選者（例如，由於未能存入足夠大的抵押金）。
+通常，一個fisherman需要成為至少某些shardchains的完整節點，並花費一些計算資源來運行至少一些智能合約的程式碼。雖然fisherman不需要像validator那麼多的計算能力，但我們認為，一個天生的fisherman是一個準備處理新blocks，但尚未被選為validator的候選者（例如，由於未能存入足夠大的抵押金）。
 
 \nxsubpoint\label{sp:collators} \embt(Collators: obtaining money by
 suggesting new blocks to validators.)  另一種不成為validator但可以獲得一些獎勵的方法是成為一個{\em collator}。這是一個節點，它為validator準備並建議新的shardchain block候選者，並使用從此shardchain的狀態和其他(通常是相鄰的) shardchains中取得的資料進行補充（collated），伴隨適當的Merkle證明。當需要從鄰近的shardchains轉發一些消息時，這是必要的。然後，validator可以輕鬆檢查所提議的block候選者的有效性，無需下載此或其他shardchains的完整狀態。
@@ -795,37 +795,37 @@ validators的抵押金被凍結，直到他們被選舉的時期結束，再加�
 
 
 \nxsubpoint\label{sp:val.task.grp} \embt(Election of validator ``task
-groups''.)  整體的全域驗證者集合（其中每個驗證者都被視為具有與其股份相等的多重性 - 否則驗證者可能會被誘使承擔多個身份並在它們之間劃分其股份）只用於驗證新的 masterchain 區塊。 shardchain 的區塊只由特定選擇的驗證者子集驗證，這些驗證者是從在\ptref{sp:global.valid}中描述的選擇的全域驗證者集合中選擇的。
+groups''.)  整體的全域validator集合（其中每個validator都被視為具有與其股份相等的多重性 - 否則validator可能會被誘使承擔多個身份並在它們之間劃分其股份）只用於驗證新的 masterchain 區塊。 shardchain 的區塊只由特定選擇的validator子集驗證，這些validator是從在\ptref{sp:global.valid}中描述的選擇的全域validator集合中選擇的。
 
-這些驗證者「子集」或「任務組」，為每個 shard 定義，每小時（實際上，每 $2^{10}$ 個 masterchain 區塊）旋轉一次，它們在一小時前就已知，因此每個驗證者都知道它將需要驗證哪些 shards，並可以為此做準備（例如，通過下載丟失的 shardchain 數據）。
+這些validator「子集」或「任務組」，為每個 shard 定義，每小時（實際上，每 $2^{10}$ 個 masterchain 區塊）旋轉一次，它們在一小時前就已知，因此每個validator都知道它將需要驗證哪些 shards，並可以為此做準備（例如，通過下載丟失的 shardchain 數據）。
 
-用於為每個 shard $(w,s)$ 選擇驗證者任務組的算法是確定性偽隨機的。它使用驗證者嵌入到每個 masterchain 區塊中的偽隨機數（通過使用閾值簽名生成的共識生成）來創建一個隨機種子，然後例如為每個驗證者計算 $\Hash(\code(w).\code(s).\vr{validator\_id}.\vr{rand\_seed})$。然後按此 hash 的值對驗證者進行排序，並選擇第一個驗證者，以便至少具有總驗證者股份的 $20/T$ 並且由至少5個驗證者組成。
+用於為每個 shard $(w,s)$ 選擇validator任務組的算法是確定性偽隨機的。它使用validator嵌入到每個 masterchain 區塊中的偽隨機數（通過使用閾值簽名生成的共識生成）來創建一個隨機種子，然後例如為每個validator計算 $\Hash(\code(w).\code(s).\vr{validator\_id}.\vr{rand\_seed})$。然後按此 hash 的值對validator進行排序，並選擇第一個validator，以便至少具有總validator股份的 $20/T$ 並且由至少5個validator組成。
 
 這種選擇可以由特殊的智能合約完成。在這種情況下，選擇算法將可以輕鬆升級，無需通過\ptref{sp:config.param}中提到的投票機制進行硬分叉。迄今為止提到的所有其他「常數」（例如 $2^{19}$、$2^{10}$、$T$、20 和 5）也都是可配置的參數。
 
 \nxsubpoint\label{sp:rot.gen.prio} \embt(Rotating priority order on
 each task group.)  在 shard 任務組的成員上有一個特定的「優先順序」，取決於先前 masterchain 區塊的 hash 和 (shardchain) 區塊序列號。此順序是通過生成並排序上述的某些 hash 來確定的。
 
-當需要生成新的 shardchain 區塊時，通常選擇用於創建此區塊的 shard 任務組驗證者是根據此旋轉「優先順序」的第一名。如果它未能創建該區塊，第二或第三個驗證者也可能這樣做。基本上，他們都可以建議他們的區塊候選者，但是由具有最高優先權的驗證者建議的候選者應該作為 Byzantine Fault Tolerant (BFT) 共識協議的結果獲勝。
+當需要生成新的 shardchain 區塊時，通常選擇用於創建此區塊的 shard 任務組validator是根據此旋轉「優先順序」的第一名。如果它未能創建該區塊，第二或第三個validator也可能這樣做。基本上，他們都可以建議他們的區塊候選者，但是由具有最高優先權的validator建議的候選者應該作為 Byzantine Fault Tolerant (BFT) 共識協議的結果獲勝。
 
 
 \nxsubpoint\label{sp:sh.blk.cand.prop} \embt(Propagation of shardchain
-block candidates.)  因為shardchain任務組的成員資格提前一小時就已知，它們的成員可以利用這段時間建立一個專用的「shard 驗證者多播覆蓋網絡」，使用TON Network的一般機制 (cf.~\ptref{sect:overlay})。當需要生成一個新的shardchain區塊時—通常在最近的masterchain區塊被傳播後的一兩秒鐘—每個人都知道誰有最高的優先權生成下一個區塊 (cf.~\ptref{sp:rot.gen.prio})。這個驗證者將創建一個新的整合的區塊候選者，無論是自己還是在整合者的幫助下 (cf.~\ptref{sp:collators})。驗證者必須檢查（驗證）此區塊候選者（尤其是如果它是由某個整合者準備的）並用其（驗證者）私鑰簽名。然後，使用預先安排的多播覆蓋網絡將區塊候選者傳播到任務組的其餘部分 (該任務組根據\ptref{sect:overlay}中的解釋創建自己的私有覆蓋網絡，然後使用\ptref{sp:streaming.multicast}中描述的串流多播協議的版本來傳播區塊候選者)。
+block candidates.)  因為shardchain任務組的成員資格提前一小時就已知，它們的成員可以利用這段時間建立一個專用的「shard validator多播覆蓋網路」，使用TON Network的一般機制 (cf.~\ptref{sect:overlay})。當需要生成一個新的shardchain區塊時—通常在最近的masterchain區塊被傳播後的一兩秒鐘—每個人都知道誰有最高的優先權生成下一個區塊 (cf.~\ptref{sp:rot.gen.prio})。這個validator將創建一個新的整合的區塊候選者，無論是自己還是在整合者的幫助下 (cf.~\ptref{sp:collators})。validator必須檢查（驗證）此區塊候選者（尤其是如果它是由某個整合者準備的）並用其（validator）私鑰簽名。然後，使用預先安排的多播覆蓋網路將區塊候選者傳播到任務組的其餘部分 (該任務組根據\ptref{sect:overlay}中的解釋創建自己的私有覆蓋網路，然後使用\ptref{sp:streaming.multicast}中描述的串流多播協議的版本來傳播區塊候選者)。
 
-真正的BFT方式是使用拜占庭多播協議，例如Honey Badger BFT中使用的協議~\cite{HoneyBadger}：通過一個$(N,2N/3)$-消除代碼對區塊候選者進行編碼，將結果數據的$1/N$直接發送到組的每個成員，並期望他們將其數據的部分直接多播到組的所有其他成員。
+真正的BFT方式是使用拜占庭多播協議，例如Honey Badger BFT中使用的協議~\cite{HoneyBadger}：通過一個$(N,2N/3)$-消除程式碼對區塊候選者進行編碼，將結果數據的$1/N$直接發送到組的每個成員，並期望他們將其數據的部分直接多播到組的所有其他成員。
 
-然而，一個更快且更簡單的方法（參見\ptref{sp:streaming.multicast}）是將區塊候選者分成一系列簽名的一千字節區塊（「chunks」），通過Reed--Solomon或泉代碼（如RaptorQ code~\cite{RaptorQ} \cite{Raptor}）擴充它們的序列，並開始傳輸chunks到「多播網格」（即覆蓋網絡）中的鄰居，期望他們將這些chunks進一步傳播。一旦驗證者獲得足夠的chunks來從中重建區塊候選者，它就會簽署一個確認收據並通過其鄰居將其傳播到整個組。然後，它的鄰居停止向它發送新的chunks，但可能會繼續發送這些chunks的（原始）簽名，認為該節點可以通過應用Reed--Solomon或泉代碼自行生成後續的chunks（擁有所有必要的數據），將它們與簽名組合起來，並傳播給還沒有準備好的鄰居。
+然而，一個更快且更簡單的方法（參見\ptref{sp:streaming.multicast}）是將區塊候選者分成一系列簽名的一千字節區塊（「chunks」），通過Reed--Solomon或泉程式碼（如RaptorQ code~\cite{RaptorQ} \cite{Raptor}）擴充它們的序列，並開始傳輸chunks到「多播網格」（即覆蓋網路）中的鄰居，期望他們將這些chunks進一步傳播。一旦validator獲得足夠的chunks來從中重建區塊候選者，它就會簽署一個確認收據並通過其鄰居將其傳播到整個組。然後，它的鄰居停止向它發送新的chunks，但可能會繼續發送這些chunks的（原始）簽名，認為該節點可以通過應用Reed--Solomon或泉程式碼自行生成後續的chunks（擁有所有必要的數據），將它們與簽名組合起來，並傳播給還沒有準備好的鄰居。
 
-如果在移除所有「壞」節點後「多播網格」（覆蓋網絡）仍保持連接（回想一下，允許最多三分之一的節點以拜占庭方式壞掉，即以任意惡意方式行為），則此算法將以最快的方式傳播區塊候選者。
+如果在移除所有「壞」節點後「多播網格」（覆蓋網路）仍保持連接（回想一下，允許最多三分之一的節點以拜占庭方式壞掉，即以任意惡意方式行為），則此算法將以最快的方式傳播區塊候選者。
 
-不僅指定的高優先級區塊創建者可以將其區塊候選者多播到整個組。第二和第三優先順序的驗證者可能會開始多播他們的區塊候選者，無論是立即還是在未能從最高優先級的驗證者那裡接收到區塊候選者之後。但是，通常只有最大優先權的區塊候選者將被所有（實際上，至少由三分之二的任務組）驗證者簽名並作為新的shardchain區塊提交。
+不僅指定的高優先級區塊創建者可以將其區塊候選者多播到整個組。第二和第三優先順序的validator可能會開始多播他們的區塊候選者，無論是立即還是在未能從最高優先級的validator那裡接收到區塊候選者之後。但是，通常只有最大優先權的區塊候選者將被所有（實際上，至少由三分之二的任務組）validator簽名並作為新的shardchain區塊提交。
 
 
-\nxsubpoint \embt(Validation of block candidates.)  一旦 block candidate 被 validator 接收並檢查其起始 validator 的簽名，接收 validator 會檢查此 block candidate 的有效性，執行其中的所有交易並確保其結果與所聲稱的一致。從其他區塊鏈導入的所有消息都必須在 collated data 中有適當的 Merkle 證明，否則 block candidate 將被視為無效（並且，如果此證明被提交到 masterchain，則可能會懲罰已經簽署此 block candidate 的 validator）。另一方面，如果 block candidate 被認定為有效，接收 validator 會簽署它並將其簽名傳播給組中的其他 validator，可以通過「mesh multicast network」或直接的網絡消息。
+\nxsubpoint \embt(Validation of block candidates.)  一旦 block candidate 被 validator 接收並檢查其起始 validator 的簽名，接收 validator 會檢查此 block candidate 的有效性，執行其中的所有交易並確保其結果與所聲稱的一致。從其他區塊鏈導入的所有消息都必須在 collated data 中有適當的 Merkle 證明，否則 block candidate 將被視為無效（並且，如果此證明被提交到 masterchain，則可能會懲罰已經簽署此 block candidate 的 validator）。另一方面，如果 block candidate 被認定為有效，接收 validator 會簽署它並將其簽名傳播給組中的其他 validator，可以通過「mesh multicast network」或直接的網路消息。
 
-我們想強調，{\em validator 在檢查（collated）block candidate 的有效性時，不需要訪問此 shardchain 或相鄰 shardchain 的狀態}。\footnote{一個可能的例外是相鄰 shardchain 的輸出隊列的狀態，因為在這種情況下，Merkle 證明的大小可能會變得過大。} 這使得驗證可以非常快速地進行（不需要磁盤訪問），並減輕了 validator 的計算和存儲負擔（尤其是如果他們願意接受外部 collators 的幫助來創建 block candidate）。
+我們想強調，{\em validator 在檢查（collated）block candidate 的有效性時，不需要訪問此 shardchain 或相鄰 shardchain 的狀態}。\footnote{一個可能的例外是相鄰 shardchain 的輸出隊列的狀態，因為在這種情況下，Merkle 證明的大小可能會變得過大。} 這使得驗證可以非常快速地進行（不需要硬碟訪問），並減輕了 validator 的計算和存儲負擔（尤其是如果他們願意接受外部 collators 的幫助來創建 block candidate）。
 
-\nxsubpoint\label{sp:new.shardc.blk} \embt(Election of the next block candidate.)  一旦 block candidate 收集到 task group 中至少三分之二（按 stake）的 validator 的有效簽名，它就有資格被提交為下一個 shardchain block。運行一個 BFT 協議來達成對所選 block candidate 的共識（可能有多個提議），所有「好的」validator 都會優先選擇該輪中優先級最高的 block candidate。運行此協議的結果是，該 block 會被至少三分之二的 validator（按 stake）的簽名所增強。這些簽名不僅證明了所問 block 的有效性，還證明了它是由 BFT 協議選出的。之後，將 block（無 collated data）與這些簽名組合，以確定的方式序列化，然後通過網絡傳播給所有相關方。
+\nxsubpoint\label{sp:new.shardc.blk} \embt(Election of the next block candidate.)  一旦 block candidate 收集到 task group 中至少三分之二（按 stake）的 validator 的有效簽名，它就有資格被提交為下一個 shardchain block。運行一個 BFT 協議來達成對所選 block candidate 的共識（可能有多個提議），所有「好的」validator 都會優先選擇該輪中優先級最高的 block candidate。運行此協議的結果是，該 block 會被至少三分之二的 validator（按 stake）的簽名所增強。這些簽名不僅證明了所問 block 的有效性，還證明了它是由 BFT 協議選出的。之後，將 block（無 collated data）與這些簽名組合，以確定的方式序列化，然後通過網路傳播給所有相關方。
 
 \nxsubpoint \embt(Validators must keep the blocks they have signed.)  在他們成為 task group 的成員期間，以及之後至少一小時（或者 $2^{10}$ blocks），validator 預期會保留他們已簽署和提交的 block。如果未能向其他 validator 提供簽署的 block，可能會受到懲罰。
 
@@ -835,81 +835,81 @@ block candidates.)  因為shardchain任務組的成員資格提前一小時就�
 
 
 \nxsubpoint \embt(Validators must keep the state of masterchain.)  
-所有的驗證者都預期要追踪 masterchain 的狀態，而不依賴於彙整的數據。這很重要，因為驗證者工作組的知識是從 masterchain 的狀態中衍生出來的。
+所有的validator都預期要追踪 masterchain 的狀態，而不依賴於彙整的數據。這很重要，因為validator工作組的知識是從 masterchain 的狀態中衍生出來的。
 
 \nxsubpoint \embt(Shardchain blocks are generated and propagated in parallel.)  
-通常，每個驗證者都是幾個 shardchain 任務組的成員;他們的數量（因此驗證者的負載）大約與驗證者的股份成正比。這意味著驗證者同時運行多個新的 shardchain 區塊生成協議。
+通常，每個validator都是幾個 shardchain 任務組的成員;他們的數量（因此validator的負載）大約與validator的股份成正比。這意味著validator同時運行多個新的 shardchain 區塊生成協議。
 
 \nxsubpoint \embt(Mitigation of block retention attacks.)  
-因為所有驗證者在只看到其標頭和簽名後就將一個新的 shardchain 區塊的 hash 插入到 masterchain 中，因此存在一個小概率，即生成此區塊的驗證者會密謀並試圖避免發佈整個新區塊。這將導致鄰近 shardchains 的驗證者無法創建新的區塊，因為一旦它的 hash 被提交到 masterchain 中，他們必須至少知道新區塊的輸出消息隊列。
+因為所有validator在只看到其標頭和簽名後就將一個新的 shardchain 區塊的 hash 插入到 masterchain 中，因此存在一個小概率，即生成此區塊的validator會密謀並試圖避免發佈整個新區塊。這將導致鄰近 shardchains 的validator無法創建新的區塊，因為一旦它的 hash 被提交到 masterchain 中，他們必須至少知道新區塊的輸出消息隊列。
 
-為了緩解這種情況，新區塊必須從其他一些驗證者（例如，鄰近 shardchains 的任務組聯合的三分之二）收集簽名，證明這些驗證者確實擁有此區塊的副本並且願意在需要時將它們發送給其他驗證者。只有在提供這些簽名之後，新區塊的 hash 才可能包含在 masterchain 中。
+為了緩解這種情況，新區塊必須從其他一些validator（例如，鄰近 shardchains 的任務組聯合的三分之二）收集簽名，證明這些validator確實擁有此區塊的副本並且願意在需要時將它們發送給其他validator。只有在提供這些簽名之後，新區塊的 hash 才可能包含在 masterchain 中。
 
 \nxsubpoint \embt(Masterchain blocks are generated later than shardchain blocks.)  
 Masterchain 區塊大約每五秒生成一次，就像 shardchain 區塊一樣。但是，雖然所有 shardchains 中的新區塊的生成基本上是同時進行的（通常由釋放新的 masterchain 區塊觸發），但新的 masterchain 區塊的生成被故意延遲，以允許在 masterchain 中包含新生成的 shardchain 區塊的 hashes。
 
 \nxsubpoint\label{sp:slow.valid} \embt(Slow validators may receive lower rewards.)  
-如果一個驗證者“慢”，它可能無法驗證新的區塊候選者，並且收集提交新區塊所需的三分之二的簽名可能不需要它的參與。在這種情況下，它將收到與此區塊相關的較低份額的獎勵。
+如果一個validator“慢”，它可能無法驗證新的區塊候選者，並且收集提交新區塊所需的三分之二的簽名可能不需要它的參與。在這種情況下，它將收到與此區塊相關的較低份額的獎勵。
 
-這為驗證者提供了一個激勵，以優化他們的硬體、軟體和網路連接，以便盡可能快地處理用戶交易。
+這為validator提供了一個激勵，以優化他們的硬體、軟體和網路連接，以便盡可能快地處理用戶交易。
 
-但是，如果驗證者在區塊提交之前未簽名，則其簽名可能包含在接下來的一個或多個區塊中，然後這部分獎勵（根據已生成多少區塊而呈指數下降---例如，如果驗證者延遲$k$區塊則為$0.9^k$）仍將給予此驗證者。
+但是，如果validator在區塊提交之前未簽名，則其簽名可能包含在接下來的一個或多個區塊中，然後這部分獎勵（根據已生成多少區塊而呈指數下降---例如，如果validator延遲$k$區塊則為$0.9^k$）仍將給予此validator。
 
 
 \nxsubpoint\label{sp:val.sign.depth} \embt(``Depth'' of validator signatures.)  
-通常，當驗證者簽署一個區塊時，該簽名只證明了區塊的{\em 相對有效性\/}：只要這個和其他 shardchains 的所有先前區塊都是有效的，這個區塊就是有效的。驗證者不能因為將先前區塊中提交的無效數據視為理所當然而受到懲罰。
+通常，當validator簽署一個區塊時，該簽名只證明了區塊的{\em 相對有效性\/}：只要這個和其他 shardchains 的所有先前區塊都是有效的，這個區塊就是有效的。validator不能因為將先前區塊中提交的無效數據視為理所當然而受到懲罰。
 
-然而，區塊的驗證者簽名有一個稱為“深度”的整數參數。如果它是非零的，那就意味著驗證者也宣稱先前指定數量的區塊的(相對)有效性。這是“慢”或“暫時離線”的驗證者趕上並簽署一些已經提交但未經他們簽名的區塊的方式。然後區塊獎勵的一部分仍將給予他們（參見~\ptref{sp:slow.valid}）。
+然而，區塊的validator簽名有一個稱為“深度”的整數參數。如果它是非零的，那就意味著validator也宣稱先前指定數量的區塊的(相對)有效性。這是“慢”或“暫時離線”的validator趕上並簽署一些已經提交但未經他們簽名的區塊的方式。然後區塊獎勵的一部分仍將給予他們（參見~\ptref{sp:slow.valid}）。
 
 \nxsubpoint\label{sp:abs.val.from.rel} \embt(Validators are responsible for {\em relative\/} validity of signed shardchain blocks; absolute validity follows.)  
-我們想再次強調，驗證者在 shardchain 區塊 \(B\) 上的簽名只證明了該區塊的{\em 相對\/}有效性（或者如果簽名有“深度” \(d\)，也可能是 \(d\) 個先前的區塊的相對有效性，參見~\ptref{sp:val.sign.depth}；但這不太影響下面的討論）。換句話說，驗證者聲稱 shardchain 的下一個狀態 \(s'\) 是通過應用在~\ptref{sp:blk.transf}中描述的區塊評估函數 \(\evblock\) 從先前的狀態 \(s\) 獲得的：
+我們想再次強調，validator在 shardchain 區塊 \(B\) 上的簽名只證明了該區塊的{\em 相對\/}有效性（或者如果簽名有“深度” \(d\)，也可能是 \(d\) 個先前的區塊的相對有效性，參見~\ptref{sp:val.sign.depth}；但這不太影響下面的討論）。換句話說，validator聲稱 shardchain 的下一個狀態 \(s'\) 是通過應用在~\ptref{sp:blk.transf}中描述的區塊評估函數 \(\evblock\) 從先前的狀態 \(s\) 獲得的：
 \begin{equation}\label{eq:ev.block.2}
   s'=\evblock(B)(s)
 \end{equation}
-這樣，如果原始狀態 \(s\) 被證明為“不正確”（例如，由於先前區塊的無效性），那麼簽署了區塊 \(B\) 的驗證者不能被懲罰。漁夫（參見~\ptref{sp:fish}）只有在發現一個區塊是{\em 相對地\/}無效時才會抱怨。PoS 系統作為一個整體努力使每個區塊都是{\em 相對地\/}有效的，而不是{\em 遞迴地（或絕對地）}有效的。然而，注意到，{\em 如果 blockchain 中的所有區塊都是相對有效的，那麼它們所有的和 blockchain 作為一個整體都是絕對有效的}；使用對 blockchain 的長度的數學歸納法可以輕易地證明這一語句。通過這種方式，輕鬆可驗證的區塊的{\em 相對\/}有效性的聲明一起證明了整個 blockchain 的更強大的{\em 絕對有效性\/}。
+這樣，如果原始狀態 \(s\) 被證明為“不正確”（例如，由於先前區塊的無效性），那麼簽署了區塊 \(B\) 的validator不能被懲罰。漁夫（參見~\ptref{sp:fish}）只有在發現一個區塊是{\em 相對地\/}無效時才會抱怨。PoS 系統作為一個整體努力使每個區塊都是{\em 相對地\/}有效的，而不是{\em 遞迴地（或絕對地）}有效的。然而，注意到，{\em 如果 blockchain 中的所有區塊都是相對有效的，那麼它們所有的和 blockchain 作為一個整體都是絕對有效的}；使用對 blockchain 的長度的數學歸納法可以輕易地證明這一語句。通過這種方式，輕鬆可驗證的區塊的{\em 相對\/}有效性的聲明一起證明了整個 blockchain 的更強大的{\em 絕對有效性\/}。
 
-注意，通過簽署一個區塊~\(B\)，驗證者聲稱該區塊給定原始狀態 \(s\) 是有效的（即，~\eqref{eq:ev.block.2}的結果不是值 \(\bot\)，表示下一個狀態不能被計算）。因此，驗證者必須執行在評估~\eqref{eq:ev.block.2}期間訪問的原始狀態的 cell 的最小形式檢查。
+注意，通過簽署一個區塊~\(B\)，validator聲稱該區塊給定原始狀態 \(s\) 是有效的（即，~\eqref{eq:ev.block.2}的結果不是值 \(\bot\)，表示下一個狀態不能被計算）。因此，validator必須執行在評估~\eqref{eq:ev.block.2}期間訪問的原始狀態的 cell 的最小形式檢查。
 
-例如，想像一個情境，期望從提交到區塊的交易中訪問的賬戶的原始餘額的 cell 被發現有零個原始字節，而不是期望的 8 或 16。然後，原始餘額簡單地不能從 cell 中檢索，並且在嘗試處理該區塊時會發生“未處理的異常”。在這種情況下，驗證者不應該簽署這樣的區塊，否則將受到懲罰。
+例如，想像一個情境，期望從提交到區塊的交易中訪問的賬戶的原始餘額的 cell 被發現有零個原始字節，而不是期望的 8 或 16。然後，原始餘額簡單地不能從 cell 中檢索，並且在嘗試處理該區塊時會發生“未處理的異常”。在這種情況下，validator不應該簽署這樣的區塊，否則將受到懲罰。
 
 \nxsubpoint \embt(Signing masterchain blocks.)  
-與masterchain區塊的情況略有不同：簽署一個masterchain區塊，驗證者不僅聲明其相對有效性，而且還聲明所有先前區塊的相對有效性，直到這個驗證者承擔其責任的第一個區塊（但不再往回）。
+與masterchain區塊的情況略有不同：簽署一個masterchain區塊，validator不僅聲明其相對有效性，而且還聲明所有先前區塊的相對有效性，直到這個validator承擔其責任的第一個區塊（但不再往回）。
 
 \nxsubpoint \embt(The total number of validators.)  
-驗證者被選舉的總數的上限 \(T\) （參見~\ptref{sp:global.valid}）在迄今為止描述的系統中，不能超過，例如，幾百或一千，因為所有驗證者都預計參與BFT共識協議來創建每個新的masterchain區塊，並且尚不清楚這樣的協議是否可以擴展到數千參與者。更重要的是，masterchain區塊必須收集至少三分之二的所有驗證者（按權益）的簽名，並且這些簽名必須包含在新區塊中（否則系統中的所有其他節點都沒有理由信任新區塊而不自己驗證它）。如果必須在每個masterchain區塊中包括超過，例如，一千個驗證者簽名，這將意味著每個masterchain區塊中有更多的數據，所有完整節點都要存儲並通過網絡傳播，以及花費更多的處理能力來檢查這些簽名（在PoS系統中，完整節點不需要自己驗證區塊，但他們需要相反地檢查驗證者的簽名）。
+validator被選舉的總數的上限 \(T\) （參見~\ptref{sp:global.valid}）在迄今為止描述的系統中，不能超過，例如，幾百或一千，因為所有validator都預計參與BFT共識協議來創建每個新的masterchain區塊，並且尚不清楚這樣的協議是否可以擴展到數千參與者。更重要的是，masterchain區塊必須收集至少三分之二的所有validator（按權益）的簽名，並且這些簽名必須包含在新區塊中（否則系統中的所有其他節點都沒有理由信任新區塊而不自己驗證它）。如果必須在每個masterchain區塊中包括超過，例如，一千個validator簽名，這將意味著每個masterchain區塊中有更多的數據，所有完整節點都要存儲並通過網路傳播，以及花費更多的處理能力來檢查這些簽名（在PoS系統中，完整節點不需要自己驗證區塊，但他們需要相反地檢查validator的簽名）。
 
-雖然將 \(T\) 限制為一千個驗證者對於TON Blockchain的部署的第一階段似乎足夠了，但必須為未來的增長提供條款，當shardchains的總數變得如此之大，以至於幾百個驗證者不足以處理所有的shardchains。為此，我們引入了一個額外的可配置參數 \(T'\leq T\)（原本等於~\(T\)），並且只有前 \(T'\) 名被選舉的驗證者（按權益）預計創建和簽署新的masterchain區塊。
+雖然將 \(T\) 限制為一千個validator對於TON Blockchain的部署的第一階段似乎足夠了，但必須為未來的增長提供條款，當shardchains的總數變得如此之大，以至於幾百個validator不足以處理所有的shardchains。為此，我們引入了一個額外的可配置參數 \(T'\leq T\)（原本等於~\(T\)），並且只有前 \(T'\) 名被選舉的validator（按權益）預計創建和簽署新的masterchain區塊。
 
 
 \nxsubpoint \embt(Decentralization of the system.)  
-有人可能會懷疑，像TON Blockchain這樣的Proof-of-Stake系統，依賴\(T\approx1000\)的驗證者來創建所有shardchain和masterchain區塊，是否會變得“太集中”，與像Bitcoin或Ethereum這樣的傳統Proof-of-Work區塊鏈相反，其中每個人（原則上）都可能開採一個新區塊，沒有礦工總數的明確上限。
+有人可能會懷疑，像TON Blockchain這樣的Proof-of-Stake系統，依賴\(T\approx1000\)的validator來創建所有shardchain和masterchain區塊，是否會變得“太集中”，與像Bitcoin或Ethereum這樣的傳統Proof-of-Work區塊鏈相反，其中每個人（原則上）都可能開採一個新區塊，沒有礦工總數的明確上限。
 
 但是，像Bitcoin和Ethereum這樣的受歡迎的Proof-of-Work區塊鏈，目前需要大量的計算能力（高“hash rates”）以成功的概率開採新區塊。因此，新區塊的開採趨於集中在幾個大玩家手中，他們投資大量資金建立充滿為開採優化的定制硬體的數據中心；以及幾個大型的開採池手中，它們集中並協調了無法自己提供足夠“hash rate”的大量人的努力。
 
 因此，到2017年，超過75％的新Ethereum或Bitcoin區塊由少於十個礦工產生。實際上，兩個最大的Ethereum開採池共同生產了超過一半的所有新區塊！顯然，這樣的系統比依賴\(T\approx1000\)節點生產新區塊的系統更為集中。
 
-人們還可能注意到，成為TON Blockchain驗證者所需的投資——即購買硬體（例如，幾個高性能服務器）和權益（如有必要，可以通過提名者池輕鬆收集；參見~\ptref{sp:nominators}）——比成為成功的獨立Bitcoin或Ethereum礦工所需的要少。實際上，~\ptref{sp:global.valid}的參數\(L\)將迫使提名者不加入最大的“開採池”（即，積累了最大權益的驗證者），而是尋找目前正在接受提名者資金的較小的驗證者，甚至創建新的驗證者，因為這將允許更高比例的驗證者的——並且也是提名者的——權益被使用，從而獲得更大的開採獎勵。這種方式，TON Proof-of-Stake系統實際上{\em 鼓勵\/}去中心化（創建和使用更多的驗證者）並{\em 懲罰\/}集中化。
+人們還可能注意到，成為TON Blockchainvalidator所需的投資——即購買硬體（例如，幾個高性能伺服器）和權益（如有必要，可以通過提名者池輕鬆收集；參見~\ptref{sp:nominators}）——比成為成功的獨立Bitcoin或Ethereum礦工所需的要少。實際上，~\ptref{sp:global.valid}的參數\(L\)將迫使提名者不加入最大的“開採池”（即，積累了最大權益的validator），而是尋找目前正在接受提名者資金的較小的validator，甚至創建新的validator，因為這將允許更高比例的validator的——並且也是提名者的——權益被使用，從而獲得更大的開採獎勵。這種方式，TON Proof-of-Stake系統實際上{\em 鼓勵\/}去中心化（創建和使用更多的validator）並{\em 懲罰\/}集中化。
 
 \nxsubpoint\label{sp:rel.rel} \embt(Relative reliability of a block.)
-區塊的{\em (相對) 可靠性\/}簡單地說是已簽署此區塊的所有驗證者的總權益。換句話說，如果這個區塊被證明是無效的，某些行為者會失去的金額。如果有人關心的交易傳輸值低於區塊的可靠性，可以認為它們足夠安全。從這個意義上說，相對可靠性是外部觀察者可以對特定區塊的信任度的衡量。
+區塊的{\em (相對) 可靠性\/}簡單地說是已簽署此區塊的所有validator的總權益。換句話說，如果這個區塊被證明是無效的，某些行為者會失去的金額。如果有人關心的交易傳輸值低於區塊的可靠性，可以認為它們足夠安全。從這個意義上說，相對可靠性是外部觀察者可以對特定區塊的信任度的衡量。
 
 注意，我們談論的是區塊的{\em 相對\/}可靠性，因為它保證該區塊是有效的{\em 前提是前一個區塊和所有其他被參考的shardchains'區塊都是有效的\/}（參見~\ptref{sp:abs.val.from.rel}）。
 
-一個區塊的相對可靠性在提交後可能會增加——例如，當遲來的驗證者的簽名被添加時（參見~\ptref{sp:val.sign.depth}）。另一方面，如果其中一個驗證者因與其他區塊相關的不當行為而失去部分或全部權益，區塊的相對可靠性可能{\em 減少}。
+一個區塊的相對可靠性在提交後可能會增加——例如，當遲來的validator的簽名被添加時（參見~\ptref{sp:val.sign.depth}）。另一方面，如果其中一個validator因與其他區塊相關的不當行為而失去部分或全部權益，區塊的相對可靠性可能{\em 減少}。
 
-\nxsubpoint \embt("Strengthening" the blockchain.) 提供驅使驗證器提高區塊相對可靠性的激勵是很重要的。這樣做的一種方法是為驗證器分配小量的獎勵，以在其他shardchains的區塊上添加簽名。即使是“即將成為”的驗證器，他們已存入的股份不足以進入按股份排名前$T$的驗證器，並被包括在全局驗證器集合中（參見~\ptref{sp:global.valid}），也可能參與這項活動（如果他們同意在失去選舉後保持其股份凍結，而不是撤回）。這樣的驗證器可能同時充當漁民（參見~\ptref{sp:fish}）：如果他們必須檢查某些區塊的有效性，他們也可以選擇報告無效的區塊並收集相關獎勵。
+\nxsubpoint \embt("Strengthening" the blockchain.) 提供驅使validator提高區塊相對可靠性的激勵是很重要的。這樣做的一種方法是為validator分配小量的獎勵，以在其他shardchains的區塊上添加簽名。即使是“即將成為”的validator，他們已存入的股份不足以進入按股份排名前$T$的validator，並被包括在全局validator集合中（參見~\ptref{sp:global.valid}），也可能參與這項活動（如果他們同意在失去選舉後保持其股份凍結，而不是撤回）。這樣的validator可能同時充當漁民（參見~\ptref{sp:fish}）：如果他們必須檢查某些區塊的有效性，他們也可以選擇報告無效的區塊並收集相關獎勵。
 
 \nxsubpoint\label{sp:rec.rel} \embt(Recursive reliability of a block.) 人們也可以定義一個區塊的{\em recursive reliability\/}，這是其相對可靠性與其引用的所有區塊的遞歸可靠性之間的最小值（即，masterchain區塊、先前的shardchain區塊和一些相鄰shardchains的區塊）。換句話說，如果該區塊被證明是無效的，無論是因為它本身無效還是因為它所依賴的某個區塊無效，至少有人會失去這筆錢。如果人們真的不確定是否信任區塊中的特定交易，人們應該計算這個區塊的{\em recursive\/}可靠性，而不僅僅是{\em relative\/}的可靠性。
 
-當計算遞歸可靠性時，沒有必要回溯太遠，因為如果我們回溯太遠，我們會看到已經解凍並提取的驗證器簽名的區塊。無論如何，我們不允許驗證器自動重新考慮那些舊的區塊（即，創建超過兩個月的區塊，如果使用當前的可配置參數的值），並從中創建分叉或使用“垂直blockchains”（參見~\ptref{sp:inv.sh.blk.corr}）修正它們，即使它們被證明是無效的。我們假設兩個月的時期提供了充足的機會來檢測和報告任何無效的區塊，因此如果在這段時期內沒有挑戰某個區塊，那麼它不太可能受到挑戰。
+當計算遞歸可靠性時，沒有必要回溯太遠，因為如果我們回溯太遠，我們會看到已經解凍並提取的validator簽名的區塊。無論如何，我們不允許validator自動重新考慮那些舊的區塊（即，創建超過兩個月的區塊，如果使用當前的可配置參數的值），並從中創建分叉或使用“垂直blockchains”（參見~\ptref{sp:inv.sh.blk.corr}）修正它們，即使它們被證明是無效的。我們假設兩個月的時期提供了充足的機會來檢測和報告任何無效的區塊，因此如果在這段時期內沒有挑戰某個區塊，那麼它不太可能受到挑戰。
 
 \nxsubpoint \embt(Consequence of Proof-of-Stake for light nodes.)  TON Blockchain 採用的 Proof-of-Stake 方法的一個重要結果是，TON Blockchain 的輕型節點（運行輕型客戶端軟體）不需要下載所有 shardchain 或甚至 masterchain 區塊的「標頭」，以便能夠自行檢查完整節點提供給其的 Merkle 證明，作為對其查詢的回答。
 
-實際上，由於最近的 shardchain 區塊 hash 已包含在 masterchain 區塊中，完整節點可以輕鬆提供一個 Merkle 證明，從已知的 masterchain 區塊的 hash 開始，說明給定的 shardchain 區塊是有效的。接下來，輕型節點只需要知道 masterchain 的第一個區塊（其中宣布了第一組驗證器），這個區塊（或至少其 hash）可能被內置到客戶端軟體中，並且每個月後只需一個 masterchain 區塊，其中宣布了新當選的驗證器集合，因為這個區塊將由上一組驗證器簽署。從那時起，它可以獲得最近的幾個 masterchain 區塊，或至少他們的標頭和驗證器簽名，並使用它們作為檢查完整節點提供的 Merkle 證明的基礎。
+實際上，由於最近的 shardchain 區塊 hash 已包含在 masterchain 區塊中，完整節點可以輕鬆提供一個 Merkle 證明，從已知的 masterchain 區塊的 hash 開始，說明給定的 shardchain 區塊是有效的。接下來，輕型節點只需要知道 masterchain 的第一個區塊（其中宣布了第一組validator），這個區塊（或至少其 hash）可能被內置到客戶端軟體中，並且每個月後只需一個 masterchain 區塊，其中宣布了新當選的validator集合，因為這個區塊將由上一組validator簽署。從那時起，它可以獲得最近的幾個 masterchain 區塊，或至少他們的標頭和validator簽名，並使用它們作為檢查完整節點提供的 Merkle 證明的基礎。
 
 \mysubsection{分割和合併 Shardchains}\label{sect:split.merge}
 
-TON Blockchain 最具特色和獨特的功能之一是，當負載過高時，它能夠自動將 shardchain 分割為兩部分，並在負載下降時將它們合併回來（參見~\ptref{sp:dyn.split.merge}）。由於其獨特性和對整個項目可擴展性的重要性，我們必須詳細討論它。
+TON Blockchain 最具特色和獨特的功能之一是，當負載過高時，它能夠自動將 shardchain 分割為兩部分，並在負載下降時將它們合併回來（參見~\ptref{sp:dyn.split.merge}）。由於其獨特性和對整個專案可擴展性的重要性，我們必須詳細討論它。
 
 \nxsubpoint \embt(Shard configuration.)  請回憶，在任何給定的時間點，每個工作鏈 $w$ 都被分割成一個或多個 shardchains $(w,s)$ （參見~\ptref{sp:shard.ident}）。這些 shardchains 可以由一棵二進制樹的葉子表示，其根為 $(w,\emptyset)$，且每個非葉子節點 $(w,s)$ 都有子節點 $(w,s.0)$ 和 $(w,s.1)$。這樣，屬於工作鏈 $w$ 的每個賬戶都被分配到確切的一個 shard，而知道當前的 shardchain 配置的每個人都可以確定包含賬戶 $\accountid$ 的 shard $(w,s)$：它是二進制字符串 $s$ 是 $\accountid$ 前綴的唯一 shard。
 
@@ -921,19 +921,19 @@ shard 配置—即，這個 {\em shard binary tree}，或給定 $w$ 的所有活
 
 這些 split/merge 操作在事先（例如，$2^6$；這是一個可配置的參數）的區塊中被宣布，首先在相應的 shardchain 區塊的「標頭」中，然後在引用這些 shardchain 區塊的 masterchain 區塊中。這個提前公告是為了讓所有相關方為計劃的變更做好準備（例如，建立一個 overlay multicast network 來分發新創建的 shardchains 的新區塊，如~\ptref{sect:overlay}所述）。然後，更改首先提交到 shardchain 區塊的（標頭），然後傳播到 masterchain 區塊。這樣，masterchain 區塊不僅定義了在其創建之前的最新 shard 配置，而且還定義了下一個立即的 shard 配置。
 
-\nxsubpoint \embt(Validator task groups for new shardchains.)  回憶一下，每個 shard，即每個 shardchain，通常都被分配一個驗證器的子集（一個 validator task group）專用於在相應的 shardchain 中創建和驗證新區塊（參見~\ptref{sp:val.task.grp}）。這些 task groups 被選為某段時間（大約一小時），並且在提前知道的時間（也大約是一小時），在此期間是不變的。\footnote{除非某些驗證器因簽署無效的區塊而被臨時或永久禁止，那麼他們將自動從所有 task groups 中被排除。}
+\nxsubpoint \embt(Validator task groups for new shardchains.)  回憶一下，每個 shard，即每個 shardchain，通常都被分配一個validator的子集（一個 validator task group）專用於在相應的 shardchain 中創建和驗證新區塊（參見~\ptref{sp:val.task.grp}）。這些 task groups 被選為某段時間（大約一小時），並且在提前知道的時間（也大約是一小時），在此期間是不變的。\footnote{除非某些validator因簽署無效的區塊而被臨時或永久禁止，那麼他們將自動從所有 task groups 中被排除。}
 
 但是，實際的 shard 配置可能會在此期間因為 split/merge 操作而發生變化。必須為新創建的 shards 分配 task groups。這是如此完成的：
 
 注意，任何活躍的 shard $(w,s)$ 要麼是某個唯一確定的原始 shard $(w,s')$ 的後代，意味著 $s'$ 是 $s$ 的前綴，要麼它將是原始 shards $(w,s')$ 的子樹的根，其中 $s$ 將是每個 $s'$ 的前綴。在第一種情況下，我們簡單地將原始 shard $(w,s')$ 的 task group 作為新 shard $(w,s)$ 的 task group。在後一種情況下，新 shard $(w,s)$ 的 task group 將是所有原始 shards $(w,s')$ 的 task groups 的聯集，這些 shards 是 shard tree 中的 $(w,s)$ 的後代。
 
-這樣，每個活躍的 shard $(w,s)$ 都被分配了一個明確定義的驗證器子集（task group）。當一個 shard 被分割時，兩個子節點都繼承了原始 shard 的整個 task group。當兩個 shards 被合併時，它們的 task groups 也被合併。
+這樣，每個活躍的 shard $(w,s)$ 都被分配了一個明確定義的validator子集（task group）。當一個 shard 被分割時，兩個子節點都繼承了原始 shard 的整個 task group。當兩個 shards 被合併時，它們的 task groups 也被合併。
 
-任何追踪 masterchain 狀態的人都可以計算每個活躍 shard 的驗證器 task groups。
+任何追踪 masterchain 狀態的人都可以計算每個活躍 shard 的validator task groups。
 
 
 \nxsubpoint \embt(Limit on split/merge operations during the period of
-responsibility of original task groups.) 最終，新的 shard 配置將被考慮到，並且新的專用驗證器子集（task groups）將自動分配給每個 shard。在此之前，必須對 split/merge 操作施加某種限制；否則，如果原始 shard 迅速分裂成 $2^k$ 個新的 shards，則原始 task group 可能最終同時驗證 $2^k$ shardchains，對於大的 $k$。
+responsibility of original task groups.) 最終，新的 shard 配置將被考慮到，並且新的專用validator子集（task groups）將自動分配給每個 shard。在此之前，必須對 split/merge 操作施加某種限制；否則，如果原始 shard 迅速分裂成 $2^k$ 個新的 shards，則原始 task group 可能最終同時驗證 $2^k$ shardchains，對於大的 $k$。
 
 這是通過對 active shard 配置與原始 shard 配置（目前用於選擇 validator task groups 的配置）之間的距離施加限制來實現的。例如，可能要求從 active shard $(w,s)$ 到原始 shard $(w,s')$ 在 shard tree 中的距離，如果 $s'$ 是 $s$ 的前驅（即 $s'$ 是 binary string $s$ 的前綴），則不得超過3，如果 $s'$ 是 $s$ 的後繼（即 $s$ 是 $s'$ 的前綴），則不得超過2。否則，不允許進行 split 或 merge 操作。
 
@@ -981,7 +981,7 @@ merge operations.) 合併 shard 操作的必要性也由某些正式條件檢測
 
 \nxsubpoint\label{sp:single.multi} \embt(Single-blockchain vs.\ multi-blockchain projects.) 第一個分類標準是系統中的區塊鏈數量。最古老和最簡單的專案由一個{\em 單一區塊鏈}組成（簡稱「單鏈專案」）；更複雜的專案使用（或更確切地說，計劃使用）{\em 多個區塊鏈}（「多鏈專案」）。
 
-單鏈專案通常更簡單且經過更好的測試；它們經受住了時間的考驗。它們的主要缺點是低性能，或者至少是交易吞吐量，對於通用系統來說，這一數量在十 (Bitcoin) 到不到一百 (Ethereum) 的交易每秒。一些專用系統（如 Bitshares）能夠在區塊鏈狀態適合於記憶體的情況下，處理每秒數萬的專用交易，並將處理限制於一個預定義的特殊交易集，然後由像 C++ 這樣的語言編寫的高度優化的代碼執行（這裡沒有 VMs）。
+單鏈專案通常更簡單且經過更好的測試；它們經受住了時間的考驗。它們的主要缺點是低性能，或者至少是交易吞吐量，對於通用系統來說，這一數量在十 (Bitcoin) 到不到一百 (Ethereum) 的交易每秒。一些專用系統（如 Bitshares）能夠在區塊鏈狀態適合於記憶體的情況下，處理每秒數萬的專用交易，並將處理限制於一個預定義的特殊交易集，然後由像 C++ 這樣的語言編寫的高度優化的程式碼執行（這裡沒有 VMs）。
 
 多鏈專案提供了每個人都渴望的可擴展性。他們可能支持更大的總狀態和更多的每秒交易，但代價是使專案變得更為複雜，其實施更具挑戰性。因此，已經運行的多鏈專案很少，但大多數擬議的專案都是多鏈的。我們相信未來屬於多鏈專案。
 
@@ -990,11 +990,11 @@ merge operations.) 合併 shard 操作的必要性也由某些正式條件檢測
 
 兩種最常見的範疇是 {\em Proof-of-Work (PoW)} 和 {\em Proof-of-Stake (PoS)}。工作量證明方法通常允許任何節點創建（“挖掘”）一個新區塊（並獲得與挖掘區塊相關的一些獎勵），前提是它有幸在其他競爭者成功之前解決一個否則無用的計算問題（通常涉及計算大量的hashes）。在出現分支的情況下（例如，如果兩個節點發布兩個否則有效但不同的區塊來跟隨前一個），最長的分支勝出。這樣，區塊鏈的不變性保證是基於生成區塊鏈所花費的{\em 工作量}（計算資源）：任何希望創建此區塊鏈的分支的人都需要重新做這些工作，以創建已提交區塊的替代版本。為此，一個人需要控制超過$50\%$的創建新區塊所花費的總計算能力，否則替代分支變得最長的機會會指數性地降低。
 
-權益證明方法基於一些特殊節點（{\em 驗證者}）所做的大量{\em 賭注}（以加密貨幣提名），以斷言它們已經檢查了一些區塊並發現它們是正確的。驗證者簽署區塊，並因此收到一些小獎勵；但是，如果一個驗證者被發現簽署了一個不正確的區塊，並且提供了這方面的證據，則其全部或部分賭注將被沒收。這樣，區塊鏈的有效性和不變性保證是由驗證者對區塊鏈有效性的總賭注給出的。
+權益證明方法基於一些特殊節點（{\em validator}）所做的大量{\em 賭注}（以加密貨幣提名），以斷言它們已經檢查了一些區塊並發現它們是正確的。validator簽署區塊，並因此收到一些小獎勵；但是，如果一個validator被發現簽署了一個不正確的區塊，並且提供了這方面的證據，則其全部或部分賭注將被沒收。這樣，區塊鏈的有效性和不變性保證是由validator對區塊鏈有效性的總賭注給出的。
 
-從這個角度看，權益證明更為自然，因為它激勵驗證者（它們取代了PoW礦工）執行有用的計算（需要檢查或創建新區塊，尤其是執行區塊中列出的所有交易），而不是計算其他無用的hashes。這樣，驗證者會購買更適合處理用戶交易的硬件，以獲得與這些交易相關的獎勵，從整個系統的角度看，這似乎是一項相當有用的投資。
+從這個角度看，權益證明更為自然，因為它激勵validator（它們取代了PoW礦工）執行有用的計算（需要檢查或創建新區塊，尤其是執行區塊中列出的所有交易），而不是計算其他無用的hashes。這樣，validator會購買更適合處理用戶交易的硬件，以獲得與這些交易相關的獎勵，從整個系統的角度看，這似乎是一項相當有用的投資。
 
-然而，權益證明系統在實施上有些挑戰，因為必須為許多罕見但可能的情況提供支援。例如，一些惡意的驗證者可能密謀破壞系統以獲取利益（例如，通過改變自己的加密貨幣餘額）。這導致了一些非常重要的博弈論問題。
+然而，權益證明系統在實施上有些挑戰，因為必須為許多罕見但可能的情況提供支援。例如，一些惡意的validator可能密謀破壞系統以獲取利益（例如，通過改變自己的加密貨幣餘額）。這導致了一些非常重要的博弈論問題。
 
 簡而言之，權益證明更為自然且更有前景，尤其是對於多區塊鏈專案（因為如果有許多區塊鏈，工作量證明將需要過多的計算資源），但必須更加小心地考慮和實施。大多數目前運行的區塊鏈專案，尤其是最古老的專案（如Bitcoin和至少是原始的Ethereum），使用工作量證明。
 
@@ -1003,46 +1003,46 @@ vs.\ BFT.) 雖然Proof-of-Work算法彼此非常相似，主要差異在於必�
 
 基本上，人們必須回答關於Proof-of-Stake算法的以下問題：
 \begin{itemize}
-\item 誰可以產生（“挖掘”）一個新區塊 - 任何完整節點，或只是驗證者的（相對地）小子集的成員？ (大多數PoS系統要求新區塊由數個指定的驗證者生成並簽名。)
-\item 驗證者是否通過他們的簽名保證區塊的有效性，還是所有完整節點都期望自己驗證所有區塊？ (可擴展的PoS系統必須依賴驗證者的簽名，而不是要求所有節點驗證所有區塊鏈的所有區塊。)
+\item 誰可以產生（“挖掘”）一個新區塊 - 任何完整節點，或只是validator的（相對地）小子集的成員？ (大多數PoS系統要求新區塊由數個指定的validator生成並簽名。)
+\item validator是否通過他們的簽名保證區塊的有效性，還是所有完整節點都期望自己驗證所有區塊？ (可擴展的PoS系統必須依賴validator的簽名，而不是要求所有節點驗證所有區塊鏈的所有區塊。)
 \item 是否有一個預先知道的指定生產者來生成下一個區塊鏈區塊，這樣其他人就不能代替它產生那個區塊？
-\item 新建的區塊最初只由一個驗證者（其生產者）簽署，還是它必須從一開始就收集大多數驗證者的簽名？
+\item 新建的區塊最初只由一個validator（其生產者）簽署，還是它必須從一開始就收集大多數validator的簽名？
 \end{itemize}
 
-雖然似乎根據這些問題的答案有$2^4$可能的PoS算法類別，但在實踐中，區別主要歸結為兩種主要的PoS方法。事實上，大多數現代的PoS算法，旨在用於可擴展的多鏈系統，在前兩個問題上的答案是相同的：只有驗證者可以產生新區塊，並且他們保證區塊的有效性，而不要求所有完整節點自己檢查所有區塊的有效性。
+雖然似乎根據這些問題的答案有$2^4$可能的PoS算法類別，但在實踐中，區別主要歸結為兩種主要的PoS方法。事實上，大多數現代的PoS算法，旨在用於可擴展的多鏈系統，在前兩個問題上的答案是相同的：只有validator可以產生新區塊，並且他們保證區塊的有效性，而不要求所有完整節點自己檢查所有區塊的有效性。
 
 至於最後兩個問題，它們的答案被證明是高度相關的，基本上只留下了兩個基本選項：
 \begin{itemize}
-\item {\em Delegated Proof-of-Stake (DPOS)}：每個區塊都有一個眾所周知的指定生產者；其他人不能生產該區塊；新區塊最初只由其生成的驗證者簽署。
-\item {\em Byzantine Fault Tolerant (BFT)} PoS算法：有一個已知的驗證者子集，其中任何一個都可以建議一個新區塊；在多個建議的候選區塊中選擇實際的下一個區塊的選擇，必須在被發布到其他節點之前由大多數驗證者驗證並簽名，這是通過Byzantine Fault Tolerant共識協議的版本來實現的。
+\item {\em Delegated Proof-of-Stake (DPOS)}：每個區塊都有一個眾所周知的指定生產者；其他人不能生產該區塊；新區塊最初只由其生成的validator簽署。
+\item {\em Byzantine Fault Tolerant (BFT)} PoS算法：有一個已知的validator子集，其中任何一個都可以建議一個新區塊；在多個建議的候選區塊中選擇實際的下一個區塊的選擇，必須在被發布到其他節點之前由大多數validator驗證並簽名，這是通過Byzantine Fault Tolerant共識協議的版本來實現的。
 \end{itemize}
 
 \nxsubpoint\label{sp:dpos.bft.compare} \embt(Comparison of DPOS and
-BFT PoS.) BFT方法的優勢是新產生的區塊從一開始就有大多數驗證者的簽名證明其有效性。另一個優點是，如果大多數驗證者正確執行BFT共識協議，則根本不會出現分叉。但另一方面，BFT算法往往相當複雜，並且需要更多的時間讓驗證者子集達成共識。因此，區塊不能太頻繁地生成。這就是為什麼我們預期TON Blockchain（從這個分類的角度看是一個BFT項目）每五秒只生成一個區塊。在實踐中，這個間隔可能會減少到2-3秒（儘管我們不承諾這一點），但如果驗證者分散在全球各地，則不會再減少。
+BFT PoS.) BFT方法的優勢是新產生的區塊從一開始就有大多數validator的簽名證明其有效性。另一個優點是，如果大多數validator正確執行BFT共識協議，則根本不會出現分叉。但另一方面，BFT算法往往相當複雜，並且需要更多的時間讓validator子集達成共識。因此，區塊不能太頻繁地生成。這就是為什麼我們預期TON Blockchain（從這個分類的角度看是一個BFT專案）每五秒只生成一個區塊。在實踐中，這個間隔可能會減少到2-3秒（儘管我們不承諾這一點），但如果validator分散在全球各地，則不會再減少。
 
-DPOS算法的優勢是相當簡單和直接。由於它依賴於預先知道的指定區塊生成者，所以可以非常頻繁地生成新區塊，例如，每兩秒一次，或者甚至每秒一次。\footnote{有些人甚至聲稱DPOS區塊生成時間為半秒，如果驗證者分散在幾個大陸上，這似乎不太現實。}
+DPOS算法的優勢是相當簡單和直接。由於它依賴於預先知道的指定區塊生成者，所以可以非常頻繁地生成新區塊，例如，每兩秒一次，或者甚至每秒一次。\footnote{有些人甚至聲稱DPOS區塊生成時間為半秒，如果validator分散在幾個大陸上，這似乎不太現實。}
 
-然而，DPOS要求所有節點 - 或至少所有驗證者 - 驗證收到的所有區塊，因為生成並簽署新區塊的驗證者不僅確認了此區塊的相對有效性，還確認了它引用的前一個區塊的有效性，以及在鏈中更遠的所有區塊（也許直到當前驗證者子集的責任期開始）。當前驗證者子集上有一個預定的順序，因此每個區塊都有一個指定的生產者（即，預期生成該區塊的驗證者）；這些指定的生產者按循環方式旋轉。這樣，一個區塊首先只由其生成的驗證者簽名；然後，當挖掘下一個區塊時，並且其生產者選擇引用此區塊而不是它的前一個區塊（否則它的區塊將位於較短的鏈中，這可能會在未來失去“最長分叉”競賽），下一個區塊的簽名本質上也是對前一個區塊的附加簽名。這樣，一個新區塊逐漸收集更多驗證者的簽名 - 例如，生成下一個區塊所需的時間內的二十個簽名。一個完整的節點將需要等待這二十個簽名，或者自己驗證區塊，從一個已充分確認的區塊開始（例如，回退二十個區塊），這可能並不容易。
+然而，DPOS要求所有節點 - 或至少所有validator - 驗證收到的所有區塊，因為生成並簽署新區塊的validator不僅確認了此區塊的相對有效性，還確認了它引用的前一個區塊的有效性，以及在鏈中更遠的所有區塊（也許直到當前validator子集的責任期開始）。當前validator子集上有一個預定的順序，因此每個區塊都有一個指定的生產者（即，預期生成該區塊的validator）；這些指定的生產者按循環方式旋轉。這樣，一個區塊首先只由其生成的validator簽名；然後，當挖掘下一個區塊時，並且其生產者選擇引用此區塊而不是它的前一個區塊（否則它的區塊將位於較短的鏈中，這可能會在未來失去“最長分叉”競賽），下一個區塊的簽名本質上也是對前一個區塊的附加簽名。這樣，一個新區塊逐漸收集更多validator的簽名 - 例如，生成下一個區塊所需的時間內的二十個簽名。一個完整的節點將需要等待這二十個簽名，或者自己驗證區塊，從一個已充分確認的區塊開始（例如，回退二十個區塊），這可能並不容易。
 
-DPOS算法的明顯缺點是，只有在挖掘二十個更多的區塊後，一個新區塊（以及其內部的交易）才能達到相同的信任水平（“遞歸可靠性”如\ptref{sp:rec.rel}中所討論的），而BFT算法則立即提供這種信任水平（例如，二十個簽名）。另一個缺點是，DPOS使用“最長分叉勝出”的方法來切換到其他分叉；如果至少有一些生產者在我們感興趣的那個之後無法生成後續的區塊（或者由於網絡分割或複雜的攻擊而未能觀察到這些區塊），這使得分叉相當可能。
+DPOS算法的明顯缺點是，只有在挖掘二十個更多的區塊後，一個新區塊（以及其內部的交易）才能達到相同的信任水平（“遞歸可靠性”如\ptref{sp:rec.rel}中所討論的），而BFT算法則立即提供這種信任水平（例如，二十個簽名）。另一個缺點是，DPOS使用“最長分叉勝出”的方法來切換到其他分叉；如果至少有一些生產者在我們感興趣的那個之後無法生成後續的區塊（或者由於網路分割或複雜的攻擊而未能觀察到這些區塊），這使得分叉相當可能。
 
 
-我們認為，BFT 方法，雖然在實作上更複雜且產生區塊的間隔時間比DPOS長，但它更適合用於「緊密結合」(參考~\ptref{sp:blkch.interact})的多鏈系統。因為其他的區塊鏈可以在看到新區塊中的已提交交易（例如，生成給它們的消息）後幾乎立即開始行動，而不必等待20次確認有效性（即，接下來的20個區塊），或者等待接下來的六個區塊以確保沒有分叉出現並自己驗證新區塊（在可擴展的多鏈系統中，驗證其他區塊鏈的區塊可能變得過於繁重）。因此，他們可以在保持高度的可靠性和可用性（參考~\ptref{sp:shard.supp}）的同時達到可擴展性。
+我們認為，BFT 方法，雖然在實作上更複雜且產生區塊的間隔時間比DPOS長，但它更適合用於「緊密耦合」(參考~\ptref{sp:blkch.interact})的多鏈系統。因為其他的區塊鏈可以在看到新區塊中的已提交交易（例如，生成給它們的消息）後幾乎立即開始行動，而不必等待20次確認有效性（即，接下來的20個區塊），或者等待接下來的六個區塊以確保沒有分叉出現並自己驗證新區塊（在可擴展的多鏈系統中，驗證其他區塊鏈的區塊可能變得過於繁重）。因此，他們可以在保持高度的可靠性和可用性（參考~\ptref{sp:shard.supp}）的同時達到可擴展性。
 
-另一方面，對於一個「鬆散結合」的多鏈系統，DPOS可能是一個好選擇，即使區塊鏈之間不需要快速交互，例如，如果每個區塊鏈（「工作鏈」）代表一個單獨的分散式交換，且區塊鏈之間的互動限於從一個工作鏈到另一個的罕見代幣轉移（或者，更准確地說，以接近$1:1$的比率交易住在一個工作鏈中的一個altcoin和另一個）。這就是BitShares計畫實際上所做的事情，它非常成功地使用了DPOS。
+另一方面，對於一個「鬆散耦合」的多鏈系統，DPOS可能是一個好選擇，即使區塊鏈之間不需要快速交互，例如，如果每個區塊鏈（「工作鏈」）代表一個單獨的分散式交換，且區塊鏈之間的互動限於從一個工作鏈到另一個的罕見代幣轉移（或者，更准確地說，以接近$1:1$的比率交易住在一個工作鏈中的一個altcoin和另一個）。這就是BitShares計畫實際上所做的事情，它非常成功地使用了DPOS。
 
 總的來說，雖然DPOS可以\emph{生成}新的區塊並且\emph{將交易}快速\emph{包含}進它們（區塊間隔時間較短），但這些交易達到其他區塊鏈和off-chain應用程序所需的信任級別，作為「已提交」和「不可變」的，比在BFT系統中\emph{慢得多}，例如，三十秒%
-\footnote{例如，EOS，迄今為止提出的最好的DPOS項目之一，承諾45秒的確認和區塊鏈間的交互延遲（參考~\cite{EOSWP}，「交易確認」和「區塊鏈間通信的延遲」部分）。}
+\footnote{例如，EOS，迄今為止提出的最好的DPOS專案之一，承諾45秒的確認和區塊鏈間的交互延遲（參考~\cite{EOSWP}，「交易確認」和「區塊鏈間通信的延遲」部分）。}
 而不是五秒。更快的交易\emph{包含}並不意味著更快的交易\emph{承諾}。如果需要快速的區塊鏈間交互，這可能會成為一個巨大的問題。在這種情況下，人們必須放棄DPOS，而選擇BFT PoS。
 
 
 \nxsubpoint\label{sp:smartc.supp} \embt(Support for Turing-complete
 code in transactions, i.e., essentially arbitrary smart contracts.)
-區塊鏈項目通常在他們的區塊中收集一些{\em transactions\/}，這些會以認為有用的方式更改區塊鏈的狀態（例如，從一個賬戶轉移某個加密貨幣金額到另一個賬戶）。有些區塊鏈項目可能只允許一些特定的預定義交易類型（如從一個賬戶到另一個賬戶的值轉移，提供正確的簽名）。其他人可能支持在交易中的一些有限的腳本形式。最後，一些區塊鏈支持在交易中執行任意複雜的代碼，使系統（至少原則上）能夠支持任意應用程序，只要系統的性能允許。這通常與「圖靈完整虛擬機和腳本語言」（意味著可以在任何其他計算語言中編寫的任何程序都可以重寫以在區塊鏈內部執行），以及「智能合約」（這些是住在區塊鏈中的程序）相關聯。
+區塊鏈專案通常在他們的區塊中收集一些{\em transactions\/}，這些會以認為有用的方式更改區塊鏈的狀態（例如，從一個賬戶轉移某個加密貨幣金額到另一個賬戶）。有些區塊鏈專案可能只允許一些特定的預定義交易類型（如從一個賬戶到另一個賬戶的值轉移，提供正確的簽名）。其他人可能支持在交易中的一些有限的腳本形式。最後，一些區塊鏈支持在交易中執行任意複雜的程式碼，使系統（至少原則上）能夠支持任意應用程序，只要系統的性能允許。這通常與「圖靈完整虛擬機和腳本語言」（意味著可以在任何其他計算語言中編寫的任何程序都可以重寫以在區塊鏈內部執行），以及「智能合約」（這些是住在區塊鏈中的程序）相關聯。
 
-當然，支持任意智能合約使系統真正靈活。另一方面，這種靈活性是有代價的：這些智能合約的代碼必須在某個虛擬機上執行，每次有人想創建或驗證一個區塊時，都必須對區塊中的每個交易執行這個操作。與可以通過在像C++這樣的語言中實現它們的處理來優化的預定義和不可變的簡單交易類型的情況相比，這降低了系統的性能。
+當然，支持任意智能合約使系統真正靈活。另一方面，這種靈活性是有代價的：這些智能合約的程式碼必須在某個虛擬機上執行，每次有人想創建或驗證一個區塊時，都必須對區塊中的每個交易執行這個操作。與可以通過在像C++這樣的語言中實現它們的處理來優化的預定義和不可變的簡單交易類型的情況相比，這降低了系統的性能。
 
-最終，對於任何通用區塊鏈項目，似乎都希望支持圖靈完整的智能合約;否則，區塊鏈項目的設計者必須預先決定他們的區塊鏈將用於哪些應用程序。實際上，比特幣區塊鏈中對智能合約的支持不足是必須創建新的區塊鏈項目Ethereum的主要原因。
+最終，對於任何通用區塊鏈專案，似乎都希望支持圖靈完整的智能合約;否則，區塊鏈專案的設計者必須預先決定他們的區塊鏈將用於哪些應用程序。實際上，比特幣區塊鏈中對智能合約的支持不足是必須創建新的區塊鏈專案Ethereum的主要原因。
 
 在一個（異質的; cf.~\ptref{sp:blkch.hom.het}）多鏈系統中，人們可以通過在一些區塊鏈（即，工作鏈）中支持圖靈完整的智能合約，以及在其他區塊鏈中支持一小組高度優化的交易，來「兩全其美」。
 
@@ -1050,7 +1050,7 @@ code in transactions, i.e., essentially arbitrary smart contracts.)
 multichain systems.) 到目前為止，這個分類對單鏈和多鏈系統都是有效的。然而，多鏈系統承認幾個更多的分類標準，反映系統中不同的區塊鏈之間的關係。我們現在討論這些標準。
 
 \nxsubpoint\label{sp:blkch.hom.het} \embt(Blockchain types:
-homogeneous and heterogeneous systems.) 在多鏈系統中，所有區塊鏈可能本質上都是相同的類型，並且有相同的規則（即，使用相同的交易格式、相同的虛擬機器執行智能合約代碼、共享相同的加密貨幣等），這種相似性被明確地利用，但每個區塊鏈中的數據都是不同的。在這種情況下，我們說該系統是{\em homogeneous}。否則，不同的區塊鏈（在這種情況下通常被稱為{\em workchains\/}）可以有不同的「規則」。然後我們說系統是{\em heterogeneous}。
+homogeneous and heterogeneous systems.) 在多鏈系統中，所有區塊鏈可能本質上都是相同的類型，並且有相同的規則（即，使用相同的交易格式、相同的虛擬機器執行智能合約程式碼、共享相同的加密貨幣等），這種相似性被明確地利用，但每個區塊鏈中的數據都是不同的。在這種情況下，我們說該系統是{\em homogeneous}。否則，不同的區塊鏈（在這種情況下通常被稱為{\em workchains\/}）可以有不同的「規則」。然後我們說系統是{\em heterogeneous}。
 
 \nxsubpoint\label{sp:mixed.het.hom} \embt(Mixed
 heterogeneous-homogeneous systems.) 有時我們有一個混合系統，其中存在多個區塊鏈的類型或規則集，但許多具有相同規則的區塊鏈都存在，且這一事實被明確地利用。那麼它是一個混合的{\em heterogeneous-homogeneous system}。據我們所知，TON Blockchain 是這種系統的唯一例子。
@@ -1058,12 +1058,12 @@ heterogeneous-homogeneous systems.) 有時我們有一個混合系統，其中�
 \nxsubpoint\label{sp:het.confed} \embt(Heterogeneous systems with
 several workchains having the same rules, or {\em confederations}.) 在某些情況下，具有相同規則的多個區塊鏈（work\-chains）可以存在於異質系統中，但它們之間的互動與具有不同規則的區塊鏈之間的互動相同（即，並未明確地利用其相似性）。即使他們似乎使用「相同的」加密貨幣，事實上他們使用不同的「altcoins」（加密貨幣的獨立化身）。有時，人們甚至可以使用接近$1:1$的匯率轉換這些altcoins。然而，我們認為這並不使系統變得均質；它仍然是異質的。我們說具有相同規則的這樣的異質workchains集合是一個{\em confederation}。
 
-雖然製作一個異質系統，允許創建具有相同規則的多個work\-chains（即一個聯邦）可能看起來是建立可擴展系統的便宜方法，但這種方法也有很多缺點。從本質上講，如果有人在許多具有相同規則的workchains中托管一個大型項目，她得到的不是一個大型項目，而是該項目的許多小實例。這就像有一個聊天應用程序（或遊戲）只允許每個聊天（或遊戲）房間有最多50名成員，但「擴展」通過創建新房間在必要時容納更多用戶。結果，許多用戶可以參加聊天或遊戲，但我們能說這樣的系統真的可擴展嗎？
+雖然製作一個異質系統，允許創建具有相同規則的多個work\-chains（即一個聯邦）可能看起來是建立可擴展系統的便宜方法，但這種方法也有很多缺點。從本質上講，如果有人在許多具有相同規則的workchains中托管一個大型專案，她得到的不是一個大型專案，而是該專案的許多小實例。這就像有一個聊天應用程序（或遊戲）只允許每個聊天（或遊戲）房間有最多50名成員，但「擴展」通過創建新房間在必要時容納更多用戶。結果，許多用戶可以參加聊天或遊戲，但我們能說這樣的系統真的可擴展嗎？
 
 \nxsubpoint\label{sp:pres.masterch} \embt(Presence of a masterchain,
-external or internal.) 有時，一個多鏈計畫有一個特殊的「masterchain」（有時被稱為「控制區塊鏈」），用於存儲系統的整體配置（所有活躍的區塊鏈集合，或更準確地說是workchains）、當前的驗證者集合（對於一個Proof-of-Stake系統）等。有時其他的區塊鏈被「綁定」到masterchain，例如通過將它們最新的區塊的hash值提交到它（TON Blockchain也是這麼做的）。
+external or internal.) 有時，一個多鏈計畫有一個特殊的「masterchain」（有時被稱為「控制區塊鏈」），用於存儲系統的整體配置（所有活躍的區塊鏈集合，或更準確地說是workchains）、當前的validator集合（對於一個Proof-of-Stake系統）等。有時其他的區塊鏈被「綁定」到masterchain，例如通過將它們最新的區塊的hash值提交到它（TON Blockchain也是這麼做的）。
 
-在某些情況下，masterchain是{\em external}，這意味著它不是該計畫的一部分，而是一個原先完全與其無關的區塊鏈，對於新計畫的使用並不知情。例如，人們可以嘗試使用Ethereum區塊鏈作為一個外部計畫的masterchain，並為此目的在Ethereum區塊鏈上發布特殊的智能合約（例如，用於選舉和懲罰驗證者）。
+在某些情況下，masterchain是{\em external}，這意味著它不是該計畫的一部分，而是一個原先完全與其無關的區塊鏈，對於新計畫的使用並不知情。例如，人們可以嘗試使用Ethereum區塊鏈作為一個外部計畫的masterchain，並為此目的在Ethereum區塊鏈上發布特殊的智能合約（例如，用於選舉和懲罰validator）。
 
 \nxsubpoint\label{sp:shard.supp} \embt(Sharding support.) 有些區塊鏈計畫（或系統）有原生的支持{\em sharding}，這意味著幾個（必然是homogeneous；參見~\ptref{sp:blkch.hom.het}）區塊鏈被視為單一（從高級角度看）虛擬區塊鏈的{\em shards\/}。例如，人們可以創建256個具有相同規則的shard區塊鏈（「shardchains」），並根據其$\accountid$的第一個字節來確定帳戶的狀態。
 
@@ -1071,7 +1071,7 @@ Sharding是擴展區塊鏈系統的自然方法，因為，如果正確實施，
 
 另一種擴展方法是使用在~\ptref{sp:het.confed}中描述的異質workchains的「聯邦」，允許每個用戶在一個或多個她選擇的workchains中保留她的帳戶，並在必要時將資金從一個workchain轉移到另一個workchain，基本上進行$1:1$的altcoin交換操作。此方法的缺點已在~\ptref{sp:het.confed}中討論過。
 
-但是，sharding不容易在快速和可靠的方式中實施，因為它意味著不同的shardchains之間有很多消息。例如，如果帳戶在$N$個shards之間均勻分佈，且唯一的交易是從一個帳戶到另一個帳戶的簡單資金轉移，那麼所有交易的只有一小部分（$1/N$）將在單一的區塊鏈中執行；幾乎所有的（$1-1/N$）交易將涉及兩個區塊鏈，需要跨區塊鏈的通信。如果我們希望這些交易快速，我們需要一個用於在shardchains之間傳輸消息的快速系統。換句話說，區塊鏈計畫需要在~\ptref{sp:blkch.interact}中描述的意義上是「緊密結合的」。
+但是，sharding不容易在快速和可靠的方式中實施，因為它意味著不同的shardchains之間有很多消息。例如，如果帳戶在$N$個shards之間均勻分佈，且唯一的交易是從一個帳戶到另一個帳戶的簡單資金轉移，那麼所有交易的只有一小部分（$1/N$）將在單一的區塊鏈中執行；幾乎所有的（$1-1/N$）交易將涉及兩個區塊鏈，需要跨區塊鏈的通信。如果我們希望這些交易快速，我們需要一個用於在shardchains之間傳輸消息的快速系統。換句話說，區塊鏈計畫需要在~\ptref{sp:blkch.interact}中描述的意義上是「緊密耦合的」。
 
 \nxsubpoint\label{sp:dyn.stat.shard} \embt(Dynamic and static sharding.)  分片可能是{\em dynamic\/}（當需要時自動創建額外的分片）或是{\em static\/}（有預先定義的分片數量，最好只能通過硬分叉來改變）。大多數分片提議都是靜態的；而TON Blockchain使用的是動態分片（參見~\ptref{sect:split.merge}）。
 
@@ -1090,36 +1090,36 @@ Sharding是擴展區塊鏈系統的自然方法，因為，如果正確實施，
 當然，建立一個「鬆散耦合」的系統要簡單得多；但是，快速和高效的分片（參見~\ptref{sp:shard.supp}）要求系統是「緊密耦合」的。
 
 \nxsubpoint\label{sp:blkch.gen} \embt(Simplified
-classification. Generations of blockchain projects.)  我們到目前為止建議的分類方式將所有區塊鏈項目分割成多個類別。然而，我們使用的分類準則在實踐中確實具有很大的相關性。這使我們能夠提議一種簡化的「世代」方式來分類區塊鏈項目，作為現實的一個大略的估計，並給出一些例子。尚未被實施和部署的項目以{\em italics}表示；每一代的最重要特徵都用{\bf bold}顯示。
+classification. Generations of blockchain projects.)  我們到目前為止建議的分類方式將所有區塊鏈專案分割成多個類別。然而，我們使用的分類準則在實踐中確實具有很大的相關性。這使我們能夠提議一種簡化的「世代」方式來分類區塊鏈專案，作為現實的一個大略的估計，並給出一些例子。尚未被實施和部署的專案以{\em italics}表示；每一代的最重要特徵都用{\bf bold}顯示。
 \begin{itemize}
 \item 第一代：單鏈，{\bf PoW}，不支持智能合約。範例：Bitcoin (2009) 和許多其他不那麼有趣的仿造者（如Litecoin、Monero等）。
 \item 第二代：單鏈，PoW，{\bf 支援智能合約}。範例：Ethereum (2013; 2015年部署)，至少在它的原始形式中。
 \item 第三代：單鏈，{\bf PoS}，支援智能合約。範例：{\em 未來的Ethereum} (2018或之後)。
-\item 替代的第三代($3'$)：{\bf 多鏈}，PoS，不支持智能合約，鬆散結合。範例：Bitshares (2013--2014; 使用DPOS)。
-\item 第四代：{\bf 多鏈，PoS，支持智能合約}，鬆散結合。範例：{\em EOS\/} (2017; 使用DPOS)，{\em PolkaDot\/} (2016; 使用BFT)。
-\item 第五代：多鏈，使用BFT的PoS，支援智能合約，{\bf 緊密結合，具有分片功能}。範例：{\em TON\/} (2017)。
+\item 替代的第三代($3'$)：{\bf 多鏈}，PoS，不支持智能合約，鬆散耦合。範例：Bitshares (2013--2014; 使用DPOS)。
+\item 第四代：{\bf 多鏈，PoS，支持智能合約}，鬆散耦合。範例：{\em EOS\/} (2017; 使用DPOS)，{\em PolkaDot\/} (2016; 使用BFT)。
+\item 第五代：多鏈，使用BFT的PoS，支援智能合約，{\bf 緊密耦合，具有分片功能}。範例：{\em TON\/} (2017)。
 \end{itemize}
-儘管並非所有區塊鏈項目都確切地落入這些類別中，但大多數確實如此。
+儘管並非所有區塊鏈專案都確切地落入這些類別中，但大多數確實如此。
 
 
 \nxsubpoint\label{sp:genome.change.never} \embt(Complications of
-changing the ``genome'' of a blockchain project.) 上述分類定義了區塊鏈項目的「基因組」。這個基因組非常「固定」：一旦項目部署並被許多人使用，就幾乎不可能更改它。更改它需要一系列的硬分叉（這需要社區的大部分人批准），即使如此，更改還需要非常保守，以保持向後兼容性（例如，更改虛擬機的語義可能會破壞現有的智能合約）。另一種方法是創建具有不同規則的新「側鏈」，並將它們以某種方式綁定到原始項目的區塊鏈（或區塊鏈）。人們可能使用現有單區塊鏈項目的區塊鏈作為本質上新的和獨立項目的外部主鏈。\footnote{例如，Plasma項目計劃使用Ethereum區塊鏈作為其（外部）主鏈；它與Ethereum的其他部分互動不多，且可能由與Ethereum項目無關的團隊提議和實施。}
+changing the ``genome'' of a blockchain project.) 上述分類定義了區塊鏈專案的「基因組」。這個基因組非常「固定」：一旦專案部署並被許多人使用，就幾乎不可能更改它。更改它需要一系列的硬分叉（這需要社區的大部分人批准），即使如此，更改還需要非常保守，以保持向後兼容性（例如，更改虛擬機的語義可能會破壞現有的智能合約）。另一種方法是創建具有不同規則的新「側鏈」，並將它們以某種方式綁定到原始專案的區塊鏈（或區塊鏈）。人們可能使用現有單區塊鏈專案的區塊鏈作為本質上新的和獨立專案的外部主鏈。\footnote{例如，Plasma專案計劃使用Ethereum區塊鏈作為其（外部）主鏈；它與Ethereum的其他部分互動不多，且可能由與Ethereum專案無關的團隊提議和實施。}
 
-我們的結論是，一旦部署了項目的基因組，就很難更改它。即使從PoW開始，並計劃在未來用PoS替換它，也相當複雜。\footnote{到2017年為止，Ethereum仍在努力從PoW過渡到結合的PoW+PoS系統；我們希望它將來會成為一個真正的PoS系統。} 為原始設計不支持它們的項目添加分片似乎幾乎不可能。\footnote{Ethereum的分片提議可以追溯到2015年；目前還不清楚它們如何被實施和部署，而不會破壞Ethereum或創建一個本質上獨立的平行項目。} 實際上，將智能合約的支持添加到一個（即Bitcoin）原始設計不支持這些功能的項目中被認為是不可能的（或至少被Bitcoin社區的大多數人認為是不受期望的），最終導致了一個新的區塊鏈項目，Ethereum。
+我們的結論是，一旦部署了專案的基因組，就很難更改它。即使從PoW開始，並計劃在未來用PoS替換它，也相當複雜。\footnote{到2017年為止，Ethereum仍在努力從PoW過渡到結合的PoW+PoS系統；我們希望它將來會成為一個真正的PoS系統。} 為原始設計不支持它們的專案添加分片似乎幾乎不可能。\footnote{Ethereum的分片提議可以追溯到2015年；目前還不清楚它們如何被實施和部署，而不會破壞Ethereum或創建一個本質上獨立的平行專案。} 實際上，將智能合約的支持添加到一個（即Bitcoin）原始設計不支持這些功能的專案中被認為是不可能的（或至少被Bitcoin社區的大多數人認為是不受期望的），最終導致了一個新的區塊鏈專案，Ethereum。
 
 
-\nxsubpoint \embt(Genome of the TON Blockchain.) 因此，如果想建立一個可擴展的區塊鏈系統，必須從一開始就仔細選擇其基因組。如果系統在部署時未知但預期在未來支持一些特定功能，那麼它應該從一開始就支持「異質」工作鏈（可能具有不同的規則）。為了讓系統真正可擴展，它必須從一開始就支持分片；只有當系統是「緊密結合」時，分片才有意義（參考\ptref{sp:blkch.interact}），因此這反過來意味著存在主鏈，快速的區塊鏈間消息系統，BFT PoS的使用等。
+\nxsubpoint \embt(Genome of the TON Blockchain.) 因此，如果想建立一個可擴展的區塊鏈系統，必須從一開始就仔細選擇其基因組。如果系統在部署時未知但預期在未來支持一些特定功能，那麼它應該從一開始就支持「異質」工作鏈（可能具有不同的規則）。為了讓系統真正可擴展，它必須從一開始就支持分片；只有當系統是「緊密耦合」時，分片才有意義（參考\ptref{sp:blkch.interact}），因此這反過來意味著存在主鏈，快速的區塊鏈間消息系統，BFT PoS的使用等。
 
-考慮到所有這些含義，為TON區塊鏈項目做出的大多數設計選擇似乎都是自然的，幾乎是唯一可能的選擇。
+考慮到所有這些含義，為TON區塊鏈專案做出的大多數設計選擇似乎都是自然的，幾乎是唯一可能的選擇。
 
-\mysubsection{與其他區塊鏈項目的比較}\label{sect:compare.blkch}
+\mysubsection{與其他區塊鏈專案的比較}\label{sect:compare.blkch}
 
-我們試圖在包含現有和建議的區塊鏈項目的地圖上為其找到位置，從而總結對TON區塊鏈及其最重要和獨特功能的簡要討論。我們使用在\ptref{sect:class.blkch}中描述的分類標準以統一的方式討論不同的區塊鏈項目，並建構這樣一個「區塊鏈項目地圖」。我們將此地圖表示為Table~\ref{tab:blkch.proj}，然後簡要地單獨討論幾個項目，以指出它們可能不適合一般計劃的特殊性。
+我們試圖在包含現有和建議的區塊鏈專案的地圖上為其找到位置，從而總結對TON區塊鏈及其最重要和獨特功能的簡要討論。我們使用在\ptref{sect:class.blkch}中描述的分類標準以統一的方式討論不同的區塊鏈專案，並建構這樣一個「區塊鏈專案地圖」。我們將此地圖表示為Table~\ref{tab:blkch.proj}，然後簡要地單獨討論幾個專案，以指出它們可能不適合一般計劃的特殊性。
 
 \begin{table}
   \captionsetup{font=scriptsize}
   \begin{tabular}{|c|cc|ccc|ccc|}
-    \hline 項目 & 年份 & 世代 & 共識 & 智能 & 鏈 & 類型 & 分片 & 交互 \\ 
+    \hline 專案 & 年份 & 世代 & 共識 & 智能 & 鏈 & 類型 & 分片 & 交互 \\ 
     \hline Bitcoin & 2009 & 1 & PoW & 無 & 1 \\ 
     Ethereum & 2013, 2015 & 2 & PoW & 是 & 1 \\ 
     NXT & 2014 & 2+ & PoS & 無 & 1 \\ 
@@ -1132,78 +1132,78 @@ changing the ``genome'' of a blockchain project.) 上述分類定義了區塊鏈
     TON & 2017, (2018) & 5 & PoS BFT & 是 & m & 混合 & dyn. & T \\ 
     \hline
   \end{tabular}
-  \caption{一些值得注意的區塊鏈項目的摘要。各列分別為：{\em 項目} — 項目名稱；{\em 年份} — 宣布年份和部署年份；{\em 世代} — 世代 (參考\ptref{sp:blkch.gen})；{\em 共識} — 共識算法 (參考\ptref{sp:pow.pos} 和\ptref{sp:dpos.bft})；{\em 智能} — 支持任意程式碼（智能合約；參考\ptref{sp:smartc.supp}）；{\em 鏈} — 單/多區塊鏈系統 (參考\ptref{sp:single.multi})；{\em 類型} — 異質/同質多鏈系統 (參考\ptref{sp:blkch.hom.het})；{\em 分片} — 支持分片 (參考\ptref{sp:shard.supp})；{\em 交互} — 區塊鏈間的交互，(L)緩和 或 (T)緊密 (參考\ptref{sp:blkch.interact})。}
+  \caption{一些值得注意的區塊鏈專案的摘要。各列分別為：{\em 專案} — 專案名稱；{\em 年份} — 宣布年份和部署年份；{\em 世代} — 世代 (參考\ptref{sp:blkch.gen})；{\em 共識} — 共識算法 (參考\ptref{sp:pow.pos} 和\ptref{sp:dpos.bft})；{\em 智能} — 支持任意程式碼（智能合約；參考\ptref{sp:smartc.supp}）；{\em 鏈} — 單/多區塊鏈系統 (參考\ptref{sp:single.multi})；{\em 類型} — 異質/同質多鏈系統 (參考\ptref{sp:blkch.hom.het})；{\em 分片} — 支持分片 (參考\ptref{sp:shard.supp})；{\em 交互} — 區塊鏈間的交互，(L)緩和 或 (T)緊密 (參考\ptref{sp:blkch.interact})。}
   \label{tab:blkch.proj}
 \end{table}
 
 
 \nxsubpoint \embt(Bitcoin \cite{BitcWP}; \url{https://bitcoin.org/}.)
-            {\em Bitcoin\/} (2009) 是第一個且最知名的區塊鏈項目。它是典型的{\em 第一代}區塊鏈項目：它是單一鏈，使用工作量證明(Proof-of-Work)與「最長分支勝出」的分支選擇算法，並且沒有圖靈完整的腳本語言（但是，支持沒有循環的簡單腳本）。Bitcoin的區塊鏈沒有帳戶的概念；它使用UTXO（未花費的交易輸出）模型。
+            {\em Bitcoin\/} (2009) 是第一個且最知名的區塊鏈專案。它是典型的{\em 第一代}區塊鏈專案：它是單一鏈，使用工作量證明(Proof-of-Work)與「最長分支勝出」的分支選擇算法，並且沒有圖靈完整的腳本語言（但是，支持沒有循環的簡單腳本）。Bitcoin的區塊鏈沒有帳戶的概念；它使用UTXO（未花費的交易輸出）模型。
 
 \nxsubpoint \embt(Ethereum \cite{EthWP}; \url{https://ethereum.org/}.)
-            {\em Ethereum\/} (2015) 是第一個支持圖靈完整智能合約的區塊鏈。因此，它是典型的{\em 第二代\/}項目，且是其中最受歡迎的。它在單一區塊鏈上使用工作量證明，但擁有智能合約和帳戶。
+            {\em Ethereum\/} (2015) 是第一個支持圖靈完整智能合約的區塊鏈。因此，它是典型的{\em 第二代\/}專案，且是其中最受歡迎的。它在單一區塊鏈上使用工作量證明，但擁有智能合約和帳戶。
 
 \nxsubpoint \embt(NXT; \url{https://nxtplatform.org/}.)  {\em NXT\/}
 (2014) 是第一個基於權益證明(PoS)的區塊鏈和貨幣。它仍然是單鏈，並且不支持智能合約。
 
 \nxsubpoint \embt(Tezos; \url{https://www.tezos.com/}.)  {\em Tezos\/}
-(2018或之後) 是一個建議的基於PoS的單一區塊鏈項目。我們在這裡提到它是因為它的獨特功能：其區塊解釋函數$\evblock$（參考\ptref{sp:blk.transf}）不是固定的，而是由一個OCaml模組決定，該模組可以通過在區塊鏈中提交一個新版本（並為所提議的更改收集一些票據）來升級。通過這種方式，一個人將能夠通過首先部署一個「原始」的Tezos區塊鏈，然後逐步地將區塊解釋函數更改為所需的方向，而無需硬分支。
+(2018或之後) 是一個建議的基於PoS的單一區塊鏈專案。我們在這裡提到它是因為它的獨特功能：其區塊解釋函數$\evblock$（參考\ptref{sp:blk.transf}）不是固定的，而是由一個OCaml模組決定，該模組可以通過在區塊鏈中提交一個新版本（並為所提議的更改收集一些票據）來升級。通過這種方式，一個人將能夠通過首先部署一個「原始」的Tezos區塊鏈，然後逐步地將區塊解釋函數更改為所需的方向，而無需硬分支。
 
 這個想法，儘管引人入勝，但它有一個明顯的缺點，那就是它禁止在其他語言（如C++）中的任何優化實現，因此基於Tezos的區塊鏈註定性能較低。我們認為，可能已經通過發布所提議的區塊解釋函數$\evtrans$的正式{\em 規範}來獲得類似的結果，而不是確定特定的{\em 實現}。
 
 \nxsubpoint
 \embt(Casper.)%
 \footnote{\url{https://blog.ethereum.org/2015/08/01/introducing-casper-friendly-ghost/}}
-{\em Casper\/} 是Ethereum的即將到來的PoS算法；如果在2017年（或2018年）的逐步部署成功，它將使Ethereum變成一個帶有智能合約支持的單鏈PoS或混合PoW+PoS系統，將Ethereum轉化為{\em 第三代\/}項目。
+{\em Casper\/} 是Ethereum的即將到來的PoS算法；如果在2017年（或2018年）的逐步部署成功，它將使Ethereum變成一個帶有智能合約支持的單鏈PoS或混合PoW+PoS系統，將Ethereum轉化為{\em 第三代\/}專案。
 
 \nxsubpoint \embt(BitShares \cite{BitShWP}; \url{https://bitshares.org}.)
-            {\em BitShares\/} (2014) 是一個為分散式基於區塊鏈的交易所提供的平台。這是一個異構的多區塊鏈DPoS系統，且不帶有智能合約；它透過僅允許一小部分預先定義的專用交易類型來實現其高性能，這些交易類型可以在C++中有效地實現，前提是區塊鏈狀態適合於內存中。這也是第一個使用委託權益證明(Delegated Proof-of-Stake, DPoS)的區塊鏈項目，至少為某些專用目的證明其可行性。
+            {\em BitShares\/} (2014) 是一個為分散式基於區塊鏈的交易所提供的平台。這是一個異構的多區塊鏈DPoS系統，且不帶有智能合約；它透過僅允許一小部分預先定義的專用交易類型來實現其高性能，這些交易類型可以在C++中有效地實現，前提是區塊鏈狀態適合於記憶體中。這也是第一個使用委託權益證明(Delegated Proof-of-Stake, DPoS)的區塊鏈專案，至少為某些專用目的證明其可行性。
 
 \nxsubpoint\label{sp:discuss.EOS} \embt(EOS \cite{EOSWP}; \url{https://eos.io}.)
-            {\em EOS\/} (2018或以後) 是一個建議的異構多區塊鏈DPoS系統，{\em 並帶有\/}智能合約支持和一些最小的消息傳遞支持（在\ptref{sp:blkch.interact}描述的意義上仍然是鬆散連接的）。這是先前成功創建了BitShares和SteemIt項目的同一團隊的嘗試，展示了DPoS共識算法的強大之處。通過為需要它的項目創建專用的工作鏈（例如，一個分散式交易所可能使用一個支持一組專用的優化交易的工作鏈，類似於BitShares所做的那樣）以及創建具有相同規則的多個工作鏈來實現可伸縮性（在\ptref{sp:het.confed}描述的意義上是{\em 聯邦\/}）。這種可伸縮性方法的缺點和限制已在{\em loc.~cit.}中討論。另見\ptref{sp:dpos.bft.compare}、\ptref{sp:shard.supp}和\ptref{sp:blkch.interact}，進一步討論DPoS、分片、工作鏈之間的互動及其對區塊鏈系統的可伸縮性的影響。
+            {\em EOS\/} (2018或以後) 是一個建議的異構多區塊鏈DPoS系統，{\em 並帶有\/}智能合約支持和一些最小的消息傳遞支持（在\ptref{sp:blkch.interact}描述的意義上仍然是鬆散連接的）。這是先前成功創建了BitShares和SteemIt專案的同一團隊的嘗試，展示了DPoS共識算法的強大之處。通過為需要它的專案創建專用的工作鏈（例如，一個分散式交易所可能使用一個支持一組專用的優化交易的工作鏈，類似於BitShares所做的那樣）以及創建具有相同規則的多個工作鏈來實現可伸縮性（在\ptref{sp:het.confed}描述的意義上是{\em 聯邦\/}）。這種可伸縮性方法的缺點和限制已在{\em loc.~cit.}中討論。另見\ptref{sp:dpos.bft.compare}、\ptref{sp:shard.supp}和\ptref{sp:blkch.interact}，進一步討論DPoS、分片、工作鏈之間的互動及其對區塊鏈系統的可伸縮性的影響。
 
     與此同時，即使一個人不能在區塊鏈內「創建一個Facebook」（參見\ptref{sp:blockchain.facebook}），不論是EOS還是其他方式，我們認為EOS可能會成為某些高度專用的弱互動分散式應用程序的便利平台，類似於BitShares（去中心化交易所）和SteemIt（去中心化博客平台）。
 
 \nxsubpoint\label{sp:discuss.PolkaDot} \embt(PolkaDot \cite{PolkaWP}; \url{https://polkadot.io/}.)
-            {\em PolkaDot\/} (2019或之後) 是最佳思考且最詳細的建議多鏈權益證明項目之一；其開發是由Ethereum的共同創始人之一領導的。此項目是我們地圖上與TON Blockchain最接近的項目。（事實上，我們的「漁民」和「提名人」術語都是歸功於PolkaDot項目。）
+            {\em PolkaDot\/} (2019或之後) 是最佳思考且最詳細的建議多鏈權益證明專案之一；其開發是由Ethereum的共同創辦人之一領導的。此專案是我們地圖上與TON Blockchain最接近的專案。（事實上，我們的「漁民」和「提名人」術語都是歸功於PolkaDot專案。）
 
-PolkaDot是一個異構的鬆散連接的多鏈權益證明項目，具有用於生成新區塊的拜占庭容錯（BFT）共識和主鏈（可能是外部的，例如Ethereum區塊鏈）。它還使用超立方體路由，有點像TON的慢速版本，如\ptref{sp:hypercube}所述。
+PolkaDot是一個異構的鬆散連接的多鏈權益證明專案，具有用於生成新區塊的拜占庭容錯（BFT）共識和主鏈（可能是外部的，例如Ethereum區塊鏈）。它還使用超立方體路由，有點像TON的慢速版本，如\ptref{sp:hypercube}所述。
 
-其獨特的功能是它不僅可以創建{\em 公共的}，而且還可以創建{\em 私人的\/}區塊鏈。這些私人區塊鏈也將能夠與其他公共區塊鏈互動，不論是PolkaDot還是其他的。
+其獨特的功能是它不僅可以創建{\em 公共的}，而且還可以創建{\em 私有的\/}區塊鏈。這些私有區塊鏈也將能夠與其他公共區塊鏈互動，不論是PolkaDot還是其他的。
 
-因此，PolkaDot可能會成為大規模{\em 私人\/}區塊鏈的平台，例如，銀行聯盟可能會使用它來快速相互轉賬，或者大型公司可能對私有區塊鏈技術有其他用途。
+因此，PolkaDot可能會成為大規模{\em 私有\/}區塊鏈的平台，例如，銀行聯盟可能會使用它來快速相互轉賬，或者大型公司可能對私有區塊鏈技術有其他用途。
 
 然而，PolkaDot不支持分片且不是緊密連接的。這在某種程度上限制了其可伸縮性，與EOS相似。（或許稍好一些，因為PolkaDot使用BFT PoS而非DPoS。）
 
 \nxsubpoint \embt(Universa; \url{https://universa.io}.)  
-我們之所以在此提及這個不尋常的區塊鏈項目，是因為它是到目前為止唯一隨便提到與我們的Infinite Sharding Paradigm相似的項目（參見~\ptref{sp:ISP}）。其另一個特點是它通過承諾只有項目的受信任和持有許可的夥伴才會被錄取為驗證者，因此他們永遠不會提交無效的區塊，來繞過所有與Byzantine Fault Tolerance相關的複雜性。這是一個有趣的決定；但是，它本質上使一個區塊鏈項目故意變得{\em 集中化}，這是區塊鏈項目通常想要避免的（在一個受信任的集中化環境中為什麼需要區塊鏈？）。
+我們之所以在此提及這個不尋常的區塊鏈專案，是因為它是到目前為止唯一隨便提到與我們的Infinite Sharding Paradigm相似的專案（參見~\ptref{sp:ISP}）。其另一個特點是它通過承諾只有專案的受信任和持有許可的夥伴才會被錄取為validator，因此他們永遠不會提交無效的區塊，來繞過所有與Byzantine Fault Tolerance相關的複雜性。這是一個有趣的決定；但是，它本質上使一個區塊鏈專案故意變得{\em 集中化}，這是區塊鏈專案通常想要避免的（在一個受信任的集中化環境中為什麼需要區塊鏈？）。
 
 \nxsubpoint \embt(Plasma; \url{https://plasma.io}).)  
-{\em Plasma\/} (2019?)是Ethereum的另一位共同創始人的非傳統區塊鏈項目。它旨在緩解Ethereum的某些限制，而不引入sharding。本質上，它是一個與Ethereum分開的項目，引入了一系列的（異構的）workchains，與最高級別的Ethereum區塊鏈綁定（作為一個外部masterchain）。資金可以從層次結構中的任何區塊鏈轉移出去（從Ethereum區塊鏈作為根開始），並伴隨一個要完成的工作描述。然後在子workchain中進行必要的計算（可能需要將原始工作的部分進一步轉發到樹的下方），其結果被傳遞上去，並收集獎勵。通過一個（由payment channel啟發的）機制來避免實現這些workchains的一致性和驗證的問題，該機制允許用戶從一個行為不端的workchain單方面撤回他們的資金到其父workchain（儘管很慢），並重新分配他們的資金和工作到另一個workchain。
+{\em Plasma\/} (2019?)是Ethereum的另一位共同創辦人的非傳統區塊鏈專案。它旨在緩解Ethereum的某些限制，而不引入sharding。本質上，它是一個與Ethereum分開的專案，引入了一系列的（異構的）workchains，與最高級別的Ethereum區塊鏈綁定（作為一個外部masterchain）。資金可以從層次結構中的任何區塊鏈轉移出去（從Ethereum區塊鏈作為根開始），並伴隨一個要完成的工作描述。然後在子workchain中進行必要的計算（可能需要將原始工作的部分進一步轉發到樹的下方），其結果被傳遞上去，並收集獎勵。通過一個（由payment channel啟發的）機制來避免實現這些workchains的一致性和驗證的問題，該機制允許用戶從一個行為不端的workchain單方面撤回他們的資金到其父workchain（儘管很慢），並重新分配他們的資金和工作到另一個workchain。
 
 因此，Plasma可能成為綁定到Ethereum區塊鏈的分散式計算平台，就像一個``數學協處理器''。但是，這似乎不像是實現真正的通用可伸縮性的方法。
 
 \nxsubpoint \embt(Specialized blockchain projects.)  
-還有一些專門的區塊鏈項目，如FileCoin（一個激勵用戶為存儲願意支付費用的其他用戶的文件提供磁盤空間的系統），Golem（一個基於區塊鏈的平台，用於租用和出借計算能力給專門的應用，如3D-rendering）或SONM（另一個類似的計算能力出借項目）。這類項目在區塊鏈組織的層面上沒有引入任何概念上的新事物；相反，它們是特定的區塊鏈應用，可以由運行在通用目的區塊鏈中的智能合約實現，只要它可以提供所需的性能。因此，這類項目可能會使用現有或計劃中的區塊鏈項目作為其基礎，如EOS、PolkaDot或TON。如果一個項目需要``真正的''可伸縮性（基於sharding），那麼它最好使用TON；如果它滿足於在一個``聯邦''背景下工作，通過為其目的明確定義一系列的workchains，它可能會選擇EOS或PolkaDot。
+還有一些專門的區塊鏈專案，如FileCoin（一個激勵用戶為存儲願意支付費用的其他用戶的文件提供硬碟空間的系統），Golem（一個基於區塊鏈的平台，用於租用和出借計算能力給專門的應用，如3D-rendering）或SONM（另一個類似的計算能力出借專案）。這類專案在區塊鏈組織的層面上沒有引入任何概念上的新事物；相反，它們是特定的區塊鏈應用，可以由運行在通用目的區塊鏈中的智能合約實現，只要它可以提供所需的性能。因此，這類專案可能會使用現有或計劃中的區塊鏈專案作為其基礎，如EOS、PolkaDot或TON。如果一個專案需要``真正的''可伸縮性（基於sharding），那麼它最好使用TON；如果它滿足於在一個``聯邦''背景下工作，通過為其目的明確定義一系列的workchains，它可能會選擇EOS或PolkaDot。
 
 \nxsubpoint \embt(The TON Blockchain.)  
-TON（Telegram Open Network）Block\-chain（計劃於2018年）是我們在本文檔中描述的項目。它旨在成為第一個第五代區塊鏈項目——即BFT PoS多鏈項目，混合同質/異質性，支援（可shardable）的自定義workchains，具有原生的sharding支援，並且緊密結合（特別是，能夠在保持所有shardchains的一致狀態時，幾乎立即轉發shards之間的消息）。因此，它將是一個真正可伸縮的通用區塊鏈項目，能夠容納基本上可以在區塊鏈中實現的任何應用程序。當由TON Project的其他組件增強時（參見~\ptref{sect:ton.components}），其可能性甚至更大。
+TON（Telegram Open Network）Block\-chain（計劃於2018年）是我們在本文檔中描述的專案。它旨在成為第一個第五代區塊鏈專案——即BFT PoS多鏈專案，混合同質/異質性，支援（可shardable）的自定義workchains，具有原生的sharding支援，並且緊密耦合（特別是，能夠在保持所有shardchains的一致狀態時，幾乎立即轉發shards之間的消息）。因此，它將是一個真正可伸縮的通用區塊鏈專案，能夠容納基本上可以在區塊鏈中實現的任何應用程序。當由TON Project的其他組件增強時（參見~\ptref{sect:ton.components}），其可能性甚至更大。
 
 \nxsubpoint\label{sp:blockchain.facebook} \embtx(Is it possible to
 ``upload Facebook into a blockchain''?)  
-有時候人們聲稱，將Facebook這樣規模的社交網絡作為分佈式應用程序部署在區塊鏈中是可能的。通常會引用一個受喜愛的區塊鏈項目作為這種應用的可能“主機”。
+有時候人們聲稱，將Facebook這樣規模的社交網路作為分佈式應用程序部署在區塊鏈中是可能的。通常會引用一個受喜愛的區塊鏈專案作為這種應用的可能“主機”。
 
-我們不能說這是技術上的不可能。當然，需要一個緊密結合的區塊鏈項目，具有真正的sharding（即TON），以便這種大型應用不會運行得太慢（例如，從一個shardchain中的用戶傳送消息和更新到另一個shardchain中的朋友，且延遲合理）。然而，我們認為這是不需要的，且永遠不會被完成，因為價格會過高。
+我們不能說這是技術上的不可能。當然，需要一個緊密耦合的區塊鏈專案，具有真正的sharding（即TON），以便這種大型應用不會運行得太慢（例如，從一個shardchain中的用戶傳送消息和更新到另一個shardchain中的朋友，且延遲合理）。然而，我們認為這是不需要的，且永遠不會被完成，因為價格會過高。
 
-讓我們考慮將“將Facebook上載到區塊鏈”作為一個思考實驗；任何其他相似規模的項目也可能作為一個示例。一旦Facebook被上載到區塊鏈，目前由Facebook的伺服器完成的所有操作將被序列化為某些區塊鏈的交易（例如，TON的shardchains），並將由這些區塊鏈的所有驗證者執行。每項操作都必須執行，比如說，至少20次，如果我們希望每個區塊至少收集20個驗證者簽名（立即或最終，如在DPOS系統中）。同樣，Facebook伺服器在其磁盤上保留的所有數據將被保留在相應shardchain的所有驗證者的磁盤上（即，至少有20份副本）。
+讓我們考慮將“將Facebook上載到區塊鏈”作為一個思考實驗；任何其他相似規模的專案也可能作為一個示例。一旦Facebook被上載到區塊鏈，目前由Facebook的伺服器完成的所有操作將被序列化為某些區塊鏈的交易（例如，TON的shardchains），並將由這些區塊鏈的所有validator執行。每項操作都必須執行，比如說，至少20次，如果我們希望每個區塊至少收集20個validator簽名（立即或最終，如在DPOS系統中）。同樣，Facebook伺服器在其硬碟上保留的所有數據將被保留在相應shardchain的所有validator的硬碟上（即，至少有20份副本）。
 
-因為驗證者基本上是與Facebook目前使用的相同伺服器（或許是伺服器集群，但這不影響此論點的有效性），我們可以看出，將Facebook運行在blockchain中的總硬件開銷至少比傳統方式實現高出20倍。
+因為validator基本上是與Facebook目前使用的相同伺服器（或許是伺服器集群，但這不影響此論點的有效性），我們可以看出，將Facebook運行在blockchain中的總硬件開銷至少比傳統方式實現高出20倍。
 
-事實上，開銷還會更高，因為blockchain的虛擬機比運行優化編譯代碼的“裸CPU”要慢，且其存儲未針對Facebook特定的問題進行優化。通過為Facebook設計具有某些特殊交易的特定workchain，可以部分地減輕此問題；這是BitShares和EOS實現高性能的方法，也可在TON Blockchain中使用。然而，一般的blockchain設計本身仍然會帶來一些額外的限制，例如需要將所有操作註冊為block中的交易，將這些交易組織成Merkle tree，計算和檢查它們的Merkle hashes，進一步傳播這個block等。
+事實上，開銷還會更高，因為blockchain的虛擬機比運行優化編譯程式碼的“裸CPU”要慢，且其存儲未針對Facebook特定的問題進行優化。通過為Facebook設計具有某些特殊交易的特定workchain，可以部分地減輕此問題；這是BitShares和EOS實現高性能的方法，也可在TON Blockchain中使用。然而，一般的blockchain設計本身仍然會帶來一些額外的限制，例如需要將所有操作註冊為block中的交易，將這些交易組織成Merkle tree，計算和檢查它們的Merkle hashes，進一步傳播這個block等。
 
-因此，保守估計是，為了驗證承載該規模社交網絡的blockchain項目，需要的伺服器性能是Facebook現在使用的伺服器的100倍。有人將不得不為這些伺服器付錢，無論是擁有分散應用的公司（想像一下每個Facebook頁面上有700條廣告，而不是7條）還是它的用戶。無論哪種方式，這在經濟上似乎都不可行。
+因此，保守估計是，為了驗證承載該規模社交網路的blockchain專案，需要的伺服器性能是Facebook現在使用的伺服器的100倍。有人將不得不為這些伺服器付錢，無論是擁有分散應用的公司（想像一下每個Facebook頁面上有700條廣告，而不是7條）還是它的用戶。無論哪種方式，這在經濟上似乎都不可行。
 
-我們認為，{\em 不是所有東西都應該上載到blockchain中}。例如，不必在blockchain中保留用戶照片；將這些照片的hashes註冊到blockchain中，並將照片保存在分散的off-chain存儲（例如FileCoin或TON Storage）中，可能是更好的選擇。這就是為什麼TON不僅僅是一個blockchain項目，而是圍繞TON Blockchain為中心的幾個組件的集合，如Chapters~\ptref{sect:ton.components}和~\ptref{sect:services}所概述的。
+我們認為，{\em 不是所有東西都應該上載到blockchain中}。例如，不必在blockchain中保留用戶照片；將這些照片的hashes註冊到blockchain中，並將照片保存在分散的off-chain存儲（例如FileCoin或TON Storage）中，可能是更好的選擇。這就是為什麼TON不僅僅是一個blockchain專案，而是圍繞TON Blockchain為中心的幾個組件的集合，如Chapters~\ptref{sect:ton.components}和~\ptref{sect:services}所概述的。
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1217,9 +1217,9 @@ TON（Telegram Open Network）Block\-chain（計劃於2018年）是我們在本�
 \clearpage
 \mysection{TON 網路協議}\label{sect:network}
 
-任何 blockchain 項目不僅需要 block 格式和 blockchain 驗證規則的規範，還需要一個用於傳播新 block、發送和收集交易候選資料等的網路協議。換句話說，每個 blockchain 項目都必須設置一個專門的點對點網路。這個網路必須是點對點的，因為通常希望 blockchain 項目是分散式的，所以不能依賴於一組集中式的伺服器並使用傳統的客戶端-伺服器架構，例如，傳統的網路銀行應用程序所做的。即使是輕量級客戶端（例如，輕量級加密貨幣錢包智慧型手機應用程序），它們必須以客戶端-伺服器的方式連接到完整節點，如果先前的節點停止運作，實際上它們可以自由地連接到另一個完整節點，只要用於連接到完整節點的協議足夠標準化。
+任何 blockchain 專案不僅需要 block 格式和 blockchain 驗證規則的規範，還需要一個用於傳播新 block、發送和收集交易候選資料等的網路協議。換句話說，每個 blockchain 專案都必須設置一個專門的點對點網路。這個網路必須是點對點的，因為通常希望 blockchain 專案是分散式的，所以不能依賴於一組集中式的伺服器並使用傳統的客戶端-伺服器架構，例如，傳統的網路銀行應用程序所做的。即使是輕量級客戶端（例如，輕量級加密貨幣錢包智能型手機應用程序），它們必須以客戶端-伺服器的方式連接到完整節點，如果先前的節點停止運作，實際上它們可以自由地連接到另一個完整節點，只要用於連接到完整節點的協議足夠標準化。
 
-雖然如 Bitcoin 或 Ethereum 這樣的單一 blockchain 項目的網路需求可以很容易地被滿足（基本上需要構建一個“隨機”點對點的覆蓋網路，並通過一個 gossip 協議傳播所有新的 block 和交易候選資料），但像 TON Blockchain 這樣的多 blockchain 項目則要求更高（例如，人們必須能夠訂閱只有某些 shardchains 的更新，而不一定是所有的）。因此，TON Blockchain 和整個 TON 項目的網路部分至少值得簡短的討論。
+雖然如 Bitcoin 或 Ethereum 這樣的單一 blockchain 專案的網路需求可以很容易地被滿足（基本上需要構建一個“隨機”點對點的覆蓋網路，並通過一個 gossip 協議傳播所有新的 block 和交易候選資料），但像 TON Blockchain 這樣的多 blockchain 專案則要求更高（例如，人們必須能夠訂閱只有某些 shardchains 的更新，而不一定是所有的）。因此，TON Blockchain 和整個 TON 專案的網路部分至少值得簡短的討論。
 
 另一方面，一旦需要支持 TON Blockchain 的更為複雜的網路協議到位，事實證明它們可以很容易地用於不一定與 TON Blockchain 的直接需求相關的目的，從而為 TON 生態系統中創建新服務提供了更多的可能性和靈活性。
 
@@ -1263,7 +1263,7 @@ identifiers.)  在最簡單的情況下，攜帶內嵌TON ADNL數據報的UDP數
 
 特別地，channel identifier實際上可以選擇一個``tunnel''，當立即的接收者僅將接收到的消息轉發給其他人---實際的接收者或另一個代理時。沿途可能會進行一些加密或解密步驟（讓人想起``onion routing'' \cite{Onion}或甚至``garlic routing''\footnote{\url{https://geti2p.net/en/docs/how/garlic-routing}}），並且可能使用另一個channel identifier用於重新加密的轉發數據包（例如，點對點channel可以用於將數據包轉發給路徑上的下一個接收者）。
 
-通過這種方式，可以在TON Abstract Datagram Network Layer的層次上添加對``tunneling''和``proxying''的支持---與TOR或$I^2P$項目提供的相似---而不影響所有高級TON network protocols的功能，它們將不知道這樣的添加。此機會被{\em TON Proxy\/}服務所利用（參見\ptref{sp:ex.ton.proxy}）。
+通過這種方式，可以在TON Abstract Datagram Network Layer的層次上添加對``tunneling''和``proxying''的支持---與TOR或$I^2P$專案提供的相似---而不影響所有高級TON network protocols的功能，它們將不知道這樣的添加。此機會被{\em TON Proxy\/}服務所利用（參見\ptref{sp:ex.ton.proxy}）。
 
 
 \nxsubpoint\label{sp:net.startup} \embt(Zero channel and the bootstrap
@@ -1277,7 +1277,7 @@ problem.)  通常，一個TON ADNL節點會有一些``neighbor table''，其中�
 
 不是所有節點都需要處理發送到zero channel的數據包，但用於啟動輕型客戶端的節點應支持此功能。
 
-\nxsubpoint \embt(TCP-like stream protocol over ADNL.)  ADNL，作為基於256位抽象地址的不可靠（小尺寸）數據包協議，可以用作更複雜網絡協議的基礎。例如，可以構建一個類似TCP的流協議，使用ADNL作為IP的抽象替代品。但是，TON Project的大多數組件不需要這樣的流協議。
+\nxsubpoint \embt(TCP-like stream protocol over ADNL.)  ADNL，作為基於256位抽象地址的不可靠（小尺寸）數據包協議，可以用作更複雜網路協議的基礎。例如，可以構建一個類似TCP的流協議，使用ADNL作為IP的抽象替代品。但是，TON Project的大多數組件不需要這樣的流協議。
 
 \nxsubpoint\label{sp:RLDP} \embt(RLDP, or Reliable Large Datagram
 Protocol over ADNL.)  一個建立在ADNL上的可靠的任意大小的數據包協議，稱為RLDP，用於代替類似TCP的協議。這種可靠的數據包協議可以用來，例如，向遠程主機發送RPC查詢並從它們那裡接收答案（參見~\ptref{sp:pure.net.serv}）。
@@ -1285,7 +1285,7 @@ Protocol over ADNL.)  一個建立在ADNL上的可靠的任意大小的數據包
 \mysubsection{TON DHT: Kademlia-like Distributed Hash
   Table}\label{sect:kademlia}
 
-{\em TON 分散式雜湊表 (DHT)\/} 在TON Project的網絡部分中扮演了關鍵角色，用於定位網絡中的其他節點。例如，一個想要提交交易到某個shardchain的客戶端可能想要找到該shardchain的驗證者或collator，或至少某個可以將客戶端的交易轉發到collator的節點。這可以通過在TON DHT中查找特定的key來完成。TON DHT的另一個重要應用是，它可以快速填充新節點的鄰居表格 (參見~\ptref{sp:net.startup})，只需查找隨機key，或新節點的地址。如果節點對其入站數據報使用代理和通道，則將通道標識符和其入口點（例如，IP地址和UDP端口）發布在TON DHT中；然後，所有希望發送數據報到該節點的節點首先將從DHT獲取此聯繫信息。
+{\em TON 分散式雜湊表 (DHT)\/} 在TON Project的網路部分中扮演了關鍵角色，用於定位網路中的其他節點。例如，一個想要提交交易到某個shardchain的客戶端可能想要找到該shardchain的validator或collator，或至少某個可以將客戶端的交易轉發到collator的節點。這可以通過在TON DHT中查找特定的key來完成。TON DHT的另一個重要應用是，它可以快速填充新節點的鄰居表格 (參見~\ptref{sp:net.startup})，只需查找隨機key，或新節點的地址。如果節點對其入站數據報使用代理和通道，則將通道標識符和其入口點（例如，IP地址和UDP端口）發布在TON DHT中；然後，所有希望發送數據報到該節點的節點首先將從DHT獲取此聯繫信息。
 
 TON DHT屬於{\em Kademlia-like分散式雜湊表\/}家族~\cite{Kademlia}。
 
@@ -1318,7 +1318,7 @@ Kademlia routing table中的新節點也被包含在~\ptref{sp:net.startup}中�
 
 TON DHT的一個特殊特性是，它試圖選擇往返延遲最小的節點作為Kademlia routing table的buckets的``最好的''節點。
 
-\nxsubpoint (Kademlia網絡查詢。) 一個Kademlia節點通常支持以下網絡查詢：
+\nxsubpoint (Kademlia網路查詢。) 一個Kademlia節點通常支持以下網路查詢：
 \begin{itemize}
 \item $\Ping$ -- 檢查節點的可用性。
 \item $\Store(key,value)$ -- 要求節點保存$value$作為$key$的值。對於TON DHT，$\Store$查詢稍微複雜一些 (參考~\ptref{sp:DHT.store})。
@@ -1346,7 +1346,7 @@ TON DHT的一個特殊特性是，它試圖選擇往返延遲最小的節點作�
 
 這種機制可以用於創建一個分佈式的``torrent tracker''，在其中所有對某個``torrent''（即，某個文件）感興趣的節點可以找到對同一個torrent感興趣或已經擁有副本的其他節點。
 
-{\em TON Storage\/} (參考~\ptref{sp:ex.ton.storage})使用此技術來找到擁有所需文件副本的節點（例如，shardchain的狀態快照或舊的區塊）。然而，其更重要的用途是創建``overlay multicast subnetworks''和``network interest groups''（參考~\ptref{sect:overlay}）。其想法是只有一些節點對特定shardchain的更新感興趣。如果shardchains的數量變得非常大，則找到對相同shard感興趣的節點可能會變得很複雜。這個``distributed torrent tracker''提供了一種方便的方法來找到這些節點。另一個選項是從驗證者那裡請求它們，但這不會是一個可擴展的方法，驗證者可能選擇不回應來自任意未知節點的這種查詢。
+{\em TON Storage\/} (參考~\ptref{sp:ex.ton.storage})使用此技術來找到擁有所需文件副本的節點（例如，shardchain的狀態快照或舊的區塊）。然而，其更重要的用途是創建``overlay multicast subnetworks''和``network interest groups''（參考~\ptref{sect:overlay}）。其想法是只有一些節點對特定shardchain的更新感興趣。如果shardchains的數量變得非常大，則找到對相同shard感興趣的節點可能會變得很複雜。這個``distributed torrent tracker''提供了一種方便的方法來找到這些節點。另一個選項是從validator那裡請求它們，但這不會是一個可擴展的方法，validator可能選擇不回應來自任意未知節點的這種查詢。
 
 \nxsubpoint \embt(Fall-back keys.) 目前描述的大多數``key types''在其TL描述中都有一個額外的32位整數字段，通常等於零。但是，如果通過hash該描述獲得的鍵不能從TON DHT中檢索或更新，則會增加此字段中的值，並進行新的嘗試。這樣，通過創建許多靠近被攻擊鍵的抽象地址並控制相應的DHT節點，就不能``capture''和``censor''一個鍵（即，進行鍵保留攻擊）。
 
@@ -1357,15 +1357,15 @@ TON DHT的一個特殊特性是，它試圖選擇往返延遲最小的節點作�
 另一種方法是將公鑰發佈到TON Blockchain中，並使用一個特殊的DHT鍵，在TL描述字符串（參考~\ptref{sp:TL}）中指示該公鑰為其``owner''，以發佈服務的抽象地址的最新列表。這是TON Services利用的方法之一。
 
 
-\nxsubpoint \embt(Locating owners of TON blockchain accounts.) 在大多數情況下，TON區塊鏈賬戶的所有者不希望與抽象網絡地址，特別是IP地址相關聯，因為這可能侵犯他們的隱私。然而，在某些情況下，TON區塊鏈賬戶的所有者可能想要發佈她可以被聯繫到的一個或多個抽象地址。
+\nxsubpoint \embt(Locating owners of TON blockchain accounts.) 在大多數情況下，TON區塊鏈賬戶的所有者不希望與抽象網路地址，特別是IP地址相關聯，因為這可能侵犯他們的隱私。然而，在某些情況下，TON區塊鏈賬戶的所有者可能想要發佈她可以被聯繫到的一個或多個抽象地址。
 
-一個典型的情況是TON Payments的“lightning network”中的節點（參考~\ptref{sect:lightning}），這是即時加密貨幣轉賬的平台。一個公開的TON Payments節點可能不僅想與其他節點建立支付通道，還想發佈一個抽象網絡地址，稍後可以用該地址聯繫它，以沿著已建立的通道進行支付。
+一個典型的情況是TON Payments的“lightning network”中的節點（參考~\ptref{sect:lightning}），這是即時加密貨幣轉賬的平台。一個公開的TON Payments節點可能不僅想與其他節點建立支付通道，還想發佈一個抽象網路地址，稍後可以用該地址聯繫它，以沿著已建立的通道進行支付。
 
-一種選擇是在創建支付通道的智能合約中包含一個抽象網絡地址。更靈活的選擇是在智能合約中包括一個公鑰，然後像在~\ptref{sp:loc.serv}中解釋的那樣使用DHT。
+一種選擇是在創建支付通道的智能合約中包含一個抽象網路地址。更靈活的選擇是在智能合約中包括一個公鑰，然後像在~\ptref{sp:loc.serv}中解釋的那樣使用DHT。
 
 最自然的方法是使用控制TON區塊鏈中賬戶的同一私鑰，來簽名和發佈關於與該賬戶相關的抽象地址的TON DHT中的更新。這幾乎與在~\ptref{sp:loc.serv}中描述的方式相同;但是，所使用的DHT鍵將需要一個特殊的鍵描述，只包含$\accountid$本身，等於“賬戶描述”的$\Sha$，其中包含賬戶的公鑰。該值中包含的簽名也將包含賬戶描述。
 
-通過這種方式，提供了一種定位某些TON區塊鏈賬戶所有者的抽象網絡地址的機制。
+通過這種方式，提供了一種定位某些TON區塊鏈賬戶所有者的抽象網路地址的機制。
 
 \nxsubpoint\label{sp:loc.abs.addr} \embt(Locating abstract addresses.) 請注意，儘管TON DHT是在TON ADNL上實現的，但TON ADNL也用它來實現幾個目的。
 
@@ -1373,67 +1373,67 @@ TON DHT的一個特殊特性是，它試圖選擇往返延遲最小的節點作�
 
 為此，只需將256位抽象地址作為DHT中的鍵查找。找到使用該地址的節點（即，使用此地址作為公共半永久DHT地址），在這種情況下，可以獲知其IP地址和端口;或者，可以獲取一個由正確的私鑰簽名的問題鍵值的輸入隧道描述，在這種情況下，將使用此隧道描述將ADNL數據包發送到預期的接收者。
 
-請注意，為了使抽象地址“公開”（可以從網絡中的任何節點到達），其所有者必須使用它作為半永久DHT地址，或在考慮的抽象地址下的DHT鍵中發佈一個輸入隧道描述，使用其另一個公共抽象地址（例如，半永久地址）作為隧道的入口點。另一個選擇是簡單地發佈其IP地址和UDP端口。
+請注意，為了使抽象地址“公開”（可以從網路中的任何節點到達），其所有者必須使用它作為半永久DHT地址，或在考慮的抽象地址下的DHT鍵中發佈一個輸入隧道描述，使用其另一個公共抽象地址（例如，半永久地址）作為隧道的入口點。另一個選擇是簡單地發佈其IP地址和UDP端口。
 
 
 \mysubsection{Overlay Networks 和 Multicasting
   Messages}\label{sect:overlay}
 
 在像TON區塊鏈這樣的多區塊鏈系統中，即使是全節點
-也通常只對獲取某些shardchains的更新（即新的區塊）感興趣。為此，必須在TON Network內部構建一個特殊的overlay（子）網絡，基於在~\ptref{sect:ANL}中討論的ADNL協議，每個shardchain一個。
+也通常只對獲取某些shardchains的更新（即新的區塊）感興趣。為此，必須在TON Network內部構建一個特殊的overlay（子）網路，基於在~\ptref{sect:ANL}中討論的ADNL協議，每個shardchain一個。
 
-因此，需要建立任意的overlay子網絡，對希望參與的任何節點開放。這些overlay網絡中將運行基於ADNL的特殊gossip協議。特別是，這些gossip協議可用於在這樣的子網絡內部傳播（廣播）任意數據。
+因此，需要建立任意的overlay子網路，對希望參與的任何節點開放。這些overlay網路中將運行基於ADNL的特殊gossip協議。特別是，這些gossip協議可用於在這樣的子網路內部傳播（廣播）任意數據。
 
-\nxsubpoint \embt(Overlay networks.) 一個{\em overlay (sub)network\/}只是在某個更大的網絡內部實現的（虛擬）網絡。通常只有較大網絡的一些節點參與overlay子網絡，並且只有這些節點之間的一些物理或虛擬“鏈接”是overlay子網絡的一部分。
+\nxsubpoint \embt(Overlay networks.) 一個{\em overlay (sub)network\/}只是在某個更大的網路內部實現的（虛擬）網路。通常只有較大網路的一些節點參與overlay子網路，並且只有這些節點之間的一些物理或虛擬“鏈接”是overlay子網路的一部分。
 
-這樣，如果將包含網絡表示為圖（在像ADNL這樣的數據包網絡的情況下可能是一個完整的圖，其中任何節點都可以輕鬆地與其他節點通信），則overlay子網絡是此圖的{\em subgraph\/}。
+這樣，如果將包含網路表示為圖（在像ADNL這樣的數據包網路的情況下可能是一個完整的圖，其中任何節點都可以輕鬆地與其他節點通信），則overlay子網路是此圖的{\em subgraph\/}。
 
-在大多數情況下，使用構建於較大網絡的網絡協議之上的某些協議實現overlay網絡。它可以使用與較大網絡相同的地址，或使用自定義地址。
+在大多數情況下，使用構建於較大網路的網路協議之上的某些協議實現overlay網路。它可以使用與較大網路相同的地址，或使用自定義地址。
 
-\nxsubpoint\label{sp:ton.overlays} \embt(Overlay networks in TON.) TON中的overlay網絡基於在~\ptref{sect:ANL}中討論的ADNL協議構建;它們也使用256位ADNL抽象地址作為overlay網絡中的地址。每個節點通常選擇其抽象地址中的一個，也作為其在overlay網絡中的地址。
+\nxsubpoint\label{sp:ton.overlays} \embt(Overlay networks in TON.) TON中的overlay網路基於在~\ptref{sect:ANL}中討論的ADNL協議構建;它們也使用256位ADNL抽象地址作為overlay網路中的地址。每個節點通常選擇其抽象地址中的一個，也作為其在overlay網路中的地址。
 
-與ADNL相反，TON overlay網絡通常不支持向任意其他節點發送數據包。相反，一些“半永久鏈接”在某些節點之間建立（被稱為考慮的overlay網絡的“鄰居”），並且消息通常沿這些鏈接轉發（即，從一個節點到其鄰居之一）。通過這種方式，TON overlay網絡是ADNL網絡的（通常不完整的）子圖內。
+與ADNL相反，TON overlay網路通常不支持向任意其他節點發送數據包。相反，一些“半永久鏈接”在某些節點之間建立（被稱為考慮的overlay網路的“鄰居”），並且消息通常沿這些鏈接轉發（即，從一個節點到其鄰居之一）。通過這種方式，TON overlay網路是ADNL網路的（通常不完整的）子圖內。
 
-TON overlay網絡中的鄰居鏈接可以使用專用的點對點ADNL通道來實現（參考~\ptref{sp:net.channels}）。
+TON overlay網路中的鄰居鏈接可以使用專用的點對點ADNL通道來實現（參考~\ptref{sp:net.channels}）。
 
-overlay網絡的每個節點都維護一個鄰居列表（關於overlay網絡），包含它們的抽象地址（它們用於在overlay網絡中識別它們）和一些鏈接數據（例如，用於與它們通信的ADNL通道）。
+overlay網路的每個節點都維護一個鄰居列表（關於overlay網路），包含它們的抽象地址（它們用於在overlay網路中識別它們）和一些鏈接數據（例如，用於與它們通信的ADNL通道）。
 
 
-\nxsubpoint \embt(Private and public overlay networks.) 有些overlay網絡是{\em public}，意味著任何節點都可以隨意加入。另一些是{\em private}，意味著只有某些節點可以被允許（例如，那些可以證明他們作為驗證者的身份的節點。）一些private overlay網絡甚至可能對“一般公眾”未知。這些overlay網絡的資訊只提供給某些受信任的節點；例如，它可以使用公鑰加密，並且只有擁有相應私鑰副本的節點才能解密此資訊。
+\nxsubpoint \embt(Private and public overlay networks.) 有些overlay網路是{\em public}，意味著任何節點都可以隨意加入。另一些是{\em private}，意味著只有某些節點可以被允許（例如，那些可以證明他們作為validator的身份的節點。）一些private overlay網路甚至可能對“一般公眾”未知。這些overlay網路的資訊只提供給某些受信任的節點；例如，它可以使用公鑰加密，並且只有擁有相應私鑰副本的節點才能解密此資訊。
 
-\nxsubpoint \embt(Centrally controlled overlay networks.) 有些overlay網絡是{\em centrally controlled}，由一個或幾個節點或某個眾所周知的公鑰的所有者控制。其他則是{\em decentralized}，意味著沒有特定節點負責它們。
+\nxsubpoint \embt(Centrally controlled overlay networks.) 有些overlay網路是{\em centrally controlled}，由一個或幾個節點或某個眾所周知的公鑰的所有者控制。其他則是{\em decentralized}，意味著沒有特定節點負責它們。
 
-\nxsubpoint \embt(Joining an overlay network.) 當一個節點想要加入一個overlay網絡時，它首先必須學習其256位的{\em network identifier}，通常等於overlay網絡的{\em description\/}的$\Sha$—一個TL-serialized物件（參考~\ptref{sp:TL}），這可能包含overlay網絡的中央權威（即，其公鑰和可能的抽象地址\footnote{或者，抽象地址可能存儲在DHT中，如~\ptref{sp:loc.serv}所解釋的。}）一個與overlay網絡的名稱相對應的字符串，如果這是與該shard相關的overlay網絡，TON Blockchain shard的標識符，等等。
+\nxsubpoint \embt(Joining an overlay network.) 當一個節點想要加入一個overlay網路時，它首先必須學習其256位的{\em network identifier}，通常等於overlay網路的{\em description\/}的$\Sha$—一個TL-serialized物件（參考~\ptref{sp:TL}），這可能包含overlay網路的中央權威（即，其公鑰和可能的抽象地址\footnote{或者，抽象地址可能存儲在DHT中，如~\ptref{sp:loc.serv}所解釋的。}）一個與overlay網路的名稱相對應的字符串，如果這是與該shard相關的overlay網路，TON Blockchain shard的標識符，等等。
 
-有時從網絡標識符開始可以恢復overlay網絡描述，只需在TON DHT中查找它即可。在其他情況下（例如，對於private overlay網絡），必須與網絡標識符一起獲得網絡描述。
+有時從網路標識符開始可以恢復overlay網路描述，只需在TON DHT中查找它即可。在其他情況下（例如，對於private overlay網路），必須與網路標識符一起獲得網路描述。
 
 \nxsubpoint\label{sp:loc.1.mem} \embt(Locating one member of the
-overlay network.) 在一個節點學到它想要加入的overlay網絡的網絡標識符和網絡描述之後，它必須定位屬於該網絡的至少一個節點。
+overlay network.) 在一個節點學到它想要加入的overlay網路的網路標識符和網路描述之後，它必須定位屬於該網路的至少一個節點。
 
-這也適用於不想加入overlay網絡，但只是想與其通信的節點；例如，可能有一個專用於為特定shardchain收集和傳播交易候選者的overlay網絡，客戶端可能想連接到此網絡的任何節點以建議交易。
+這也適用於不想加入overlay網路，但只是想與其通信的節點；例如，可能有一個專用於為特定shardchain收集和傳播交易候選者的overlay網路，客戶端可能想連接到此網路的任何節點以建議交易。
 
-用於定位overlay網絡成員的方法在該網絡的描述中定義。有時（尤其是對於private網絡），必須已經知道一個成員節點才能加入。在其他情況下，某些節點的抽象地址包含在網絡描述中。一種更靈活的方法是在網絡描述中只指示負責網絡的中央權威，然後抽象地址將通過某些DHT鍵的值提供，由該中央權威簽名。
+用於定位overlay網路成員的方法在該網路的描述中定義。有時（尤其是對於private網路），必須已經知道一個成員節點才能加入。在其他情況下，某些節點的抽象地址包含在網路描述中。一種更靈活的方法是在網路描述中只指示負責網路的中央權威，然後抽象地址將通過某些DHT鍵的值提供，由該中央權威簽名。
 
-最後，真正的decentralized public overlay網絡可以使用描述在~\ptref{sp:distr.torr.tr}中的“分佈式torrent-tracker”機制，也使用TON DHT的幫助來實現。
+最後，真正的decentralized public overlay網路可以使用描述在~\ptref{sp:distr.torr.tr}中的“分佈式torrent-tracker”機制，也使用TON DHT的幫助來實現。
 
 
 \nxsubpoint\label{sp:loc.many.mem} \embt(Locating more members of the overlay network. Creating links.) 一旦找到overlay network的一個節點，可以向該節點發送一個特殊的查詢，要求提供其他成員的列表，例如，被查詢節點的鄰居或其隨機選擇。
 
-這使得加入的成員能夠根據overlay network填充其“相鄰性”或“鄰居列表”，通過選擇一些新學到的網絡節點並與它們建立連接（即，專用的ADNL點對點通道，如~\ptref{sp:ton.overlays}中所述）。之後，向所有鄰居發送特殊消息，表示新成員已準備好在overlay network中工作。鄰居在其鄰居列表中包含到新成員的連接。
+這使得加入的成員能夠根據overlay network填充其“相鄰性”或“鄰居列表”，通過選擇一些新學到的網路節點並與它們建立連接（即，專用的ADNL點對點通道，如~\ptref{sp:ton.overlays}中所述）。之後，向所有鄰居發送特殊消息，表示新成員已準備好在overlay network中工作。鄰居在其鄰居列表中包含到新成員的連接。
 
 \nxsubpoint\label{sp:rand.mem} \embt(Maintaining the neighbor list.) Overlay network節點必須不時更新其鄰居列表。一些鄰居，或至少是到它們的連接（通道），可能停止響應；在這種情況下，這些連接必須被標記為“暫停”，必須嘗試重新連接到這些鄰居，如果這些嘗試失敗，則必須銷毀這些連接。
 
 另一方面，每個節點有時從隨機選擇的鄰居處請求其鄰居列表（或其隨機選擇），並使用它部分地更新自己的鄰居列表，通過向其添加一些新發現的節點，並移除一些舊的節點，無論是隨機的還是依賴於其響應時間和數據包丟失統計數據。
 
-\nxsubpoint \embt(The overlay network is a random subgraph.) 這樣，overlay network在ADNL網絡內部成為一個隨機子圖。如果每個頂點的度至少為三（即，如果每個節點至少連接到三個鄰居），則這個隨機圖以接近一的概率被知道是{\em connected\/}。更確切地說，具有$n$頂點的隨機圖是{\em dis\/}connected的概率是指數級小的，如果例如$n\geq20$，這個概率可以完全忽略。（當然，如果全球網絡分區時，這不適用，當分區的不同側面的節點沒有機會了解彼此時。）另一方面，如果$n$小於20，只需要求每個頂點至少有，比如，至少十個鄰居。
+\nxsubpoint \embt(The overlay network is a random subgraph.) 這樣，overlay network在ADNL網路內部成為一個隨機子圖。如果每個頂點的度至少為三（即，如果每個節點至少連接到三個鄰居），則這個隨機圖以接近一的概率被知道是{\em connected\/}。更確切地說，具有$n$頂點的隨機圖是{\em dis\/}connected的概率是指數級小的，如果例如$n\geq20$，這個概率可以完全忽略。（當然，如果全球網路分區時，這不適用，當分區的不同側面的節點沒有機會了解彼此時。）另一方面，如果$n$小於20，只需要求每個頂點至少有，比如，至少十個鄰居。
 
-\nxsubpoint\label{sp:ov.opt.low.lat} \embt(TON overlay networks are optimized for lower latency.) TON overlay網絡按照以下方法優化前一方法生成的“隨機”網絡圖。每個節點都嘗試保留至少三個最小往返時間的鄰居，並很少更改這個“快速鄰居”列表。同時，它還具有至少其他三個完全隨機選擇的“慢鄰居”，以使overlay network圖始終包含一個隨機子圖。這是為了保持連接性並防止overlay network分裂為幾個未連接的區域子網絡。還選擇並保留至少三個“中間鄰居”，這些鄰居具有由某個常數（實際上，快鄰居和慢鄰居的往返時間的函數）界定的中間往返時間。
+\nxsubpoint\label{sp:ov.opt.low.lat} \embt(TON overlay networks are optimized for lower latency.) TON overlay網路按照以下方法優化前一方法生成的“隨機”網路圖。每個節點都嘗試保留至少三個最小往返時間的鄰居，並很少更改這個“快速鄰居”列表。同時，它還具有至少其他三個完全隨機選擇的“慢鄰居”，以使overlay network圖始終包含一個隨機子圖。這是為了保持連接性並防止overlay network分裂為幾個未連接的區域子網路。還選擇並保留至少三個“中間鄰居”，這些鄰居具有由某個常數（實際上，快鄰居和慢鄰居的往返時間的函數）界定的中間往返時間。
 
 這樣，overlay network的圖形仍然保持足夠的隨機性以保持連接，但是經過優化以實現較低的延遲和更高的吞吐量。
 
 \nxsubpoint \embt(Gossip protocols in an overlay network.) 在overlay network中，經常用來執行所謂的 {\em gossip protocols}，它在讓每個節點只與其鄰居互動的同時達到某個全局目標。例如，有一些gossip protocols用於構建一個(不太大) overlay network的所有成員的大致列表，或者只用每個節點有限的記憶體計算(任意大) overlay network的成員數量的估計 (參考~\cite[4.4.3]{DistrSys} 或 \cite{Birman}了解詳情)。
 
-\nxsubpoint \embt(Overlay network as a broadcast domain.) 在overlay network中運行的最重要的gossip protocol是 {\em broadcast protocol}，旨在傳播由網絡的任何節點，或者其中一個指定的發送節點生成的廣播消息，給所有其他節點。
+\nxsubpoint \embt(Overlay network as a broadcast domain.) 在overlay network中運行的最重要的gossip protocol是 {\em broadcast protocol}，旨在傳播由網路的任何節點，或者其中一個指定的發送節點生成的廣播消息，給所有其他節點。
 
 實際上有幾種廣播協議，為不同的使用情境進行了優化。其中最簡單的一種接收新的廣播消息，並將其轉發給尚未自己發送該消息副本的所有鄰居。
 
@@ -1443,7 +1443,7 @@ overlay network.) 在一個節點學到它想要加入的overlay網絡的網絡�
 
 在用於傳播特定shardchain的新區塊（或僅新區塊頭）的overlay network的情況下，一個節點檢查連接性的好方法是追踪到目前為止收到的最新區塊。因為一個區塊通常每五秒生成一次，如果超過，比如，三十秒都沒有收到新的區塊，那麼節點可能已經從overlay network中斷開了。
 
-\nxsubpoint\label{sp:streaming.multicast} \embt(Streaming broadcast protocol.) 終於，TON overlay network中有一個{\em streaming broadcast protocol\/}，例如，用於在某些shardchain的驗證者之間傳播區塊候選者（“shardchain task group”），當然，他們為此目的創建了一個私有的overlay network。相同的協議可以用來將新的shardchain區塊傳播給該shardchain的所有完整節點。
+\nxsubpoint\label{sp:streaming.multicast} \embt(Streaming broadcast protocol.) 終於，TON overlay network中有一個{\em streaming broadcast protocol\/}，例如，用於在某些shardchain的validator之間傳播區塊候選者（“shardchain task group”），當然，他們為此目的創建了一個私有的overlay network。相同的協議可以用來將新的shardchain區塊傳播給該shardchain的所有完整節點。
 
 此協議已在~\ptref{sp:sh.blk.cand.prop}中描述過：新的（大）廣播消息被分成，比如說，$N$個一千字節的片段；這些片段的序列通過像Reed-Solomon或一個噴泉碼（例如，RaptorQ碼\cite{RaptorQ} \cite{Raptor}）這樣的消除碼擴展到$M\geq N$的片段，並且這些$M$片段按升序的chunk number順序流向所有鄰居。參與的節點收集這些片段，直到它們可以恢復原始的大消息（為此，必須成功接收至少$N$的片段），然後指示其鄰居停止發送流的新片段，因為現在這些節點可以擁有原始消息的副本自己生成後續的片段。這些節點繼續生成流的後續片段並將它們發送給它們的鄰居，除非鄰居反過來指示不再需要這樣做。
 
@@ -1451,13 +1451,13 @@ overlay network.) 在一個節點學到它想要加入的overlay網絡的網絡�
 
 \nxsubpoint \embt(Constructing new overlay networks based on existing ones.) 有時，人們不想從頭開始構建一個overlay network。相反，一個或幾個先前存在的overlay network是已知的，並且新的overlay network的成員資格預計會與這些overlay network的組合成員資格重疊。
 
-一個重要的例子出現在TON shardchain被分成兩個，或兩個同級的shardchains合併為一（參見~\ptref{sect:split.merge}）。在第一種情況下，必須為每一個新的shardchain構建用於向完整節點傳播新區塊的overlay networks；但是，可以預期這些新的overlay network中的每一個都包含在原始shardchain的區塊傳播網絡中（並包含大約一半的成員）。在第二種情況下，合併shardchain的新區塊的傳播的overlay network將大致由與正在合併的兩個同級shardchains相關的兩個overlay network的成員組成。
+一個重要的例子出現在TON shardchain被分成兩個，或兩個同級的shardchains合併為一（參見~\ptref{sect:split.merge}）。在第一種情況下，必須為每一個新的shardchain構建用於向完整節點傳播新區塊的overlay networks；但是，可以預期這些新的overlay network中的每一個都包含在原始shardchain的區塊傳播網路中（並包含大約一半的成員）。在第二種情況下，合併shardchain的新區塊的傳播的overlay network將大致由與正在合併的兩個同級shardchains相關的兩個overlay network的成員組成。
 
-在這些情況下，新的overlay network的描述可能包含對與一系列相關的現有overlay network的明確或隱含的參考。希望加入新的overlay network的節點可以檢查它是否已經是這些現有網絡中的一個的成員，並詢問這些網絡中的鄰居是否也對新網絡感興趣。在得到肯定答案的情況下，可以建立到這些鄰居的新的點對點通道，並且它們可以被包括在新的overlay network的鄰居列表中。
+在這些情況下，新的overlay network的描述可能包含對與一系列相關的現有overlay network的明確或隱含的參考。希望加入新的overlay network的節點可以檢查它是否已經是這些現有網路中的一個的成員，並詢問這些網路中的鄰居是否也對新網路感興趣。在得到肯定答案的情況下，可以建立到這些鄰居的新的點對點通道，並且它們可以被包括在新的overlay network的鄰居列表中。
 
-這種機制並不完全取代在~\ptref{sp:loc.1.mem}和\ptref{sp:loc.many.mem}中描述的一般機制；相反，兩者都是並行運行的，並且用於填充鄰居列表。這是為了防止新的overlay network意外地分裂成幾個未連接的子網絡。
+這種機制並不完全取代在~\ptref{sp:loc.1.mem}和\ptref{sp:loc.many.mem}中描述的一般機制；相反，兩者都是並行運行的，並且用於填充鄰居列表。這是為了防止新的overlay network意外地分裂成幾個未連接的子網路。
 
-\nxsubpoint\label{sp:net.within.net} \embt(Overlay networks within overlay networks.) 另一個有趣的案例出現在{\em TON Payments}的實現中（用於即時off-chain價值轉移的``lightning network''；參見~\ptref{sect:lightning}）。在這種情況下，首先構建包含所有``lightning network''的轉發節點的overlay network。但是，這些節點中的一些在區塊鏈中建立了支付通道；除了通過在~\ptref{sp:loc.1.mem}、\ptref{sp:loc.many.mem} 和~\ptref{sp:rand.mem}中描述的一般overlay network算法選擇的任何``隨機''鄰居外，它們在此overlay network中必須始終是鄰居。這些與建立支付通道的鄰居的``永久鏈接''用於運行特定的lightning network協議，從而在包含的（幾乎始終連接的）overlay network內部有效地創建了一個overlay子網絡（如果事情出錯，則不一定連接）。
+\nxsubpoint\label{sp:net.within.net} \embt(Overlay networks within overlay networks.) 另一個有趣的案例出現在{\em TON Payments}的實現中（用於即時off-chain價值轉移的``lightning network''；參見~\ptref{sect:lightning}）。在這種情況下，首先構建包含所有``lightning network''的轉發節點的overlay network。但是，這些節點中的一些在區塊鏈中建立了支付通道；除了通過在~\ptref{sp:loc.1.mem}、\ptref{sp:loc.many.mem} 和~\ptref{sp:rand.mem}中描述的一般overlay network算法選擇的任何``隨機''鄰居外，它們在此overlay network中必須始終是鄰居。這些與建立支付通道的鄰居的``永久鏈接''用於運行特定的lightning network協議，從而在包含的（幾乎始終連接的）overlay network內部有效地創建了一個overlay子網路（如果事情出錯，則不一定連接）。
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1470,20 +1470,20 @@ overlay network.) 在一個節點學到它想要加入的overlay網絡的網絡�
 \clearpage
 \mysection{TON 服務與應用程式}\label{sect:services}
 
-我們已經詳細討論了 TON 區塊鏈和 TON 網絡技術。現在我們將解釋它們如何可以組合起來創建各種服務和應用程式，並討論 TON 項目本身將提供的一些服務，無論是從一開始還是在稍後的時間。
+我們已經詳細討論了 TON 區塊鏈和 TON 網路技術。現在我們將解釋它們如何可以組合起來創建各種服務和應用程式，並討論 TON 專案本身將提供的一些服務，無論是從一開始還是在稍後的時間。
 
 \mysubsection{TON 服務實施策略}%
 \label{sect:ton.service.impl}
 
-我們首先討論如何在 TON 生態系統內實施不同的區塊鏈和網絡相關應用程式和服務。首先，一個簡單的分類是必要的：
+我們首先討論如何在 TON 生態系統內實施不同的區塊鏈和網路相關應用程式和服務。首先，一個簡單的分類是必要的：
 
-\nxsubpoint \embt(Applications and services.) 我們將``應用程式''和``服務''這兩個詞互換使用。但是，其中有一個微妙且有點模糊的區別：一個 {\em 應用程式\/} 通常直接向人類用戶提供一些服務，而一個 {\em 服務\/} 通常被其他應用程式和服務所利用。例如，TON Storage 是一個服務，因為它是代表其他應用程式和服務保存文件的，即使人類用戶也可能直接使用它。一個假設的``在區塊鏈中的Facebook'' (參見~\ptref{sp:blockchain.facebook}) 或 Telegram 訊息傳遞應用，如果通過 TON 網絡提供 (即，作為一個``ton-service''實施；參見~\ptref{sp:telegram.ton.serv})，則更像是一個 {\em 應用程式}，即使一些``機器人''可能在沒有人工干預的情況下自動訪問它。
+\nxsubpoint \embt(Applications and services.) 我們將``應用程式''和``服務''這兩個詞互換使用。但是，其中有一個微妙且有點模糊的區別：一個 {\em 應用程式\/} 通常直接向人類用戶提供一些服務，而一個 {\em 服務\/} 通常被其他應用程式和服務所利用。例如，TON Storage 是一個服務，因為它是代表其他應用程式和服務保存文件的，即使人類用戶也可能直接使用它。一個假設的``在區塊鏈中的Facebook'' (參見~\ptref{sp:blockchain.facebook}) 或 Telegram 訊息傳遞應用，如果通過 TON 網路提供 (即，作為一個``ton-service''實施；參見~\ptref{sp:telegram.ton.serv})，則更像是一個 {\em 應用程式}，即使一些``機器人''可能在沒有人工干預的情況下自動訪問它。
 
 \nxsubpoint\label{sp:on.off.chain} \embt(Location of the application: on-chain, off-chain or mixed.) 為 TON 生態系設計的服務或應用程式需要將其數據保存並在某處處理該數據。這導致了以下應用程式（和服務）的分類：
 \begin{itemize}
 \item {\em On-chain\/} 應用程式 (參見~\ptref{sp:pure.blockchain})：所有數據和處理都在 TON 區塊鏈中。
-\item {\em Off-chain\/} 應用程式 (參見~\ptref{sp:pure.net.serv})：所有數據和處理都在 TON 區塊鏈之外，在通過 TON 網絡提供的服務器上。
-\item {\em Mixed\/} 應用程式 (參見~\ptref{sp:mixed.serv})：部分，但不是所有，數據和處理都在 TON 區塊鏈中；其餘的都在通過 TON 網絡提供的off-chain服務器上。
+\item {\em Off-chain\/} 應用程式 (參見~\ptref{sp:pure.net.serv})：所有數據和處理都在 TON 區塊鏈之外，在通過 TON 網路提供的伺服器上。
+\item {\em Mixed\/} 應用程式 (參見~\ptref{sp:mixed.serv})：部分，但不是所有，數據和處理都在 TON 區塊鏈中；其餘的都在通過 TON 網路提供的off-chain伺服器上。
 \end{itemize}
 
 \nxsubpoint \embt(Centralization: centralized and decentralized, or distributed, applications.) 另一個分類標準是應用程式（或服務）是否依賴於集中的伺服器集群，或者真的是``分佈式'' (參見~\ptref{sp:fog})。所有on-chain應用程式都自動地是去中心化和分佈式的。Off-chain和混合應用程式可能呈現出不同程度的集中化。
@@ -1491,37 +1491,37 @@ overlay network.) 在一個節點學到它想要加入的overlay網絡的網絡�
 \medbreak
 現在讓我們更詳細地考慮上述可能性。
 
-\nxsubpoint\label{sp:pure.blockchain} \embt(Pure ``on-chain'' applications: distributed applications, or ``dapps'', residing in the blockchain.) 其中一種可能的方法，如在~\ptref{sp:on.off.chain}中提到的，是將一個「分散式應用程式」（通常縮寫為「dapp」）完全部署在TON區塊鏈中，作為一個智慧合約或一組智慧合約。所有數據都將作為這些智慧合約的永久狀態部分保存，並且所有與該項目的交互都將通過發送到或從這些智慧合約接收的(TON區塊鏈)消息來完成。
+\nxsubpoint\label{sp:pure.blockchain} \embt(Pure ``on-chain'' applications: distributed applications, or ``dapps'', residing in the blockchain.) 其中一種可能的方法，如在~\ptref{sp:on.off.chain}中提到的，是將一個「分散式應用程式」（通常縮寫為「dapp」）完全部署在TON區塊鏈中，作為一個智能合約或一組智能合約。所有數據都將作為這些智能合約的永久狀態部分保存，並且所有與該專案的交互都將通過發送到或從這些智能合約接收的(TON區塊鏈)消息來完成。
 
-我們已經在~\ptref{sp:blockchain.facebook}中討論過這種方法有其缺點和限制。它也有其優點：這樣的分散式應用程式不需要伺服器來運行或存儲其數據（它運行在「區塊鏈中」---即在驗證者的硬體上），並享有區塊鏈極高的(拜占庭)可靠性和可訪問性。這種分散式應用的開發者不需要購買或租用任何硬體；她需要做的只是開發一些軟體（即智慧合約的代碼）。之後，她將有效地從驗證者那裡租用計算能力，並用Grams支付，要麼由她自己支付，要麼由她的用戶承擔。
+我們已經在~\ptref{sp:blockchain.facebook}中討論過這種方法有其缺點和限制。它也有其優點：這樣的分散式應用程式不需要伺服器來運行或存儲其數據（它運行在「區塊鏈中」---即在validator的硬體上），並享有區塊鏈極高的(拜占庭)可靠性和可訪問性。這種分散式應用的開發者不需要購買或租用任何硬體；她需要做的只是開發一些軟體（即智能合約的程式碼）。之後，她將有效地從validator那裡租用計算能力，並用Grams支付，要麼由她自己支付，要麼由她的用戶承擔。
 
-\nxsubpoint\label{sp:pure.net.serv} \embt(Pure network services: ``ton-sites'' and ``ton-services''.) 另一個極端選擇是將服務部署在一些伺服器上，並通過在~\ptref{sect:ANL}中描述的ADNL協議使其供用戶使用，也許還有一些更高級的協議，如在~\ptref{sp:RLDP}中討論的RLDP，該協議可以用於以任何自訂格式向服務發送RPC查詢並獲得這些查詢的答案。這樣，該服務將完全在鏈外，並將駐留在TON網絡中，幾乎不使用TON區塊鏈。
+\nxsubpoint\label{sp:pure.net.serv} \embt(Pure network services: ``ton-sites'' and ``ton-services''.) 另一個極端選擇是將服務部署在一些伺服器上，並通過在~\ptref{sect:ANL}中描述的ADNL協議使其供用戶使用，也許還有一些更高級的協議，如在~\ptref{sp:RLDP}中討論的RLDP，該協議可以用於以任何自訂格式向服務發送RPC查詢並獲得這些查詢的答案。這樣，該服務將完全在鏈外，並將駐留在TON網路中，幾乎不使用TON區塊鏈。
 
 TON區塊鏈可能只用於查找服務的抽象地址或地址，如在~\ptref{sp:loc.serv}中概述的，也許還可以利用像TON DNS這樣的服務（參見~\ptref{sp:ton.dns}）來幫助將類似域的人類可讀字符串翻譯成抽象地址。
 
-在ADNL網絡（即TON網絡）類似於Invisible Internet Project（$I^2P$）的程度上，這樣的（幾乎）純網絡服務類似於所謂的「eep-services」（即，有一個$I^2P$-地址作為他們的入口點的服務，並通過$I^2P$網絡提供給客戶）。我們會說，駐留在TON網絡中的這些純網絡服務是「ton-services」。
+在ADNL網路（即TON網路）類似於Invisible Internet Project（$I^2P$）的程度上，這樣的（幾乎）純網路服務類似於所謂的「eep-services」（即，有一個$I^2P$-地址作為他們的入口點的服務，並通過$I^2P$網路提供給客戶）。我們會說，駐留在TON網路中的這些純網路服務是「ton-services」。
 
-「eep-service」可以實現HTTP作為其客戶端-伺服器協議；在TON網絡上下文中，「ton-service」可能只是使用RLDP（參見~\ptref{sp:RLDP}）數據報來傳輸HTTP查詢和響應。如果它使用TON DNS允許其抽象地址被一個人類可讀的域名查找，那麼與網站的類比就幾乎完美了。甚至可以寫一個專門的瀏覽器，或一個在用戶的機器上本地運行的特殊代理（「ton-proxy」），該代理接受來自用戶使用的普通網絡瀏覽器的任意HTTP查詢（一旦代理的本地IP地址和TCP端口輸入到瀏覽器的配置中），並將這些查詢通過TON網絡轉發到服務的抽象地址。然後用戶將擁有類似於世界寬網（WWW）的瀏覽體驗。
+「eep-service」可以實現HTTP作為其客戶端-伺服器協議；在TON網路上下文中，「ton-service」可能只是使用RLDP（參見~\ptref{sp:RLDP}）數據報來傳輸HTTP查詢和響應。如果它使用TON DNS允許其抽象地址被一個人類可讀的域名查找，那麼與網站的類比就幾乎完美了。甚至可以寫一個專門的瀏覽器，或一個在用戶的機器上本地運行的特殊代理（「ton-proxy」），該代理接受來自用戶使用的普通網路瀏覽器的任意HTTP查詢（一旦代理的本地IP地址和TCP端口輸入到瀏覽器的配置中），並將這些查詢通過TON網路轉發到服務的抽象地址。然後用戶將擁有類似於世界寬網（WWW）的瀏覽體驗。
 
 在$I^2P$生態系中，這樣的「eep-services」被稱為「eep-sites」。在TON生態系中也可以輕鬆創建「ton-sites」。這在某種程度上得到了TON DNS這類服務的幫助，它利用TON區塊鏈和TON DHT將(TON)域名翻譯成抽象地址。
 
-\nxsubpoint\label{sp:telegram.ton.serv} \embt(Telegram Messenger as a ton-service; MTProto over RLDP.) 我們想順便提到MTProto協議\footnote{\url{https://core.telegram.org/mtproto}}，Telegram Messenger\footnote{\url{https://telegram.org/}}用於客戶端-伺服器交互，可以輕鬆嵌入到在\ptref{sp:RLDP}中討論的RLDP協議，從而實質上將Telegram轉化為ton-service。由於TON Proxy技術可以為ton-site或ton-service的終端用戶透明地開啟，並在RLDP和ADNL協議的下一級實施（參見\ptref{sp:tunnels}），這將使Telegram實質上不可封鎖。當然，其他消息和社交網絡服務也可能從這項技術中受益。
+\nxsubpoint\label{sp:telegram.ton.serv} \embt(Telegram Messenger as a ton-service; MTProto over RLDP.) 我們想順便提到MTProto協議\footnote{\url{https://core.telegram.org/mtproto}}，Telegram Messenger\footnote{\url{https://telegram.org/}}用於客戶端-伺服器交互，可以輕鬆嵌入到在\ptref{sp:RLDP}中討論的RLDP協議，從而實質上將Telegram轉化為ton-service。由於TON Proxy技術可以為ton-site或ton-service的終端用戶透明地開啟，並在RLDP和ADNL協議的下一級實施（參見\ptref{sp:tunnels}），這將使Telegram實質上不可封鎖。當然，其他消息和社交網路服務也可能從這項技術中受益。
 
-\nxsubpoint\label{sp:mixed.serv} \embt(Mixed services: partly off-chain, partly on-chain.) 一些服務可能使用混合方法：大部分處理在鏈外，但也有一些鏈上的部分（例如，為了登記他們對用戶的義務，反之亦然）。通過這種方式，狀態的一部分仍然會被保存在TON Blockchain中（即，不可變的公共分類帳），並且服務或其用戶的任何不當行為可以由智慧合約進行懲罰。
+\nxsubpoint\label{sp:mixed.serv} \embt(Mixed services: partly off-chain, partly on-chain.) 一些服務可能使用混合方法：大部分處理在鏈外，但也有一些鏈上的部分（例如，為了登記他們對用戶的義務，反之亦然）。通過這種方式，狀態的一部分仍然會被保存在TON Blockchain中（即，不可變的公共分類帳），並且服務或其用戶的任何不當行為可以由智能合約進行懲罰。
 
-\nxsubpoint\label{sp:ex.ton.storage} \embt(Example: keeping files off-chain; TON Storage.) 這樣的服務的一個例子是由TON Storage提供的。在其最簡單的形式中，它允許用戶在鏈外存儲文件，只在鏈上保留要存儲的文件的哈希值，可能還有一個智慧合約，其中一些其他方同意在給定的時間段內為預先協商的費用保存該文件。實際上，文件可以被細分為一些小的大小（例如，1千字節），由擦除代碼如Reed--Solomon或噴泉代碼進行增強，可以為增強的塊序列構建一個Merkle tree哈希值，並且這個Merkle tree哈希值可能在智慧合約中發布，而不是或與文件的通常哈希一起。這有點讓人想起文件在torrent中的存儲方式。
+\nxsubpoint\label{sp:ex.ton.storage} \embt(Example: keeping files off-chain; TON Storage.) 這樣的服務的一個例子是由TON Storage提供的。在其最簡單的形式中，它允許用戶在鏈外存儲文件，只在鏈上保留要存儲的文件的雜湊值，可能還有一個智能合約，其中一些其他方同意在給定的時間段內為預先協商的費用保存該文件。實際上，文件可以被細分為一些小的大小（例如，1千字節），由擦除程式碼如Reed--Solomon或噴泉程式碼進行增強，可以為增強的塊序列構建一個Merkle tree雜湊值，並且這個Merkle tree雜湊值可能在智能合約中發布，而不是或與文件的通常雜湊一起。這有點讓人想起文件在torrent中的存儲方式。
 
-存儲文件的更簡單形式完全是在鏈外：人們可能基本上為新文件創建一個「torrent」，並使用TON DHT作為此torrent的「分散式torrent追踪器」（參見\ptref{sp:distr.torr.tr}）。這對於受歡迎的文件可能實際上工作得很好。但是，您不會得到任何可用性保證。例如，一個假設的「區塊鏈Facebook」（參見\ptref{sp:blockchain.facebook}），它選擇在這種「torrents」中完全保留其用戶的個人資料照片，可能會冒著失去普通（不是特別受歡迎）的用戶的照片的風險，或者至少冒著在很長時間內無法顯示這些照片的風險。主要是在鏈外，但使用在鏈上的智慧合約來強制執行存儲的文件的可用性的TON存儲技術，可能更適合這項任務。
+存儲文件的更簡單形式完全是在鏈外：人們可能基本上為新文件創建一個「torrent」，並使用TON DHT作為此torrent的「分散式torrent追踪器」（參見\ptref{sp:distr.torr.tr}）。這對於受歡迎的文件可能實際上工作得很好。但是，您不會得到任何可用性保證。例如，一個假設的「區塊鏈Facebook」（參見\ptref{sp:blockchain.facebook}），它選擇在這種「torrents」中完全保留其用戶的個人資料照片，可能會冒著失去普通（不是特別受歡迎）的用戶的照片的風險，或者至少冒著在很長時間內無法顯示這些照片的風險。主要是在鏈外，但使用在鏈上的智能合約來強制執行存儲的文件的可用性的TON存儲技術，可能更適合這項任務。
 
 \nxsubpoint\label{sp:fog} \embt(Decentralized mixed services, or ``fog services''.) 到目前為止，我們已經討論了{\em centralized\/}混合服務和應用程式。雖然它們的鏈上組件是以去中心化和分散的方式進行處理的，位於區塊鏈中，但它們的鏈下組件依賴於某些由服務提供商以常見的集中方式控制的伺服器。而不是使用一些專用伺服器，計算能力可能會從其中一家大公司提供的雲計算服務中租用。但是，這不會導致服務的鏈下組件的去中心化。
 
 實現服務的鏈下組件的去中心化方法在於創建一個{\em 市場}，任何擁有所需硬體並願意出租其計算能力或磁碟空間的人都可以向需要它們的人提供服務。
 
-例如，可能存在一個註冊表（也可以稱為「市場」或「交換所」），所有有興趣保存其他用戶文件的節點都在那裡發佈他們的聯繫信息，以及他們的可用存儲容量、可用性政策和價格。需要這些服務的人可能會在那裡查找它們，如果另一方同意，則在區塊鏈中創建智慧合約並上傳文件進行鏈下存儲。這樣，像{\em TON Storage\/}這樣的服務就真正成為去中心化的，因為它不需要依賴任何集中的伺服器集群來存儲文件。
+例如，可能存在一個註冊表（也可以稱為「市場」或「交易所」），所有有興趣保存其他用戶文件的節點都在那裡發佈他們的聯繫信息，以及他們的可用存儲容量、可用性政策和價格。需要這些服務的人可能會在那裡查找它們，如果另一方同意，則在區塊鏈中創建智能合約並上傳文件進行鏈下存儲。這樣，像{\em TON Storage\/}這樣的服務就真正成為去中心化的，因為它不需要依賴任何集中的伺服器集群來存儲文件。
 
-\nxsubpoint \embt(Example: ``fog computing'' platforms as decentralized mixed services.) 這種去中心化混合應用的另一個例子是當人們想執行一些特定計算（例如，3D渲染或訓練神經網絡），通常需要特定且昂貴的硬體。然後擁有這種設備的人可能會通過類似的「交換所」提供他們的服務，需要這種服務的人則會租用它們，並通過智慧合約註冊雙方的義務。這類似於``fog computing''平台，如Golem (\url{https://golem.network/}) 或 SONM (\url{https://sonm.io/})，所承諾提供的。
+\nxsubpoint \embt(Example: ``fog computing'' platforms as decentralized mixed services.) 這種去中心化混合應用的另一個例子是當人們想執行一些特定計算（例如，3D渲染或訓練神經網路），通常需要特定且昂貴的硬體。然後擁有這種設備的人可能會通過類似的「交易所」提供他們的服務，需要這種服務的人則會租用它們，並通過智能合約註冊雙方的義務。這類似於``fog computing''平台，如Golem (\url{https://golem.network/}) 或 SONM (\url{https://sonm.io/})，所承諾提供的。
 
-\nxsubpoint\label{sp:ex.ton.proxy} \embt(Example: TON Proxy is a fog service.) {\em TON Proxy\/} 提供了一個fog服務的另一個例子，希望提供其服務的節點（有償或無償）作為ADNL網絡流量的隧道可能會註冊，需要它們的人可能會根據提供的價格、延遲和帶寬選擇其中一個節點。之後，人們可能會使用由{\em TON Payments\/}提供的支付通道來處理代理服務的微支付，例如，每傳輸128~KiB收取的付款。
+\nxsubpoint\label{sp:ex.ton.proxy} \embt(Example: TON Proxy is a fog service.) {\em TON Proxy\/} 提供了一個fog服務的另一個例子，希望提供其服務的節點（有償或無償）作為ADNL網路流量的隧道可能會註冊，需要它們的人可能會根據提供的價格、延遲和帶寬選擇其中一個節點。之後，人們可能會使用由{\em TON Payments\/}提供的支付通道來處理代理服務的微支付，例如，每傳輸128~KiB收取的付款。
 
 
 \nxsubpoint \embt(Example: TON Payments is a fog service.) TON Payments平台(cf.~\ptref{sect:payments})也是這種去中心化混合應用的一個例子。
@@ -1532,17 +1532,17 @@ TON區塊鏈可能只用於查找服務的抽象地址或地址，如在~\ptref{
 
 這些市場很可能作為鏈上、鏈下或混合服務本身被實現，無論是集中式還是分散式。
 
-\nxsubpoint \embt(Example: connecting to TON Payments.) 例如，如果某人想使用TON Payments(cf.~\ptref{sect:payments})，第一步是找到至少一些現有的「lightning network」(cf.~\ptref{sect:lightning})的轉接節點，並與它們建立支付通道，如果它們願意的話。可以使用「包圍」的覆蓋網絡找到一些節點，該網絡應該包含所有的轉接lightning network節點(cf.~\ptref{sp:net.within.net})。但是，這些節點是否願意創建新的支付通道還不清楚。因此，需要一個註冊表，那些準備創建新連接的節點可以在其中發佈他們的聯繫信息（例如，他們的抽象地址）。
+\nxsubpoint \embt(Example: connecting to TON Payments.) 例如，如果某人想使用TON Payments(cf.~\ptref{sect:payments})，第一步是找到至少一些現有的「lightning network」(cf.~\ptref{sect:lightning})的轉接節點，並與它們建立支付通道，如果它們願意的話。可以使用「包圍」的覆蓋網路找到一些節點，該網路應該包含所有的轉接lightning network節點(cf.~\ptref{sp:net.within.net})。但是，這些節點是否願意創建新的支付通道還不清楚。因此，需要一個註冊表，那些準備創建新連接的節點可以在其中發佈他們的聯繫信息（例如，他們的抽象地址）。
 
-\nxsubpoint \embt(Example: uploading a file into TON Storage.) 同樣，如果某人想將文件上傳到TON Storage，她必須找到一些願意簽署智慧合約的節點，將它們綁定到保留該文件的副本（或任何低於某個大小限制的文件）。因此，需要一個提供存儲文件服務的節點註冊表。
+\nxsubpoint \embt(Example: uploading a file into TON Storage.) 同樣，如果某人想將文件上傳到TON Storage，她必須找到一些願意簽署智能合約的節點，將它們綁定到保留該文件的副本（或任何低於某個大小限制的文件）。因此，需要一個提供存儲文件服務的節點註冊表。
 
-\nxsubpoint \embt(On-chain, mixed and off-chain registries.) 這種服務提供者註冊表可能完全在鏈上實現，借助一個智慧合約來在其永久存儲中保留註冊表。但是，這將是相當緩慢和昂貴的。一種混合方法更為高效，其中相對較小且很少更改的鏈上註冊表只用於指出某些節點（通過它們的抽象地址，或者通過它們的公鑰，如在~\ptref{sp:loc.serv}中描述的那樣，可以用來查找實際的抽象地址），這些節點提供鏈下（集中式）的註冊服務。
+\nxsubpoint \embt(On-chain, mixed and off-chain registries.) 這種服務提供者註冊表可能完全在鏈上實現，借助一個智能合約來在其永久存儲中保留註冊表。但是，這將是相當緩慢和昂貴的。一種混合方法更為高效，其中相對較小且很少更改的鏈上註冊表只用於指出某些節點（通過它們的抽象地址，或者通過它們的公鑰，如在~\ptref{sp:loc.serv}中描述的那樣，可以用來查找實際的抽象地址），這些節點提供鏈下（集中式）的註冊服務。
 
-最後，一種去中心化的、純鏈下的方法可能包括一個公共的覆蓋網絡(cf.~\ptref{sect:overlay})，在那裡願意提供他們的服務的人，或者那些尋求購買某人服務的人，只需廣播由他們的私鑰簽名的優惠。如果要提供的服務非常簡單，甚至可能不需要廣播優惠：覆蓋網絡本身的大致成員資格可以用作願意提供特定服務的人的「註冊表」。然後，需要此服務的客戶可以定位(cf.~\ptref{sp:loc.many.mem})並查詢此覆蓋網絡的一些節點，然後查詢其鄰居，如果已知的節點不準備滿足其需求。
+最後，一種去中心化的、純鏈下的方法可能包括一個公共的覆蓋網路(cf.~\ptref{sect:overlay})，在那裡願意提供他們的服務的人，或者那些尋求購買某人服務的人，只需廣播由他們的私鑰簽名的優惠。如果要提供的服務非常簡單，甚至可能不需要廣播優惠：覆蓋網路本身的大致成員資格可以用作願意提供特定服務的人的「註冊表」。然後，需要此服務的客戶可以定位(cf.~\ptref{sp:loc.many.mem})並查詢此覆蓋網路的一些節點，然後查詢其鄰居，如果已知的節點不準備滿足其需求。
 
 
 \nxsubpoint\label{sp:side.chain.reg} \embt(Registry or exchange in a
-side-chain.)  另一種實現去中心化混合註冊表的方法是創建一個獨立的專用區塊鏈（「side-chain」），由其自己的一組自稱為驗證者的人維護，他們在on-chain智能合約中發佈他們的身份，並為所有感興趣的方提供網絡訪問這個專用的區塊鏈，通過專用覆蓋網絡收集交易候選人和廣播塊更新（cf.~\ptref{sect:overlay}）。然後，這個sidechain的任何完整節點都可以維護其自己的共享註冊表副本（本質上等於此side-chain的全局狀態），並處理與此註冊表相關的任意查詢。
+side-chain.)  另一種實現去中心化混合註冊表的方法是創建一個獨立的專用區塊鏈（「side-chain」），由其自己的一組自稱為validator的人維護，他們在on-chain智能合約中發佈他們的身份，並為所有感興趣的方提供網路訪問這個專用的區塊鏈，通過專用覆蓋網路收集交易候選人和廣播塊更新（cf.~\ptref{sect:overlay}）。然後，這個sidechain的任何完整節點都可以維護其自己的共享註冊表副本（本質上等於此side-chain的全局狀態），並處理與此註冊表相關的任意查詢。
 
 \nxsubpoint \embt(Registry or exchange in a workchain.) 另一個選擇是在TON區塊鏈內創建一個專用的workchain，專門用於創建註冊表、市場和交易所。這可能比使用位於基本workchain中的智能合約更有效率和更便宜(cf.~\ptref{sp:basic.workchain})。但是，這仍然比在side-chains中維護註冊表更昂貴(cf.~\ptref{sp:side.chain.reg}）。
 
@@ -1551,19 +1551,19 @@ side-chain.)  另一種實現去中心化混合註冊表的方法是創建一個
 我們已經在~\ptref{sect:ton.service.impl}中討論了創建居於TON生態系中的新服務和應用程序的不同方法。現在，我們討論如何訪問這些服務，以及TON將提供的一些「輔助服務」，包括{\em TON DNS\/}和{\em TON Storage}。
 
 \nxsubpoint\label{sp:ton.dns} \embt(TON DNS: a mostly on-chain
-hierarchical domain name service.) {\em TON DNS\/}是一個預定義的服務，它使用一系列的智能合約來從人類可讀的域名映射到ADNL網絡節點和TON區塊鏈賬戶和智能合約的（256位）地址。
+hierarchical domain name service.) {\em TON DNS\/}是一個預定義的服務，它使用一系列的智能合約來從人類可讀的域名映射到ADNL網路節點和TON區塊鏈賬戶和智能合約的（256位）地址。
 
 雖然原則上任何人都可以使用TON區塊鏈實現這樣的服務，但擁有這樣一個預定義的服務，並具有一個眾所周知的界面，當一個應用程序或服務希望將人類可讀的標識符轉換為地址時，將其用作默認選擇是很有用的。
 
 \nxsubpoint \embt(TON DNS use cases.) 例如，希望將一些加密貨幣轉移給另一個用戶或商家的用戶可能更喜歡記住該用戶或商家賬戶的TON DNS域名，而不是手頭保留他們的256位賬戶識別碼並將它們複製粘貼到他們的輕錢包客戶端的收件人字段中。
 
-同樣地，TON DNS可以用來查找智能合約的賬戶識別碼或ton-services和ton-sites的入口點（cf.~\ptref{sp:pure.net.serv}），使得一個專用客戶端（「ton-browser」）或一個與專用ton-proxy擴展或獨立應用程序結合的常見互聯網瀏覽器，能夠為用戶提供一個類似WWW的瀏覽體驗。
+同樣地，TON DNS可以用來查找智能合約的賬戶識別碼或ton-services和ton-sites的入口點（cf.~\ptref{sp:pure.net.serv}），使得一個專用客戶端（「ton-browser」）或一個與專用ton-proxy擴展或獨立應用程序耦合的常見互聯網瀏覽器，能夠為用戶提供一個類似WWW的瀏覽體驗。
 
 \nxsubpoint \embt(TON DNS smart contracts.)  TON DNS是通過一系列特殊的(DNS)智能合約來實現的。每一個DNS智能合約都負責註冊某固定域的子域名。``根'' DNS智能合約，即TON DNS系統的一級域名所在的位置，位於masterchain中。所有希望直接訪問TON DNS數據庫的軟件都必須將其帳戶標識符硬編碼。
 
 任何DNS智能合約都包含一個hashmap，將可變長度的以null結尾的UTF-8字符串映射到它們的``值''。這個hashmap是作為一個二進制的Patricia樹來實現的，與在~\ptref{sp:patricia}中描述的類似，但支持可變長度的bitstrings作為鍵。
 
-\nxsubpoint \embt(Values of the DNS hashmap, or TON DNS records.)  至於值，它們是由TL-scheme描述的``TON DNS記錄'' (cf.~\ptref{sp:TL})。它們包括一個``魔數''，選擇其中的一個支持的選項，然後是一個帳戶標識符、或一個智能合約標識符、或一個抽象網絡地址(cf.~\ptref{sect:ANL})，或一個用於查找服務的抽象地址的公鑰 (cf.~\ptref{sp:loc.serv})，或一個覆蓋網絡的描述，等等。一個重要的情況是另一個DNS智能合約：在這種情況下，該智能合約用於解析其域的子域名。通過這種方式，可以為不同的域創建單獨的註冊表，由這些域的所有者控制。
+\nxsubpoint \embt(Values of the DNS hashmap, or TON DNS records.)  至於值，它們是由TL-scheme描述的``TON DNS記錄'' (cf.~\ptref{sp:TL})。它們包括一個``魔數''，選擇其中的一個支持的選項，然後是一個帳戶標識符、或一個智能合約標識符、或一個抽象網路地址(cf.~\ptref{sect:ANL})，或一個用於查找服務的抽象地址的公鑰 (cf.~\ptref{sp:loc.serv})，或一個覆蓋網路的描述，等等。一個重要的情況是另一個DNS智能合約：在這種情況下，該智能合約用於解析其域的子域名。通過這種方式，可以為不同的域創建單獨的註冊表，由這些域的所有者控制。
 
 這些記錄還可以包含一個到期時間、一個緩存時間（通常非常大，因為在區塊鏈中太經常更新值是昂貴的），並且在大多數情況下引用所問子域名的所有者。所有者有權更改此記錄（尤其是所有者字段，從而將域名轉移給其他人的控制），並對其進行延長。
 
@@ -1600,11 +1600,11 @@ contract.)  原則上，對於包含DNS智能合約的masterchain或shardchain�
 \nxsubpoint\label{sp:get.methods} \embt(``Get methods'' of smart
 contracts.)  一個更好的方法是在智能合約中定義一些{\em get methods\/}，即一些類型的入站消息，當交付時不會影響智能合約的狀態，但會生成一個或多個包含``結果''的輸出消息的get方法。這樣，只要知道它實現了具有已知簽名的get方法（即已知要發送的入站消息的格式以及作為結果接收的出站消息的格式），就可以從智能合約中獲取數據。
 
-這種方法更加優雅，並符合面向對象編程（OOP）。然而，到目前為止，它有一個明顯的缺陷：必須實際將交易提交到區塊鏈（將get消息發送到智能合約），等待它被提交並由驗證者處理，從新塊中提取答案，並支付燃氣費（即在驗證者的硬件上執行get方法）。這是資源的浪費：get方法無論如何都不會改變智能合約的狀態，所以它們不需要在區塊鏈中執行。
+這種方法更加優雅，並符合面向對象編程（OOP）。然而，到目前為止，它有一個明顯的缺陷：必須實際將交易提交到區塊鏈（將get消息發送到智能合約），等待它被提交並由validator處理，從新塊中提取答案，並支付燃氣費（即在validator的硬件上執行get方法）。這是資源的浪費：get方法無論如何都不會改變智能合約的狀態，所以它們不需要在區塊鏈中執行。
 
 \nxsubpoint\label{sp:tent.exec.get} \embt(Tentative execution of get
 methods of smart contracts.)  我們已經提到
-(cf.~\ptref{sp:ext.msg})任何完整節點都可以嘗試執行任何智能合約的任何方法（即，將任何消息交付給智能合約），從智能合約的給定狀態開始，而無需實際提交相應的交易。完整節點可以簡單地將正在考慮的智能合約的代碼加載到TON VM中，從shardchain的全局狀態（shardchain的所有完整節點都知道）初始化其持久存儲，並使用入站消息作為其輸入參數執行智能合約代碼。所創建的輸出消息將產生此計算的結果。
+(cf.~\ptref{sp:ext.msg})任何完整節點都可以嘗試執行任何智能合約的任何方法（即，將任何消息交付給智能合約），從智能合約的給定狀態開始，而無需實際提交相應的交易。完整節點可以簡單地將正在考慮的智能合約的程式碼加載到TON VM中，從shardchain的全局狀態（shardchain的所有完整節點都知道）初始化其持久存儲，並使用入站消息作為其輸入參數執行智能合約程式碼。所創建的輸出消息將產生此計算的結果。
 
 通過這種方式，任何完整節點都可以評估任意智能合約的任意get方法，只要它們的簽名（即入站和出站消息的格式）是已知的。該節點可以跟踪在此評估期間訪問的shardchain狀態的cell，並為可能要求完整節點這樣做的輕型節點創建Merkle證明，證明所執行的計算的有效性（cf.~\ptref{sp:merkle.query.resp}）。
 
@@ -1637,7 +1637,7 @@ entity explorer can be built into Telegram Messenger clients.)  在此階段出�
 \nxsubpoint \embt(``ton-sites'' as ton-services supporting an HTTP
 interface.)  一個{\em ton-site\/}簡單地說就是一個支持HTTP介面的ton-service，也許還有其他一些介面。這種支持可以在相應的TON DNS記錄中宣布。
 
-\nxsubpoint \embt(Hyperlinks.)  請注意，由ton-sites返回的HTML頁面可能包含{\em ton-hyperlinks} --- 也就是，通過特殊製作的URI方案（參見~\ptref{sp:ton.uri}）引用其他ton-sites、智能合約和帳戶的參考 --- 包含抽象網絡地址、帳戶識別符或可讀的TON DNS域。然後，當用戶選擇它時，``ton-browser''可能會遵循這樣的超連結，檢測要使用的介面，並顯示一個用戶介面表單，如\ptref{sp:ui.smartc}和~\ptref{sp:ui.ton.serv}中所述。
+\nxsubpoint \embt(Hyperlinks.)  請注意，由ton-sites返回的HTML頁面可能包含{\em ton-hyperlinks} --- 也就是，通過特殊製作的URI方案（參見~\ptref{sp:ton.uri}）引用其他ton-sites、智能合約和帳戶的參考 --- 包含抽象網路地址、帳戶識別符或可讀的TON DNS域。然後，當用戶選擇它時，``ton-browser''可能會遵循這樣的超連結，檢測要使用的介面，並顯示一個用戶介面表單，如\ptref{sp:ui.smartc}和~\ptref{sp:ui.ton.serv}中所述。
 
 \nxsubpoint\label{sp:ton.uri} \embt(Hyperlink URLs may specify some
 parameters.)  超連結URL可能不僅包含所述服務的(TON) DNS域或抽象地址，還包含要調用的方法名稱以及部分或所有的參數。這種URI方案可能如下所示：
@@ -1651,9 +1651,9 @@ parameters.)  超連結URL可能不僅包含所述服務的(TON) DNS域或抽象
 \nxsubpoint \embt(POST actions.)  ton-site可以將它返回的HTML頁面嵌入到一些常見的POST表格中，其中的POST操作通過適當的(TON) URLs引用ton-sites、ton-services或智能合約。在這種情況下，一旦用戶填寫並提交了該自定義表單，就會採取相應的操作，無論是立即還是在明確確認後。
 
 
-\nxsubpoint\label{sp:ton.www} \embt(TON WWW.)  上述所有內容都將導致在TON Network中建立一整個相互參照的實體網絡，終端用戶可以通過ton-browser訪問它，為用戶提供類似WWW的瀏覽體驗。對於終端用戶來說，這將最終使區塊鏈應用基本上與他們已經習慣的網站相似。
+\nxsubpoint\label{sp:ton.www} \embt(TON WWW.)  上述所有內容都將導致在TON Network中建立一整個相互參照的實體網路，終端用戶可以通過ton-browser訪問它，為用戶提供類似WWW的瀏覽體驗。對於終端用戶來說，這將最終使區塊鏈應用基本上與他們已經習慣的網站相似。
 
-\nxsubpoint \embt(Advantages of TON WWW.)  這個包括on-chain和off-chain服務的``TON WWW''相比於其常規對應物具有一些優勢。例如，支付在系統中是固有集成的。用戶身份可以始終呈現給服務（通過自動生成的交易和生成的RPC請求上的簽名），或者可以隱藏。服務不需要檢查和重新檢查用戶憑證；這些憑證可以一勞永逸地在區塊鏈中發布。可以很容易地通過TON Proxy保留用戶網絡匿名性，並且所有服務都將有效地無法被封鎖。由於ton-browsers可以與TON支付系統集成，所以也可能並且容易進行小額支付。
+\nxsubpoint \embt(Advantages of TON WWW.)  這個包括on-chain和off-chain服務的``TON WWW''相比於其常規對應物具有一些優勢。例如，支付在系統中是固有集成的。用戶身份可以始終呈現給服務（通過自動生成的交易和生成的RPC請求上的簽名），或者可以隱藏。服務不需要檢查和重新檢查用戶憑證；這些憑證可以一勞永逸地在區塊鏈中發布。可以很容易地通過TON Proxy保留用戶網路匿名性，並且所有服務都將有效地無法被封鎖。由於ton-browsers可以與TON支付系統集成，所以也可能並且容易進行小額支付。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -1669,19 +1669,19 @@ parameters.)  超連結URL可能不僅包含所述服務的(TON) DNS域或抽象
 
 這樣的即時支付的總體開銷非常小，所以可以用於微支付。例如，TON 文件存儲服務可能會向用戶收取每下載 128 KiB 數據的費用，或者付費的 TON Proxy 可能需要對每 128 KiB 的中繼流量支付微小的費用。
 
-雖然 {\em TON Payments\/} 可能比 TON 專案的核心組件晚些時候發布，但需要從一開始就進行一些考慮。例如，用於執行 TON 區塊鏈智能合約的代碼的 TON 虛擬機 (TON VM; cf.~\ptref{sp:tonvm})，必須支持與 Merkle 證明的一些特殊操作。如果這樣的支持在原始設計中不存在，那麼在後期加入可能會變得有問題(cf.~\ptref{sp:genome.change.never})。但是，我們會看到，TON VM 本身就支持「智能」支付通道(cf.~\ptref{sp:ton.smart.pc.supp})。
+雖然 {\em TON Payments\/} 可能比 TON 專案的核心組件晚些時候發布，但需要從一開始就進行一些考慮。例如，用於執行 TON 區塊鏈智能合約的程式碼的 TON 虛擬機 (TON VM; cf.~\ptref{sp:tonvm})，必須支持與 Merkle 證明的一些特殊操作。如果這樣的支持在原始設計中不存在，那麼在後期加入可能會變得有問題(cf.~\ptref{sp:genome.change.never})。但是，我們會看到，TON VM 本身就支持「智能」支付通道(cf.~\ptref{sp:ton.smart.pc.supp})。
 
 \mysubsection{支付通道}
 
 我們首先討論點對點支付通道，以及它們如何在 TON 區塊鏈中實施。
 
-\nxsubpoint \embt(The idea of a payment channel.) 假設有兩個參與者，$A$ 和 $B$，他們知道在未來他們需要彼此進行大量的支付。他們不是將每筆付款作為一筆交易提交到區塊鏈，而是創建一個共享的「money pool」（或者也許是一個只有兩個帳戶的小型私人銀行），並向其中投入一些資金：$A$ 投入 $a$ 個幣，$B$ 投入 $b$ 個幣。這是通過在區塊鏈中創建一個特殊的智能合約，並向其發送資金來實現的。
+\nxsubpoint \embt(The idea of a payment channel.) 假設有兩個參與者，$A$ 和 $B$，他們知道在未來他們需要彼此進行大量的支付。他們不是將每筆付款作為一筆交易提交到區塊鏈，而是創建一個共享的「money pool」（或者也許是一個只有兩個帳戶的小型私有銀行），並向其中投入一些資金：$A$ 投入 $a$ 個幣，$B$ 投入 $b$ 個幣。這是通過在區塊鏈中創建一個特殊的智能合約，並向其發送資金來實現的。
 
 在創建「money pool」之前，雙方同意某個協議。他們將跟踪 pool 的{\em 狀態}，即他們在共享 pool 中的餘額。原始的狀態是 $(a,b)$，意味著 $a$ 個幣實際上屬於 $A$，$b$ 個幣屬於 $B$。然後，如果 $A$ 想支付 $d$ 個幣給 $B$，他們可以簡單地同意新的狀態是 $(a',b')=(a-d,b+d)$。之後，如果，例如，$B$ 想支付 $d'$ 個幣給 $A$，那麼狀態將變成 $(a'',b'')=(a'+d',b'-d')$，依此類推。
 
 所有這些在 pool 內部的餘額更新都是完全離鏈的。當雙方決定從 pool 中提取他們應得的資金時，他們會根據 pool 的最終狀態這樣做。這是通過向智能合約發送一條特殊的消息來實現的，該消息包含經 $A$ 和 $B$ 雙方簽名同意的最終狀態 $(a^*,b^*)$。然後，智能合約向 $A$ 發送 $a^*$ 個幣，向 $B$ 發送 $b^*$ 個幣，並自毀。
 
-這個智能合約，以及 $A$ 和 $B$ 用於更新 pool 狀態的網絡協議，是一個簡單的 {\em 在 $A$ 和~$B$ 之間的支付通道}。根據在~\ptref{sp:on.off.chain}中描述的分類，它是一個 {\em 混合} 服務：它的部分狀態位於區塊鏈中（智能合約），但大部分的狀態更新是離鏈的（由網絡協議完成）。如果一切順利，雙方將能夠互相支付他們想要的金額（唯一的限制是通道的「容量」沒有超出——也就是說，他們在支付通道中的餘額都保持非負），只需要在區塊鏈中提交兩筆交易：一筆用於打開（創建）支付通道（智能合約），另一筆用於關閉（銷毀）它。
+這個智能合約，以及 $A$ 和 $B$ 用於更新 pool 狀態的網路協議，是一個簡單的 {\em 在 $A$ 和~$B$ 之間的支付通道}。根據在~\ptref{sp:on.off.chain}中描述的分類，它是一個 {\em 混合} 服務：它的部分狀態位於區塊鏈中（智能合約），但大部分的狀態更新是離鏈的（由網路協議完成）。如果一切順利，雙方將能夠互相支付他們想要的金額（唯一的限制是通道的「容量」沒有超出——也就是說，他們在支付通道中的餘額都保持非負），只需要在區塊鏈中提交兩筆交易：一筆用於打開（創建）支付通道（智能合約），另一筆用於關閉（銷毀）它。
 
 \nxsubpoint \embt(Trustless payment channels.)  先前的例子有些不切實際，因為它假設兩個參與者都願意合作，且永遠不會為了某些優勢而作弊。例如，想像$A$選擇不簽署最終的餘額$(a',b')$，其中$a'<a$。這將使$B$陷入困境。
 
@@ -1703,11 +1703,11 @@ parameters.)  超連結URL可能不僅包含所述服務的(TON) DNS域或抽象
 
 這個簡單的支付通道協議是 {\em fair\/}，意味著任何一方都可以總是獲得其應得的，無論另一方是否合作，並且如果試圖欺騙，很可能失去其承諾給支付通道的所有資金。
 
-\nxsubpoint\label{sp:sync.pc.as.blockch} \embt(Synchronous payment channel as a simple virtual blockchain with two validators.) 上面的簡單同步支付通道的示例可以這樣重新描述。想像一下，狀態序列 $S_0$、$S_1$、...、$S_n$ 實際上是一個非常簡單區塊鏈的區塊序列。這個區塊鏈的每個區塊基本上只包含區塊鏈的當前狀態，也許還有對前一個區塊（即其hash）的引用。$A$ 和 $B$ 兩方都作為此區塊鏈的驗證者，所以每個區塊必須收集他們兩人的簽名。區塊鏈的狀態 $S_i$ 定義了下一個區塊的指定生產者 $o_i$，所以 $A$ 和 $B$ 在生產下一個區塊時沒有競爭。生產者 $A$ 只能創建將資金從 $A$ 轉移到 $B$ 的區塊（即減少不平衡：$\delta_{i+1}\leq\delta_i$），$B$ 則只能將資金從 $B$ 轉移到 $A$（即增加 $\delta$）。
+\nxsubpoint\label{sp:sync.pc.as.blockch} \embt(Synchronous payment channel as a simple virtual blockchain with two validators.) 上面的簡單同步支付通道的示例可以這樣重新描述。想像一下，狀態序列 $S_0$、$S_1$、...、$S_n$ 實際上是一個非常簡單區塊鏈的區塊序列。這個區塊鏈的每個區塊基本上只包含區塊鏈的當前狀態，也許還有對前一個區塊（即其hash）的引用。$A$ 和 $B$ 兩方都作為此區塊鏈的validator，所以每個區塊必須收集他們兩人的簽名。區塊鏈的狀態 $S_i$ 定義了下一個區塊的指定生產者 $o_i$，所以 $A$ 和 $B$ 在生產下一個區塊時沒有競爭。生產者 $A$ 只能創建將資金從 $A$ 轉移到 $B$ 的區塊（即減少不平衡：$\delta_{i+1}\leq\delta_i$），$B$ 則只能將資金從 $B$ 轉移到 $A$（即增加 $\delta$）。
 
-如果兩個驗證者同意區塊鏈的最後一個區塊（和最終狀態），則可以通過收集兩方的特殊“最終”簽名並與最終區塊一起提交到通道智能合約進行處理和相應地重新分配資金來確定它。
+如果兩個validator同意區塊鏈的最後一個區塊（和最終狀態），則可以通過收集兩方的特殊“最終”簽名並與最終區塊一起提交到通道智能合約進行處理和相應地重新分配資金來確定它。
 
-如果驗證者簽署一個無效的區塊，或者創建一個分叉，或者簽署兩個不同的最終區塊，它可以通過將其不端行為的證據提交給智能合約，這相當於一個驗證者失去其股份。
+如果validator簽署一個無效的區塊，或者創建一個分叉，或者簽署兩個不同的最終區塊，它可以通過將其不端行為的證據提交給智能合約，這相當於一個validator失去其股份。
 
 
 \nxsubpoint\label{sp:async.pc} \embt(Asynchronous payment channel as a
@@ -1738,11 +1738,11 @@ sophisticated payment channel smart contracts.) 請注意，雖然一個複雜�
 換句話說，支付通道的智能合約必須能夠使用Merkle證明，檢查它們的「hash有效性」，並且必須包含$\evtrans$和$\evblock$功能的實現（參見\ptref{sp:blk.transf}）對於支付通道的（虛擬）區塊鏈。
 
 \nxsubpoint\label{sp:ton.smart.pc.supp} \embt(TON VM support for
-"smart" payment channels.) TON VM，用於運行TON Blockchain智能合約的代碼，能夠應對執行所需的"smart"或複雜支付通道的智能合約（參見\ptref{sp:sm.pc.chal}）。
+"smart" payment channels.) TON VM，用於運行TON Blockchain智能合約的程式碼，能夠應對執行所需的"smart"或複雜支付通道的智能合約（參見\ptref{sp:sm.pc.chal}）。
 
 此時，「一切皆為bag of cells」的模式（參見\ptref{sp:everything.is.BoC}）變得非常方便。由於所有的區塊（包括短暫支付通道區塊鏈的區塊）都被表示為bag of cells（並由一些代數資料類型描述），對於訊息和Merkle證明也是如此，Merkle證明可以輕易地嵌入到發送到支付通道智能合約的入站訊息中。Merkle證明的「hash條件」將自動被檢查，當智能合約訪問呈現的「Merkle證明」時，它將像使用相應代數資料類型的值一樣工作，儘管它是不完整的，樹的一些子樹被替換為包含省略子樹的Merkle hash的特殊節點。然後智能合約將使用該值，該值可能代表支付通道（虛擬）區塊鏈及其狀態的一個區塊，並將該區塊鏈的$\evblock$函數（參見\ptref{sp:blk.transf}）評估為這個區塊和前一個狀態。然後，計算要麼完成，並且最終狀態可以與區塊中的聲明相比，要麼在嘗試訪問缺失的子樹時拋出「absent node」異常，表示Merkle證明是無效的。
 
-以這種方式，使用TON Blockchain智能合約實現智能支付通道區塊鏈的驗證代碼變得相對直接。可以說，{\em TON 虛擬機內建了檢查其他簡單區塊鏈有效性的支持。}唯一的限制因素是要合併到智能合約的入站訊息中的Merkle證明的大小（即交易）。
+以這種方式，使用TON Blockchain智能合約實現智能支付通道區塊鏈的驗證程式碼變得相對直接。可以說，{\em TON 虛擬機內建了檢查其他簡單區塊鏈有效性的支持。}唯一的限制因素是要合併到智能合約的入站訊息中的Merkle證明的大小（即交易）。
 
 \nxsubpoint\label{sp:pc.within.pc} \embt(Simple payment channel within
 a smart payment channel.) 我們想討論在現有支付通道內創建一個簡單的（同步或非同步）支付通道的可能性。
@@ -1760,9 +1760,9 @@ a smart payment channel.) 我們想討論在現有支付通道內創建一個簡
 
 \nxsubpoint \embt(Limitations of payment channels.)  一個支付通道對於那些期望在他們之間有大量的金錢轉賬的雙方是有用的。但是，如果一個人只需要向特定的接收者轉賬一兩次，則與她建立支付通道將是不切實際的。除其他外，這將意味著在支付通道中凍結大量的金錢，而且還需要至少兩次區塊鏈交易。
 
-\nxsubpoint \embt(Payment channel networks, or ``lightning networks''.)  支付通道網絡通過使金錢沿著{\em chains}的支付通道進行轉賬，來克服支付通道的局限性。如果$A$想要向$E$轉賬，她不需要與$E$建立支付通道。擁有一條通過幾個中間節點連接$A$和$E$的支付通道鏈就足夠了---比如說，四個支付通道：從$A$到$B$，從$B$到$C$，從$C$到$D$，以及從$D$到$E$。
+\nxsubpoint \embt(Payment channel networks, or ``lightning networks''.)  支付通道網路通過使金錢沿著{\em chains}的支付通道進行轉賬，來克服支付通道的局限性。如果$A$想要向$E$轉賬，她不需要與$E$建立支付通道。擁有一條通過幾個中間節點連接$A$和$E$的支付通道鏈就足夠了---比如說，四個支付通道：從$A$到$B$，從$B$到$C$，從$C$到$D$，以及從$D$到$E$。
 
-\nxsubpoint \embt(Overview of payment channel networks.)  回想一下，一個{\em 支付通道網絡}，也被稱為「閃電網路」，由一系列參與節點組成，其中一些節點之間建立了長時間存在的支付通道。我們稍後將看到，這些支付通道必須是\ptref{sp:pc.promises}意義上的「smart」。當一個參與節點$A$想要向任何其他參與節點$E$轉賬時，她會嘗試在支付通道網絡內找到連接$A$和$E$的路徑。當找到這樣的路徑時，她沿著這條路徑進行「鏈金錢轉賬」。
+\nxsubpoint \embt(Overview of payment channel networks.)  回想一下，一個{\em 支付通道網路}，也被稱為「閃電網路」，由一系列參與節點組成，其中一些節點之間建立了長時間存在的支付通道。我們稍後將看到，這些支付通道必須是\ptref{sp:pc.promises}意義上的「smart」。當一個參與節點$A$想要向任何其他參與節點$E$轉賬時，她會嘗試在支付通道網路內找到連接$A$和$E$的路徑。當找到這樣的路徑時，她沿著這條路徑進行「鏈金錢轉賬」。
 
 \nxsubpoint\label{sp:ch.money.tr} \embt(Chain money transfers.) 假設存在一條從$A$到$B$，從$B$到$C$，從$C$到$D$，以及從$D$到$E$的支付通道鏈。進一步假設$A$想要轉賬$x$個硬幣給$E$。
 
@@ -1788,9 +1788,9 @@ a smart payment channel.) 我們想討論在現有支付通道內創建一個簡
 
 \nxsubpoint\label{sp:lnet.find.path} \embt(Finding paths in the lightning network.) 關於在支付網路(payment network)中如何找到連接$A$和$E$的路徑，這一點到目前為止還沒有討論。如果支付網路不是太大，可以使用類似OSPF的協議：所有支付網路的節點創建一個覆蓋網路(overlay network)（參考~\ptref{sp:net.within.net}），然後每個節點都通過gossip協議將所有可用鏈接（即，參與的支付通道）信息傳播給其鄰居。最終，所有節點都將擁有支付網路中所有參與的支付通道的完整列表，並且將能夠自己找到最短的路徑---例如，應用一個修改過的Dijkstra算法版本，以考慮到涉及的支付通道的"容量"（即，可以沿著它們傳輸的最大金額）。一旦找到了一個候選路徑，它可以被一個特殊的ADNL數據包探測，該數據包包含完整的路徑，並要求每個中間節點確認所涉及的支付通道的存在，並根據路徑將此數據包進一步轉發。之後，可以構建一條鏈，並可以運行鏈轉移（參考~\ptref{sp:ch.money.tr}）或在支付通道鏈中創建虛擬支付通道的協議（參考~\ptref{sp:virt.pc}）。
 
-\nxsubpoint \embt(Optimizations.) 在此處可以進行一些優化。例如，只有閃電網絡(lightning network)的中繼節點需要參與在~\ptref{sp:lnet.find.path}中討論的類似OSPF的協議。兩個“葉子”節點希望通過閃電網絡連接，將他們連接到的中繼節點列表（即，他們已建立的參與支付網絡的支付通道）通告給對方。然後，可以如上所述檢查從一個列表中的中繼節點到另一個列表中的中繼節點的路徑~\ptref{sp:lnet.find.path}。
+\nxsubpoint \embt(Optimizations.) 在此處可以進行一些優化。例如，只有閃電網路(lightning network)的中繼節點需要參與在~\ptref{sp:lnet.find.path}中討論的類似OSPF的協議。兩個“葉子”節點希望通過閃電網路連接，將他們連接到的中繼節點列表（即，他們已建立的參與支付網路的支付通道）通告給對方。然後，可以如上所述檢查從一個列表中的中繼節點到另一個列表中的中繼節點的路徑~\ptref{sp:lnet.find.path}。
 
-\nxsubpoint \embt(Conclusion.) 我們已經概述了如何使用TON項目的區塊鏈和網絡技術來創建{\em TON Payments}，這是一個用於鏈外即時金錢轉賬和小額支付的平台。對於居住在TON生態系中的服務，這個平台可能非常有用，允許它們在需要的時候和地方輕鬆收集小額支付。
+\nxsubpoint \embt(Conclusion.) 我們已經概述了如何使用TON專案的區塊鏈和網路技術來創建{\em TON Payments}，這是一個用於鏈外即時金錢轉賬和小額支付的平台。對於居住在TON生態系中的服務，這個平台可能非常有用，允許它們在需要的時候和地方輕鬆收集小額支付。
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1808,9 +1808,9 @@ a smart payment channel.) 我們想討論在現有支付通道內創建一個簡
 
 我們已提出一個可擴展的多區塊鏈架構，能夠支持大量流行的加密貨幣和具有用戶友好界面的去中心化應用程式。
 
-為了達到必要的可擴展性，我們提出了{\em TON Blockchain}，一個``密切結合''的多區塊鏈系統（參見~\ptref{sp:blkch.interact}），該系統採用了自下而上的分片方法（參見~\ptref{sp:shard.supp}和~\ptref{sp:ISP}）。為了進一步提高潛在性能，我們引入了2區塊鏈機制來替換無效的區塊（參見~\ptref{sp:inv.sh.blk.corr}）以及Instant Hypercube Routing以實現分片之間的更快通訊（參見~\ptref{sp:instant.hypercube}）。與現有和提議的區塊鏈項目的簡短比較（參見~\ptref{sect:class.blkch}和~\ptref{sect:compare.blkch}）突顯了這種方法對於尋求每秒處理百萬交易的系統的好處。
+為了達到必要的可擴展性，我們提出了{\em TON Blockchain}，一個``緊密耦合''的多區塊鏈系統（參見~\ptref{sp:blkch.interact}），該系統採用了自下而上的分片方法（參見~\ptref{sp:shard.supp}和~\ptref{sp:ISP}）。為了進一步提高潛在性能，我們引入了2區塊鏈機制來替換無效的區塊（參見~\ptref{sp:inv.sh.blk.corr}）以及Instant Hypercube Routing以實現分片之間的更快通訊（參見~\ptref{sp:instant.hypercube}）。與現有和提議的區塊鏈專案的簡短比較（參見~\ptref{sect:class.blkch}和~\ptref{sect:compare.blkch}）突顯了這種方法對於尋求每秒處理百萬交易的系統的好處。
 
-在第~\ptref{sect:network}章中描述的{\em TON Network}，滿足了所提議的多區塊鏈基礎設施的網絡需求。此網絡組件還可與區塊鏈結合使用，以創建一系列應用程式和服務，僅使用區塊鏈無法實現（參見~\ptref{sp:blockchain.facebook}）。在第~\ptref{sect:services}章中討論的這些服務包括{\em TON DNS}，一個用於將人類可讀的對象識別符翻譯成其地址的服務；{\em TON Storage}，一個用於存儲任意文件的分佈式平台；{\em TON Proxy}，一個用於匿名化網絡訪問和訪問TON驅動服務的服務；以及{\em TON Payments\/}（參見第~\ptref{sect:payments}章），這是一個用於在TON生態系統中進行即時鏈下資金轉移的平台，應用程式可用於小額支付。
+在第~\ptref{sect:network}章中描述的{\em TON Network}，滿足了所提議的多區塊鏈基礎設施的網路需求。此網路組件還可與區塊鏈結合使用，以創建一系列應用程式和服務，僅使用區塊鏈無法實現（參見~\ptref{sp:blockchain.facebook}）。在第~\ptref{sect:services}章中討論的這些服務包括{\em TON DNS}，一個用於將人類可讀的對象識別符翻譯成其地址的服務；{\em TON Storage}，一個用於存儲任意文件的分佈式平台；{\em TON Proxy}，一個用於匿名化網路訪問和訪問TON驅動服務的服務；以及{\em TON Payments\/}（參見第~\ptref{sect:payments}章），這是一個用於在TON生態系統中進行即時鏈下資金轉移的平台，應用程式可用於小額支付。
 
 TON基礎設施允許專門的輕量客戶端錢包和``ton-browser''桌面和智能手機應用程式，為最終用戶提供類似瀏覽器的體驗（參見~\ptref{sp:ton.www}），使加密貨幣支付以及與TON平台上的智能合約和其他服務的互動對大眾用戶來說是可訪問的。這樣的輕量客戶端可以集成到Telegram Messenger客戶端中（參見~\ptref{sp:telegram.integr}），從而最終將基於區塊鏈的應用程式帶給數以億計的用戶。
 
