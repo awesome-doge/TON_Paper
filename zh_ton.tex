@@ -181,7 +181,7 @@ TON 區塊鏈的一個重要特點是它實現了{\em dynamic sharding}，這意
 
 最初，只為工作鏈 $w$ 創建了一個分片 $(w,\emptyset)$。稍後，當這變得必要時，它被細分為更多的分片 (cf.~\ptref{sp:split.necess} and~\ptref{sp:merge.necess})。
 
-\nxsubpoint\label{sp:basic.workchain} \embt(Basic workchain or Workchain Zero.) 雖然可以定義高達 $2^{32}$ 的工作鏈(workchains)並有其特定的規則和交易，但我們一開始只定義一個，即 $\workchainid=0$。這個工作鏈被稱為Workchain Zero或基礎工作鏈，它是用於操作{\em TON smart contracts\/} 和轉移{\em TON coins}，也稱為{\em Grams\/} (cf.\ Appendix~\ref{app:coins})。大多數應用可能只需要Workchain Zero。基礎工作鏈的分片鏈會被稱為{\em basic shardchains}。
+\nxsubpoint\label{sp:basic.workchain} \embt(Basic workchain or Workchain Zero.) 雖然可以定義高達 $2^{32}$ 的工作鏈(workchains)並有其特定的規則和交易，但我們一開始只定義一個，即 $\workchainid=0$。這個工作鏈被稱為Workchain Zero或基礎工作鏈，它是用於操作{\em TON smart contracts\/} 和轉移{\em TON coins}，也稱為{\em Toncoin\/} (cf.\ Appendix~\ref{app:coins})。大多數應用可能只需要Workchain Zero。基礎工作鏈的分片鏈會被稱為{\em basic shardchains}。
 
 \nxsubpoint \embt(Block generation intervals.) 我們預計每個分片鏈和主鏈大約每五秒會生成一個新的區塊。這將導致相對較小的交易確認時間。所有分片鏈的新區塊大約同時生成；主鏈的新區塊大約在一秒後生成，因為它必須包含所有分片鏈的最新區塊的雜湊值。
 
@@ -230,11 +230,11 @@ Masterchain狀態隱含地定義了一個映射，將每個“垂直”區塊鏈
 
 \nxsubpoint \embt(TON coins and multi-currency workchains.)  TON區塊鏈支持多達$2^{32}$種不同的“加密貨幣”、“硬幣”或“代幣”，通過32位的$\currencyid$加以區分。新的加密貨幣可以通過主鏈中的特殊交易來添加。每個工作鏈都有一種基本加密貨幣，並且可以有幾種其他加密貨幣。
 
-有一種特殊的加密貨幣，$\currencyid=0$，即{\em TON幣}，也稱為{\em Gram}（參見附錄~\ref{app:coins}）。這是工作鏈零的基本加密貨幣。它也用於交易費和validator的權益股份。
+有一種特殊的加密貨幣，$\currencyid=0$，即{\em TON幣}，也稱為{\em Toncoin}（參見附錄~\ref{app:coins}）。這是工作鏈零的基本加密貨幣。它也用於交易費和validator的權益股份。
 
-原則上，其他工作鏈可能會以其他代幣收取交易費。在這種情況下，應該提供一些智能合約，用於將這些交易費自動轉換為Grams。
+原則上，其他工作鏈可能會以其他代幣收取交易費。在這種情況下，應該提供一些智能合約，用於將這些交易費自動轉換為Toncoin。
 
-\nxsubpoint \embt(Messaging and value transfer.) 屬於相同或不同工作鏈的分片鏈可以互相傳送{\em messages\/}。儘管允許的訊息的確切形式取決於接收工作鏈和接收帳戶（智能合約），但有一些共同的欄位使跨工作鏈的訊息成為可能。特別是，每條訊息可能會有一些{\em value}，以一定數量的Grams（TON coins）和/或其他註冊的加密貨幣的形式附加，前提是它們被接收工作鏈宣布為可接受的加密貨幣。
+\nxsubpoint \embt(Messaging and value transfer.) 屬於相同或不同工作鏈的分片鏈可以互相傳送{\em messages\/}。儘管允許的訊息的確切形式取決於接收工作鏈和接收帳戶（智能合約），但有一些共同的欄位使跨工作鏈的訊息成為可能。特別是，每條訊息可能會有一些{\em value}，以一定數量的Toncoin（TON coins）和/或其他註冊的加密貨幣的形式附加，前提是它們被接收工作鏈宣布為可接受的加密貨幣。
 
 這種訊息的最簡單形式是從一個（通常不是智能合約）帳戶到另一個帳戶的價值轉移。
 
@@ -382,7 +382,7 @@ Blockchain.) 我們目前為TON Blockchain使用256-bit的$\Sha$雜湊。如果�
 \begin{equation}
   \vr{balance}:\Account\to\uint_{128}
 \end{equation}
-將 $\Account=\st2^{256}$ 映射為類型為 $\uint_{128}=\st2^{128}$ 的Gram (TON幣) 餘額。此雜湊映射的預設值為零，這意味著最初（在處理第一個區塊之前）所有帳戶的餘額都是零。
+將 $\Account=\st2^{256}$ 映射為類型為 $\uint_{128}=\st2^{128}$ 的Toncoin (TON幣) 餘額。此雜湊映射的預設值為零，這意味著最初（在處理第一個區塊之前）所有帳戶的餘額都是零。
 
 \nxsubpoint \embt(Example: smart-contract persistent storage.) 另一個例子是智能合約的持久存儲，可以（非常大致地）表示為一個雜湊映射
 \begin{equation}
@@ -497,7 +497,7 @@ for values of arbitrary algebraic types.)  由於 TON VM 通過由 (TVM) 單元�
 \nxsubpoint \embt(Payment for persistent storage.)
 TON 區塊鏈的一個值得注意的特點是從智能合約中扣除用於存儲其持久數據的支付（即，增加區塊鏈的總狀態）。它的工作原理如下：
 
-每個區塊都宣布兩種費率，以區塊鏈的主要貨幣（通常是 Gram）來提名：保持一個單元在持久儲存中的價格，以及在持久儲存的某個單元中保持一個原始字節的價格。每個賬戶使用的單元和字節的總數據作為其狀態的一部分存儲，所以通過將這些數字乘以在區塊頭中宣布的兩個費率，我們可以計算從賬戶餘額中扣除的支付，以保持其數據在前一個區塊和當前區塊之間。
+每個區塊都宣布兩種費率，以區塊鏈的主要貨幣（通常是 Toncoin）來提名：保持一個單元在持久儲存中的價格，以及在持久儲存的某個單元中保持一個原始字節的價格。每個賬戶使用的單元和字節的總數據作為其狀態的一部分存儲，所以通過將這些數字乘以在區塊頭中宣布的兩個費率，我們可以計算從賬戶餘額中扣除的支付，以保持其數據在前一個區塊和當前區塊之間。
 
 然而，對於每個賬戶和每個智能合約在每個區塊中的持久儲存使用的支付並不是每次都收取的；而是在賬戶數據中存儲上次收取此支付的區塊的序列號，並且當對賬戶進行任何操作時（例如，轉移價值或接收並由智能合約處理一條消息），在執行任何進一步的操作之前，從賬戶餘額中扣除自上次這樣的支付以來的所有區塊的儲存使用支付。如果賬戶的餘額在此之後變為負數，則該賬戶將被銷毀。
 
@@ -534,7 +534,7 @@ TON 區塊鏈的一個值得注意的特點是從智能合約中扣除用於存�
 \item 最近傳送消息的（雜湊的）集合（參見~\ptref{sp:deliver.q}）
 \end{itemize}
 
-並不是每個賬戶都真正需要所有這些；例如，只有智能合約需要智能合約程式碼，而「簡單」的賬戶則不需要。此外，儘管任何賬戶必須在主要貨幣中有一個非零餘額（例如，基礎工作鏈的主鏈和分片鏈的Grams），但在其他貨幣中可能有零餘額。為了避免保留未使用的數據，定義了一個乘積型別（取決於工作鏈）（在工作鏈的創建期間），它使用不同的標籤字節（例如，TL 構造器；參見~\ptref{sp:TL}）來區分使用的不同「構造器」。最終，賬戶狀態本身作為TVM持久性存儲的單元集合保存。
+並不是每個賬戶都真正需要所有這些；例如，只有智能合約需要智能合約程式碼，而「簡單」的賬戶則不需要。此外，儘管任何賬戶必須在主要貨幣中有一個非零餘額（例如，基礎工作鏈的主鏈和分片鏈的Toncoin），但在其他貨幣中可能有零餘額。為了避免保留未使用的數據，定義了一個乘積型別（取決於工作鏈）（在工作鏈的創建期間），它使用不同的標籤字節（例如，TL 構造器；參見~\ptref{sp:TL}）來區分使用的不同「構造器」。最終，賬戶狀態本身作為TVM持久性存儲的單元集合保存。
 
 \mysubsection{分片鏈間的消息}
 
@@ -742,7 +742,7 @@ Shardchain block本身也可以用代數類型來描述，並存儲為「bag of 
 TON Blockchain最終由shardchain和masterchain blocks組成。為了系統順利且正確地運作，必須創建、驗證這些blocks，並通過網路將其傳播到所有相關方。
 
 
-\nxsubpoint\label{sp:validators} \embt(Validators.)  新的blocks由特定的節點創建和驗證，這些節點被稱為{\em validators}。實質上，任何希望成為validator的節點都可以成為validator，前提是它可以在masterchain中存入足夠多的抵押金（以TON幣，即Grams；參考\ Appendix~\ptref{app:coins}）。Validators為良好的工作獲得一些「獎勵」，即所有交易、存儲和燃氣費用，以及一些新鑄造的幣，這反映了整個社群對validators的「感激」，因為它們使TON Blockchain持續運作。這筆收入按照所有參與validators的抵押金比例分配。
+\nxsubpoint\label{sp:validators} \embt(Validators.)  新的blocks由特定的節點創建和驗證，這些節點被稱為{\em validators}。實質上，任何希望成為validator的節點都可以成為validator，前提是它可以在masterchain中存入足夠多的抵押金（以TON幣，即Toncoin；參考\ Appendix~\ptref{app:coins}）。Validators為良好的工作獲得一些「獎勵」，即所有交易、存儲和燃氣費用，以及一些新鑄造的幣，這反映了整個社群對validators的「感激」，因為它們使TON Blockchain持續運作。這筆收入按照所有參與validators的抵押金比例分配。
 
 然而，成為validator是一項重大的責任。如果validator簽署了一個無效的block，它可能會失去部分或全部的抵押金，並且可能會暫時或永久地被排除在validators之外。如果validator不參與創建block，它不會收到與該block相關的獎勵部分。如果validator長時間不創建新的blocks，它可能會失去部分的抵押金，並被暫停或永久排除在validators之外。
 
@@ -762,7 +762,7 @@ Proof-of-Stake世界中的相應概念是{\em nominator}。實質上，這是一
 
 但是，如果validator因無效行為而失去其抵押金，nominator也會失去其抵押金的部分。在這種意義上，nominator {\em 分擔風險}。它必須明智地選擇其nominated validator，否則可能會損失資金。在這種意義上，nominator進行加權決策並使用其資金「投票」支持某些validator。
 
-另一方面，這種提名或借貸系統使人們能夠成為validator，而無需首先投入大量金錢購買Grams（TON幣）。換句話說，它防止持有大量Grams的人壟斷validator的供應。
+另一方面，這種提名或借貸系統使人們能夠成為validator，而無需首先投入大量金錢購買Toncoin（TON幣）。換句話說，它防止持有大量Toncoin的人壟斷validator的供應。
 
 \nxsubpoint\label{sp:fish} \embt(Fishermen: obtaining money by pointing out others' mistakes.)  另一種不成為validator而獲得一些獎勵的方式是成為一名{\em fisherman}。實質上，任何節點都可以通過在masterchain中存入少量資金成為fisherman。然後，它可以使用特殊的masterchain交易來發布某些由validators之前簽名和發布的（通常是shardchain）blocks的（Merkle）無效性證明。如果其他validators同意這個無效性證明，則違規的validators將被懲罰（失去其抵押金的一部分），fisherman則獲得一些獎勵（從違規的validators中沒收的幣的一部分）。之後，如~\ptref{sp:inv.sh.blk.corr}中所述，必須更正無效的（shardchain）block。更正無效的masterchain blocks可能需要在先前提交的masterchain blocks之上創建「垂直」blocks（參見~\ptref{sp:inv.sh.blk.corr}）；無需創建masterchain的分叉。
 
@@ -781,7 +781,7 @@ including user transactions.)  使用者可以向一些collators或validators打
 \nxsubpoint\label{sp:global.valid} \embt(Global validator set
 election.)  每月一次（實際上是每$2^{19}$個masterchain blocks）選舉``global''的validators集合。此集合在一個月前確定並被全球知悉。
 
-要成為validator，節點必須將一些TON幣（Grams）轉入masterchain，然後將它們發送到特定的智能合約作為其建議的抵押金$s$。與抵押金一起發送的另一個參數是$l\geq 1$，這是此節點願意接受的相對於最小可能值的最大驗證負載。還有一個$l$的全球上限（另一個可配置參數）$L$，例如說是10。
+要成為validator，節點必須將一些TON幣（Toncoin）轉入masterchain，然後將它們發送到特定的智能合約作為其建議的抵押金$s$。與抵押金一起發送的另一個參數是$l\geq 1$，這是此節點願意接受的相對於最小可能值的最大驗證負載。還有一個$l$的全球上限（另一個可配置參數）$L$，例如說是10。
 
 然後，這個智能合約選舉global的validator集合，只需選擇最大的建議抵押金的前$T$個候選者並公布其身份。最初，validators的總數是$T=100$；隨著負載的增加，我們預期它將增長到1000。它是一個可配置參數（參見~\ptref{sp:config.param}）。
 
@@ -1493,7 +1493,7 @@ overlay network.) 在一個節點學到它想要加入的overlay網路的網路�
 
 \nxsubpoint\label{sp:pure.blockchain} \embt(Pure ``on-chain'' applications: distributed applications, or ``dapps'', residing in the blockchain.) 其中一種可能的方法，如在~\ptref{sp:on.off.chain}中提到的，是將一個「分散式應用程式」（通常縮寫為「dapp」）完全部署在TON區塊鏈中，作為一個智能合約或一組智能合約。所有數據都將作為這些智能合約的永久狀態部分保存，並且所有與該專案的交互都將通過發送到或從這些智能合約接收的(TON區塊鏈)消息來完成。
 
-我們已經在~\ptref{sp:blockchain.facebook}中討論過這種方法有其缺點和限制。它也有其優點：這樣的分散式應用程式不需要伺服器來運行或存儲其數據（它運行在「區塊鏈中」---即在validator的硬體上），並享有區塊鏈極高的(拜占庭)可靠性和可訪問性。這種分散式應用的開發者不需要購買或租用任何硬體；她需要做的只是開發一些軟體（即智能合約的程式碼）。之後，她將有效地從validator那裡租用計算能力，並用Grams支付，要麼由她自己支付，要麼由她的用戶承擔。
+我們已經在~\ptref{sp:blockchain.facebook}中討論過這種方法有其缺點和限制。它也有其優點：這樣的分散式應用程式不需要伺服器來運行或存儲其數據（它運行在「區塊鏈中」---即在validator的硬體上），並享有區塊鏈極高的(拜占庭)可靠性和可訪問性。這種分散式應用的開發者不需要購買或租用任何硬體；她需要做的只是開發一些軟體（即智能合約的程式碼）。之後，她將有效地從validator那裡租用計算能力，並用Toncoin支付，要麼由她自己支付，要麼由她的用戶承擔。
 
 \nxsubpoint\label{sp:pure.net.serv} \embt(Pure network services: ``ton-sites'' and ``ton-services''.) 另一個極端選擇是將服務部署在一些伺服器上，並通過在~\ptref{sect:ANL}中描述的ADNL協議使其供用戶使用，也許還有一些更高級的協議，如在~\ptref{sp:RLDP}中討論的RLDP，該協議可以用於以任何自訂格式向服務發送RPC查詢並獲得這些查詢的答案。這樣，該服務將完全在鏈外，並將駐留在TON網路中，幾乎不使用TON區塊鏈。
 
@@ -1618,7 +1618,7 @@ smart contract.)  注意，一個正式化的智能合約接口，無論是以TL
 這樣一個公共接口的例子是DNS智能合約的接口，它應該至少實現一個用於查找子域的標準get方法（cf.~\ptref{sp:dns.get}）。在DNS智能合約的標準公共接口中也可以包括用於註冊新子域的標準方法。
 
 \nxsubpoint\label{sp:ui.smartc} \embt(User interface of a smart
-contract.)  智能合約的公共介面存在還有其他好處。例如，當用戶請求查看一個智能合約時，一個錢包客戶端應用程序可以下載這樣的介面，並顯示智能合約支持的公共方法（即，可用的操作）列表，如果在正式介面中提供了一些人類可讀的評論，也許會顯示出來。在用戶選擇其中一種方法後，可以根據TL-scheme自動生成一個表單，在其中用戶將被提示選擇所需的所有字段和要附加到此請求的加密貨幣（例如，Grams）的所需金額。提交此表單將創建一個新的區塊鏈交易，其中包含剛剛組成的消息，從用戶的區塊鏈帳戶發送。
+contract.)  智能合約的公共介面存在還有其他好處。例如，當用戶請求查看一個智能合約時，一個錢包客戶端應用程序可以下載這樣的介面，並顯示智能合約支持的公共方法（即，可用的操作）列表，如果在正式介面中提供了一些人類可讀的評論，也許會顯示出來。在用戶選擇其中一種方法後，可以根據TL-scheme自動生成一個表單，在其中用戶將被提示選擇所需的所有字段和要附加到此請求的加密貨幣（例如，Toncoin）的所需金額。提交此表單將創建一個新的區塊鏈交易，其中包含剛剛組成的消息，從用戶的區塊鏈帳戶發送。
 
 通過這種方式，只要這些智能合約已經發布了它們的介面，用戶將能夠通過填寫和提交某些表格以用戶友好的方式從錢包客戶端應用程序與任意智能合約進行互動。
 
@@ -1889,41 +1889,41 @@ TON基礎設施允許專門的輕量客戶端錢包和``ton-browser''桌面和�
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \appendix
-\myappendix{TON Coin，又名Gram}\label{app:coins}
+\myappendix{TON Coin，又名Toncoin}\label{app:coins}
 
-TON區塊鏈的主要加密貨幣，特別是其主鏈和基本工作鏈，是{\em TON Coin}，也被稱為{\em Gram\/} (GRM)。它被用於進行成為驗證者所需的存款；交易費、gas支付（即，智能合約消息處理費）和持久存儲支付通常也以Gram收取。
+TON區塊鏈的主要加密貨幣，特別是其主鏈和基本工作鏈，是{\em TON Coin}，也被稱為{\em Toncoin\/} (GRM)。它被用於進行成為驗證者所需的存款；交易費、gas支付（即，智能合約消息處理費）和持久存儲支付通常也以Toncoin收取。
 
-\nxpoint \embt(Subdivision and terminology.)  一個{\em Gram\/}被細分為十億 ($10^9$) 更小的單位，稱為{\em nanograms}、{\em ngrams}或簡單地稱為{\em nanos}。所有的轉賬和賬戶餘額都表示為nanos的非負整數倍。其他單位包括：
+\nxpoint \embt(Subdivision and terminology.)  一個{\em Toncoin\/}被細分為十億 ($10^9$) 更小的單位，稱為{\em nanograms}、{\em ngrams}或簡單地稱為{\em nanos}。所有的轉賬和賬戶餘額都表示為nanos的非負整數倍。其他單位包括：
 \begin{itemize}
-\item 一個{\em nano}、{\em ngram}或{\em nanogram}是最小的單位，等於 $10^{-9}$ Grams。
+\item 一個{\em nano}、{\em ngram}或{\em nanogram}是最小的單位，等於 $10^{-9}$ Toncoin。
 \item 一個{\em micro\/}或{\em microgram\/}等於一千($10^3$) nanos。
-\item 一個{\em milli\/}等於一百萬 ($10^6$) nanos，或一個Gram的千分之一 ($10^{-3}$)。
-\item 一個{\em Gram\/}等於十億 ($10^9$) nanos。
-\item 一個{\em kilogram}、或{\em kGram}，等於一千 ($10^3$) Grams。
-\item 一個{\em megagram}、或{\em MGram}，等於一百萬 ($10^6$) Grams，或 $10^{15}$ nanos。
-\item 最後，一個{\em gigagram}、或{\em GGram}，等於十億 ($10^9$) Grams，或 $10^{18}$ nanos。
+\item 一個{\em milli\/}等於一百萬 ($10^6$) nanos，或一個Toncoin的千分之一 ($10^{-3}$)。
+\item 一個{\em Toncoin\/}等於十億 ($10^9$) nanos。
+\item 一個{\em kilogram}、或{\em kToncoin}，等於一千 ($10^3$) Toncoin。
+\item 一個{\em megagram}、或{\em MToncoin}，等於一百萬 ($10^6$) Toncoin，或 $10^{15}$ nanos。
+\item 最後，一個{\em gigagram}、或{\em GToncoin}，等於十億 ($10^9$) Toncoin，或 $10^{18}$ nanos。
 \end{itemize}
 
-不需要更大的單位，因為Gram的初始供應量將限制為五十億 ($5\cdot10^9$) Grams (即，5 Gigagrams)。
+不需要更大的單位，因為Toncoin的初始供應量將限制為五十億 ($5\cdot10^9$) Toncoin (即，5 Gigagrams)。
 
 \nxpoint \embt(Smaller units for expressing gas prices.)  如果出現需要更小單位的必要性，將使用等於 $2^{-16}$ nanograms的``specks''。例如，gas價格可能以specks表示。然而，實際要支付的費用，計算為gas價格和消耗的gas量的乘積，將始終四捨五入到最接近的 $2^{16}$ specks的倍數，並表示為nanos的整數。
 
 
-\nxpoint \embt(Original supply, mining rewards and inflation.)  Grams的總供應量原本限制為$5$ Gigagrams (即，五十億的Grams或$5\cdot10^{18}$ nanos)。
+\nxpoint \embt(Original supply, mining rewards and inflation.)  Toncoin的總供應量原本限制為$5$ Gigagrams (即，五十億的Toncoin或$5\cdot10^{18}$ nanos)。
 
 這一供應量將非常緩慢地增加，因為獎勵給驗證者挖掘新的主鏈和分片鏈區塊積累。這些獎勵大約會達到$20\%$ (確切的數字可能在未來進行調整)的驗證者的每年股份，只要驗證者努力履行其職責，簽署所有區塊，從不離線並且從不簽署無效的區塊。這樣，驗證者將有足夠的利潤投資於更好更快的硬體，以處理不斷增加的用戶交易量。
 
-我們預計最多$10\%$\footnote{驗證者股份的最大總量是區塊鏈的一個可配置參數，因此如果需要，該協議可以強制執行此限制。}的Grams總供應量，平均下來，將在任何給定時刻被驗證者股份綁定。這將產生一個$2\%$的每年的通脹率，並因此，在35年內將Grams的總供應量加倍(到十個Gigagrams)。從本質上講，這種通脹代表了由社區的所有成員支付給驗證者的款項，用於保持系統正常運行。
+我們預計最多$10\%$\footnote{驗證者股份的最大總量是區塊鏈的一個可配置參數，因此如果需要，該協議可以強制執行此限制。}的Toncoin總供應量，平均下來，將在任何給定時刻被驗證者股份綁定。這將產生一個$2\%$的每年的通脹率，並因此，在35年內將Toncoin的總供應量加倍(到十個Gigagrams)。從本質上講，這種通脹代表了由社區的所有成員支付給驗證者的款項，用於保持系統正常運行。
 
-另一方面，如果一個驗證者被抓到有不正當行為，其部分或全部的股份將被作為懲罰而扣除，並且其中的較大部分隨後將被“銷毀”，從而減少Grams的總供應量。這將導致通貨緊縮。罰款的一小部分可能會重新分配給驗證者或提交有罪驗證者不當行為證明的“漁夫”。
+另一方面，如果一個驗證者被抓到有不正當行為，其部分或全部的股份將被作為懲罰而扣除，並且其中的較大部分隨後將被“銷毀”，從而減少Toncoin的總供應量。這將導致通貨緊縮。罰款的一小部分可能會重新分配給驗證者或提交有罪驗證者不當行為證明的“漁夫”。
 
-\nxpoint\label{sp:gram.price} \embt(Original price of Grams.)  第一個要出售的Gram的價格將約等於$\$0.1$ (USD)。每一個接下來要被賣出的Gram (由TON儲備，由TON基金會控制) 都將比前一個價格高十億分之一。這樣，要放入流通的第$n$個Gram將以大約
-\begin{equation}\label{eq:gram.price}
+\nxpoint\label{sp:Toncoin.price} \embt(Original price of Toncoin.)  第一個要出售的Toncoin的價格將約等於$\$0.1$ (USD)。每一個接下來要被賣出的Toncoin (由TON儲備，由TON基金會控制) 都將比前一個價格高十億分之一。這樣，要放入流通的第$n$個Toncoin將以大約
+\begin{equation}\label{eq:Toncoin.price}
   p(n)\approx 0.1\cdot (1+10^{-9})^n\quad\text{USD},
 \end{equation}
 或其他(加密)貨幣的大約相等的金額（由於市場匯率迅速變化），如BTC或ETH，出售。
 
-\nxsubpoint\label{sp:exp.priced} \embt(Exponentially priced cryptocurrencies.)  我們稱Gram為一種{\em exponentially priced cryptocurrency}，意思是將要流通的第$n$個Gram的價格大約為$p(n)$，由以下公式給出
+\nxsubpoint\label{sp:exp.priced} \embt(Exponentially priced cryptocurrencies.)  我們稱Toncoin為一種{\em exponentially priced cryptocurrency}，意思是將要流通的第$n$個Toncoin的價格大約為$p(n)$，由以下公式給出
 \begin{equation}
   p(n)=p_0\cdot e^{\alpha n}
 \end{equation}
@@ -1931,9 +1931,9 @@ TON區塊鏈的主要加密貨幣，特別是其主鏈和基本工作鏈，是{\
 
 更精確地說，一個新硬幣的小部分$dn$價值為$p(n)\,dn$美元，一旦$n$個硬幣流通。(這裡的$n$不必然是整數。)
 
-這種加密貨幣的其他重要參數包括$n$，流通中的硬幣總數，和$N\geq n$，可以存在的硬幣總數。對於Gram，$N=5\cdot 10^9$。
+這種加密貨幣的其他重要參數包括$n$，流通中的硬幣總數，和$N\geq n$，可以存在的硬幣總數。對於Toncoin，$N=5\cdot 10^9$。
 
-\nxsubpoint \embt(Total price of first $n$ coins.)  第一個$n$個以指數方式定價的加密貨幣(例如，Gram)要流通的總價$T(n)=\int_0^n p(n)\,dn\approx p(0)+p(1)+\cdots+p(n-1)$可以通過以下方式計算
+\nxsubpoint \embt(Total price of first $n$ coins.)  第一個$n$個以指數方式定價的加密貨幣(例如，Toncoin)要流通的總價$T(n)=\int_0^n p(n)\,dn\approx p(0)+p(1)+\cdots+p(n-1)$可以通過以下方式計算
 \begin{equation}
   T(n)=p_0\cdot\alpha^{-1}(e^{\alpha n}-1)\quad.
 \end{equation}
@@ -1951,36 +1951,36 @@ TON區塊鏈的主要加密貨幣，特別是其主鏈和基本工作鏈，是{\
 當然，如果$T\lll p(n)\alpha^{-1}$，那麼$\Delta n\approx T/p(n)$。
 
 
-\nxsubpoint \embt(Market price of Grams.)  當然，如果自由市場價格跌破$p(n):=0.1\cdot (1+10^{-9})^n$，一旦$n$個Gram流通，沒有人會從TON Reserve購買新的Gram；他們會選擇在自由市場上購買Gram，而不增加Gram的總流通量。另一方面，一個Gram的市場價格不能比$p(n)$高得多，否則從TON Reserve獲得新的Gram是有意義的。這意味著Gram的市場價格不會受到突如其來的劇烈波動(和下跌)；這很重要，因為賭注(validator deposits)至少被凍結了一個月，而且gas價格也不能改變得太快。所以，系統的整體經濟穩定性需要一個機制，防止Gram的匯率發生過於劇烈的變化，就像上面描述的那樣。
+\nxsubpoint \embt(Market price of Toncoin.)  當然，如果自由市場價格跌破$p(n):=0.1\cdot (1+10^{-9})^n$，一旦$n$個Toncoin流通，沒有人會從TON Reserve購買新的Toncoin；他們會選擇在自由市場上購買Toncoin，而不增加Toncoin的總流通量。另一方面，一個Toncoin的市場價格不能比$p(n)$高得多，否則從TON Reserve獲得新的Toncoin是有意義的。這意味著Toncoin的市場價格不會受到突如其來的劇烈波動(和下跌)；這很重要，因為賭注(validator deposits)至少被凍結了一個月，而且gas價格也不能改變得太快。所以，系統的整體經濟穩定性需要一個機制，防止Toncoin的匯率發生過於劇烈的變化，就像上面描述的那樣。
 
-\nxsubpoint \embt(Buying back the Grams.)  如果Gram的市場價格跌到$0.5\cdot p(n)$以下，當總共有$n$個Gram流通(即，不保留在TON Reserve控制的特殊帳戶上)，TON Reserve保留購回一些Gram並減少$n$，即Gram的總流通量的權利。這可能是為了防止Gram匯率突然下跌。
+\nxsubpoint \embt(Buying back the Toncoin.)  如果Toncoin的市場價格跌到$0.5\cdot p(n)$以下，當總共有$n$個Toncoin流通(即，不保留在TON Reserve控制的特殊帳戶上)，TON Reserve保留購回一些Toncoin並減少$n$，即Toncoin的總流通量的權利。這可能是為了防止Toncoin匯率突然下跌。
 
-\nxsubpoint \embt(Selling new Grams at a higher price.)  TON Reserve將只根據價格公式~\eqref{eq:gram.price}銷售最多一半(即，$2.5\cdot10^9$ Gram)的Gram總供應量。它保留不銷售任何剩餘的Gram，或以高於$p(n)$的價格出售它們，但永遠不會以較低的價格出售(考慮到匯率快速變化的不確定性)。這裡的道理是，一旦至少一半的Gram都被賣出，Gram市場的總價值將足夠高，外部力量操縱匯率比在Gram部署初期可能更困難。
+\nxsubpoint \embt(Selling new Toncoin at a higher price.)  TON Reserve將只根據價格公式~\eqref{eq:Toncoin.price}銷售最多一半(即，$2.5\cdot10^9$ Toncoin)的Toncoin總供應量。它保留不銷售任何剩餘的Toncoin，或以高於$p(n)$的價格出售它們，但永遠不會以較低的價格出售(考慮到匯率快速變化的不確定性)。這裡的道理是，一旦至少一半的Toncoin都被賣出，Toncoin市場的總價值將足夠高，外部力量操縱匯率比在Toncoin部署初期可能更困難。
 
-\nxpoint\label{sp:unalloc.gr} \embt(Using unallocated Grams.)  TON Reserve將使用大部分的``未分配''Gram(大約$5\cdot10^9-n$ Gram)---即，那些存在於TON Reserve的特殊帳戶和與之明確關聯的其他帳戶中的Gram---只作為validator stakes (因為TON基金會本身可能必須在TON區塊鏈的第一個部署階段提供大部分的validators)，和在主鏈上投票支持或反對有關``可配置參數''和其他協議更改的提案，由TON基金會決定(即，其創建者---開發團隊)。這也意味著在TON Blockchain的第一個部署階段，TON基金會將擁有大多數的票。希望那時系統會變得更加成熟，不需要太頻繁地調整參數。
+\nxpoint\label{sp:unalloc.gr} \embt(Using unallocated Toncoin.)  TON Reserve將使用大部分的``未分配''Toncoin(大約$5\cdot10^9-n$ Toncoin)---即，那些存在於TON Reserve的特殊帳戶和與之明確關聯的其他帳戶中的Toncoin---只作為validator stakes (因為TON基金會本身可能必須在TON區塊鏈的第一個部署階段提供大部分的validators)，和在主鏈上投票支持或反對有關``可配置參數''和其他協議更改的提案，由TON基金會決定(即，其創建者---開發團隊)。這也意味著在TON Blockchain的第一個部署階段，TON基金會將擁有大多數的票。希望那時系統會變得更加成熟，不需要太頻繁地調整參數。
 
-\nxsubpoint\label{sp:dev.grams} \embt(Some unallocated Grams will be
-given to developers.)  一預定的（相對較少的）「未分配」的Grams數量（例如，200 Megagrams，相當於總供應的4％）將在TON Blockchain的部署期間轉移到由TON Foundation控制的特殊賬戶，然後某些「獎勵」可能會從此賬戶支付給開源TON軟體的開發者，並有最少兩年的鑲嵌期。
+\nxsubpoint\label{sp:dev.Toncoin} \embt(Some unallocated Toncoin will be
+given to developers.)  一預定的（相對較少的）「未分配」的Toncoin數量（例如，200 Megagrams，相當於總供應的4％）將在TON Blockchain的部署期間轉移到由TON Foundation控制的特殊賬戶，然後某些「獎勵」可能會從此賬戶支付給開源TON軟體的開發者，並有最少兩年的鑲嵌期。
 
-\nxsubpoint\label{sp:TON.own.grams} \embt(The TON Foundation needs
-Grams for operational purposes.)  請記住，TON Foundation將收到由TON Reserve出售的Grams所得的法定貨幣和加密貨幣，並將其用於TON Project的開發和部署。例如，原始的驗證器集合以及TON Storage和TON Proxy節點的初始集合可能由TON Foundation安裝。
+\nxsubpoint\label{sp:TON.own.Toncoin} \embt(The TON Foundation needs
+Toncoin for operational purposes.)  請記住，TON Foundation將收到由TON Reserve出售的Toncoin所得的法定貨幣和加密貨幣，並將其用於TON Project的開發和部署。例如，原始的驗證器集合以及TON Storage和TON Proxy節點的初始集合可能由TON Foundation安裝。
 
-雖然這對於項目的快速啟動是必要的，但最終目標是使該項目盡可能去中心化。為此，TON Foundation可能需要鼓勵安裝第三方驗證器以及TON Storage和TON Proxy節點 - 例如，通過支付他們存儲TON Blockchain的舊區塊或代理所選服務子集的網絡流量。此類付款將以Grams進行；因此，TON Foundation將需要大量的Grams用於操作目的。
+雖然這對於項目的快速啟動是必要的，但最終目標是使該項目盡可能去中心化。為此，TON Foundation可能需要鼓勵安裝第三方驗證器以及TON Storage和TON Proxy節點 - 例如，通過支付他們存儲TON Blockchain的舊區塊或代理所選服務子集的網絡流量。此類付款將以Toncoin進行；因此，TON Foundation將需要大量的Toncoin用於操作目的。
 
-\nxsubpoint \embt(Taking a pre-arranged amount from the Reserve.) TON Foundation將從TON Reserve轉賬到其賬戶的一小部分 - 說，所有硬幣的10％（即500 Megagrams）在Grams的初次銷售結束後 - 用於其自己的目的，如在~\ptref{sp:TON.own.grams}中概述的。最好是與為TON開發人員提供的資金轉賬同時完成，如在~\ptref{sp:dev.grams}中提到的。
+\nxsubpoint \embt(Taking a pre-arranged amount from the Reserve.) TON Foundation將從TON Reserve轉賬到其賬戶的一小部分 - 說，所有硬幣的10％（即500 Megagrams）在Toncoin的初次銷售結束後 - 用於其自己的目的，如在~\ptref{sp:TON.own.Toncoin}中概述的。最好是與為TON開發人員提供的資金轉賬同時完成，如在~\ptref{sp:dev.Toncoin}中提到的。
 
-在轉移到TON Foundation和TON開發人員之後，TON Reserve價格$p(n)$的Gram將立即上升一定量，這一量是提前知道的。例如，如果所有硬幣的10％被轉移用於TON Foundation的目的，而4％被轉移以鼓勵開發者，則流通中的硬幣總數量$n$將立即增加$\Delta n=7\cdot10^8$，Gram的價格乘以$e^{\alpha\,\Delta n}=e^{0.7}\approx 2$（即，加倍）。
+在轉移到TON Foundation和TON開發人員之後，TON Reserve價格$p(n)$的Toncoin將立即上升一定量，這一量是提前知道的。例如，如果所有硬幣的10％被轉移用於TON Foundation的目的，而4％被轉移以鼓勵開發者，則流通中的硬幣總數量$n$將立即增加$\Delta n=7\cdot10^8$，Toncoin的價格乘以$e^{\alpha\,\Delta n}=e^{0.7}\approx 2$（即，加倍）。
 
 
-剩餘的「未分配」Grams將由TON Reserve使用，如上面的~\ptref{sp:unalloc.gr}所解釋。如果TON Foundation之後還需要更多的Grams，它將簡單地將其在硬幣銷售期間先前獲得的部分資金轉換為Grams，無論是在自由市場還是從TON Reserve購買Grams。為了防止過度中心化，TON Foundation永遠不會努力在其帳戶上擁有超過總Grams數量的10％（即500 Megagrams）。
+剩餘的「未分配」Toncoin將由TON Reserve使用，如上面的~\ptref{sp:unalloc.gr}所解釋。如果TON Foundation之後還需要更多的Toncoin，它將簡單地將其在硬幣銷售期間先前獲得的部分資金轉換為Toncoin，無論是在自由市場還是從TON Reserve購買Toncoin。為了防止過度中心化，TON Foundation永遠不會努力在其帳戶上擁有超過總Toncoin數量的10％（即500 Megagrams）。
 
-\nxpoint\label{sp:bulk.sales} \embt(Bulk sales of Grams.) 當很多人同時想從TON Reserve購買大量Grams時，最好不要立即處理他們的訂單，因為這將導致結果非常依賴於特定訂單的時機和他們的處理順序。
+\nxpoint\label{sp:bulk.sales} \embt(Bulk sales of Toncoin.) 當很多人同時想從TON Reserve購買大量Toncoin時，最好不要立即處理他們的訂單，因為這將導致結果非常依賴於特定訂單的時機和他們的處理順序。
 
-相反，購買Grams的訂單可能在某個預定的時間段（例如，一天或一個月）內收集，然後一次全部處理。如果收到$k$個訂單，第$i$個訂單價值$T_i$美元，則總金額$T=T_1+T_2+\cdots+T_k$用於根據\eqref{eq:new.coins}購買$\Delta n$新硬幣，並且第$i$個訂單的發送者分配了這些硬幣的$\Delta n\cdot T_i/T$。這樣，所有買家都以每Gram $T/\Delta n$ USD的相同平均價格獲得他們的Grams。
+相反，購買Toncoin的訂單可能在某個預定的時間段（例如，一天或一個月）內收集，然後一次全部處理。如果收到$k$個訂單，第$i$個訂單價值$T_i$美元，則總金額$T=T_1+T_2+\cdots+T_k$用於根據\eqref{eq:new.coins}購買$\Delta n$新硬幣，並且第$i$個訂單的發送者分配了這些硬幣的$\Delta n\cdot T_i/T$。這樣，所有買家都以每Toncoin $T/\Delta n$ USD的相同平均價格獲得他們的Toncoin。
 
-之後，收集購買新Grams的訂單的新一輪開始。
+之後，收集購買新Toncoin的訂單的新一輪開始。
 
-當Gram購買訂單的總價值變得足夠低時，這種「批量銷售」系統可能會被一個根據公式~\eqref{eq:new.coins}從TON Reserve立即銷售Grams的系統所替代。
+當Toncoin購買訂單的總價值變得足夠低時，這種「批量銷售」系統可能會被一個根據公式~\eqref{eq:new.coins}從TON Reserve立即銷售Toncoin的系統所替代。
 
 「批量銷售」機制可能在收集TON Project投資的初始階段得到廣泛使用。
 
