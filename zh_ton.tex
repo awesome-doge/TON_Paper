@@ -609,7 +609,7 @@ for messages with assured delivery.)  TON Blockchain 使用「超立方體路由
 
 如果消息被發送到與當前的 shard 不同的 shard，當前的 shard 標識符的十六進制數字（確定地選擇）被替換為目標 shard 的相應數字，並使用所得的標識符作為轉發消息的近端目標。\footnote{這不一定是用於計算超立方體路由的下一跳的算法的最終版本。特別是，十六進制數字可能會被 $r$-位群組替換，其中 $r$ 是一個可配置的參數，不一定等於四。}
 
-超立方體路由的主要優點是區塊有效性條件意味著創建 shardchain 的區塊的Validator必須收集和處理「鄰近」shardchain 的輸出隊列中的消息，否則將失去他們的賭注。這樣，任何消息都可以預期最終會達到其最終目的地；消息不能在過程中丟失或傳遞兩次。
+超立方體路由的主要優點是區塊有效性條件意味著創建 shardchain 的區塊的Validator必須收集和處理「鄰近」shardchain 的輸出隊列中的消息，否則將失去他們的 stake 。這樣，任何消息都可以預期最終會達到其最終目的地；消息不能在過程中丟失或傳遞兩次。
 
 請注意，超立方體路由帶來了一些額外的延遲和開銷，因為必須通過幾個中間的 shardchain 轉發消息。然而，這些中間的 shardchain 的數量增長非常緩慢，作為 shardchain 總數 $N$ 的對數 $\log N$（更確切地說，$\lceil\log_{16}N\rceil-1$）。例如，如果 $N\approx250$，最多只有一個中間的 hop；對於 $N\approx4000$ 的 shardchain，最多有兩個。四個中間的 hop，我們可以支持多達一百萬的 shardchain。我們認為為系統的基本無限的可擴展性支付的這個代價是非常小的。事實上，甚至不必支付這個價格：
 
@@ -635,7 +635,7 @@ messages from output queues of neighboring shardchains.) 當為 shardchain 提�
 
 \nxsubpoint \embt(Payment for forwarding and keeping a message.) 轉發交易實際上消耗了一些瓦斯（取決於被轉發的訊息的大小），因此從被轉發的訊息的值中扣除了一筆瓦斯支付，代表此分片鏈的Validator。此轉發支付通常遠小於當訊息最終交付給其收件人時所確定的瓦斯支付，即使該訊息由於超立方體路由而被轉發了多次。此外，只要某個分片鏈的輸出隊列中保持有訊息，它就是分片鏈的全域狀態的一部分，因此特殊交易也可能收取長時間保持全域數據的支付。
 
-\nxsubpoint \embt(Messages to and from the masterchain.) 訊息可以直接從任何分片鏈發送到主鏈，反之亦然。但是，發送訊息到主鏈以及在主鏈中處理訊息的瓦斯價格相當高，因此只有在真正需要時才會使用此功能——例如，由Validator來存入他們的賭注。在某些情況下，可能會定義發送到主鏈的訊息的最小存款（附加值），只有當接收方認為該訊息是“有效”的時候才會退還。
+\nxsubpoint \embt(Messages to and from the masterchain.) 訊息可以直接從任何分片鏈發送到主鏈，反之亦然。但是，發送訊息到主鏈以及在主鏈中處理訊息的瓦斯價格相當高，因此只有在真正需要時才會使用此功能——例如，由Validator來存入他們的 stake 。在某些情況下，可能會定義發送到主鏈的訊息的最小存款（附加值），只有當接收方認為該訊息是“有效”的時候才會退還。
 
 訊息不能自動通過主鏈路由。帶有 $\workchainid\neq-1$ 的訊息（其中 $-1$ 是表示主鏈的特殊 $\workchainid$）不能交付給主鏈。
 
@@ -991,7 +991,7 @@ merge operations.) 合併 shard 操作的必要性也由某些正式條件檢測
 
 兩種最常見的範疇是 {\em Proof-of-Work (PoW)} 和 {\em Proof-of-Stake (PoS)}。工作量證明方法通常允許任何節點創建（“挖掘”）一個新區塊（並獲得與挖掘區塊相關的一些獎勵），前提是它有幸在其他競爭者成功之前解決一個否則無用的計算問題（通常涉及計算大量的hashes）。在出現分支的情況下（例如，如果兩個節點發布兩個否則有效但不同的區塊來跟隨前一個），最長的分支勝出。這樣，區塊鏈的不變性保證是基於生成區塊鏈所花費的{\em 工作量}（計算資源）：任何希望創建此區塊鏈的分支的人都需要重新做這些工作，以創建已提交區塊的替代版本。為此，一個人需要控制超過$50\%$的創建新區塊所花費的總計算能力，否則替代分支變得最長的機會會指數性地降低。
 
-權益證明方法基於一些特殊節點（{\em Validator}）所做的大量{\em 賭注}（以加密貨幣提名），以斷言它們已經檢查了一些區塊並發現它們是正確的。Validator簽署區塊，並因此收到一些小獎勵；但是，如果一個Validator被發現簽署了一個不正確的區塊，並且提供了這方面的證據，則其全部或部分賭注將被沒收。這樣，區塊鏈的有效性和不變性保證是由Validator對區塊鏈有效性的總賭注給出的。
+權益證明方法基於一些特殊節點（{\em Validator}）所做的大量{\em  stake }（以加密貨幣提名），以斷言它們已經檢查了一些區塊並發現它們是正確的。Validator簽署區塊，並因此收到一些小獎勵；但是，如果一個Validator被發現簽署了一個不正確的區塊，並且提供了這方面的證據，則其全部或部分 stake 將被沒收。這樣，區塊鏈的有效性和不變性保證是由Validator對區塊鏈有效性的總 stake 給出的。
 
 從這個角度看，權益證明更為自然，因為它激勵Validator（它們取代了PoW礦工）執行有用的計算（需要檢查或創建新區塊，尤其是執行區塊中列出的所有交易），而不是計算其他無用的hashes。這樣，Validator會購買更適合處理用戶交易的硬件，以獲得與這些交易相關的獎勵，從整個系統的角度看，這似乎是一項相當有用的投資。
 
@@ -1952,7 +1952,7 @@ TON區塊鏈的主要加密貨幣，特別是其主鏈和基本工作鏈，是{\
 當然，如果$T\lll p(n)\alpha^{-1}$，那麼$\Delta n\approx T/p(n)$。
 
 
-\nxsubpoint \embt(Market price of Toncoin.)  當然，如果自由市場價格跌破$p(n):=0.1\cdot (1+10^{-9})^n$，一旦$n$個Toncoin流通，沒有人會從TON Reserve購買新的Toncoin；他們會選擇在自由市場上購買Toncoin，而不增加Toncoin的總流通量。另一方面，一個Toncoin的市場價格不能比$p(n)$高得多，否則從TON Reserve獲得新的Toncoin是有意義的。這意味著Toncoin的市場價格不會受到突如其來的劇烈波動(和下跌)；這很重要，因為賭注(Validator deposits)至少被凍結了一個月，而且gas價格也不能改變得太快。所以，系統的整體經濟穩定性需要一個機制，防止Toncoin的匯率發生過於劇烈的變化，就像上面描述的那樣。
+\nxsubpoint \embt(Market price of Toncoin.)  當然，如果自由市場價格跌破$p(n):=0.1\cdot (1+10^{-9})^n$，一旦$n$個Toncoin流通，沒有人會從TON Reserve購買新的Toncoin；他們會選擇在自由市場上購買Toncoin，而不增加Toncoin的總流通量。另一方面，一個Toncoin的市場價格不能比$p(n)$高得多，否則從TON Reserve獲得新的Toncoin是有意義的。這意味著Toncoin的市場價格不會受到突如其來的劇烈波動(和下跌)；這很重要，因為 stake (Validator deposits)至少被凍結了一個月，而且gas價格也不能改變得太快。所以，系統的整體經濟穩定性需要一個機制，防止Toncoin的匯率發生過於劇烈的變化，就像上面描述的那樣。
 
 \nxsubpoint \embt(Buying back the Toncoin.)  如果Toncoin的市場價格跌到$0.5\cdot p(n)$以下，當總共有$n$個Toncoin流通(即，不保留在TON Reserve控制的特殊帳戶上)，TON Reserve保留購回一些Toncoin並減少$n$，即Toncoin的總流通量的權利。這可能是為了防止Toncoin匯率突然下跌。
 
