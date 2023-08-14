@@ -889,7 +889,7 @@ validator被選舉的總數的上限 \(T\) （參見~\ptref{sp:global.valid}）�
 
 因此，到2017年，超過75％的新Ethereum或Bitcoin區塊由少於十個礦工產生。實際上，兩個最大的Ethereum開採池共同生產了超過一半的所有新區塊！顯然，這樣的系統比依賴\(T\approx1000\)節點生產新區塊的系統更為集中。
 
-人們還可能注意到，成為TON Blockchainvalidator所需的投資——即購買硬體（例如，幾個高性能伺服器）和權益（如有必要，可以通過提名者池輕鬆收集；參見~\ptref{sp:nominators}）——比成為成功的獨立Bitcoin或Ethereum礦工所需的要少。實際上，~\ptref{sp:global.valid}的參數\(L\)將迫使提名者不加入最大的“開採池”（即，積累了最大權益的validator），而是尋找目前正在接受提名者資金的較小的validator，甚至創建新的validator，因為這將允許更高比例的validator的——並且也是提名者的——權益被使用，從而獲得更大的開採獎勵。這種方式，TON Proof-of-Stake系統實際上{\em 鼓勵\/}去中心化（創建和使用更多的validator）並{\em 懲罰\/}集中化。
+人們還可能注意到，成為TON Blockchainvalidator所需的投資——即購買硬體（例如，幾個高性能伺服器）和權益（如有必要，可以通過 nominator pool 輕鬆收集；參見~\ptref{sp:nominators}）——比成為成功的獨立Bitcoin或Ethereum礦工所需的要少。實際上，~\ptref{sp:global.valid}的參數\(L\)將迫使 nominator 不加入最大的“開採池”（即，積累了最大權益的validator），而是尋找目前正在接受 nominator 資金的較小的validator，甚至創建新的validator，因為這將允許更高比例的validator的——並且也是 nominator 的——權益被使用，從而獲得更大的開採獎勵。這種方式，TON Proof-of-Stake系統實際上{\em 鼓勵\/}去中心化（創建和使用更多的validator）並{\em 懲罰\/}集中化。
 
 \nxsubpoint\label{sp:rel.rel} \embt(Relative reliability of a block.)
 區塊的{\em (相對) 可靠性\/}簡單地說是已簽署此區塊的所有validator的總權益。換句話說，如果這個區塊被證明是無效的，某些行為者會失去的金額。如果有人關心的交易傳輸值低於區塊的可靠性，可以認為它們足夠安全。從這個意義上說，相對可靠性是外部觀察者可以對特定區塊的信任度的衡量。
@@ -1166,7 +1166,7 @@ changing the ``genome'' of a blockchain project.) 上述分類定義了區塊鏈
     與此同時，即使一個人不能在區塊鏈內「創建一個Facebook」（參見\ptref{sp:blockchain.facebook}），不論是EOS還是其他方式，我們認為EOS可能會成為某些高度專用的弱互動分散式應用程序的便利平台，類似於BitShares（去中心化交易所）和SteemIt（去中心化博客平台）。
 
 \nxsubpoint\label{sp:discuss.PolkaDot} \embt(PolkaDot \cite{PolkaWP}; \url{https://polkadot.io/}.)
-            {\em PolkaDot\/} (2019或之後) 是最佳思考且最詳細的建議多鏈權益證明專案之一；其開發是由Ethereum的共同創辦人之一領導的。此專案是我們地圖上與TON Blockchain最接近的專案。（事實上，我們的「fisherman」和「提名人」術語都是歸功於PolkaDot專案。）
+            {\em PolkaDot\/} (2019或之後) 是最佳思考且最詳細的建議多鏈權益證明專案之一；其開發是由Ethereum的共同創辦人之一領導的。此專案是我們地圖上與TON Blockchain最接近的專案。（事實上，我們的「fisherman」和「nominator」術語都是歸功於PolkaDot專案。）
 
 PolkaDot是一個異構的鬆散連接的多鏈權益證明專案，具有用於生成新區塊的拜占庭容錯（BFT）共識和主鏈（可能是外部的，例如Ethereum區塊鏈）。它還使用超立方體路由，有點像TON的慢速版本，如\ptref{sp:hypercube}所述。
 
