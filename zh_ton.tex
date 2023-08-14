@@ -120,7 +120,7 @@ TL: Dr Awesome Doge}% a.k.a. K.O.T.
 \item 一個靈活的多區塊鏈平台 ({\em TON Blockchain}; 參考第~\ptref{sect:blockchain}章)，能夠處理每秒數百萬筆交易，擁有圖靈完全智能合約、可升級的正式區塊鏈規格、多加密貨幣價值轉移、支持微支付通道和鏈下支付網路。{\em TON Blockchain\/} 提供了一些新的和獨特的功能，例如「自我修復」垂直區塊鏈機制 (參考~\ptref{sp:inv.sh.blk.corr}) 和 Instant Hypercube Routing (參考~\ptref{sp:instant.hypercube})，使其同時快速、可靠、可擴展和自我一致。
 \item 一個點對點網路 ({\em TON P2P Network}, 或簡稱 {\em TON Network}; 參考第~\ptref{sect:network}章)，用於訪問TON區塊鏈、發送交易候選者，以及只接收客戶端感興趣的區塊鏈的部分更新（例如，與客戶端的賬戶和智能合約相關的部分），但也能支持任意分散服務，無論是否與區塊鏈相關。
 \item 一種分散的文件儲存技術 {\em (TON Storage);} (參考~\ptref{sp:ex.ton.storage})，通過 {\em TON Network} 訪問，由TON Blockchain用於儲存區塊和狀態數據（快照）的存檔副本，但也可以用於儲存平台上的使用者或其他服務的任意文件，使用類似於torrent的訪問技術。
-\item 一個網路代理/匿名層 {\em (TON Proxy);} (參考~\ptref{sp:ex.ton.proxy} 和~\ptref{sp:tunnels})，類似於 $I^2P$ (Invisible Internet Project)，如有必要（例如，從擁有大量加密貨幣的賬戶提交交易的節點，或希望隱藏其確切IP地址和地理位置以對抗DDoS攻擊的高風險區塊鏈Validator節點），用於隱藏 {\em TON Network\/} 節點的身份和IP地址。
+\item 一個網路代理/匿名層 {\em (TON Proxy);} (參考~\ptref{sp:ex.ton.proxy} 和~\ptref{sp:tunnels})，類似於 $I^2P$ (Invisible Internet Project)，如有必要（例如，從擁有大量加密貨幣的賬戶提交交易的節點，或希望隱藏其確切IP地址和地理位置以對抗DDoS攻擊的高風險區塊鏈validator節點），用於隱藏 {\em TON Network\/} 節點的身份和IP地址。
 \item 一個類似Kademlia的分散式雜湊表 ({\em TON DHT}; 參考~\ptref{sect:kademlia})，用作 {\em TON Storage} 的「torrent tracker」(參考~\ptref{sp:distr.torr.tr})，作為 {\em TON Proxy\/} 的「input tunnel locator」(參考~\ptref{sp:loc.abs.addr})，以及作為 {\em TON Services} 的服務定位器 (參考~\ptref{sp:loc.serv})。
 \item 一個提供任意服務的平台 ({\em TON Services}; 參考第~\ptref{sect:services}章)，居住在並可通過 {\em TON Network\/} 和 {\em TON Proxy} 訪問，具有正式化的界面 (參考~\ptref{sp:pub.int.smartc}) 使得瀏覽器或智能手機應用程序可以互動。這些正式界面和持久的服務入口點可以在TON Blockchain中發布 (參考~\ptref{sp:ui.ton.dns})；提供服務的實際節點可以從在TON Blockchain中發布的信息開始，通過 {\em TON DHT\/} 查找 (參考~\ptref{sp:loc.serv})。服務可以在TON Blockchain中創建智能合約，為其客戶提供一些保證 (參考~\ptref{sp:mixed.serv})。
 \item {\em TON DNS\/} (參考~\ptref{sp:ton.dns})，用於為賬戶、智能合約、服務和網路節點分配易讀的名稱。
@@ -145,7 +145,7 @@ TON Blockchain 實際上是區塊鏈的{\em 集合}（甚至是區塊鏈的區�
 \nxsubpoint\label{sp:list.blkch.typ}
 \embt(List of blockchain types.) 此系列中的區塊鏈包括：
 \begin{itemize}
-\item 唯一的{\em master blockchain}，或簡稱為{\em masterchain}，該區塊鏈包含有關協議的一般資訊、其參數的當前值、Validator集合和他們的股份、當前活躍的工作鏈(workchains)及其"shards"，以及最重要的，所有workchains和shardchains的最近區塊的雜湊集合。
+\item 唯一的{\em master blockchain}，或簡稱為{\em masterchain}，該區塊鏈包含有關協議的一般資訊、其參數的當前值、validator集合和他們的股份、當前活躍的工作鏈(workchains)及其"shards"，以及最重要的，所有workchains和shardchains的最近區塊的雜湊集合。
 \item 數個(最多 $2^{32}$)的{\em working blockchains}，或簡稱為{\em workchains}，實際上是這系統的"工作馬"，包含價值轉移和智能合約交易。不同的workchains可能有不同的"規則"，意味著帳戶地址的不同格式、交易的不同格式、智能合約的不同虛擬機(VMs)、不同的基本加密貨幣等等。然而，它們都必須滿足某些基本的互操作性標準，以確保不同的workchains之間的互動簡單和可能。在這方面，TON Blockchain是{\em heterogeneous}（參考~\ptref{sp:blkch.hom.het}），類似於EOS（參考~\ptref{sp:discuss.EOS}）和PolkaDot（參考~\ptref{sp:discuss.PolkaDot}）專案。
 \item 每個workchain會進一步細分為多達 $2^{60}$ 的{\em shard blockchains}，或簡稱為{\em shardchains}，它們具有與workchain本身相同的規則和區塊格式，但只對帳戶的某個子集負責，這取決於帳戶地址的幾個首位(最重要的位)。換句話說，這系統內建了一種分片(sharding)的形式（參考~\ptref{sp:shard.supp}）。因為所有這些shardchains共享通用的區塊格式和規則，TON Blockchain在這方面是{\em homogeneous}（參考~\ptref{sp:blkch.hom.het}），這與Ethereum的某個擴展建議相似。\footnote{\url{https://github.com/ethereum/wiki/wiki/Sharding-FAQ}}
 \item shardchain（和masterchain）中的每個區塊實際上不只是一個區塊，而是一個小區塊鏈。通常，這"block blockchain"或"vertical blockchain"只包含一個區塊，然後我們可能會認為這只是shardchain的相對應區塊（在這種情況下也稱為"horizontal blockchain"）。但是，如果需要修正不正確的shardchain區塊，新的區塊將被提交到"vertical blockchain"，包含無效"horizontal blockchain"區塊的替代品，或一個"block difference"，只包含該區塊先前版本中需要更改的部分的描述。這是一個TON特有的機制，用於替換檢測到的無效區塊，而不會真正地分叉所有涉及的shardchains；這將在~\ptref{sp:inv.sh.blk.corr}中詳細解釋。目前，我們只需指出，每個shardchain（和masterchain）不是一個常規的區塊鏈，而是一個{\em blockchain of blockchains}，或{\em 2D-blockchain}，或只是一個{\em 2-blockchain}。
@@ -169,7 +169,7 @@ TON的分片方法是「自下而上」，如下所述。
 
 \nxsubpoint \embt(Identification of workchains.) 每一個工作鏈都由其{\em number\/}或{\em workchain identifier\/}（\(\workchainid:\uint_{32}\)）來識別，它只是一個無符號的32位整數。工作鏈是由主鏈中的特殊交易所創建，定義（先前未使用的）工作鏈識別符和工作鏈的正式描述，至少足以讓此工作鏈與其他工作鏈互動以及對此工作鏈的區塊進行表面驗證。
 
-\nxsubpoint \embt(Creation and activation of new workchains.) 新的工作鏈的創建可以由社區中的任何成員啟動，只要他們準備支付發佈新工作鏈的正式規範所需的（高額）主鏈交易費用。但是，為了使新的工作鏈變得活躍，需要三分之二的Validator達成共識，因為他們需要升級他們的軟件以處理新工作鏈的區塊，並通過特殊的主鏈交易表示他們準備好與新的工作鏈一起工作。對新工作鏈的啟動感興趣的方可能會提供某些激勵，讓Validator透過智能合約分發的某些獎勵來支持新的工作鏈。
+\nxsubpoint \embt(Creation and activation of new workchains.) 新的工作鏈的創建可以由社區中的任何成員啟動，只要他們準備支付發佈新工作鏈的正式規範所需的（高額）主鏈交易費用。但是，為了使新的工作鏈變得活躍，需要三分之二的validator達成共識，因為他們需要升級他們的軟件以處理新工作鏈的區塊，並通過特殊的主鏈交易表示他們準備好與新的工作鏈一起工作。對新工作鏈的啟動感興趣的方可能會提供某些激勵，讓validator透過智能合約分發的某些獎勵來支持新的工作鏈。
 
 \nxsubpoint\label{sp:shard.ident} \embt(Identification of shardchains.) 每個分片鏈(shardchain)都由一對 $(w,s)=(\workchainid, \shardpfx)$ 來識別，其中 $\workchainid:\uint_{32}$ 識別相應的工作鏈(workchain)，而 $\shardpfx:\st2^{0\ldots60}$ 是一個最長為60的位元串，定義此分片鏈所負責的帳戶子集。換句話說，所有以 $\shardpfx$ 開頭的帳戶 $\accountid$ （即，具有 $\shardpfx$ 作為最重要位元）都將被分配到這個分片鏈。
 
@@ -191,33 +191,33 @@ TON 區塊鏈的一個重要特點是它實現了{\em dynamic sharding}，這意
 
 \nxsubpoint \embt(Masterchain block hash as a global state.) 根據~\ptref{sp:sc.hash.mc}，最後一個主鏈區塊的雜湊完全確定了外部觀察者的整體系統狀態。人們不需要單獨監視所有分片鏈的狀態。
 
-\nxsubpoint \embt(Generation of new blocks by Validators; cf.~\ptref{sect:Validators}.) TON 區塊鏈使用 Proof-of-Stake (PoS) 方法在分片鏈和主鏈中生成新的區塊。這意味著有一組，例如，多達幾百個的{\em Validators}---特殊的節點，透過特殊的主鏈交易存放{\em stakes\/}（大量的 Toncoin）以符合生成和驗證新區塊的資格。
+\nxsubpoint \embt(Generation of new blocks by validators; cf.~\ptref{sect:validators}.) TON 區塊鏈使用 Proof-of-Stake (PoS) 方法在分片鏈和主鏈中生成新的區塊。這意味著有一組，例如，多達幾百個的{\em validators}---特殊的節點，透過特殊的主鏈交易存放{\em stakes\/}（大量的 Toncoin）以符合生成和驗證新區塊的資格。
 
-然後，小部分的Validator被分配給每一個分片 $(w,s)$，這是以決定性的偽隨機方式進行的，每1024個區塊大約會改變一次。這部分的Validator建議並在下一個分片鏈區塊應是什麼上達成共識，通過從客戶端收集適當的建議交易到新的有效的區塊候選。對於每個區塊，Validator上有一個偽隨機選定的順序，以確定誰的區塊候選在每一輪中有最高的優先順序被提交。
+然後，小部分的validator被分配給每一個分片 $(w,s)$，這是以決定性的偽隨機方式進行的，每1024個區塊大約會改變一次。這部分的validator建議並在下一個分片鏈區塊應是什麼上達成共識，通過從客戶端收集適當的建議交易到新的有效的區塊候選。對於每個區塊，validator上有一個偽隨機選定的順序，以確定誰的區塊候選在每一輪中有最高的優先順序被提交。
 
-Validator和其他節點檢查所提議的區塊候選的有效性；如果Validator簽署了一個無效的區塊候選，它可能會自動被懲罰，失去部分或全部的 stake，或被暫停從Validator集合一段時間。之後，Validator應達成對下一個區塊的選擇的共識，本質上是 BFT (Byzantine Fault Tolerant; cf.~\ptref{sp:dpos.bft}) 共識協議的高效變體，類似於 PBFT~\cite{PBFT} 或 Honey Badger BFT~\cite{HoneyBadger}。如果達到共識，將創建新的區塊，且Validator在交易費用上進行分割，包括交易，加上一些新創建的（“鑄造的”）硬幣。
+validator和其他節點檢查所提議的區塊候選的有效性；如果validator簽署了一個無效的區塊候選，它可能會自動被懲罰，失去部分或全部的 stake，或被暫停從validator集合一段時間。之後，validator應達成對下一個區塊的選擇的共識，本質上是 BFT (Byzantine Fault Tolerant; cf.~\ptref{sp:dpos.bft}) 共識協議的高效變體，類似於 PBFT~\cite{PBFT} 或 Honey Badger BFT~\cite{HoneyBadger}。如果達到共識，將創建新的區塊，且validator在交易費用上進行分割，包括交易，加上一些新創建的（“鑄造的”）硬幣。
 
-每個Validator可以被選舉參與多個Validator子集；在這種情況下，預計它將平行運行所有的驗證和共識算法。
+每個validator可以被選舉參與多個validator子集；在這種情況下，預計它將平行運行所有的驗證和共識算法。
 
-在生成所有新的分片鏈區塊之後或超時之後，將生成一個新的主鏈區塊，包括所有分片鏈的最新區塊的雜湊值。這是通過{\em all\/} Validator的 BFT 共識完成的。\footnote{實際上，兩個三分之一的 stake 就足夠達成共識，但努力收集盡可能多的簽名。}
+在生成所有新的分片鏈區塊之後或超時之後，將生成一個新的主鏈區塊，包括所有分片鏈的最新區塊的雜湊值。這是通過{\em all\/} validator的 BFT 共識完成的。\footnote{實際上，兩個三分之一的 stake 就足夠達成共識，但努力收集盡可能多的簽名。}
 
-TON PoS 方法及其經濟模型的更多細節提供在 section~\ptref{sect:Validators}。
+TON PoS 方法及其經濟模型的更多細節提供在 section~\ptref{sect:validators}。
 
 \nxsubpoint \embt(Forks of the masterchain.) 我們緊密耦合的方法帶來的一個複雜性是，切換到主鏈的不同分叉幾乎必然需要在至少一些分片鏈中切換到另一個分叉。另一方面，只要主鏈中沒有分叉，分片鏈中的分叉甚至都是不可能的，因為分片鏈的替代分叉中的沒有區塊可以通過將其雜湊值納入主鏈區塊而變得「標準化」。
 
 一般的規則是，{\em 如果主鏈區塊 $B'$ 是 $B$ 的前輩，$B'$ 包括 $(w,s)$-分片鏈區塊 $B'_{w,s}$ 的雜湊 $\Hash(B'_{w,s})$，且 $B$ 包括雜湊 $\Hash(B_{w,s})$，那麼 $B'_{w,s}$ {\bf 必須}是 $B_{w,s}$ 的前輩; 否則，主鏈區塊 $B$ 就是無效的。}
 
-我們預期主鏈分叉將會很少，幾乎不存在，因為在由 TON 區塊鏈所採用的 BFT 範疇中，它們只能在{\em 大部分\/} Validator行為不正確的情況下發生（參見~\ptref{sp:Validators} 和~\ptref{sp:new.master.blk}），這將意味著由違反者承擔的重大的 stake 損失。因此，不應期待分片鏈中存在真正的分叉。相反，如果檢測到一個無效的分片鏈區塊，將通過 2-blockchain 的「垂直區塊鏈」機制進行修正（參見~\ptref{sp:inv.sh.blk.corr}），這可以在不分叉「水平區塊鏈」（即，分片鏈）的情況下實現此目標。同樣的機制也可以用來修正主鏈區塊中的非致命性錯誤。
+我們預期主鏈分叉將會很少，幾乎不存在，因為在由 TON 區塊鏈所採用的 BFT 範疇中，它們只能在{\em 大部分\/} validator行為不正確的情況下發生（參見~\ptref{sp:validators} 和~\ptref{sp:new.master.blk}），這將意味著由違反者承擔的重大的 stake 損失。因此，不應期待分片鏈中存在真正的分叉。相反，如果檢測到一個無效的分片鏈區塊，將通過 2-blockchain 的「垂直區塊鏈」機制進行修正（參見~\ptref{sp:inv.sh.blk.corr}），這可以在不分叉「水平區塊鏈」（即，分片鏈）的情況下實現此目標。同樣的機制也可以用來修正主鏈區塊中的非致命性錯誤。
 
-\nxsubpoint\label{sp:inv.sh.blk.corr} \embt(Correcting invalid shardchain blocks.) 通常，只有有效的分片鏈區塊會被提交，因為分配給分片鏈的Validator在新區塊可以被提交之前必須達到三分之二的拜占庭共識。然而，系統必須允許檢測先前提交的無效區塊及其校正。
+\nxsubpoint\label{sp:inv.sh.blk.corr} \embt(Correcting invalid shardchain blocks.) 通常，只有有效的分片鏈區塊會被提交，因為分配給分片鏈的validator在新區塊可以被提交之前必須達到三分之二的拜占庭共識。然而，系統必須允許檢測先前提交的無效區塊及其校正。
 
-當然，一旦找到一個無效的分片鏈區塊 —— 不論是由一個Validator（不一定分配到這個分片鏈）還是一個「漁夫」（系統的任何節點，它已經支付了某個存款以便對區塊有效性提出疑問；參見~\ptref{sp:fish}）—— 無效性的主張及其證明都會被提交到主鏈，而已經簽署無效區塊的Validator將被懲罰，部分或全部扣除他們的 stake，和/或暫時從Validator集合中被停權（後者的措施對於攻擊者竊取本質上良性的Validator的私有簽名鍵非常重要）。
+當然，一旦找到一個無效的分片鏈區塊 —— 不論是由一個validator（不一定分配到這個分片鏈）還是一個「fisherman」（系統的任何節點，它已經支付了某個存款以便對區塊有效性提出疑問；參見~\ptref{sp:fish}）—— 無效性的主張及其證明都會被提交到主鏈，而已經簽署無效區塊的validator將被懲罰，部分或全部扣除他們的 stake，和/或暫時從validator集合中被停權（後者的措施對於攻擊者竊取本質上良性的validator的私有簽名鍵非常重要）。
 
 然而，這還不夠，因為由於先前提交的無效分片鏈區塊，系統（TON 區塊鏈）的整體狀態結果是無效的。這個無效區塊必須被一個新的有效版本替換。
 
 大多數系統會通過「回滾」到該分片鏈中的無效區塊之前的最後一個區塊，以及每個其他分片鏈中不受從無效區塊傳播的消息影響的最後區塊，並從這些區塊創建一個新的分叉來實現這一點。這種方法的缺點是，大量本來正確且已提交的交易突然被回滾，且不清楚它們是否會在稍後再次被包括。
 
-TON 區塊鏈通過使每個分片鏈和主鏈的每個「區塊」（「水平區塊鏈」）本身都成為一個小型區塊鏈（「垂直區塊鏈」），包含這個「區塊」的不同版本，或其「差異」來解決這個問題。通常，垂直區塊鏈只包含一個區塊，而分片鏈看起來像一個經典的區塊鏈。但是，一旦一個區塊的無效性被確認並提交到主鏈區塊中，該無效區塊的「垂直區塊鏈」就被允許在垂直方向上增加一個新區塊，替換或編輯無效區塊。這個新區塊是由當前問題分片鏈的Validator子集生成的。
+TON 區塊鏈通過使每個分片鏈和主鏈的每個「區塊」（「水平區塊鏈」）本身都成為一個小型區塊鏈（「垂直區塊鏈」），包含這個「區塊」的不同版本，或其「差異」來解決這個問題。通常，垂直區塊鏈只包含一個區塊，而分片鏈看起來像一個經典的區塊鏈。但是，一旦一個區塊的無效性被確認並提交到主鏈區塊中，該無效區塊的「垂直區塊鏈」就被允許在垂直方向上增加一個新區塊，替換或編輯無效區塊。這個新區塊是由當前問題分片鏈的validator子集生成的。
 
 
 新的“垂直”區塊要有效的規則非常嚴格。特別是，如果無效區塊中包含的虛擬“帳戶鏈區塊”（參見 \ptref{sp:ISP}）本身是有效的，則它必須被新的垂直區塊保持不變。
@@ -230,7 +230,7 @@ Masterchain狀態隱含地定義了一個映射，將每個“垂直”區塊鏈
 
 \nxsubpoint \embt(Toncoin and multi-currency workchains.)  TON區塊鏈支持多達$2^{32}$種不同的“加密貨幣”、“硬幣”或“代幣”，通過32位的$\currencyid$加以區分。新的加密貨幣可以通過主鏈中的特殊交易來添加。每個工作鏈都有一種基本加密貨幣，並且可以有幾種其他加密貨幣。
 
-有一種特殊的加密貨幣，$\currencyid=0$，即{\em TON幣}，也稱為{\em Toncoin}（參見附錄~\ref{app:coins}）。這是工作鏈零的基本加密貨幣。它也用於交易費和Validator的權益股份。
+有一種特殊的加密貨幣，$\currencyid=0$，即{\em TON幣}，也稱為{\em Toncoin}（參見附錄~\ref{app:coins}）。這是工作鏈零的基本加密貨幣。它也用於交易費和validator的權益股份。
 
 原則上，其他工作鏈可能會以其他代幣收取交易費。在這種情況下，應該提供一些智能合約，用於將這些交易費自動轉換為Toncoin。
 
@@ -268,7 +268,7 @@ Masterchain狀態隱含地定義了一個映射，將每個“垂直”區塊鏈
 \end{itemize}
  
 \nxsubpoint\label{sp:config.param} \embt(Configurable parameters.) 
-TON Block\-chain 的一個重要特性是它有許多{\em 可配置的}參數。這意味著它們是 masterchain 狀態的一部分，且可以通過 masterchain 中的某些特殊的提議/投票/結果交易來更改，而不需要硬分叉。更改這些參數需要收集三分之二的Validator投票，以及超過一半想要參與投票過程的所有其他參與者的投票以支持該提議。
+TON Block\-chain 的一個重要特性是它有許多{\em 可配置的}參數。這意味著它們是 masterchain 狀態的一部分，且可以通過 masterchain 中的某些特殊的提議/投票/結果交易來更改，而不需要硬分叉。更改這些參數需要收集三分之二的validator投票，以及超過一半想要參與投票過程的所有其他參與者的投票以支持該提議。
 
 \mysubsection{關於區塊鏈的概論}
 
@@ -466,7 +466,7 @@ Blockchain.) 我們目前為TON Blockchain使用256-bit的$\Sha$雜湊。如果�
 
 在某些情況下，客戶端可能希望獲得值 $y=\Hash(x)=\Hash(h[i])$，例如，如果 $x$ 本身非常大（例如，是一個 hashmap）。然後，可以提供 $(i,y)$ 的 Merkle 證明。如果 $x$ 也是一個 hashmap，那麼可以從完整節點獲得從 $y=\Hash(x)$ 開始的第二個 Merkle 證明，以提供值 $x[j]=h[i][j]$ 或僅其雜湊。
 
-\nxsubpoint \embt(Importance of Merkle proofs for a multi-chain system such as TON.) 請注意，節點通常不能為 TON 環境中存在的所有 shardchains 成為完整節點。它通常只是某些 shardchains 的完整節點——例如，包含其自己的帳戶，它感興趣的智能合約，或者該節點已被指派為其Validator的那些。對於其他 shardchains，它必須是一個輕量節點——否則儲存、計算和網路帶寬的要求將是禁止的。這意味著這樣的節點不能直接檢查關於其他 shardchains 狀態的斷言；它必須依賴於從那些 shardchains 的完整節點獲得的 Merkle 證明，除非 \eqref{eq:hash.coll} 失敗（即，找到一個雜湊碰撞），這同樣安全。
+\nxsubpoint \embt(Importance of Merkle proofs for a multi-chain system such as TON.) 請注意，節點通常不能為 TON 環境中存在的所有 shardchains 成為完整節點。它通常只是某些 shardchains 的完整節點——例如，包含其自己的帳戶，它感興趣的智能合約，或者該節點已被指派為其validator的那些。對於其他 shardchains，它必須是一個輕量節點——否則儲存、計算和網路帶寬的要求將是禁止的。這意味著這樣的節點不能直接檢查關於其他 shardchains 狀態的斷言；它必須依賴於從那些 shardchains 的完整節點獲得的 Merkle 證明，除非 \eqref{eq:hash.coll} 失敗（即，找到一個雜湊碰撞），這同樣安全。
 
 
 \nxsubpoint\label{sp:pec.tvm} \embt(Peculiarities of TON VM.) TON VM 或 TVM (Telegram Virtual Machine)，用於在 masterchain 和 Workchain Zero 中運行智能合約，與受到 EVM (Ethereum Virtual Machine) 啟發的常見設計有很大的不同：它不僅僅與 256 位整數工作，實際上它與（幾乎）任意的「紀錄」、「結構」或「總乘積類型」一起工作，使其更適合執行用高級（尤其是功能性）語言編寫的程式碼。實際上，TVM 使用的是帶有標籤的數據類型，這與 Prolog 或 Erlang 的實現中使用的不太相同。
@@ -503,9 +503,9 @@ TON 區塊鏈的一個值得注意的特點是從智能合約中扣除用於儲�
 
 一個工作鏈可能宣稱每個賬戶的一些原始數據字節是「免費的」（即，不參與持久儲存支付），以使「簡單」的賬戶，只在一兩種加密貨幣中保持它們的餘額，免於這些常數支付。
 
-請注意，如果沒有人給一個賬戶發送任何消息，它的持久儲存支付不會被收集，並且它可以無限期地存在。然而，任何人都可以發送，例如，一條空消息來銷毀這樣的賬戶。可以給發送這樣一條消息的人提供一個小的激勵，從要被銷毀的賬戶的原始餘額中收取部分資金。然而，我們預期，Validator會免費銷毀這樣的無資金賬戶，僅僅是為了減少全域區塊鏈的狀態大小，並避免保持大量的數據而不得到賠償。
+請注意，如果沒有人給一個賬戶發送任何消息，它的持久儲存支付不會被收集，並且它可以無限期地存在。然而，任何人都可以發送，例如，一條空消息來銷毀這樣的賬戶。可以給發送這樣一條消息的人提供一個小的激勵，從要被銷毀的賬戶的原始餘額中收取部分資金。然而，我們預期，validator會免費銷毀這樣的無資金賬戶，僅僅是為了減少全域區塊鏈的狀態大小，並避免保持大量的數據而不得到賠償。
 
-為持久數據的保持收集的支付在 shardchain 或 masterchain 的Validator之間分配（在後一種情況下按比例分配他們的股份）。
+為持久數據的保持收集的支付在 shardchain 或 masterchain 的validator之間分配（在後一種情況下按比例分配他們的股份）。
 
 \nxsubpoint\label{sp:loc.glob.smct} \embt(Local and global smart contracts; smart-contract instances.)
 一個智能合約通常只存在於一個分片中，根據智能合約的 $\accountid$ 選擇，與「普通」賬戶類似。這通常對大多數應用程序來說都是足夠的。然而，一些「高負載」的智能合約可能希望在某個工作鏈的每個分片鏈中都有一個「實例」。為了實現這一點，它們必須將它們的創建交易傳播到所有的分片鏈中，例如，通過將此交易提交到工作鏈 $w$ 的「根」分片鏈 $(w,\emptyset)$ 中，並支付一大筆佣金。\footnote{一個更昂貴的選擇是在主鏈中發布這樣一個「全域」智能合約。}
@@ -567,7 +567,7 @@ TON 區塊鏈的一個重要組件是{\em 區塊鏈間的消息系統\/}。這�
 
 實際上，人們可能會認為「簡單」賬戶是帶有預定義程式碼的智能合約的特例。這種智能合約只接收一種類型的消息。這種入站消息必須包含作為傳遞（處理）入站消息結果要生成的出站消息列表，以及一個簽名。智能合約檢查簽名，如果它是正確的，則生成所需的消息。
 
-當然，「來自無處的消息」和普通消息之間有所不同，因為「來自無處的消息」不能承載值，所以它們不能為自己的「gas」（即它們的處理）付款。相反，它們在甚至被建議包含在新的shardchain塊中之前，會先嘗試執行一個小的gas限制；如果執行失敗（簽名不正確），則「來自無處的消息」被視為不正確並被丟棄。如果執行在小的gas限制內不失敗，則消息可能被包含在新的shardchain塊中並完全處理，從接收者的賬戶中扣除所消耗的gas（處理能力）的付款。 「來自無處的消息」也可以定義一些交易費，這些費用在gas付款之外從接收者的賬戶中扣除，以重新分配給Validator。
+當然，「來自無處的消息」和普通消息之間有所不同，因為「來自無處的消息」不能承載值，所以它們不能為自己的「gas」（即它們的處理）付款。相反，它們在甚至被建議包含在新的shardchain塊中之前，會先嘗試執行一個小的gas限制；如果執行失敗（簽名不正確），則「來自無處的消息」被視為不正確並被丟棄。如果執行在小的gas限制內不失敗，則消息可能被包含在新的shardchain塊中並完全處理，從接收者的賬戶中扣除所消耗的gas（處理能力）的付款。 「來自無處的消息」也可以定義一些交易費，這些費用在gas付款之外從接收者的賬戶中扣除，以重新分配給validator。
 
 在這個意義上，「來自無處的消息」或「外部消息」起到了在其他區塊鏈系統中使用的交易候選人的作用（例如，比特幣和以太坊）。
 
@@ -605,11 +605,11 @@ TON 區塊鏈的一個重要組件是{\em 區塊鏈間的消息系統\/}。這�
 \nxsubpoint\label{sp:intershard.msgs} \embt(Reliable and fast inter-chain messaging.)  對於像TON這樣的可擴展多區塊鏈專案，能夠在不同的shardchains之間轉發和傳遞消息是至關重要的 (cf.~\ptref{sp:msg.IHR})，即使系統中有數百萬個。消息應該被{\em 可靠地\/}（即，消息不應該丟失或傳遞多次）和{\em 快速地}傳遞。TON區塊鏈通過使用兩種「消息路由」機制的組合來實現這一目標。
 
 \nxsubpoint\label{sp:hypercube} \embt(Hypercube routing: ``slow path''
-for messages with assured delivery.)  TON Blockchain 使用「超立方體路由」作為一種緩慢，但安全可靠的方法，從一個 shardchain 傳遞消息到另一個 shardchain，如有必要，使用幾個中間的 shardchain 進行轉發。否則，任何給定的 shardchain 的Validator都需要追踪所有其他 shardchain 的狀態（輸出隊列），隨著 shardchain 總數的增加，這將需要過多的計算能力和網路帶寬，從而限制了系統的可擴展性。因此，無法直接從任何 shard 傳遞消息到其他每一個 shard。相反，每個 shard 只與其 $(w,s)$ shard 標識符中確切一個十六進制數位不同的 shard「連接」(cf.~\ptref{sp:shard.ident})。這樣，所有的 shardchain 構成一個「超立方體」圖，消息沿著這個超立方體的邊緣移動。
+for messages with assured delivery.)  TON Blockchain 使用「超立方體路由」作為一種緩慢，但安全可靠的方法，從一個 shardchain 傳遞消息到另一個 shardchain，如有必要，使用幾個中間的 shardchain 進行轉發。否則，任何給定的 shardchain 的validator都需要追踪所有其他 shardchain 的狀態（輸出隊列），隨著 shardchain 總數的增加，這將需要過多的計算能力和網路帶寬，從而限制了系統的可擴展性。因此，無法直接從任何 shard 傳遞消息到其他每一個 shard。相反，每個 shard 只與其 $(w,s)$ shard 標識符中確切一個十六進制數位不同的 shard「連接」(cf.~\ptref{sp:shard.ident})。這樣，所有的 shardchain 構成一個「超立方體」圖，消息沿著這個超立方體的邊緣移動。
 
 如果消息被發送到與當前的 shard 不同的 shard，當前的 shard 標識符的十六進制數字（確定地選擇）被替換為目標 shard 的相應數字，並使用所得的標識符作為轉發消息的近端目標。\footnote{這不一定是用於計算超立方體路由的下一跳的算法的最終版本。特別是，十六進制數字可能會被 $r$-位群組替換，其中 $r$ 是一個可配置的參數，不一定等於四。}
 
-超立方體路由的主要優點是區塊有效性條件意味著創建 shardchain 的區塊的Validator必須收集和處理「鄰近」shardchain 的輸出隊列中的消息，否則將失去他們的 stake 。這樣，任何消息都可以預期最終會達到其最終目的地；消息不能在過程中丟失或傳遞兩次。
+超立方體路由的主要優點是區塊有效性條件意味著創建 shardchain 的區塊的validator必須收集和處理「鄰近」shardchain 的輸出隊列中的消息，否則將失去他們的 stake 。這樣，任何消息都可以預期最終會達到其最終目的地；消息不能在過程中丟失或傳遞兩次。
 
 請注意，超立方體路由帶來了一些額外的延遲和開銷，因為必須通過幾個中間的 shardchain 轉發消息。然而，這些中間的 shardchain 的數量增長非常緩慢，作為 shardchain 總數 $N$ 的對數 $\log N$（更確切地說，$\lceil\log_{16}N\rceil-1$）。例如，如果 $N\approx250$，最多只有一個中間的 hop；對於 $N\approx4000$ 的 shardchain，最多有兩個。四個中間的 hop，我們可以支持多達一百萬的 shardchain。我們認為為系統的基本無限的可擴展性支付的這個代價是非常小的。事實上，甚至不必支付這個價格：
 
@@ -618,9 +618,9 @@ Routing: ``fast path'' for messages.) TON Blockchain 的一個新功能是它引
 
 該思路如下。在「慢速」的超立方體路由中，消息在超立方體的邊緣上（在網路中）旅行，但在每個中間頂點都會被延遲（大約五秒鐘），以將其提交到相應的 shardchain，然後再繼續其旅程。
 
-為了避免不必要的延遲，可以沿著超立方體的邊緣轉發消息和一個適當的 Merkle 證明，而不用等待將其提交到中間的 shardchains。實際上，網路消息應該從原始 shard 的「任務組」的Validator（cf.~\ptref{sp:val.task.grp}）轉發到目的地 shard 的「任務組」的指定區塊生產者（cf.~\ptref{sp:rot.gen.prio}）；這可能可以直接完成，而不沿著超立方體的邊緣。當這條帶有 Merkle 證明的消息到達目的地 shardchain 的Validator（更確切地說，是 collators；cf.~\ptref{sp:collators}）時，他們可以立即將其提交到一個新的區塊，而不用等待消息完成沿著「慢路徑」的旅程。然後將交付確認以及一個適當的 Merkle 證明沿著超立方體的邊緣發回，並且可以通過提交一個特殊的交易來停止消息沿著「慢路徑」的旅程。
+為了避免不必要的延遲，可以沿著超立方體的邊緣轉發消息和一個適當的 Merkle 證明，而不用等待將其提交到中間的 shardchains。實際上，網路消息應該從原始 shard 的「任務組」的validator（cf.~\ptref{sp:val.task.grp}）轉發到目的地 shard 的「任務組」的指定區塊生產者（cf.~\ptref{sp:rot.gen.prio}）；這可能可以直接完成，而不沿著超立方體的邊緣。當這條帶有 Merkle 證明的消息到達目的地 shardchain 的validator（更確切地說，是 collators；cf.~\ptref{sp:collators}）時，他們可以立即將其提交到一個新的區塊，而不用等待消息完成沿著「慢路徑」的旅程。然後將交付確認以及一個適當的 Merkle 證明沿著超立方體的邊緣發回，並且可以通過提交一個特殊的交易來停止消息沿著「慢路徑」的旅程。
 
-請注意，這種「即時交付」機制並未取代在~\ptref{sp:hypercube} 中描述的「慢速」但是不會失敗的機制。仍然需要「慢路徑」，因為Validator不能因失去或簡單地決定不將「快速路徑」消息提交到他們區塊鏈的新區塊而受到懲罰。\footnote{然而，Validator有一定的動機盡快這樣做，因為他們將能夠收集與消息相關的所有轉發費用，這些費用尚未在慢路徑中被消耗。}
+請注意，這種「即時交付」機制並未取代在~\ptref{sp:hypercube} 中描述的「慢速」但是不會失敗的機制。仍然需要「慢路徑」，因為validator不能因失去或簡單地決定不將「快速路徑」消息提交到他們區塊鏈的新區塊而受到懲罰。\footnote{然而，validator有一定的動機盡快這樣做，因為他們將能夠收集與消息相關的所有轉發費用，這些費用尚未在慢路徑中被消耗。}
 
 因此，兩種消息轉發方法是平行運行的，只有在「快速」機制的成功證明被提交到一個中間的 shardchain 時，「慢速」機制才會被中止。%\footnote{實際上，可以暫時或永久禁用「即時交付」機制，系統將繼續運行，但速度會慢一些。}
 
@@ -633,9 +633,9 @@ messages from output queues of neighboring shardchains.) 當為 shardchain 提�
 
 \nxsubpoint \embt(Forwarding messages intended for other shardchains.) 通過 Hypercube 路由（參見\ptref{sp:hypercube}）有時出站訊息不是交付給包含預期收件人的分片鏈，而是交付給位於到目的地的超立方體路徑上的相鄰分片鏈。在這種情況下，"交付"包括將入站訊息移動到出站隊列。這在塊中明確地反映為一個特殊的{\em 轉發交易}，其中包含該訊息。本質上，這看起來就像該訊息已被分片鏈內的某人接收，並且生成了一個相同的訊息作為結果。
 
-\nxsubpoint \embt(Payment for forwarding and keeping a message.) 轉發交易實際上消耗了一些瓦斯（取決於被轉發的訊息的大小），因此從被轉發的訊息的值中扣除了一筆瓦斯支付，代表此分片鏈的Validator。此轉發支付通常遠小於當訊息最終交付給其收件人時所確定的瓦斯支付，即使該訊息由於超立方體路由而被轉發了多次。此外，只要某個分片鏈的輸出隊列中保持有訊息，它就是分片鏈的全域狀態的一部分，因此特殊交易也可能收取長時間保持全域數據的支付。
+\nxsubpoint \embt(Payment for forwarding and keeping a message.) 轉發交易實際上消耗了一些瓦斯（取決於被轉發的訊息的大小），因此從被轉發的訊息的值中扣除了一筆瓦斯支付，代表此分片鏈的validator。此轉發支付通常遠小於當訊息最終交付給其收件人時所確定的瓦斯支付，即使該訊息由於超立方體路由而被轉發了多次。此外，只要某個分片鏈的輸出隊列中保持有訊息，它就是分片鏈的全域狀態的一部分，因此特殊交易也可能收取長時間保持全域數據的支付。
 
-\nxsubpoint \embt(Messages to and from the masterchain.) 訊息可以直接從任何分片鏈發送到主鏈，反之亦然。但是，發送訊息到主鏈以及在主鏈中處理訊息的瓦斯價格相當高，因此只有在真正需要時才會使用此功能——例如，由Validator來存入他們的 stake 。在某些情況下，可能會定義發送到主鏈的訊息的最小存款（附加值），只有當接收方認為該訊息是“有效”的時候才會退還。
+\nxsubpoint \embt(Messages to and from the masterchain.) 訊息可以直接從任何分片鏈發送到主鏈，反之亦然。但是，發送訊息到主鏈以及在主鏈中處理訊息的瓦斯價格相當高，因此只有在真正需要時才會使用此功能——例如，由validator來存入他們的 stake 。在某些情況下，可能會定義發送到主鏈的訊息的最小存款（附加值），只有當接收方認為該訊息是“有效”的時候才會退還。
 
 訊息不能自動通過主鏈路由。帶有 $\workchainid\neq-1$ 的訊息（其中 $-1$ 是表示主鏈的特殊 $\workchainid$）不能交付給主鏈。
 
@@ -738,175 +738,175 @@ Shardchain block本身也可以用代數類型來描述，並儲存為「bag of 
 
 但是，根cell可能不包含通常期望從這樣的header中獲得的所有數據。本質上，人們希望header包含$\Block$數據類型中定義的某些字段。通常，這些字段將包含在幾個cell中，包括根cell。這些cell一起構成了有關字段值的``Merkle proof''。人們可能會堅持在block中的任何其他cell之前，在一開始就包含這些``header cells''。然後，只需要下載block序列化的前幾個字節，就可以獲得所有的``header cells''，並了解所有期望的字段。
 
-\mysubsection{創建和驗證新的Blocks}\label{sect:Validators}
+\mysubsection{創建和驗證新的Blocks}\label{sect:validators}
 
 TON Blockchain最終由shardchain和masterchain blocks組成。為了系統順利且正確地運作，必須創建、驗證這些blocks，並通過網路將其傳播到所有相關方。
 
 
-\nxsubpoint\label{sp:Validators} \embt(Validators.)  新的blocks由特定的節點創建和驗證，這些節點被稱為{\em Validators}。實質上，任何希望成為Validator的節點都可以成為Validator，前提是它可以在masterchain中存入足夠多的抵押金（以TON幣，即Toncoin；參考\ Appendix~\ptref{app:coins}）。Validators為良好的工作獲得一些「獎勵」，即所有交易、儲存和燃氣費用，以及一些新鑄造的幣，這反映了整個社群對Validators的「感激」，因為它們使TON Blockchain持續運作。這筆收入按照所有參與Validators的抵押金比例分配。
+\nxsubpoint\label{sp:validators} \embt(validators.)  新的blocks由特定的節點創建和驗證，這些節點被稱為{\em validators}。實質上，任何希望成為validator的節點都可以成為validator，前提是它可以在masterchain中存入足夠多的抵押金（以TON幣，即Toncoin；參考\ Appendix~\ptref{app:coins}）。validators為良好的工作獲得一些「獎勵」，即所有交易、儲存和燃氣費用，以及一些新鑄造的幣，這反映了整個社群對validators的「感激」，因為它們使TON Blockchain持續運作。這筆收入按照所有參與validators的抵押金比例分配。
 
-然而，成為Validator是一項重大的責任。如果Validator簽署了一個無效的block，它可能會失去部分或全部的抵押金，並且可能會暫時或永久地被排除在Validators之外。如果Validator不參與創建block，它不會收到與該block相關的獎勵部分。如果Validator長時間不創建新的blocks，它可能會失去部分的抵押金，並被暫停或永久排除在Validators之外。
+然而，成為validator是一項重大的責任。如果validator簽署了一個無效的block，它可能會失去部分或全部的抵押金，並且可能會暫時或永久地被排除在validators之外。如果validator不參與創建block，它不會收到與該block相關的獎勵部分。如果validator長時間不創建新的blocks，它可能會失去部分的抵押金，並被暫停或永久排除在validators之外。
 
-這一切都意味著Validator不是輕而易舉地獲得金錢。事實上，它必須追踪所有或某些shardchains的狀態（每個Validator負責驗證和創建某一子集shardchains中的新blocks），執行這些shardchains中的智能合約所請求的所有計算，接收其他shardchains的更新等等。這項活動需要大量的磁碟空間、計算能力和網路帶寬。
+這一切都意味著validator不是輕而易舉地獲得金錢。事實上，它必須追踪所有或某些shardchains的狀態（每個validator負責驗證和創建某一子集shardchains中的新blocks），執行這些shardchains中的智能合約所請求的所有計算，接收其他shardchains的更新等等。這項活動需要大量的磁碟空間、計算能力和網路帶寬。
 
-\nxsubpoint \embt(Validators instead of miners.)  請記住，TON Blockchain使用的是Proof-of-Stake方法，而不是Bitcoin、當前版本的Ethereum和大多數其他加密貨幣採用的Proof-of-Work方法。這意味著人們不能通過提供某些工作證明（計算大量其他無用的hashes）來「挖掘」新的block，並因此獲得一些新的幣。相反，人們必須成為Validator，並花費自己的計算資源來儲存和處理TON Blockchain的請求和數據。簡而言之，{\em 要挖新幣，必須成為Validator。}就這一點而言，{\em Validators就是新的miners。}
+\nxsubpoint \embt(validators instead of miners.)  請記住，TON Blockchain使用的是Proof-of-Stake方法，而不是Bitcoin、當前版本的Ethereum和大多數其他加密貨幣採用的Proof-of-Work方法。這意味著人們不能通過提供某些工作證明（計算大量其他無用的hashes）來「挖掘」新的block，並因此獲得一些新的幣。相反，人們必須成為validator，並花費自己的計算資源來儲存和處理TON Blockchain的請求和數據。簡而言之，{\em 要挖新幣，必須成為validator。}就這一點而言，{\em validators就是新的miners。}
 
-但是，除了成為Validator之外，還有一些其他方式可以賺取幣。
+但是，除了成為validator之外，還有一些其他方式可以賺取幣。
 
-\nxsubpoint\label{sp:nominators} \embt(Nominators and ``mining pools''.)  要成為Validator，通常需要購買和安裝幾臺高性能的伺服器，並為它們提供良好的互聯網連接。這不像當前挖掘比特幣所需的ASIC設備那麼昂貴。但你絕對不能在家用電腦上挖新的TON幣，更不用說智能手機了。
+\nxsubpoint\label{sp:nominators} \embt(Nominators and ``mining pools''.)  要成為validator，通常需要購買和安裝幾臺高性能的伺服器，並為它們提供良好的互聯網連接。這不像當前挖掘比特幣所需的ASIC設備那麼昂貴。但你絕對不能在家用電腦上挖新的TON幣，更不用說智能手機了。
 
 在比特幣、以太坊和其他Proof-of-Work加密貨幣挖掘社區中，有一個名為{\em mining pools}的概念，其中許多節點因計算能力不足而無法自行挖掘新的blocks，所以他們合併力量並在之後分享獎勵。
 
-Proof-of-Stake世界中的相應概念是{\em nominator}。實質上，這是一個將其資金借給Validator以增加其抵押金的節點；然後Validator將其獎勵的相應部分（或之前同意的一部分，例如50\%）分配給nominator。
+Proof-of-Stake世界中的相應概念是{\em nominator}。實質上，這是一個將其資金借給validator以增加其抵押金的節點；然後validator將其獎勵的相應部分（或之前同意的一部分，例如50\%）分配給nominator。
 
-通過這種方式，nominator也可以參與「挖掘」並獲得與其存款金額成正比的一些獎勵。它只獲得Validator獎勵的一部分，因為它只提供了「資本」，但不需要購買計算能力、儲存和網路帶寬。
+通過這種方式，nominator也可以參與「挖掘」並獲得與其存款金額成正比的一些獎勵。它只獲得validator獎勵的一部分，因為它只提供了「資本」，但不需要購買計算能力、儲存和網路帶寬。
 
-但是，如果Validator因無效行為而失去其抵押金，nominator也會失去其抵押金的部分。在這種意義上，nominator {\em 分擔風險}。它必須明智地選擇其nominated Validator，否則可能會損失資金。在這種意義上，nominator進行加權決策並使用其資金「投票」支持某些Validator。
+但是，如果validator因無效行為而失去其抵押金，nominator也會失去其抵押金的部分。在這種意義上，nominator {\em 分擔風險}。它必須明智地選擇其nominated validator，否則可能會損失資金。在這種意義上，nominator進行加權決策並使用其資金「投票」支持某些validator。
 
-另一方面，這種提名或借貸系統使人們能夠成為Validator，而無需首先投入大量金錢購買Toncoin（TON幣）。換句話說，它防止持有大量Toncoin的人壟斷Validator的供應。
+另一方面，這種提名或借貸系統使人們能夠成為validator，而無需首先投入大量金錢購買Toncoin（TON幣）。換句話說，它防止持有大量Toncoin的人壟斷validator的供應。
 
-\nxsubpoint\label{sp:fish} \embt(Fishermen: obtaining money by pointing out others' mistakes.)  另一種不成為Validator而獲得一些獎勵的方式是成為一名{\em fisherman}。實質上，任何節點都可以通過在masterchain中存入少量資金成為fisherman。然後，它可以使用特殊的masterchain交易來發布某些由Validators之前簽名和發布的（通常是shardchain）blocks的（Merkle）無效性證明。如果其他Validators同意這個無效性證明，則違規的Validators將被懲罰（失去其抵押金的一部分），fisherman則獲得一些獎勵（從違規的Validators中沒收的幣的一部分）。之後，如~\ptref{sp:inv.sh.blk.corr}中所述，必須更正無效的（shardchain）block。更正無效的masterchain blocks可能需要在先前提交的masterchain blocks之上創建「垂直」blocks（參見~\ptref{sp:inv.sh.blk.corr}）；無需創建masterchain的分叉。
+\nxsubpoint\label{sp:fish} \embt(Fishermen: obtaining money by pointing out others' mistakes.)  另一種不成為validator而獲得一些獎勵的方式是成為一名{\em fisherman}。實質上，任何節點都可以通過在masterchain中存入少量資金成為fisherman。然後，它可以使用特殊的masterchain交易來發布某些由validators之前簽名和發布的（通常是shardchain）blocks的（Merkle）無效性證明。如果其他validators同意這個無效性證明，則違規的validators將被懲罰（失去其抵押金的一部分），fisherman則獲得一些獎勵（從違規的validators中沒收的幣的一部分）。之後，如~\ptref{sp:inv.sh.blk.corr}中所述，必須更正無效的（shardchain）block。更正無效的masterchain blocks可能需要在先前提交的masterchain blocks之上創建「垂直」blocks（參見~\ptref{sp:inv.sh.blk.corr}）；無需創建masterchain的分叉。
 
-通常，一個fisherman需要成為至少某些shardchains的完整節點，並花費一些計算資源來運行至少一些智能合約的程式碼。雖然fisherman不需要像Validator那麼多的計算能力，但我們認為，一個天生的fisherman是一個準備處理新blocks，但尚未被選為Validator的候選者（例如，由於未能存入足夠大的抵押金）。
+通常，一個fisherman需要成為至少某些shardchains的完整節點，並花費一些計算資源來運行至少一些智能合約的程式碼。雖然fisherman不需要像validator那麼多的計算能力，但我們認為，一個天生的fisherman是一個準備處理新blocks，但尚未被選為validator的候選者（例如，由於未能存入足夠大的抵押金）。
 
 \nxsubpoint\label{sp:collators} \embt(Collators: obtaining money by
-suggesting new blocks to Validators.)  另一種不成為Validator但可以獲得一些獎勵的方法是成為一個{\em collator}。這是一個節點，它為Validator準備並建議新的shardchain block候選者，並使用從此shardchain的狀態和其他(通常是相鄰的) shardchains中取得的資料進行補充（collated），伴隨適當的Merkle證明。當需要從鄰近的shardchains轉發一些消息時，這是必要的。然後，Validator可以輕鬆檢查所提議的block候選者的有效性，無需下載此或其他shardchains的完整狀態。
+suggesting new blocks to validators.)  另一種不成為validator但可以獲得一些獎勵的方法是成為一個{\em collator}。這是一個節點，它為validator準備並建議新的shardchain block候選者，並使用從此shardchain的狀態和其他(通常是相鄰的) shardchains中取得的資料進行補充（collated），伴隨適當的Merkle證明。當需要從鄰近的shardchains轉發一些消息時，這是必要的。然後，validator可以輕鬆檢查所提議的block候選者的有效性，無需下載此或其他shardchains的完整狀態。
 
-由於Validator需要提交新的(collated) block候選者以獲得一些（``mining''）獎勵，因此有理由支付一部分獎勵給願意提供適當block候選者的collator。這樣，Validator可以避免觀察鄰近shardchains的狀態，將其外包給collator。
+由於validator需要提交新的(collated) block候選者以獲得一些（``mining''）獎勵，因此有理由支付一部分獎勵給願意提供適當block候選者的collator。這樣，validator可以避免觀察鄰近shardchains的狀態，將其外包給collator。
 
-然而，我們預期在系統的初始部署階段不會有單獨指定的collators，因為所有Validators都將能夠為自己充當collators。
+然而，我們預期在系統的初始部署階段不會有單獨指定的collators，因為所有validators都將能夠為自己充當collators。
 
-\nxsubpoint \embt(Collators or Validators: obtaining money for
-including user transactions.)  使用者可以向一些collators或Validators打開micropayment通道，並支付少量的幣以換取在shardchain中包括他們的交易。
+\nxsubpoint \embt(Collators or validators: obtaining money for
+including user transactions.)  使用者可以向一些collators或validators打開micropayment通道，並支付少量的幣以換取在shardchain中包括他們的交易。
 
-\nxsubpoint\label{sp:global.valid} \embt(Global Validator set
-election.)  每月一次（實際上是每$2^{19}$個masterchain blocks）選舉``global''的Validators集合。此集合在一個月前確定並被全域知悉。
+\nxsubpoint\label{sp:global.valid} \embt(Global validator set
+election.)  每月一次（實際上是每$2^{19}$個masterchain blocks）選舉``global''的validators集合。此集合在一個月前確定並被全域知悉。
 
-要成為Validator，節點必須將一些TON幣（Toncoin）轉入masterchain，然後將它們發送到特定的智能合約作為其建議的抵押金$s$。與抵押金一起發送的另一個參數是$l\geq 1$，這是此節點願意接受的相對於最小可能值的最大驗證負載。還有一個$l$的全域上限（另一個可配置參數）$L$，例如說是10。
+要成為validator，節點必須將一些TON幣（Toncoin）轉入masterchain，然後將它們發送到特定的智能合約作為其建議的抵押金$s$。與抵押金一起發送的另一個參數是$l\geq 1$，這是此節點願意接受的相對於最小可能值的最大驗證負載。還有一個$l$的全域上限（另一個可配置參數）$L$，例如說是10。
 
-然後，這個智能合約選舉global的Validator集合，只需選擇最大的建議抵押金的前$T$個候選者並公布其身份。最初，Validators的總數是$T=100$；隨著負載的增加，我們預期它將增長到1000。它是一個可配置參數（參見~\ptref{sp:config.param}）。
+然後，這個智能合約選舉global的validator集合，只需選擇最大的建議抵押金的前$T$個候選者並公布其身份。最初，validators的總數是$T=100$；隨著負載的增加，我們預期它將增長到1000。它是一個可配置參數（參見~\ptref{sp:config.param}）。
 
-每個Validator的實際抵押金如下計算：如果前$T$個提議的抵押金是$s_1\geq s_2\geq\cdots\geq s_T$，那麼第$i$個Validator的實際抵押金設定為$s'_i:=\min(s_i,l_i\cdot s_T)$。這樣，$s'_i/s'_T\leq l_i$，所以第$i$個Validator不會獲得超過$l_i\leq L$倍最弱Validator的負載（因為負載最終與抵押金成正比）。
+每個validator的實際抵押金如下計算：如果前$T$個提議的抵押金是$s_1\geq s_2\geq\cdots\geq s_T$，那麼第$i$個validator的實際抵押金設定為$s'_i:=\min(s_i,l_i\cdot s_T)$。這樣，$s'_i/s'_T\leq l_i$，所以第$i$個validator不會獲得超過$l_i\leq L$倍最弱validator的負載（因為負載最終與抵押金成正比）。
 
-然後，當選的Validators可以撤回他們未使用的抵押金部分，$s_i-s'_i$。不成功的Validator候選人可以撤回他們所有的建議抵押金。
+然後，當選的validators可以撤回他們未使用的抵押金部分，$s_i-s'_i$。不成功的validator候選人可以撤回他們所有的建議抵押金。
 
-每個Validator發布其{\em public signing key}，並不一定等於抵押金來源的帳戶的公鑰。\footnote{對於每次Validator選舉，生成和使用新的密鑰對是有意義的。}
+每個validator發布其{\em public signing key}，並不一定等於抵押金來源的帳戶的公鑰。\footnote{對於每次validator選舉，生成和使用新的密鑰對是有意義的。}
 
-Validators的抵押金被凍結，直到他們被選舉的時期結束，再加上一個月，以防新的爭議出現（例如，發現一個由這些Validators簽名的無效block）。之後，將返回抵押金，以及在此期間鑄造的Validator的幣份額和處理的交易的費用。
+validators的抵押金被凍結，直到他們被選舉的時期結束，再加上一個月，以防新的爭議出現（例如，發現一個由這些validators簽名的無效block）。之後，將返回抵押金，以及在此期間鑄造的validator的幣份額和處理的交易的費用。
 
 
-\nxsubpoint\label{sp:val.task.grp} \embt(Election of Validator ``task
-groups''.)  整體的全域Validator集合（其中每個Validator都被視為具有與其股份相等的多重性 - 否則Validator可能會被誘使承擔多個身份並在它們之間劃分其股份）只用於驗證新的 masterchain 區塊。 shardchain 的區塊只由特定選擇的Validator子集驗證，這些Validator是從在\ptref{sp:global.valid}中描述的選擇的全域Validator集合中選擇的。
+\nxsubpoint\label{sp:val.task.grp} \embt(Election of validator ``task
+groups''.)  整體的全域validator集合（其中每個validator都被視為具有與其股份相等的多重性 - 否則validator可能會被誘使承擔多個身份並在它們之間劃分其股份）只用於驗證新的 masterchain 區塊。 shardchain 的區塊只由特定選擇的validator子集驗證，這些validator是從在\ptref{sp:global.valid}中描述的選擇的全域validator集合中選擇的。
 
-這些Validator「子集」或「任務組」，為每個 shard 定義，每小時（實際上，每 $2^{10}$ 個 masterchain 區塊）旋轉一次，它們在一小時前就已知，因此每個Validator都知道它將需要驗證哪些 shards，並可以為此做準備（例如，通過下載丟失的 shardchain 數據）。
+這些validator「子集」或「任務組」，為每個 shard 定義，每小時（實際上，每 $2^{10}$ 個 masterchain 區塊）旋轉一次，它們在一小時前就已知，因此每個validator都知道它將需要驗證哪些 shards，並可以為此做準備（例如，通過下載丟失的 shardchain 數據）。
 
-用於為每個 shard $(w,s)$ 選擇Validator任務組的算法是確定性偽隨機的。它使用Validator嵌入到每個 masterchain 區塊中的偽隨機數（通過使用閾值簽名生成的共識生成）來創建一個隨機種子，然後例如為每個Validator計算 $\Hash(\code(w).\code(s).\vr{Validator\_id}.\vr{rand\_seed})$。然後按此 hash 的值對Validator進行排序，並選擇第一個Validator，以便至少具有總Validator股份的 $20/T$ 並且由至少5個Validator組成。
+用於為每個 shard $(w,s)$ 選擇validator任務組的算法是確定性偽隨機的。它使用validator嵌入到每個 masterchain 區塊中的偽隨機數（通過使用閾值簽名生成的共識生成）來創建一個隨機種子，然後例如為每個validator計算 $\Hash(\code(w).\code(s).\vr{validator\_id}.\vr{rand\_seed})$。然後按此 hash 的值對validator進行排序，並選擇第一個validator，以便至少具有總validator股份的 $20/T$ 並且由至少5個validator組成。
 
 這種選擇可以由特殊的智能合約完成。在這種情況下，選擇算法將可以輕鬆升級，無需通過\ptref{sp:config.param}中提到的投票機制進行硬分叉。迄今為止提到的所有其他「常數」（例如 $2^{19}$、$2^{10}$、$T$、20 和 5）也都是可配置的參數。
 
 \nxsubpoint\label{sp:rot.gen.prio} \embt(Rotating priority order on
 each task group.)  在 shard 任務組的成員上有一個特定的「優先順序」，取決於先前 masterchain 區塊的 hash 和 (shardchain) 區塊序列號。此順序是通過生成並排序上述的某些 hash 來確定的。
 
-當需要生成新的 shardchain 區塊時，通常選擇用於創建此區塊的 shard 任務組Validator是根據此旋轉「優先順序」的第一名。如果它未能創建該區塊，第二或第三個Validator也可能這樣做。基本上，他們都可以建議他們的區塊候選者，但是由具有最高優先權的Validator建議的候選者應該作為 Byzantine Fault Tolerant (BFT) 共識協議的結果獲勝。
+當需要生成新的 shardchain 區塊時，通常選擇用於創建此區塊的 shard 任務組validator是根據此旋轉「優先順序」的第一名。如果它未能創建該區塊，第二或第三個validator也可能這樣做。基本上，他們都可以建議他們的區塊候選者，但是由具有最高優先權的validator建議的候選者應該作為 Byzantine Fault Tolerant (BFT) 共識協議的結果獲勝。
 
 
 \nxsubpoint\label{sp:sh.blk.cand.prop} \embt(Propagation of shardchain
-block candidates.)  因為shardchain任務組的成員資格提前一小時就已知，它們的成員可以利用這段時間建立一個專用的「shard Validator多播覆蓋網路」，使用TON Network的一般機制 (cf.~\ptref{sect:overlay})。當需要生成一個新的shardchain區塊時—通常在最近的masterchain區塊被傳播後的一兩秒鐘—每個人都知道誰有最高的優先權生成下一個區塊 (cf.~\ptref{sp:rot.gen.prio})。這個Validator將創建一個新的整合的區塊候選者，無論是自己還是在整合者的幫助下 (cf.~\ptref{sp:collators})。Validator必須檢查（驗證）此區塊候選者（尤其是如果它是由某個整合者準備的）並用其（Validator）私鑰簽名。然後，使用預先安排的多播覆蓋網路將區塊候選者傳播到任務組的其餘部分 (該任務組根據\ptref{sect:overlay}中的解釋創建自己的私有覆蓋網路，然後使用\ptref{sp:streaming.multicast}中描述的串流多播協議的版本來傳播區塊候選者)。
+block candidates.)  因為shardchain任務組的成員資格提前一小時就已知，它們的成員可以利用這段時間建立一個專用的「shard validator多播覆蓋網路」，使用TON Network的一般機制 (cf.~\ptref{sect:overlay})。當需要生成一個新的shardchain區塊時—通常在最近的masterchain區塊被傳播後的一兩秒鐘—每個人都知道誰有最高的優先權生成下一個區塊 (cf.~\ptref{sp:rot.gen.prio})。這個validator將創建一個新的整合的區塊候選者，無論是自己還是在整合者的幫助下 (cf.~\ptref{sp:collators})。validator必須檢查（驗證）此區塊候選者（尤其是如果它是由某個整合者準備的）並用其（validator）私鑰簽名。然後，使用預先安排的多播覆蓋網路將區塊候選者傳播到任務組的其餘部分 (該任務組根據\ptref{sect:overlay}中的解釋創建自己的私有覆蓋網路，然後使用\ptref{sp:streaming.multicast}中描述的串流多播協議的版本來傳播區塊候選者)。
 
 真正的BFT方式是使用拜占庭多播協議，例如Honey Badger BFT中使用的協議~\cite{HoneyBadger}：通過一個$(N,2N/3)$-消除程式碼對區塊候選者進行編碼，將結果數據的$1/N$直接發送到組的每個成員，並期望他們將其數據的部分直接多播到組的所有其他成員。
 
-然而，一個更快且更簡單的方法（參見\ptref{sp:streaming.multicast}）是將區塊候選者分成一系列簽名的一千字節區塊（「chunks」），通過Reed--Solomon或泉程式碼（如RaptorQ code~\cite{RaptorQ} \cite{Raptor}）擴充它們的序列，並開始傳輸chunks到「多播網格」（即覆蓋網路）中的鄰居，期望他們將這些chunks進一步傳播。一旦Validator獲得足夠的chunks來從中重建區塊候選者，它就會簽署一個確認收據並通過其鄰居將其傳播到整個組。然後，它的鄰居停止向它發送新的chunks，但可能會繼續發送這些chunks的（原始）簽名，認為該節點可以通過應用Reed--Solomon或泉程式碼自行生成後續的chunks（擁有所有必要的數據），將它們與簽名組合起來，並傳播給還沒有準備好的鄰居。
+然而，一個更快且更簡單的方法（參見\ptref{sp:streaming.multicast}）是將區塊候選者分成一系列簽名的一千字節區塊（「chunks」），通過Reed--Solomon或泉程式碼（如RaptorQ code~\cite{RaptorQ} \cite{Raptor}）擴充它們的序列，並開始傳輸chunks到「多播網格」（即覆蓋網路）中的鄰居，期望他們將這些chunks進一步傳播。一旦validator獲得足夠的chunks來從中重建區塊候選者，它就會簽署一個確認收據並通過其鄰居將其傳播到整個組。然後，它的鄰居停止向它發送新的chunks，但可能會繼續發送這些chunks的（原始）簽名，認為該節點可以通過應用Reed--Solomon或泉程式碼自行生成後續的chunks（擁有所有必要的數據），將它們與簽名組合起來，並傳播給還沒有準備好的鄰居。
 
 如果在移除所有「壞」節點後「多播網格」（覆蓋網路）仍保持連接（回想一下，允許最多三分之一的節點以拜占庭方式壞掉，即以任意惡意方式行為），則此算法將以最快的方式傳播區塊候選者。
 
-不僅指定的高優先級區塊創建者可以將其區塊候選者多播到整個組。第二和第三優先順序的Validator可能會開始多播他們的區塊候選者，無論是立即還是在未能從最高優先級的Validator那裡接收到區塊候選者之後。但是，通常只有最大優先權的區塊候選者將被所有（實際上，至少由三分之二的任務組）Validator簽名並作為新的shardchain區塊提交。
+不僅指定的高優先級區塊創建者可以將其區塊候選者多播到整個組。第二和第三優先順序的validator可能會開始多播他們的區塊候選者，無論是立即還是在未能從最高優先級的validator那裡接收到區塊候選者之後。但是，通常只有最大優先權的區塊候選者將被所有（實際上，至少由三分之二的任務組）validator簽名並作為新的shardchain區塊提交。
 
 
-\nxsubpoint \embt(Validation of block candidates.)  一旦 block candidate 被 Validator 接收並檢查其起始 Validator 的簽名，接收 Validator 會檢查此 block candidate 的有效性，執行其中的所有交易並確保其結果與所聲稱的一致。從其他區塊鏈導入的所有消息都必須在 collated data 中有適當的 Merkle 證明，否則 block candidate 將被視為無效（並且，如果此證明被提交到 masterchain，則可能會懲罰已經簽署此 block candidate 的 Validator）。另一方面，如果 block candidate 被認定為有效，接收 Validator 會簽署它並將其簽名傳播給組中的其他 Validator，可以通過「mesh multicast network」或直接的網路消息。
+\nxsubpoint \embt(Validation of block candidates.)  一旦 block candidate 被 validator 接收並檢查其起始 validator 的簽名，接收 validator 會檢查此 block candidate 的有效性，執行其中的所有交易並確保其結果與所聲稱的一致。從其他區塊鏈導入的所有消息都必須在 collated data 中有適當的 Merkle 證明，否則 block candidate 將被視為無效（並且，如果此證明被提交到 masterchain，則可能會懲罰已經簽署此 block candidate 的 validator）。另一方面，如果 block candidate 被認定為有效，接收 validator 會簽署它並將其簽名傳播給組中的其他 validator，可以通過「mesh multicast network」或直接的網路消息。
 
-我們想強調，{\em Validator 在檢查（collated）block candidate 的有效性時，不需要訪問此 shardchain 或相鄰 shardchain 的狀態}。\footnote{一個可能的例外是相鄰 shardchain 的輸出隊列的狀態，因為在這種情況下，Merkle 證明的大小可能會變得過大。} 這使得驗證可以非常快速地進行（不需要硬碟訪問），並減輕了 Validator 的計算和儲存負擔（尤其是如果他們願意接受外部 collators 的幫助來創建 block candidate）。
+我們想強調，{\em validator 在檢查（collated）block candidate 的有效性時，不需要訪問此 shardchain 或相鄰 shardchain 的狀態}。\footnote{一個可能的例外是相鄰 shardchain 的輸出隊列的狀態，因為在這種情況下，Merkle 證明的大小可能會變得過大。} 這使得驗證可以非常快速地進行（不需要硬碟訪問），並減輕了 validator 的計算和儲存負擔（尤其是如果他們願意接受外部 collators 的幫助來創建 block candidate）。
 
-\nxsubpoint\label{sp:new.shardc.blk} \embt(Election of the next block candidate.)  一旦 block candidate 收集到 task group 中至少三分之二（按 stake）的 Validator 的有效簽名，它就有資格被提交為下一個 shardchain block。運行一個 BFT 協議來達成對所選 block candidate 的共識（可能有多個提議），所有「好的」Validator 都會優先選擇該輪中優先級最高的 block candidate。運行此協議的結果是，該 block 會被至少三分之二的 Validator（按 stake）的簽名所增強。這些簽名不僅證明了所問 block 的有效性，還證明了它是由 BFT 協議選出的。之後，將 block（無 collated data）與這些簽名組合，以確定的方式序列化，然後通過網路傳播給所有相關方。
+\nxsubpoint\label{sp:new.shardc.blk} \embt(Election of the next block candidate.)  一旦 block candidate 收集到 task group 中至少三分之二（按 stake）的 validator 的有效簽名，它就有資格被提交為下一個 shardchain block。運行一個 BFT 協議來達成對所選 block candidate 的共識（可能有多個提議），所有「好的」validator 都會優先選擇該輪中優先級最高的 block candidate。運行此協議的結果是，該 block 會被至少三分之二的 validator（按 stake）的簽名所增強。這些簽名不僅證明了所問 block 的有效性，還證明了它是由 BFT 協議選出的。之後，將 block（無 collated data）與這些簽名組合，以確定的方式序列化，然後通過網路傳播給所有相關方。
 
-\nxsubpoint \embt(Validators must keep the blocks they have signed.)  在他們成為 task group 的成員期間，以及之後至少一小時（或者 $2^{10}$ blocks），Validator 預期會保留他們已簽署和提交的 block。如果未能向其他 Validator 提供簽署的 block，可能會受到懲罰。
+\nxsubpoint \embt(validators must keep the blocks they have signed.)  在他們成為 task group 的成員期間，以及之後至少一小時（或者 $2^{10}$ blocks），validator 預期會保留他們已簽署和提交的 block。如果未能向其他 validator 提供簽署的 block，可能會受到懲罰。
 
-\nxsubpoint \embt(Propagating the headers and signatures of new shardchain blocks to all Validators.)  Validator 將新生成的 shardchain block 的 headers 和簽名傳播到全域 set of Validators，使用類似於為每個 task group 創建的 multicast mesh network。
+\nxsubpoint \embt(Propagating the headers and signatures of new shardchain blocks to all validators.)  validator 將新生成的 shardchain block 的 headers 和簽名傳播到全域 set of validators，使用類似於為每個 task group 創建的 multicast mesh network。
 
-\nxsubpoint\label{sp:new.master.blk} \embt(Generation of new masterchain blocks.)  在所有（或幾乎所有）新的 shardchain block 生成之後，可以生成一個新的 masterchain block。這個程序基本上與 shardchain block 相同（參見~\ptref{sp:new.shardc.blk}），不同之處在於所有 Validator（或至少三分之二的 Validator）都必須參與此過程。因為新的 shardchain block 的 headers 和簽名被傳播給所有的 Validator，所以每個 shardchain 中最新的 block 的 hash 可以並且必須被包含在新的 masterchain block 中。一旦這些 hash 被提交到 masterchain block，外部觀察者和其他 shardchain 可以認為新的 shardchain block 已經提交並且是不可變的（參見~\ptref{sp:sc.hash.mc}）。
+\nxsubpoint\label{sp:new.master.blk} \embt(Generation of new masterchain blocks.)  在所有（或幾乎所有）新的 shardchain block 生成之後，可以生成一個新的 masterchain block。這個程序基本上與 shardchain block 相同（參見~\ptref{sp:new.shardc.blk}），不同之處在於所有 validator（或至少三分之二的 validator）都必須參與此過程。因為新的 shardchain block 的 headers 和簽名被傳播給所有的 validator，所以每個 shardchain 中最新的 block 的 hash 可以並且必須被包含在新的 masterchain block 中。一旦這些 hash 被提交到 masterchain block，外部觀察者和其他 shardchain 可以認為新的 shardchain block 已經提交並且是不可變的（參見~\ptref{sp:sc.hash.mc}）。
 
 
-\nxsubpoint \embt(Validators must keep the state of masterchain.)  
-所有的Validator都預期要追踪 masterchain 的狀態，而不依賴於彙整的數據。這很重要，因為Validator工作組的知識是從 masterchain 的狀態中衍生出來的。
+\nxsubpoint \embt(validators must keep the state of masterchain.)  
+所有的validator都預期要追踪 masterchain 的狀態，而不依賴於彙整的數據。這很重要，因為validator工作組的知識是從 masterchain 的狀態中衍生出來的。
 
 \nxsubpoint \embt(Shardchain blocks are generated and propagated in parallel.)  
-通常，每個Validator都是幾個 shardchain 任務組的成員;他們的數量（因此Validator的負載）大約與Validator的股份成正比。這意味著Validator同時運行多個新的 shardchain 區塊生成協議。
+通常，每個validator都是幾個 shardchain 任務組的成員;他們的數量（因此validator的負載）大約與validator的股份成正比。這意味著validator同時運行多個新的 shardchain 區塊生成協議。
 
 \nxsubpoint \embt(Mitigation of block retention attacks.)  
-因為所有Validator在只看到其標頭和簽名後就將一個新的 shardchain 區塊的 hash 插入到 masterchain 中，因此存在一個小概率，即生成此區塊的Validator會密謀並試圖避免發佈整個新區塊。這將導致鄰近 shardchains 的Validator無法創建新的區塊，因為一旦它的 hash 被提交到 masterchain 中，他們必須至少知道新區塊的輸出消息隊列。
+因為所有validator在只看到其標頭和簽名後就將一個新的 shardchain 區塊的 hash 插入到 masterchain 中，因此存在一個小概率，即生成此區塊的validator會密謀並試圖避免發佈整個新區塊。這將導致鄰近 shardchains 的validator無法創建新的區塊，因為一旦它的 hash 被提交到 masterchain 中，他們必須至少知道新區塊的輸出消息隊列。
 
-為了緩解這種情況，新區塊必須從其他一些Validator（例如，鄰近 shardchains 的任務組聯合的三分之二）收集簽名，證明這些Validator確實擁有此區塊的副本並且願意在需要時將它們發送給其他Validator。只有在提供這些簽名之後，新區塊的 hash 才可能包含在 masterchain 中。
+為了緩解這種情況，新區塊必須從其他一些validator（例如，鄰近 shardchains 的任務組聯合的三分之二）收集簽名，證明這些validator確實擁有此區塊的副本並且願意在需要時將它們發送給其他validator。只有在提供這些簽名之後，新區塊的 hash 才可能包含在 masterchain 中。
 
 \nxsubpoint \embt(Masterchain blocks are generated later than shardchain blocks.)  
 Masterchain 區塊大約每五秒生成一次，就像 shardchain 區塊一樣。但是，雖然所有 shardchains 中的新區塊的生成基本上是同時進行的（通常由釋放新的 masterchain 區塊觸發），但新的 masterchain 區塊的生成被故意延遲，以允許在 masterchain 中包含新生成的 shardchain 區塊的 hashes。
 
-\nxsubpoint\label{sp:slow.valid} \embt(Slow Validators may receive lower rewards.)  
-如果一個Validator“慢”，它可能無法驗證新的區塊候選者，並且收集提交新區塊所需的三分之二的簽名可能不需要它的參與。在這種情況下，它將收到與此區塊相關的較低份額的獎勵。
+\nxsubpoint\label{sp:slow.valid} \embt(Slow validators may receive lower rewards.)  
+如果一個validator“慢”，它可能無法驗證新的區塊候選者，並且收集提交新區塊所需的三分之二的簽名可能不需要它的參與。在這種情況下，它將收到與此區塊相關的較低份額的獎勵。
 
-這為Validator提供了一個激勵，以優化他們的硬體、軟體和網路連接，以便盡可能快地處理用戶交易。
+這為validator提供了一個激勵，以優化他們的硬體、軟體和網路連接，以便盡可能快地處理用戶交易。
 
-但是，如果Validator在區塊提交之前未簽名，則其簽名可能包含在接下來的一個或多個區塊中，然後這部分獎勵（根據已生成多少區塊而呈指數下降---例如，如果Validator延遲$k$區塊則為$0.9^k$）仍將給予此Validator。
+但是，如果validator在區塊提交之前未簽名，則其簽名可能包含在接下來的一個或多個區塊中，然後這部分獎勵（根據已生成多少區塊而呈指數下降---例如，如果validator延遲$k$區塊則為$0.9^k$）仍將給予此validator。
 
 
-\nxsubpoint\label{sp:val.sign.depth} \embt(``Depth'' of Validator signatures.)  
-通常，當Validator簽署一個區塊時，該簽名只證明了區塊的{\em 相對有效性\/}：只要這個和其他 shardchains 的所有先前區塊都是有效的，這個區塊就是有效的。Validator不能因為將先前區塊中提交的無效數據視為理所當然而受到懲罰。
+\nxsubpoint\label{sp:val.sign.depth} \embt(``Depth'' of validator signatures.)  
+通常，當validator簽署一個區塊時，該簽名只證明了區塊的{\em 相對有效性\/}：只要這個和其他 shardchains 的所有先前區塊都是有效的，這個區塊就是有效的。validator不能因為將先前區塊中提交的無效數據視為理所當然而受到懲罰。
 
-然而，區塊的Validator簽名有一個稱為“深度”的整數參數。如果它是非零的，那就意味著Validator也宣稱先前指定數量的區塊的(相對)有效性。這是“慢”或“暫時離線”的Validator趕上並簽署一些已經提交但未經他們簽名的區塊的方式。然後區塊獎勵的一部分仍將給予他們（參見~\ptref{sp:slow.valid}）。
+然而，區塊的validator簽名有一個稱為“深度”的整數參數。如果它是非零的，那就意味著validator也宣稱先前指定數量的區塊的(相對)有效性。這是“慢”或“暫時離線”的validator趕上並簽署一些已經提交但未經他們簽名的區塊的方式。然後區塊獎勵的一部分仍將給予他們（參見~\ptref{sp:slow.valid}）。
 
-\nxsubpoint\label{sp:abs.val.from.rel} \embt(Validators are responsible for {\em relative\/} validity of signed shardchain blocks; absolute validity follows.)  
-我們想再次強調，Validator在 shardchain 區塊 \(B\) 上的簽名只證明了該區塊的{\em 相對\/}有效性（或者如果簽名有“深度” \(d\)，也可能是 \(d\) 個先前的區塊的相對有效性，參見~\ptref{sp:val.sign.depth}；但這不太影響下面的討論）。換句話說，Validator聲稱 shardchain 的下一個狀態 \(s'\) 是通過應用在~\ptref{sp:blk.transf}中描述的區塊評估函數 \(\evblock\) 從先前的狀態 \(s\) 獲得的：
+\nxsubpoint\label{sp:abs.val.from.rel} \embt(validators are responsible for {\em relative\/} validity of signed shardchain blocks; absolute validity follows.)  
+我們想再次強調，validator在 shardchain 區塊 \(B\) 上的簽名只證明了該區塊的{\em 相對\/}有效性（或者如果簽名有“深度” \(d\)，也可能是 \(d\) 個先前的區塊的相對有效性，參見~\ptref{sp:val.sign.depth}；但這不太影響下面的討論）。換句話說，validator聲稱 shardchain 的下一個狀態 \(s'\) 是通過應用在~\ptref{sp:blk.transf}中描述的區塊評估函數 \(\evblock\) 從先前的狀態 \(s\) 獲得的：
 \begin{equation}\label{eq:ev.block.2}
   s'=\evblock(B)(s)
 \end{equation}
-這樣，如果原始狀態 \(s\) 被證明為“不正確”（例如，由於先前區塊的無效性），那麼簽署了區塊 \(B\) 的Validator不能被懲罰。漁夫（參見~\ptref{sp:fish}）只有在發現一個區塊是{\em 相對地\/}無效時才會抱怨。PoS 系統作為一個整體努力使每個區塊都是{\em 相對地\/}有效的，而不是{\em 遞迴地（或絕對地）}有效的。然而，注意到，{\em 如果 blockchain 中的所有區塊都是相對有效的，那麼它們所有的和 blockchain 作為一個整體都是絕對有效的}；使用對 blockchain 的長度的數學歸納法可以輕易地證明這一語句。通過這種方式，輕鬆可驗證的區塊的{\em 相對\/}有效性的聲明一起證明了整個 blockchain 的更強大的{\em 絕對有效性\/}。
+這樣，如果原始狀態 \(s\) 被證明為“不正確”（例如，由於先前區塊的無效性），那麼簽署了區塊 \(B\) 的validator不能被懲罰。fisherman（參見~\ptref{sp:fish}）只有在發現一個區塊是{\em 相對地\/}無效時才會抱怨。PoS 系統作為一個整體努力使每個區塊都是{\em 相對地\/}有效的，而不是{\em 遞迴地（或絕對地）}有效的。然而，注意到，{\em 如果 blockchain 中的所有區塊都是相對有效的，那麼它們所有的和 blockchain 作為一個整體都是絕對有效的}；使用對 blockchain 的長度的數學歸納法可以輕易地證明這一語句。通過這種方式，輕鬆可驗證的區塊的{\em 相對\/}有效性的聲明一起證明了整個 blockchain 的更強大的{\em 絕對有效性\/}。
 
-注意，通過簽署一個區塊~\(B\)，Validator聲稱該區塊給定原始狀態 \(s\) 是有效的（即，~\eqref{eq:ev.block.2}的結果不是值 \(\bot\)，表示下一個狀態不能被計算）。因此，Validator必須執行在評估~\eqref{eq:ev.block.2}期間訪問的原始狀態的 cell 的最小形式檢查。
+注意，通過簽署一個區塊~\(B\)，validator聲稱該區塊給定原始狀態 \(s\) 是有效的（即，~\eqref{eq:ev.block.2}的結果不是值 \(\bot\)，表示下一個狀態不能被計算）。因此，validator必須執行在評估~\eqref{eq:ev.block.2}期間訪問的原始狀態的 cell 的最小形式檢查。
 
-例如，想像一個情境，期望從提交到區塊的交易中訪問的賬戶的原始餘額的 cell 被發現有零個原始字節，而不是期望的 8 或 16。然後，原始餘額簡單地不能從 cell 中檢索，並且在嘗試處理該區塊時會發生“未處理的異常”。在這種情況下，Validator不應該簽署這樣的區塊，否則將受到懲罰。
+例如，想像一個情境，期望從提交到區塊的交易中訪問的賬戶的原始餘額的 cell 被發現有零個原始字節，而不是期望的 8 或 16。然後，原始餘額簡單地不能從 cell 中檢索，並且在嘗試處理該區塊時會發生“未處理的異常”。在這種情況下，validator不應該簽署這樣的區塊，否則將受到懲罰。
 
 \nxsubpoint \embt(Signing masterchain blocks.)  
-與masterchain區塊的情況略有不同：簽署一個masterchain區塊，Validator不僅聲明其相對有效性，而且還聲明所有先前區塊的相對有效性，直到這個Validator承擔其責任的第一個區塊（但不再往回）。
+與masterchain區塊的情況略有不同：簽署一個masterchain區塊，validator不僅聲明其相對有效性，而且還聲明所有先前區塊的相對有效性，直到這個validator承擔其責任的第一個區塊（但不再往回）。
 
-\nxsubpoint \embt(The total number of Validators.)  
-Validator被選舉的總數的上限 \(T\) （參見~\ptref{sp:global.valid}）在迄今為止描述的系統中，不能超過，例如，幾百或一千，因為所有Validator都預計參與BFT共識協議來創建每個新的masterchain區塊，並且尚不清楚這樣的協議是否可以擴展到數千參與者。更重要的是，masterchain區塊必須收集至少三分之二的所有Validator（按權益）的簽名，並且這些簽名必須包含在新區塊中（否則系統中的所有其他節點都沒有理由信任新區塊而不自己驗證它）。如果必須在每個masterchain區塊中包括超過，例如，一千個Validator簽名，這將意味著每個masterchain區塊中有更多的數據，所有完整節點都要儲存並通過網路傳播，以及花費更多的處理能力來檢查這些簽名（在PoS系統中，完整節點不需要自己驗證區塊，但他們需要相反地檢查Validator的簽名）。
+\nxsubpoint \embt(The total number of validators.)  
+validator被選舉的總數的上限 \(T\) （參見~\ptref{sp:global.valid}）在迄今為止描述的系統中，不能超過，例如，幾百或一千，因為所有validator都預計參與BFT共識協議來創建每個新的masterchain區塊，並且尚不清楚這樣的協議是否可以擴展到數千參與者。更重要的是，masterchain區塊必須收集至少三分之二的所有validator（按權益）的簽名，並且這些簽名必須包含在新區塊中（否則系統中的所有其他節點都沒有理由信任新區塊而不自己驗證它）。如果必須在每個masterchain區塊中包括超過，例如，一千個validator簽名，這將意味著每個masterchain區塊中有更多的數據，所有完整節點都要儲存並通過網路傳播，以及花費更多的處理能力來檢查這些簽名（在PoS系統中，完整節點不需要自己驗證區塊，但他們需要相反地檢查validator的簽名）。
 
-雖然將 \(T\) 限制為一千個Validator對於TON Blockchain的部署的第一階段似乎足夠了，但必須為未來的增長提供條款，當shardchains的總數變得如此之大，以至於幾百個Validator不足以處理所有的shardchains。為此，我們引入了一個額外的可配置參數 \(T'\leq T\)（原本等於~\(T\)），並且只有前 \(T'\) 名被選舉的Validator（按權益）預計創建和簽署新的masterchain區塊。
+雖然將 \(T\) 限制為一千個validator對於TON Blockchain的部署的第一階段似乎足夠了，但必須為未來的增長提供條款，當shardchains的總數變得如此之大，以至於幾百個validator不足以處理所有的shardchains。為此，我們引入了一個額外的可配置參數 \(T'\leq T\)（原本等於~\(T\)），並且只有前 \(T'\) 名被選舉的validator（按權益）預計創建和簽署新的masterchain區塊。
 
 
 \nxsubpoint \embt(Decentralization of the system.)  
-有人可能會懷疑，像TON Blockchain這樣的Proof-of-Stake系統，依賴\(T\approx1000\)的Validator來創建所有shardchain和masterchain區塊，是否會變得“太集中”，與像Bitcoin或Ethereum這樣的傳統Proof-of-Work區塊鏈相反，其中每個人（原則上）都可能開採一個新區塊，沒有礦工總數的明確上限。
+有人可能會懷疑，像TON Blockchain這樣的Proof-of-Stake系統，依賴\(T\approx1000\)的validator來創建所有shardchain和masterchain區塊，是否會變得“太集中”，與像Bitcoin或Ethereum這樣的傳統Proof-of-Work區塊鏈相反，其中每個人（原則上）都可能開採一個新區塊，沒有礦工總數的明確上限。
 
 但是，像Bitcoin和Ethereum這樣的受歡迎的Proof-of-Work區塊鏈，目前需要大量的計算能力（高“hash rates”）以成功的概率開採新區塊。因此，新區塊的開採趨於集中在幾個大玩家手中，他們投資大量資金建立充滿為開採優化的定制硬體的數據中心；以及幾個大型的開採池手中，它們集中並協調了無法自己提供足夠“hash rate”的大量人的努力。
 
 因此，到2017年，超過75％的新Ethereum或Bitcoin區塊由少於十個礦工產生。實際上，兩個最大的Ethereum開採池共同生產了超過一半的所有新區塊！顯然，這樣的系統比依賴\(T\approx1000\)節點生產新區塊的系統更為集中。
 
-人們還可能注意到，成為TON BlockchainValidator所需的投資——即購買硬體（例如，幾個高性能伺服器）和權益（如有必要，可以通過提名者池輕鬆收集；參見~\ptref{sp:nominators}）——比成為成功的獨立Bitcoin或Ethereum礦工所需的要少。實際上，~\ptref{sp:global.valid}的參數\(L\)將迫使提名者不加入最大的“開採池”（即，積累了最大權益的Validator），而是尋找目前正在接受提名者資金的較小的Validator，甚至創建新的Validator，因為這將允許更高比例的Validator的——並且也是提名者的——權益被使用，從而獲得更大的開採獎勵。這種方式，TON Proof-of-Stake系統實際上{\em 鼓勵\/}去中心化（創建和使用更多的Validator）並{\em 懲罰\/}集中化。
+人們還可能注意到，成為TON Blockchainvalidator所需的投資——即購買硬體（例如，幾個高性能伺服器）和權益（如有必要，可以通過提名者池輕鬆收集；參見~\ptref{sp:nominators}）——比成為成功的獨立Bitcoin或Ethereum礦工所需的要少。實際上，~\ptref{sp:global.valid}的參數\(L\)將迫使提名者不加入最大的“開採池”（即，積累了最大權益的validator），而是尋找目前正在接受提名者資金的較小的validator，甚至創建新的validator，因為這將允許更高比例的validator的——並且也是提名者的——權益被使用，從而獲得更大的開採獎勵。這種方式，TON Proof-of-Stake系統實際上{\em 鼓勵\/}去中心化（創建和使用更多的validator）並{\em 懲罰\/}集中化。
 
 \nxsubpoint\label{sp:rel.rel} \embt(Relative reliability of a block.)
-區塊的{\em (相對) 可靠性\/}簡單地說是已簽署此區塊的所有Validator的總權益。換句話說，如果這個區塊被證明是無效的，某些行為者會失去的金額。如果有人關心的交易傳輸值低於區塊的可靠性，可以認為它們足夠安全。從這個意義上說，相對可靠性是外部觀察者可以對特定區塊的信任度的衡量。
+區塊的{\em (相對) 可靠性\/}簡單地說是已簽署此區塊的所有validator的總權益。換句話說，如果這個區塊被證明是無效的，某些行為者會失去的金額。如果有人關心的交易傳輸值低於區塊的可靠性，可以認為它們足夠安全。從這個意義上說，相對可靠性是外部觀察者可以對特定區塊的信任度的衡量。
 
 注意，我們談論的是區塊的{\em 相對\/}可靠性，因為它保證該區塊是有效的{\em 前提是前一個區塊和所有其他被參考的shardchains'區塊都是有效的\/}（參見~\ptref{sp:abs.val.from.rel}）。
 
-一個區塊的相對可靠性在提交後可能會增加——例如，當遲來的Validator的簽名被添加時（參見~\ptref{sp:val.sign.depth}）。另一方面，如果其中一個Validator因與其他區塊相關的不當行為而失去部分或全部權益，區塊的相對可靠性可能{\em 減少}。
+一個區塊的相對可靠性在提交後可能會增加——例如，當遲來的validator的簽名被添加時（參見~\ptref{sp:val.sign.depth}）。另一方面，如果其中一個validator因與其他區塊相關的不當行為而失去部分或全部權益，區塊的相對可靠性可能{\em 減少}。
 
-\nxsubpoint \embt("Strengthening" the blockchain.) 提供驅使Validator提高區塊相對可靠性的激勵是很重要的。這樣做的一種方法是為Validator分配小量的獎勵，以在其他shardchains的區塊上添加簽名。即使是“即將成為”的Validator，他們已存入的股份不足以進入按股份排名前$T$的Validator，並被包括在全域Validator集合中（參見~\ptref{sp:global.valid}），也可能參與這項活動（如果他們同意在失去選舉後保持其股份凍結，而不是撤回）。這樣的Validator可能同時充當漁民（參見~\ptref{sp:fish}）：如果他們必須檢查某些區塊的有效性，他們也可以選擇報告無效的區塊並收集相關獎勵。
+\nxsubpoint \embt("Strengthening" the blockchain.) 提供驅使validator提高區塊相對可靠性的激勵是很重要的。這樣做的一種方法是為validator分配小量的獎勵，以在其他shardchains的區塊上添加簽名。即使是“即將成為”的validator，他們已存入的股份不足以進入按股份排名前$T$的validator，並被包括在全域validator集合中（參見~\ptref{sp:global.valid}），也可能參與這項活動（如果他們同意在失去選舉後保持其股份凍結，而不是撤回）。這樣的validator可能同時充當fisherman（參見~\ptref{sp:fish}）：如果他們必須檢查某些區塊的有效性，他們也可以選擇報告無效的區塊並收集相關獎勵。
 
 \nxsubpoint\label{sp:rec.rel} \embt(Recursive reliability of a block.) 人們也可以定義一個區塊的{\em recursive reliability\/}，這是其相對可靠性與其引用的所有區塊的遞歸可靠性之間的最小值（即，masterchain區塊、先前的shardchain區塊和一些相鄰shardchains的區塊）。換句話說，如果該區塊被證明是無效的，無論是因為它本身無效還是因為它所依賴的某個區塊無效，至少有人會失去這筆錢。如果人們真的不確定是否信任區塊中的特定交易，人們應該計算這個區塊的{\em recursive\/}可靠性，而不僅僅是{\em relative\/}的可靠性。
 
-當計算遞歸可靠性時，沒有必要回溯太遠，因為如果我們回溯太遠，我們會看到已經解凍並提取的Validator簽名的區塊。無論如何，我們不允許Validator自動重新考慮那些舊的區塊（即，創建超過兩個月的區塊，如果使用當前的可配置參數的值），並從中創建分叉或使用“垂直blockchains”（參見~\ptref{sp:inv.sh.blk.corr}）修正它們，即使它們被證明是無效的。我們假設兩個月的時期提供了充足的機會來檢測和報告任何無效的區塊，因此如果在這段時期內沒有挑戰某個區塊，那麼它不太可能受到挑戰。
+當計算遞歸可靠性時，沒有必要回溯太遠，因為如果我們回溯太遠，我們會看到已經解凍並提取的validator簽名的區塊。無論如何，我們不允許validator自動重新考慮那些舊的區塊（即，創建超過兩個月的區塊，如果使用當前的可配置參數的值），並從中創建分叉或使用“垂直blockchains”（參見~\ptref{sp:inv.sh.blk.corr}）修正它們，即使它們被證明是無效的。我們假設兩個月的時期提供了充足的機會來檢測和報告任何無效的區塊，因此如果在這段時期內沒有挑戰某個區塊，那麼它不太可能受到挑戰。
 
 \nxsubpoint \embt(Consequence of Proof-of-Stake for light nodes.)  TON Blockchain 採用的 Proof-of-Stake 方法的一個重要結果是，TON Blockchain 的輕型節點（運行輕型客戶端軟體）不需要下載所有 shardchain 或甚至 masterchain 區塊的「標頭」，以便能夠自行檢查完整節點提供給其的 Merkle 證明，作為對其查詢的回答。
 
-實際上，由於最近的 shardchain 區塊 hash 已包含在 masterchain 區塊中，完整節點可以輕鬆提供一個 Merkle 證明，從已知的 masterchain 區塊的 hash 開始，說明給定的 shardchain 區塊是有效的。接下來，輕型節點只需要知道 masterchain 的第一個區塊（其中宣布了第一組Validator），這個區塊（或至少其 hash）可能被內置到客戶端軟體中，並且每個月後只需一個 masterchain 區塊，其中宣布了新當選的Validator集合，因為這個區塊將由上一組Validator簽署。從那時起，它可以獲得最近的幾個 masterchain 區塊，或至少他們的標頭和Validator簽名，並使用它們作為檢查完整節點提供的 Merkle 證明的基礎。
+實際上，由於最近的 shardchain 區塊 hash 已包含在 masterchain 區塊中，完整節點可以輕鬆提供一個 Merkle 證明，從已知的 masterchain 區塊的 hash 開始，說明給定的 shardchain 區塊是有效的。接下來，輕型節點只需要知道 masterchain 的第一個區塊（其中宣布了第一組validator），這個區塊（或至少其 hash）可能被內置到客戶端軟體中，並且每個月後只需一個 masterchain 區塊，其中宣布了新當選的validator集合，因為這個區塊將由上一組validator簽署。從那時起，它可以獲得最近的幾個 masterchain 區塊，或至少他們的標頭和validator簽名，並使用它們作為檢查完整節點提供的 Merkle 證明的基礎。
 
 \mysubsection{分割和合併 Shardchains}\label{sect:split.merge}
 
@@ -922,42 +922,42 @@ shard 配置—即，這個 {\em shard binary tree}，或給定 $w$ 的所有活
 
 這些 split/merge 操作在事先（例如，$2^6$；這是一個可配置的參數）的區塊中被宣布，首先在相應的 shardchain 區塊的「標頭」中，然後在引用這些 shardchain 區塊的 masterchain 區塊中。這個提前公告是為了讓所有相關方為計劃的變更做好準備（例如，建立一個 overlay multicast network 來分發新創建的 shardchains 的新區塊，如~\ptref{sect:overlay}所述）。然後，更改首先提交到 shardchain 區塊的（標頭），然後傳播到 masterchain 區塊。這樣，masterchain 區塊不僅定義了在其創建之前的最新 shard 配置，而且還定義了下一個立即的 shard 配置。
 
-\nxsubpoint \embt(Validator task groups for new shardchains.)  回憶一下，每個 shard，即每個 shardchain，通常都被分配一個Validator的子集（一個 Validator task group）專用於在相應的 shardchain 中創建和驗證新區塊（參見~\ptref{sp:val.task.grp}）。這些 task groups 被選為某段時間（大約一小時），並且在提前知道的時間（也大約是一小時），在此期間是不變的。\footnote{除非某些Validator因簽署無效的區塊而被臨時或永久禁止，那麼他們將自動從所有 task groups 中被排除。}
+\nxsubpoint \embt(validator task groups for new shardchains.)  回憶一下，每個 shard，即每個 shardchain，通常都被分配一個validator的子集（一個 validator task group）專用於在相應的 shardchain 中創建和驗證新區塊（參見~\ptref{sp:val.task.grp}）。這些 task groups 被選為某段時間（大約一小時），並且在提前知道的時間（也大約是一小時），在此期間是不變的。\footnote{除非某些validator因簽署無效的區塊而被臨時或永久禁止，那麼他們將自動從所有 task groups 中被排除。}
 
 但是，實際的 shard 配置可能會在此期間因為 split/merge 操作而發生變化。必須為新創建的 shards 分配 task groups。這是如此完成的：
 
 注意，任何活躍的 shard $(w,s)$ 要麼是某個唯一確定的原始 shard $(w,s')$ 的後代，意味著 $s'$ 是 $s$ 的前綴，要麼它將是原始 shards $(w,s')$ 的子樹的根，其中 $s$ 將是每個 $s'$ 的前綴。在第一種情況下，我們簡單地將原始 shard $(w,s')$ 的 task group 作為新 shard $(w,s)$ 的 task group。在後一種情況下，新 shard $(w,s)$ 的 task group 將是所有原始 shards $(w,s')$ 的 task groups 的聯集，這些 shards 是 shard tree 中的 $(w,s)$ 的後代。
 
-這樣，每個活躍的 shard $(w,s)$ 都被分配了一個明確定義的Validator子集（task group）。當一個 shard 被分割時，兩個子節點都繼承了原始 shard 的整個 task group。當兩個 shards 被合併時，它們的 task groups 也被合併。
+這樣，每個活躍的 shard $(w,s)$ 都被分配了一個明確定義的validator子集（task group）。當一個 shard 被分割時，兩個子節點都繼承了原始 shard 的整個 task group。當兩個 shards 被合併時，它們的 task groups 也被合併。
 
-任何追踪 masterchain 狀態的人都可以計算每個活躍 shard 的Validator task groups。
+任何追踪 masterchain 狀態的人都可以計算每個活躍 shard 的validator task groups。
 
 
 \nxsubpoint \embt(Limit on split/merge operations during the period of
-responsibility of original task groups.) 最終，新的 shard 配置將被考慮到，並且新的專用Validator子集（task groups）將自動分配給每個 shard。在此之前，必須對 split/merge 操作施加某種限制；否則，如果原始 shard 迅速分裂成 $2^k$ 個新的 shards，則原始 task group 可能最終同時驗證 $2^k$ shardchains，對於大的 $k$。
+responsibility of original task groups.) 最終，新的 shard 配置將被考慮到，並且新的專用validator子集（task groups）將自動分配給每個 shard。在此之前，必須對 split/merge 操作施加某種限制；否則，如果原始 shard 迅速分裂成 $2^k$ 個新的 shards，則原始 task group 可能最終同時驗證 $2^k$ shardchains，對於大的 $k$。
 
-這是通過對 active shard 配置與原始 shard 配置（目前用於選擇 Validator task groups 的配置）之間的距離施加限制來實現的。例如，可能要求從 active shard $(w,s)$ 到原始 shard $(w,s')$ 在 shard tree 中的距離，如果 $s'$ 是 $s$ 的前驅（即 $s'$ 是 binary string $s$ 的前綴），則不得超過3，如果 $s'$ 是 $s$ 的後繼（即 $s$ 是 $s'$ 的前綴），則不得超過2。否則，不允許進行 split 或 merge 操作。
+這是通過對 active shard 配置與原始 shard 配置（目前用於選擇 validator task groups 的配置）之間的距離施加限制來實現的。例如，可能要求從 active shard $(w,s)$ 到原始 shard $(w,s')$ 在 shard tree 中的距離，如果 $s'$ 是 $s$ 的前驅（即 $s'$ 是 binary string $s$ 的前綴），則不得超過3，如果 $s'$ 是 $s$ 的後繼（即 $s$ 是 $s'$ 的前綴），則不得超過2。否則，不允許進行 split 或 merge 操作。
 
-大致上，對於給定的 Validator task groups 集合的責任期間，一個 shard 可以被分裂（例如，三次）或合併（例如，兩次）的次數施加了限制。除此之外，合併或分裂創建 shard 之後，某段時間（某些區塊數）內不能重新配置它。
+大致上，對於給定的 validator task groups 集合的責任期間，一個 shard 可以被分裂（例如，三次）或合併（例如，兩次）的次數施加了限制。除此之外，合併或分裂創建 shard 之後，某段時間（某些區塊數）內不能重新配置它。
 
 \nxsubpoint\label{sp:split.necess} \embt(Determining the necessity of
 split operations.) shardchain 的 split 操作是由某些正式條件觸發的（例如，如果連續64個區塊的 shardchain 區塊至少有 $90\%$ 是滿的）。這些條件由 shardchain task group 監控。如果它們得到滿足，首先在新的 shardchain 區塊的標頭中包含一個「split 準備」標誌（並傳播到引用這個 shardchain 區塊的 masterchain 區塊）。然後，在幾個區塊之後，shardchain 區塊的標頭中包含「split 提交」標誌（並傳播到下一個 masterchain 區塊）。
 
 \nxsubpoint \embt(Performing split operations.) 在 shardchain $(w,s)$ 的區塊 $B$ 中包含「split commit」標誌後，該 shardchain 中不能有後續的區塊 $B'$。相反，將創建 shardchains $(w,s.0)$ 和 $(w,s.1)$ 的兩個區塊 $B'_0$ 和 $B'_1$，分別參考區塊 $B$ 作為它們的前一個區塊（並且它們都將通過標頭中的標誌指示 shard 剛剛被分裂）。下一個 masterchain 區塊將包含新 shardchains 的區塊 $B'_0$ 和 $B'_1$ 的 hashes；它不允許包含 shardchain $(w,s)$ 的新區塊 $B'$ 的 hash，因為「split commit」事件已經被提交到前一個 masterchain 區塊。
 
-請注意，兩個新的 shardchains 將由與舊的 shardchain 相同的 Validator task group 驗證，所以它們將自動擁有其狀態的副本。從 Infinite Sharding Paradigm 的角度來看，狀態分裂操作本身相對簡單（參見~\ptref{sp:split.merge.state}）。
+請注意，兩個新的 shardchains 將由與舊的 shardchain 相同的 validator task group 驗證，所以它們將自動擁有其狀態的副本。從 Infinite Sharding Paradigm 的角度來看，狀態分裂操作本身相對簡單（參見~\ptref{sp:split.merge.state}）。
 
 
 \nxsubpoint\label{sp:merge.necess} \embt(Determining the necessity of
 merge operations.) 合併 shard 操作的必要性也由某些正式條件檢測 (例如，如果連續64個區塊的兩個兄弟 shardchains 的區塊大小總和不超過最大區塊大小的 $60\%$)。這些正式條件還應考慮這些區塊所消耗的總 gas，並將其與當前的區塊 gas 限制進行比較，否則由於有一些計算密集型的交易阻止了更多交易的納入，區塊可能會偶然變小。
 
-這些條件由兩個兄弟 shards $(w,s.0)$ 和 $(w,s.1)$ 的 Validator task groups 監控。請注意，兄弟節點在 hypercube 路由方面必然是鄰居 (參考~\ptref{sp:hypercube})，因此任何 shard 的 task group 的 Validators 都將在某種程度上監控兄弟 shard。
+這些條件由兩個兄弟 shards $(w,s.0)$ 和 $(w,s.1)$ 的 validator task groups 監控。請注意，兄弟節點在 hypercube 路由方面必然是鄰居 (參考~\ptref{sp:hypercube})，因此任何 shard 的 task group 的 validators 都將在某種程度上監控兄弟 shard。
 
-當滿足這些條件時，Validator 子組之一可以通過發送特殊消息建議另一個合併。然後，它們組合成一個臨時的「合併任務組」，具有組合的成員資格，能夠運行 BFT 共識算法，並在必要時傳播區塊更新和區塊候選者。
+當滿足這些條件時，validator 子組之一可以通過發送特殊消息建議另一個合併。然後，它們組合成一個臨時的「合併任務組」，具有組合的成員資格，能夠運行 BFT 共識算法，並在必要時傳播區塊更新和區塊候選者。
 
-如果他們就合併的必要性和準備情況達成共識，「merge prepare」標誌將提交到每個 shardchain 的一些區塊的頭部，並附帶至少三分之二的兄弟 task group 的 Validators 的簽名（並被傳播到下一個 masterchain 區塊，以便每個人都可以為即將到來的重新配置做好準備）。但是，他們繼續為一些預定義數量的區塊創建單獨的 shardchain 區塊。
+如果他們就合併的必要性和準備情況達成共識，「merge prepare」標誌將提交到每個 shardchain 的一些區塊的頭部，並附帶至少三分之二的兄弟 task group 的 validators 的簽名（並被傳播到下一個 masterchain 區塊，以便每個人都可以為即將到來的重新配置做好準備）。但是，他們繼續為一些預定義數量的區塊創建單獨的 shardchain 區塊。
 
-\nxsubpoint \embt(Performing merge operations.) 之後，當來自兩個原始 task groups 的聯合的 Validators 準備成為已合併 shardchain 的 Validators 時 (這可能涉及從兄弟 shardchain 的狀態轉移和一個狀態合併操作)，他們在其 shardchain 的區塊的頭部提交一個「merge commit」標誌 (這一事件傳播到下一個 masterchain 區塊)，並停止在單獨的 shardchains 中創建新的區塊 (一旦出現 merge commit 標誌，在單獨的 shardchains 中創建區塊是被禁止的)。相反，創建了一個已合併的 shardchain 區塊 (由兩個原始 task groups 的聯合創建)，在其「header」中參考它的兩個「preceding blocks」。這反映在下一個 masterchain 區塊中，該區塊將包含已合併 shardchain 的新創建區塊的 hash。之後，已合併的 task group 繼續在已合併的 shardchain 中創建區塊。
+\nxsubpoint \embt(Performing merge operations.) 之後，當來自兩個原始 task groups 的聯合的 validators 準備成為已合併 shardchain 的 validators 時 (這可能涉及從兄弟 shardchain 的狀態轉移和一個狀態合併操作)，他們在其 shardchain 的區塊的頭部提交一個「merge commit」標誌 (這一事件傳播到下一個 masterchain 區塊)，並停止在單獨的 shardchains 中創建新的區塊 (一旦出現 merge commit 標誌，在單獨的 shardchains 中創建區塊是被禁止的)。相反，創建了一個已合併的 shardchain 區塊 (由兩個原始 task groups 的聯合創建)，在其「header」中參考它的兩個「preceding blocks」。這反映在下一個 masterchain 區塊中，該區塊將包含已合併 shardchain 的新創建區塊的 hash。之後，已合併的 task group 繼續在已合併的 shardchain 中創建區塊。
 
 \mysubsection{區塊鏈專案的分類}\label{sect:class.blkch}
 
@@ -991,11 +991,11 @@ merge operations.) 合併 shard 操作的必要性也由某些正式條件檢測
 
 兩種最常見的範疇是 {\em Proof-of-Work (PoW)} 和 {\em Proof-of-Stake (PoS)}。工作量證明方法通常允許任何節點創建（“挖掘”）一個新區塊（並獲得與挖掘區塊相關的一些獎勵），前提是它有幸在其他競爭者成功之前解決一個否則無用的計算問題（通常涉及計算大量的hashes）。在出現分支的情況下（例如，如果兩個節點發布兩個否則有效但不同的區塊來跟隨前一個），最長的分支勝出。這樣，區塊鏈的不變性保證是基於生成區塊鏈所花費的{\em 工作量}（計算資源）：任何希望創建此區塊鏈的分支的人都需要重新做這些工作，以創建已提交區塊的替代版本。為此，一個人需要控制超過$50\%$的創建新區塊所花費的總計算能力，否則替代分支變得最長的機會會指數性地降低。
 
-權益證明方法基於一些特殊節點（{\em Validator}）所做的大量{\em  stake }（以加密貨幣提名），以斷言它們已經檢查了一些區塊並發現它們是正確的。Validator簽署區塊，並因此收到一些小獎勵；但是，如果一個Validator被發現簽署了一個不正確的區塊，並且提供了這方面的證據，則其全部或部分 stake 將被沒收。這樣，區塊鏈的有效性和不變性保證是由Validator對區塊鏈有效性的總 stake 給出的。
+權益證明方法基於一些特殊節點（{\em validator}）所做的大量{\em  stake }（以加密貨幣提名），以斷言它們已經檢查了一些區塊並發現它們是正確的。validator簽署區塊，並因此收到一些小獎勵；但是，如果一個validator被發現簽署了一個不正確的區塊，並且提供了這方面的證據，則其全部或部分 stake 將被沒收。這樣，區塊鏈的有效性和不變性保證是由validator對區塊鏈有效性的總 stake 給出的。
 
-從這個角度看，權益證明更為自然，因為它激勵Validator（它們取代了PoW礦工）執行有用的計算（需要檢查或創建新區塊，尤其是執行區塊中列出的所有交易），而不是計算其他無用的hashes。這樣，Validator會購買更適合處理用戶交易的硬件，以獲得與這些交易相關的獎勵，從整個系統的角度看，這似乎是一項相當有用的投資。
+從這個角度看，權益證明更為自然，因為它激勵validator（它們取代了PoW礦工）執行有用的計算（需要檢查或創建新區塊，尤其是執行區塊中列出的所有交易），而不是計算其他無用的hashes。這樣，validator會購買更適合處理用戶交易的硬件，以獲得與這些交易相關的獎勵，從整個系統的角度看，這似乎是一項相當有用的投資。
 
-然而，權益證明系統在實施上有些挑戰，因為必須為許多罕見但可能的情況提供支援。例如，一些惡意的Validator可能密謀破壞系統以獲取利益（例如，通過改變自己的加密貨幣餘額）。這導致了一些非常重要的博弈論問題。
+然而，權益證明系統在實施上有些挑戰，因為必須為許多罕見但可能的情況提供支援。例如，一些惡意的validator可能密謀破壞系統以獲取利益（例如，通過改變自己的加密貨幣餘額）。這導致了一些非常重要的博弈論問題。
 
 簡而言之，權益證明更為自然且更有前景，尤其是對於多區塊鏈專案（因為如果有許多區塊鏈，工作量證明將需要過多的計算資源），但必須更加小心地考慮和實施。大多數目前運行的區塊鏈專案，尤其是最古老的專案（如Bitcoin和至少是原始的Ethereum），使用工作量證明。
 
@@ -1004,26 +1004,26 @@ vs.\ BFT.) 雖然Proof-of-Work算法彼此非常相似，主要差異在於必�
 
 基本上，人們必須回答關於Proof-of-Stake算法的以下問題：
 \begin{itemize}
-\item 誰可以產生（“挖掘”）一個新區塊 - 任何完整節點，或只是Validator的（相對地）小子集的成員？ (大多數PoS系統要求新區塊由數個指定的Validator生成並簽名。)
-\item Validator是否通過他們的簽名保證區塊的有效性，還是所有完整節點都期望自己驗證所有區塊？ (可擴展的PoS系統必須依賴Validator的簽名，而不是要求所有節點驗證所有區塊鏈的所有區塊。)
+\item 誰可以產生（“挖掘”）一個新區塊 - 任何完整節點，或只是validator的（相對地）小子集的成員？ (大多數PoS系統要求新區塊由數個指定的validator生成並簽名。)
+\item validator是否通過他們的簽名保證區塊的有效性，還是所有完整節點都期望自己驗證所有區塊？ (可擴展的PoS系統必須依賴validator的簽名，而不是要求所有節點驗證所有區塊鏈的所有區塊。)
 \item 是否有一個預先知道的指定生產者來生成下一個區塊鏈區塊，這樣其他人就不能代替它產生那個區塊？
-\item 新建的區塊最初只由一個Validator（其生產者）簽署，還是它必須從一開始就收集大多數Validator的簽名？
+\item 新建的區塊最初只由一個validator（其生產者）簽署，還是它必須從一開始就收集大多數validator的簽名？
 \end{itemize}
 
-雖然似乎根據這些問題的答案有$2^4$可能的PoS算法類別，但在實踐中，區別主要歸結為兩種主要的PoS方法。事實上，大多數現代的PoS算法，旨在用於可擴展的多鏈系統，在前兩個問題上的答案是相同的：只有Validator可以產生新區塊，並且他們保證區塊的有效性，而不要求所有完整節點自己檢查所有區塊的有效性。
+雖然似乎根據這些問題的答案有$2^4$可能的PoS算法類別，但在實踐中，區別主要歸結為兩種主要的PoS方法。事實上，大多數現代的PoS算法，旨在用於可擴展的多鏈系統，在前兩個問題上的答案是相同的：只有validator可以產生新區塊，並且他們保證區塊的有效性，而不要求所有完整節點自己檢查所有區塊的有效性。
 
 至於最後兩個問題，它們的答案被證明是高度相關的，基本上只留下了兩個基本選項：
 \begin{itemize}
-\item {\em Delegated Proof-of-Stake (DPOS)}：每個區塊都有一個眾所周知的指定生產者；其他人不能生產該區塊；新區塊最初只由其生成的Validator簽署。
-\item {\em Byzantine Fault Tolerant (BFT)} PoS算法：有一個已知的Validator子集，其中任何一個都可以建議一個新區塊；在多個建議的候選區塊中選擇實際的下一個區塊的選擇，必須在被發布到其他節點之前由大多數Validator驗證並簽名，這是通過Byzantine Fault Tolerant共識協議的版本來實現的。
+\item {\em Delegated Proof-of-Stake (DPOS)}：每個區塊都有一個眾所周知的指定生產者；其他人不能生產該區塊；新區塊最初只由其生成的validator簽署。
+\item {\em Byzantine Fault Tolerant (BFT)} PoS算法：有一個已知的validator子集，其中任何一個都可以建議一個新區塊；在多個建議的候選區塊中選擇實際的下一個區塊的選擇，必須在被發布到其他節點之前由大多數validator驗證並簽名，這是通過Byzantine Fault Tolerant共識協議的版本來實現的。
 \end{itemize}
 
 \nxsubpoint\label{sp:dpos.bft.compare} \embt(Comparison of DPOS and
-BFT PoS.) BFT方法的優勢是新產生的區塊從一開始就有大多數Validator的簽名證明其有效性。另一個優點是，如果大多數Validator正確執行BFT共識協議，則根本不會出現分叉。但另一方面，BFT算法往往相當複雜，並且需要更多的時間讓Validator子集達成共識。因此，區塊不能太頻繁地生成。這就是為什麼我們預期TON Blockchain（從這個分類的角度看是一個BFT專案）每五秒只生成一個區塊。在實踐中，這個間隔可能會減少到2-3秒（儘管我們不承諾這一點），但如果Validator分散在全球各地，則不會再減少。
+BFT PoS.) BFT方法的優勢是新產生的區塊從一開始就有大多數validator的簽名證明其有效性。另一個優點是，如果大多數validator正確執行BFT共識協議，則根本不會出現分叉。但另一方面，BFT算法往往相當複雜，並且需要更多的時間讓validator子集達成共識。因此，區塊不能太頻繁地生成。這就是為什麼我們預期TON Blockchain（從這個分類的角度看是一個BFT專案）每五秒只生成一個區塊。在實踐中，這個間隔可能會減少到2-3秒（儘管我們不承諾這一點），但如果validator分散在全球各地，則不會再減少。
 
-DPOS算法的優勢是相當簡單和直接。由於它依賴於預先知道的指定區塊生成者，所以可以非常頻繁地生成新區塊，例如，每兩秒一次，或者甚至每秒一次。\footnote{有些人甚至聲稱DPOS區塊生成時間為半秒，如果Validator分散在幾個大陸上，這似乎不太現實。}
+DPOS算法的優勢是相當簡單和直接。由於它依賴於預先知道的指定區塊生成者，所以可以非常頻繁地生成新區塊，例如，每兩秒一次，或者甚至每秒一次。\footnote{有些人甚至聲稱DPOS區塊生成時間為半秒，如果validator分散在幾個大陸上，這似乎不太現實。}
 
-然而，DPOS要求所有節點 - 或至少所有Validator - 驗證收到的所有區塊，因為生成並簽署新區塊的Validator不僅確認了此區塊的相對有效性，還確認了它引用的前一個區塊的有效性，以及在鏈中更遠的所有區塊（也許直到當前Validator子集的責任期開始）。當前Validator子集上有一個預定的順序，因此每個區塊都有一個指定的生產者（即，預期生成該區塊的Validator）；這些指定的生產者按循環方式旋轉。這樣，一個區塊首先只由其生成的Validator簽名；然後，當挖掘下一個區塊時，並且其生產者選擇引用此區塊而不是它的前一個區塊（否則它的區塊將位於較短的鏈中，這可能會在未來失去“最長分叉”競賽），下一個區塊的簽名本質上也是對前一個區塊的附加簽名。這樣，一個新區塊逐漸收集更多Validator的簽名 - 例如，生成下一個區塊所需的時間內的二十個簽名。一個完整的節點將需要等待這二十個簽名，或者自己驗證區塊，從一個已充分確認的區塊開始（例如，回退二十個區塊），這可能並不容易。
+然而，DPOS要求所有節點 - 或至少所有validator - 驗證收到的所有區塊，因為生成並簽署新區塊的validator不僅確認了此區塊的相對有效性，還確認了它引用的前一個區塊的有效性，以及在鏈中更遠的所有區塊（也許直到當前validator子集的責任期開始）。當前validator子集上有一個預定的順序，因此每個區塊都有一個指定的生產者（即，預期生成該區塊的validator）；這些指定的生產者按循環方式旋轉。這樣，一個區塊首先只由其生成的validator簽名；然後，當挖掘下一個區塊時，並且其生產者選擇引用此區塊而不是它的前一個區塊（否則它的區塊將位於較短的鏈中，這可能會在未來失去“最長分叉”競賽），下一個區塊的簽名本質上也是對前一個區塊的附加簽名。這樣，一個新區塊逐漸收集更多validator的簽名 - 例如，生成下一個區塊所需的時間內的二十個簽名。一個完整的節點將需要等待這二十個簽名，或者自己驗證區塊，從一個已充分確認的區塊開始（例如，回退二十個區塊），這可能並不容易。
 
 DPOS算法的明顯缺點是，只有在挖掘二十個更多的區塊後，一個新區塊（以及其內部的交易）才能達到相同的信任水平（“遞歸可靠性”如\ptref{sp:rec.rel}中所討論的），而BFT算法則立即提供這種信任水平（例如，二十個簽名）。另一個缺點是，DPOS使用“最長分叉勝出”的方法來切換到其他分叉；如果至少有一些生產者在我們感興趣的那個之後無法生成後續的區塊（或者由於網路分割或複雜的攻擊而未能觀察到這些區塊），這使得分叉相當可能。
 
@@ -1062,9 +1062,9 @@ several workchains having the same rules, or {\em confederations}.) 在某些情
 雖然製作一個異質系統，允許創建具有相同規則的多個work\-chains（即一個聯邦）可能看起來是建立可擴展系統的便宜方法，但這種方法也有很多缺點。從本質上講，如果有人在許多具有相同規則的workchains中托管一個大型專案，她得到的不是一個大型專案，而是該專案的許多小實例。這就像有一個聊天應用程序（或遊戲）只允許每個聊天（或遊戲）房間有最多50名成員，但「擴展」通過創建新房間在必要時容納更多用戶。結果，許多用戶可以參加聊天或遊戲，但我們能說這樣的系統真的可擴展嗎？
 
 \nxsubpoint\label{sp:pres.masterch} \embt(Presence of a masterchain,
-external or internal.) 有時，一個多鏈計畫有一個特殊的「masterchain」（有時被稱為「控制區塊鏈」），用於儲存系統的整體配置（所有活躍的區塊鏈集合，或更準確地說是workchains）、當前的Validator集合（對於一個Proof-of-Stake系統）等。有時其他的區塊鏈被「綁定」到masterchain，例如通過將它們最新的區塊的hash值提交到它（TON Blockchain也是這麼做的）。
+external or internal.) 有時，一個多鏈計畫有一個特殊的「masterchain」（有時被稱為「控制區塊鏈」），用於儲存系統的整體配置（所有活躍的區塊鏈集合，或更準確地說是workchains）、當前的validator集合（對於一個Proof-of-Stake系統）等。有時其他的區塊鏈被「綁定」到masterchain，例如通過將它們最新的區塊的hash值提交到它（TON Blockchain也是這麼做的）。
 
-在某些情況下，masterchain是{\em external}，這意味著它不是該計畫的一部分，而是一個原先完全與其無關的區塊鏈，對於新計畫的使用並不知情。例如，人們可以嘗試使用Ethereum區塊鏈作為一個外部計畫的masterchain，並為此目的在Ethereum區塊鏈上發布特殊的智能合約（例如，用於選舉和懲罰Validator）。
+在某些情況下，masterchain是{\em external}，這意味著它不是該計畫的一部分，而是一個原先完全與其無關的區塊鏈，對於新計畫的使用並不知情。例如，人們可以嘗試使用Ethereum區塊鏈作為一個外部計畫的masterchain，並為此目的在Ethereum區塊鏈上發布特殊的智能合約（例如，用於選舉和懲罰validator）。
 
 \nxsubpoint\label{sp:shard.supp} \embt(Sharding support.) 有些區塊鏈計畫（或系統）有原生的支持{\em sharding}，這意味著幾個（必然是homogeneous；參見~\ptref{sp:blkch.hom.het}）區塊鏈被視為單一（從高級角度看）虛擬區塊鏈的{\em shards\/}。例如，人們可以創建256個具有相同規則的shard區塊鏈（「shardchains」），並根據其$\accountid$的第一個字節來確定帳戶的狀態。
 
@@ -1166,7 +1166,7 @@ changing the ``genome'' of a blockchain project.) 上述分類定義了區塊鏈
     與此同時，即使一個人不能在區塊鏈內「創建一個Facebook」（參見\ptref{sp:blockchain.facebook}），不論是EOS還是其他方式，我們認為EOS可能會成為某些高度專用的弱互動分散式應用程序的便利平台，類似於BitShares（去中心化交易所）和SteemIt（去中心化博客平台）。
 
 \nxsubpoint\label{sp:discuss.PolkaDot} \embt(PolkaDot \cite{PolkaWP}; \url{https://polkadot.io/}.)
-            {\em PolkaDot\/} (2019或之後) 是最佳思考且最詳細的建議多鏈權益證明專案之一；其開發是由Ethereum的共同創辦人之一領導的。此專案是我們地圖上與TON Blockchain最接近的專案。（事實上，我們的「漁民」和「提名人」術語都是歸功於PolkaDot專案。）
+            {\em PolkaDot\/} (2019或之後) 是最佳思考且最詳細的建議多鏈權益證明專案之一；其開發是由Ethereum的共同創辦人之一領導的。此專案是我們地圖上與TON Blockchain最接近的專案。（事實上，我們的「fisherman」和「提名人」術語都是歸功於PolkaDot專案。）
 
 PolkaDot是一個異構的鬆散連接的多鏈權益證明專案，具有用於生成新區塊的拜占庭容錯（BFT）共識和主鏈（可能是外部的，例如Ethereum區塊鏈）。它還使用超立方體路由，有點像TON的慢速版本，如\ptref{sp:hypercube}所述。
 
@@ -1177,7 +1177,7 @@ PolkaDot是一個異構的鬆散連接的多鏈權益證明專案，具有用於
 然而，PolkaDot不支持分片且不是緊密連接的。這在某種程度上限制了其可伸縮性，與EOS相似。（或許稍好一些，因為PolkaDot使用BFT PoS而非DPoS。）
 
 \nxsubpoint \embt(Universa; \url{https://universa.io}.)  
-我們之所以在此提及這個不尋常的區塊鏈專案，是因為它是到目前為止唯一隨便提到與我們的Infinite Sharding Paradigm相似的專案（參見~\ptref{sp:ISP}）。其另一個特點是它通過承諾只有專案的受信任和持有許可的夥伴才會被錄取為Validator，因此他們永遠不會提交無效的區塊，來繞過所有與Byzantine Fault Tolerance相關的複雜性。這是一個有趣的決定；但是，它本質上使一個區塊鏈專案故意變得{\em 集中化}，這是區塊鏈專案通常想要避免的（在一個受信任的集中化環境中為什麼需要區塊鏈？）。
+我們之所以在此提及這個不尋常的區塊鏈專案，是因為它是到目前為止唯一隨便提到與我們的Infinite Sharding Paradigm相似的專案（參見~\ptref{sp:ISP}）。其另一個特點是它通過承諾只有專案的受信任和持有許可的夥伴才會被錄取為validator，因此他們永遠不會提交無效的區塊，來繞過所有與Byzantine Fault Tolerance相關的複雜性。這是一個有趣的決定；但是，它本質上使一個區塊鏈專案故意變得{\em 集中化}，這是區塊鏈專案通常想要避免的（在一個受信任的集中化環境中為什麼需要區塊鏈？）。
 
 \nxsubpoint \embt(Plasma; \url{https://plasma.io}).)  
 {\em Plasma\/} (2019?)是Ethereum的另一位共同創辦人的非傳統區塊鏈專案。它旨在緩解Ethereum的某些限制，而不引入sharding。本質上，它是一個與Ethereum分開的專案，引入了一系列的（異構的）workchains，與最高級別的Ethereum區塊鏈綁定（作為一個外部masterchain）。資金可以從層次結構中的任何區塊鏈轉移出去（從Ethereum區塊鏈作為根開始），並伴隨一個要完成的工作描述。然後在子workchain中進行必要的計算（可能需要將原始工作的部分進一步轉發到樹的下方），其結果被傳遞上去，並收集獎勵。通過一個（由payment channel啟發的）機制來避免實現這些workchains的一致性和驗證的問題，該機制允許用戶從一個行為不端的workchain單方面撤回他們的資金到其父workchain（儘管很慢），並重新分配他們的資金和工作到另一個workchain。
@@ -1196,9 +1196,9 @@ TON（The Open Network）Block\-chain（計劃於2018年）是我們在本文檔
 
 我們不能說這是技術上的不可能。當然，需要一個緊密耦合的區塊鏈專案，具有真正的sharding（即TON），以便這種大型應用不會運行得太慢（例如，從一個shardchain中的用戶傳送消息和更新到另一個shardchain中的朋友，且延遲合理）。然而，我們認為這是不需要的，且永遠不會被完成，因為價格會過高。
 
-讓我們考慮將“將Facebook上載到區塊鏈”作為一個思考實驗；任何其他相似規模的專案也可能作為一個示例。一旦Facebook被上載到區塊鏈，目前由Facebook的伺服器完成的所有操作將被序列化為某些區塊鏈的交易（例如，TON的shardchains），並將由這些區塊鏈的所有Validator執行。每項操作都必須執行，比如說，至少20次，如果我們希望每個區塊至少收集20個Validator簽名（立即或最終，如在DPOS系統中）。同樣，Facebook伺服器在其硬碟上保留的所有數據將被保留在相應shardchain的所有Validator的硬碟上（即，至少有20份副本）。
+讓我們考慮將“將Facebook上載到區塊鏈”作為一個思考實驗；任何其他相似規模的專案也可能作為一個示例。一旦Facebook被上載到區塊鏈，目前由Facebook的伺服器完成的所有操作將被序列化為某些區塊鏈的交易（例如，TON的shardchains），並將由這些區塊鏈的所有validator執行。每項操作都必須執行，比如說，至少20次，如果我們希望每個區塊至少收集20個validator簽名（立即或最終，如在DPOS系統中）。同樣，Facebook伺服器在其硬碟上保留的所有數據將被保留在相應shardchain的所有validator的硬碟上（即，至少有20份副本）。
 
-因為Validator基本上是與Facebook目前使用的相同伺服器（或許是伺服器集群，但這不影響此論點的有效性），我們可以看出，將Facebook運行在blockchain中的總硬件開銷至少比傳統方式實現高出20倍。
+因為validator基本上是與Facebook目前使用的相同伺服器（或許是伺服器集群，但這不影響此論點的有效性），我們可以看出，將Facebook運行在blockchain中的總硬件開銷至少比傳統方式實現高出20倍。
 
 事實上，開銷還會更高，因為blockchain的虛擬機比運行優化編譯程式碼的“裸CPU”要慢，且其儲存未針對Facebook特定的問題進行優化。通過為Facebook設計具有某些特殊交易的特定workchain，可以部分地減輕此問題；這是BitShares和EOS實現高性能的方法，也可在TON Blockchain中使用。然而，一般的blockchain設計本身仍然會帶來一些額外的限制，例如需要將所有操作註冊為block中的交易，將這些交易組織成Merkle tree，計算和檢查它們的Merkle hashes，進一步傳播這個block等。
 
@@ -1286,7 +1286,7 @@ Protocol over ADNL.)  一個建立在ADNL上的可靠的任意大小的數據包
 \mysubsection{TON DHT: Kademlia-like Distributed Hash
   Table}\label{sect:kademlia}
 
-{\em TON 分散式雜湊表 (DHT)\/} 在TON Project的網路部分中扮演了關鍵角色，用於定位網路中的其他節點。例如，一個想要提交交易到某個shardchain的客戶端可能想要找到該shardchain的Validator或collator，或至少某個可以將客戶端的交易轉發到collator的節點。這可以通過在TON DHT中查找特定的key來完成。TON DHT的另一個重要應用是，它可以快速填充新節點的鄰居表格 (參見~\ptref{sp:net.startup})，只需查找隨機key，或新節點的地址。如果節點對其入站數據報使用代理和通道，則將通道標識符和其入口點（例如，IP地址和UDP端口）發布在TON DHT中；然後，所有希望發送數據報到該節點的節點首先將從DHT獲取此聯繫信息。
+{\em TON 分散式雜湊表 (DHT)\/} 在TON Project的網路部分中扮演了關鍵角色，用於定位網路中的其他節點。例如，一個想要提交交易到某個shardchain的客戶端可能想要找到該shardchain的validator或collator，或至少某個可以將客戶端的交易轉發到collator的節點。這可以通過在TON DHT中查找特定的key來完成。TON DHT的另一個重要應用是，它可以快速填充新節點的鄰居表格 (參見~\ptref{sp:net.startup})，只需查找隨機key，或新節點的地址。如果節點對其入站數據報使用代理和通道，則將通道標識符和其入口點（例如，IP地址和UDP端口）發布在TON DHT中；然後，所有希望發送數據報到該節點的節點首先將從DHT獲取此聯繫信息。
 
 TON DHT屬於{\em Kademlia-like分散式雜湊表\/}家族~\cite{Kademlia}。
 
@@ -1347,7 +1347,7 @@ TON DHT的一個特殊特性是，它試圖選擇往返延遲最小的節點作�
 
 這種機制可以用於創建一個分佈式的``torrent tracker''，在其中所有對某個``torrent''（即，某個文件）感興趣的節點可以找到對同一個torrent感興趣或已經擁有副本的其他節點。
 
-{\em TON Storage\/} (參考~\ptref{sp:ex.ton.storage})使用此技術來找到擁有所需文件副本的節點（例如，shardchain的狀態快照或舊的區塊）。然而，其更重要的用途是創建``overlay multicast subnetworks''和``network interest groups''（參考~\ptref{sect:overlay}）。其想法是只有一些節點對特定shardchain的更新感興趣。如果shardchains的數量變得非常大，則找到對相同shard感興趣的節點可能會變得很複雜。這個``distributed torrent tracker''提供了一種方便的方法來找到這些節點。另一個選項是從Validator那裡請求它們，但這不會是一個可擴展的方法，Validator可能選擇不回應來自任意未知節點的這種查詢。
+{\em TON Storage\/} (參考~\ptref{sp:ex.ton.storage})使用此技術來找到擁有所需文件副本的節點（例如，shardchain的狀態快照或舊的區塊）。然而，其更重要的用途是創建``overlay multicast subnetworks''和``network interest groups''（參考~\ptref{sect:overlay}）。其想法是只有一些節點對特定shardchain的更新感興趣。如果shardchains的數量變得非常大，則找到對相同shard感興趣的節點可能會變得很複雜。這個``distributed torrent tracker''提供了一種方便的方法來找到這些節點。另一個選項是從validator那裡請求它們，但這不會是一個可擴展的方法，validator可能選擇不回應來自任意未知節點的這種查詢。
 
 \nxsubpoint \embt(Fall-back keys.) 目前描述的大多數``key types''在其TL描述中都有一個額外的32位整數字段，通常等於零。但是，如果通過hash該描述獲得的鍵不能從TON DHT中檢索或更新，則會增加此字段中的值，並進行新的嘗試。這樣，通過創建許多靠近被攻擊鍵的抽象地址並控制相應的DHT節點，就不能``capture''和``censor''一個鍵（即，進行鍵保留攻擊）。
 
@@ -1400,7 +1400,7 @@ TON overlay網路中的鄰居鏈接可以使用專用的點對點ADNL通道來�
 overlay網路的每個節點都維護一個鄰居列表（關於overlay網路），包含它們的抽象地址（它們用於在overlay網路中識別它們）和一些鏈接數據（例如，用於與它們通信的ADNL通道）。
 
 
-\nxsubpoint \embt(Private and public overlay networks.) 有些overlay網路是{\em public}，意味著任何節點都可以隨意加入。另一些是{\em private}，意味著只有某些節點可以被允許（例如，那些可以證明他們作為Validator的身份的節點。）一些private overlay網路甚至可能對“一般公眾”未知。這些overlay網路的資訊只提供給某些受信任的節點；例如，它可以使用公鑰加密，並且只有擁有相應私鑰副本的節點才能解密此資訊。
+\nxsubpoint \embt(Private and public overlay networks.) 有些overlay網路是{\em public}，意味著任何節點都可以隨意加入。另一些是{\em private}，意味著只有某些節點可以被允許（例如，那些可以證明他們作為validator的身份的節點。）一些private overlay網路甚至可能對“一般公眾”未知。這些overlay網路的資訊只提供給某些受信任的節點；例如，它可以使用公鑰加密，並且只有擁有相應私鑰副本的節點才能解密此資訊。
 
 \nxsubpoint \embt(Centrally controlled overlay networks.) 有些overlay網路是{\em centrally controlled}，由一個或幾個節點或某個眾所周知的公鑰的所有者控制。其他則是{\em decentralized}，意味著沒有特定節點負責它們。
 
@@ -1444,7 +1444,7 @@ overlay network.) 在一個節點學到它想要加入的overlay網路的網路�
 
 在用於傳播特定shardchain的新區塊（或僅新區塊頭）的overlay network的情況下，一個節點檢查連接性的好方法是追踪到目前為止收到的最新區塊。因為一個區塊通常每五秒生成一次，如果超過，比如，三十秒都沒有收到新的區塊，那麼節點可能已經從overlay network中斷開了。
 
-\nxsubpoint\label{sp:streaming.multicast} \embt(Streaming broadcast protocol.) 終於，TON overlay network中有一個{\em streaming broadcast protocol\/}，例如，用於在某些shardchain的Validator之間傳播區塊候選者（“shardchain task group”），當然，他們為此目的創建了一個私有的overlay network。相同的協議可以用來將新的shardchain區塊傳播給該shardchain的所有完整節點。
+\nxsubpoint\label{sp:streaming.multicast} \embt(Streaming broadcast protocol.) 終於，TON overlay network中有一個{\em streaming broadcast protocol\/}，例如，用於在某些shardchain的validator之間傳播區塊候選者（“shardchain task group”），當然，他們為此目的創建了一個私有的overlay network。相同的協議可以用來將新的shardchain區塊傳播給該shardchain的所有完整節點。
 
 此協議已在~\ptref{sp:sh.blk.cand.prop}中描述過：新的（大）廣播消息被分成，比如說，$N$個一千字節的片段；這些片段的序列通過像Reed-Solomon或一個噴泉碼（例如，RaptorQ碼\cite{RaptorQ} \cite{Raptor}）這樣的消除碼擴展到$M\geq N$的片段，並且這些$M$片段按升序的chunk number順序流向所有鄰居。參與的節點收集這些片段，直到它們可以恢復原始的大消息（為此，必須成功接收至少$N$的片段），然後指示其鄰居停止發送流的新片段，因為現在這些節點可以擁有原始消息的副本自己生成後續的片段。這些節點繼續生成流的後續片段並將它們發送給它們的鄰居，除非鄰居反過來指示不再需要這樣做。
 
@@ -1494,7 +1494,7 @@ overlay network.) 在一個節點學到它想要加入的overlay網路的網路�
 
 \nxsubpoint\label{sp:pure.blockchain} \embt(Pure ``on-chain'' applications: distributed applications, or ``dapps'', residing in the blockchain.) 其中一種可能的方法，如在~\ptref{sp:on.off.chain}中提到的，是將一個「分散式應用程式」（通常縮寫為「dapp」）完全部署在TON區塊鏈中，作為一個智能合約或一組智能合約。所有數據都將作為這些智能合約的永久狀態部分保存，並且所有與該專案的交互都將通過發送到或從這些智能合約接收的(TON區塊鏈)消息來完成。
 
-我們已經在~\ptref{sp:blockchain.facebook}中討論過這種方法有其缺點和限制。它也有其優點：這樣的分散式應用程式不需要伺服器來運行或儲存其數據（它運行在「區塊鏈中」---即在Validator的硬體上），並享有區塊鏈極高的(拜占庭)可靠性和可訪問性。這種分散式應用的開發者不需要購買或租用任何硬體；她需要做的只是開發一些軟體（即智能合約的程式碼）。之後，她將有效地從Validator那裡租用計算能力，並用Toncoin支付，要麼由她自己支付，要麼由她的用戶承擔。
+我們已經在~\ptref{sp:blockchain.facebook}中討論過這種方法有其缺點和限制。它也有其優點：這樣的分散式應用程式不需要伺服器來運行或儲存其數據（它運行在「區塊鏈中」---即在validator的硬體上），並享有區塊鏈極高的(拜占庭)可靠性和可訪問性。這種分散式應用的開發者不需要購買或租用任何硬體；她需要做的只是開發一些軟體（即智能合約的程式碼）。之後，她將有效地從validator那裡租用計算能力，並用Toncoin支付，要麼由她自己支付，要麼由她的用戶承擔。
 
 \nxsubpoint\label{sp:pure.net.serv} \embt(Pure network services: ``ton-sites'' and ``ton-services''.) 另一個極端選擇是將服務部署在一些伺服器上，並通過在~\ptref{sect:ANL}中描述的ADNL協議使其供用戶使用，也許還有一些更高級的協議，如在~\ptref{sp:RLDP}中討論的RLDP，該協議可以用於以任何自訂格式向服務發送RPC查詢並獲得這些查詢的答案。這樣，該服務將完全在鏈外，並將駐留在TON網路中，幾乎不使用TON區塊鏈。
 
@@ -1543,7 +1543,7 @@ TON區塊鏈可能只用於查找服務的抽象地址或地址，如在~\ptref{
 
 
 \nxsubpoint\label{sp:side.chain.reg} \embt(Registry or exchange in a
-side-chain.)  另一種實現去中心化混合註冊表的方法是創建一個獨立的專用區塊鏈（「side-chain」），由其自己的一組自稱為Validator的人維護，他們在on-chain智能合約中發佈他們的身份，並為所有感興趣的方提供網路訪問這個專用的區塊鏈，通過專用覆蓋網路收集交易候選人和廣播塊更新（cf.~\ptref{sect:overlay}）。然後，這個sidechain的任何完整節點都可以維護其自己的共享註冊表副本（本質上等於此side-chain的全域狀態），並處理與此註冊表相關的任意查詢。
+side-chain.)  另一種實現去中心化混合註冊表的方法是創建一個獨立的專用區塊鏈（「side-chain」），由其自己的一組自稱為validator的人維護，他們在on-chain智能合約中發佈他們的身份，並為所有感興趣的方提供網路訪問這個專用的區塊鏈，通過專用覆蓋網路收集交易候選人和廣播塊更新（cf.~\ptref{sect:overlay}）。然後，這個sidechain的任何完整節點都可以維護其自己的共享註冊表副本（本質上等於此side-chain的全域狀態），並處理與此註冊表相關的任意查詢。
 
 \nxsubpoint \embt(Registry or exchange in a workchain.) 另一個選擇是在TON區塊鏈內創建一個專用的workchain，專門用於創建註冊表、市場和交易所。這可能比使用位於基本workchain中的智能合約更有效率和更便宜(cf.~\ptref{sp:basic.workchain})。但是，這仍然比在side-chains中維護註冊表更昂貴(cf.~\ptref{sp:side.chain.reg}）。
 
@@ -1601,7 +1601,7 @@ contract.)  原則上，對於包含DNS智能合約的masterchain或shardchain�
 \nxsubpoint\label{sp:get.methods} \embt(``Get methods'' of smart
 contracts.)  一個更好的方法是在智能合約中定義一些{\em get methods\/}，即一些類型的入站消息，當交付時不會影響智能合約的狀態，但會生成一個或多個包含``結果''的輸出消息的get方法。這樣，只要知道它實現了具有已知簽名的get方法（即已知要發送的入站消息的格式以及作為結果接收的出站消息的格式），就可以從智能合約中獲取數據。
 
-這種方法更加優雅，並符合面向對象編程（OOP）。然而，到目前為止，它有一個明顯的缺陷：必須實際將交易提交到區塊鏈（將get消息發送到智能合約），等待它被提交並由Validator處理，從新塊中提取答案，並支付燃氣費（即在Validator的硬件上執行get方法）。這是資源的浪費：get方法無論如何都不會改變智能合約的狀態，所以它們不需要在區塊鏈中執行。
+這種方法更加優雅，並符合面向對象編程（OOP）。然而，到目前為止，它有一個明顯的缺陷：必須實際將交易提交到區塊鏈（將get消息發送到智能合約），等待它被提交並由validator處理，從新塊中提取答案，並支付燃氣費（即在validator的硬件上執行get方法）。這是資源的浪費：get方法無論如何都不會改變智能合約的狀態，所以它們不需要在區塊鏈中執行。
 
 \nxsubpoint\label{sp:tent.exec.get} \embt(Tentative execution of get
 methods of smart contracts.)  我們已經提到
@@ -1704,11 +1704,11 @@ parameters.)  超連結URL可能不僅包含所述服務的(TON) DNS域或抽象
 
 這個簡單的支付通道協議是 {\em fair\/}，意味著任何一方都可以總是獲得其應得的，無論另一方是否合作，並且如果試圖欺騙，很可能失去其承諾給支付通道的所有資金。
 
-\nxsubpoint\label{sp:sync.pc.as.blockch} \embt(Synchronous payment channel as a simple virtual blockchain with two Validators.) 上面的簡單同步支付通道的示例可以這樣重新描述。想像一下，狀態序列 $S_0$、$S_1$、...、$S_n$ 實際上是一個非常簡單區塊鏈的區塊序列。這個區塊鏈的每個區塊基本上只包含區塊鏈的當前狀態，也許還有對前一個區塊（即其hash）的引用。$A$ 和 $B$ 兩方都作為此區塊鏈的Validator，所以每個區塊必須收集他們兩人的簽名。區塊鏈的狀態 $S_i$ 定義了下一個區塊的指定生產者 $o_i$，所以 $A$ 和 $B$ 在生產下一個區塊時沒有競爭。生產者 $A$ 只能創建將資金從 $A$ 轉移到 $B$ 的區塊（即減少不平衡：$\delta_{i+1}\leq\delta_i$），$B$ 則只能將資金從 $B$ 轉移到 $A$（即增加 $\delta$）。
+\nxsubpoint\label{sp:sync.pc.as.blockch} \embt(Synchronous payment channel as a simple virtual blockchain with two validators.) 上面的簡單同步支付通道的示例可以這樣重新描述。想像一下，狀態序列 $S_0$、$S_1$、...、$S_n$ 實際上是一個非常簡單區塊鏈的區塊序列。這個區塊鏈的每個區塊基本上只包含區塊鏈的當前狀態，也許還有對前一個區塊（即其hash）的引用。$A$ 和 $B$ 兩方都作為此區塊鏈的validator，所以每個區塊必須收集他們兩人的簽名。區塊鏈的狀態 $S_i$ 定義了下一個區塊的指定生產者 $o_i$，所以 $A$ 和 $B$ 在生產下一個區塊時沒有競爭。生產者 $A$ 只能創建將資金從 $A$ 轉移到 $B$ 的區塊（即減少不平衡：$\delta_{i+1}\leq\delta_i$），$B$ 則只能將資金從 $B$ 轉移到 $A$（即增加 $\delta$）。
 
-如果兩個Validator同意區塊鏈的最後一個區塊（和最終狀態），則可以通過收集兩方的特殊“最終”簽名並與最終區塊一起提交到通道智能合約進行處理和相應地重新分配資金來確定它。
+如果兩個validator同意區塊鏈的最後一個區塊（和最終狀態），則可以通過收集兩方的特殊“最終”簽名並與最終區塊一起提交到通道智能合約進行處理和相應地重新分配資金來確定它。
 
-如果Validator簽署一個無效的區塊，或者創建一個分叉，或者簽署兩個不同的最終區塊，它可以通過將其不端行為的證據提交給智能合約，這相當於一個Validator失去其股份。
+如果validator簽署一個無效的區塊，或者創建一個分叉，或者簽署兩個不同的最終區塊，它可以通過將其不端行為的證據提交給智能合約，這相當於一個validator失去其股份。
 
 
 \nxsubpoint\label{sp:async.pc} \embt(Asynchronous payment channel as a
@@ -1892,7 +1892,7 @@ TON基礎設施允許專門的輕量客戶端錢包和``ton-browser''桌面和�
 \appendix
 \myappendix{Toncoin，又名TON}\label{app:coins}
 
-TON區塊鏈的主要加密貨幣，特別是其主鏈和基本工作鏈，是{\em Toncoin}，也被稱為{\em Toncoin\/} (TON)。它被用於進行成為Validator所需的存款；交易費、gas支付（即，智能合約消息處理費）和持久儲存支付通常也以Toncoin收取。
+TON區塊鏈的主要加密貨幣，特別是其主鏈和基本工作鏈，是{\em Toncoin}，也被稱為{\em Toncoin\/} (TON)。它被用於進行成為validator所需的存款；交易費、gas支付（即，智能合約消息處理費）和持久儲存支付通常也以Toncoin收取。
 
 \nxpoint \embt(Subdivision and terminology.)  一個{\em Toncoin\/}被細分為十億 ($10^9$) 更小的單位，稱為{\em nanoToncoin}、{\em nToncoin}或簡單地稱為{\em nanos}。所有的轉賬和賬戶餘額都表示為nanos的非負整數倍。其他單位包括：
 \begin{itemize}
@@ -1912,11 +1912,11 @@ TON區塊鏈的主要加密貨幣，特別是其主鏈和基本工作鏈，是{\
 
 \nxpoint \embt(Original supply, mining rewards and inflation.)  Toncoin的總供應量原本限制為$5$ GigaToncoin (即，五十億的Toncoin或$5\cdot10^{18}$ nanos)。
 
-這一供應量將非常緩慢地增加，因為獎勵給Validator挖掘新的主鏈和分片鏈區塊積累。這些獎勵大約會達到$20\%$ (確切的數字可能在未來進行調整)的Validator的每年股份，只要Validator努力履行其職責，簽署所有區塊，從不離線並且從不簽署無效的區塊。這樣，Validator將有足夠的利潤投資於更好更快的硬體，以處理不斷增加的用戶交易量。
+這一供應量將非常緩慢地增加，因為獎勵給validator挖掘新的主鏈和分片鏈區塊積累。這些獎勵大約會達到$20\%$ (確切的數字可能在未來進行調整)的validator的每年股份，只要validator努力履行其職責，簽署所有區塊，從不離線並且從不簽署無效的區塊。這樣，validator將有足夠的利潤投資於更好更快的硬體，以處理不斷增加的用戶交易量。
 
-我們預計最多$10\%$\footnote{Validator股份的最大總量是區塊鏈的一個可配置參數，因此如果需要，該協議可以強制執行此限制。}的Toncoin總供應量，平均下來，將在任何給定時刻被Validator股份綁定。這將產生一個$2\%$的每年的通脹率，並因此，在35年內將Toncoin的總供應量加倍(到十個GigaToncoin)。從本質上講，這種通脹代表了由社區的所有成員支付給Validator的款項，用於保持系統正常運行。
+我們預計最多$10\%$\footnote{validator股份的最大總量是區塊鏈的一個可配置參數，因此如果需要，該協議可以強制執行此限制。}的Toncoin總供應量，平均下來，將在任何給定時刻被validator股份綁定。這將產生一個$2\%$的每年的通脹率，並因此，在35年內將Toncoin的總供應量加倍(到十個GigaToncoin)。從本質上講，這種通脹代表了由社區的所有成員支付給validator的款項，用於保持系統正常運行。
 
-另一方面，如果一個Validator被抓到有不正當行為，其部分或全部的股份將被作為懲罰而扣除，並且其中的較大部分隨後將被“銷毀”，從而減少Toncoin的總供應量。這將導致通貨緊縮。罰款的一小部分可能會重新分配給Validator或提交有罪Validator不當行為證明的“漁夫”。
+另一方面，如果一個validator被抓到有不正當行為，其部分或全部的股份將被作為懲罰而扣除，並且其中的較大部分隨後將被“銷毀”，從而減少Toncoin的總供應量。這將導致通貨緊縮。罰款的一小部分可能會重新分配給validator或提交有罪validator不當行為證明的“fisherman”。
 
 \nxpoint\label{sp:Toncoin.price} \embt(Original price of Toncoin.)  第一個要出售的Toncoin的價格將約等於$\$0.1$ (USD)。每一個接下來要被賣出的Toncoin (由TON儲備，由TON基金會控制) 都將比前一個價格高十億分之一。這樣，要放入流通的第$n$個Toncoin將以大約
 \begin{equation}\label{eq:Toncoin.price}
@@ -1952,21 +1952,21 @@ TON區塊鏈的主要加密貨幣，特別是其主鏈和基本工作鏈，是{\
 當然，如果$T\lll p(n)\alpha^{-1}$，那麼$\Delta n\approx T/p(n)$。
 
 
-\nxsubpoint \embt(Market price of Toncoin.)  當然，如果自由市場價格跌破$p(n):=0.1\cdot (1+10^{-9})^n$，一旦$n$個Toncoin流通，沒有人會從TON Reserve購買新的Toncoin；他們會選擇在自由市場上購買Toncoin，而不增加Toncoin的總流通量。另一方面，一個Toncoin的市場價格不能比$p(n)$高得多，否則從TON Reserve獲得新的Toncoin是有意義的。這意味著Toncoin的市場價格不會受到突如其來的劇烈波動(和下跌)；這很重要，因為 stake (Validator deposits)至少被凍結了一個月，而且gas價格也不能改變得太快。所以，系統的整體經濟穩定性需要一個機制，防止Toncoin的匯率發生過於劇烈的變化，就像上面描述的那樣。
+\nxsubpoint \embt(Market price of Toncoin.)  當然，如果自由市場價格跌破$p(n):=0.1\cdot (1+10^{-9})^n$，一旦$n$個Toncoin流通，沒有人會從TON Reserve購買新的Toncoin；他們會選擇在自由市場上購買Toncoin，而不增加Toncoin的總流通量。另一方面，一個Toncoin的市場價格不能比$p(n)$高得多，否則從TON Reserve獲得新的Toncoin是有意義的。這意味著Toncoin的市場價格不會受到突如其來的劇烈波動(和下跌)；這很重要，因為 stake (validator deposits)至少被凍結了一個月，而且gas價格也不能改變得太快。所以，系統的整體經濟穩定性需要一個機制，防止Toncoin的匯率發生過於劇烈的變化，就像上面描述的那樣。
 
 \nxsubpoint \embt(Buying back the Toncoin.)  如果Toncoin的市場價格跌到$0.5\cdot p(n)$以下，當總共有$n$個Toncoin流通(即，不保留在TON Reserve控制的特殊帳戶上)，TON Reserve保留購回一些Toncoin並減少$n$，即Toncoin的總流通量的權利。這可能是為了防止Toncoin匯率突然下跌。
 
 \nxsubpoint \embt(Selling new Toncoin at a higher price.)  TON Reserve將只根據價格公式~\eqref{eq:Toncoin.price}銷售最多一半(即，$2.5\cdot10^9$ Toncoin)的Toncoin總供應量。它保留不銷售任何剩餘的Toncoin，或以高於$p(n)$的價格出售它們，但永遠不會以較低的價格出售(考慮到匯率快速變化的不確定性)。這裡的道理是，一旦至少一半的Toncoin都被賣出，Toncoin市場的總價值將足夠高，外部力量操縱匯率比在Toncoin部署初期可能更困難。
 
-\nxpoint\label{sp:unalloc.gr} \embt(Using unallocated Toncoin.)  TON Reserve將使用大部分的``未分配''Toncoin(大約$5\cdot10^9-n$ Toncoin)---即，那些存在於TON Reserve的特殊帳戶和與之明確關聯的其他帳戶中的Toncoin---只作為Validator stakes (因為TON基金會本身可能必須在TON區塊鏈的第一個部署階段提供大部分的Validators)，和在主鏈上投票支持或反對有關``可配置參數''和其他協議更改的提案，由TON基金會決定(即，其創建者---開發團隊)。這也意味著在TON Blockchain的第一個部署階段，TON基金會將擁有大多數的票。希望那時系統會變得更加成熟，不需要太頻繁地調整參數。
+\nxpoint\label{sp:unalloc.gr} \embt(Using unallocated Toncoin.)  TON Reserve將使用大部分的``未分配''Toncoin(大約$5\cdot10^9-n$ Toncoin)---即，那些存在於TON Reserve的特殊帳戶和與之明確關聯的其他帳戶中的Toncoin---只作為validator stakes (因為TON基金會本身可能必須在TON區塊鏈的第一個部署階段提供大部分的validators)，和在主鏈上投票支持或反對有關``可配置參數''和其他協議更改的提案，由TON基金會決定(即，其創建者---開發團隊)。這也意味著在TON Blockchain的第一個部署階段，TON基金會將擁有大多數的票。希望那時系統會變得更加成熟，不需要太頻繁地調整參數。
 
 \nxsubpoint\label{sp:dev.Toncoin} \embt(Some unallocated Toncoin will be
 given to developers.)  一預定的（相對較少的）「未分配」的Toncoin數量（例如，200 MegaToncoin，相當於總供應的4％）將在TON Blockchain的部署期間轉移到由TON Foundation控制的特殊賬戶，然後某些「獎勵」可能會從此賬戶支付給開源TON軟體的開發者，並有最少兩年的鑲嵌期。
 
 \nxsubpoint\label{sp:TON.own.Toncoin} \embt(The TON Foundation needs
-Toncoin for operational purposes.)  請記住，TON Foundation將收到由TON Reserve出售的Toncoin所得的法定貨幣和加密貨幣，並將其用於TON Project的開發和部署。例如，原始的Validator集合以及TON Storage和TON Proxy節點的初始集合可能由TON Foundation安裝。
+Toncoin for operational purposes.)  請記住，TON Foundation將收到由TON Reserve出售的Toncoin所得的法定貨幣和加密貨幣，並將其用於TON Project的開發和部署。例如，原始的validator集合以及TON Storage和TON Proxy節點的初始集合可能由TON Foundation安裝。
 
-雖然這對於項目的快速啟動是必要的，但最終目標是使該項目盡可能去中心化。為此，TON Foundation可能需要鼓勵安裝第三方Validator以及TON Storage和TON Proxy節點 - 例如，通過支付他們儲存TON Blockchain的舊區塊或代理所選服務子集的網絡流量。此類付款將以Toncoin進行；因此，TON Foundation將需要大量的Toncoin用於操作目的。
+雖然這對於項目的快速啟動是必要的，但最終目標是使該項目盡可能去中心化。為此，TON Foundation可能需要鼓勵安裝第三方validator以及TON Storage和TON Proxy節點 - 例如，通過支付他們儲存TON Blockchain的舊區塊或代理所選服務子集的網絡流量。此類付款將以Toncoin進行；因此，TON Foundation將需要大量的Toncoin用於操作目的。
 
 \nxsubpoint \embt(Taking a pre-arranged amount from the Reserve.) TON Foundation將從TON Reserve轉賬到其賬戶的一小部分 - 說，所有硬幣的10％（即500 MegaToncoin）在Toncoin的初次銷售結束後 - 用於其自己的目的，如在~\ptref{sp:TON.own.Toncoin}中概述的。最好是與為TON開發人員提供的資金轉賬同時完成，如在~\ptref{sp:dev.Toncoin}中提到的。
 
