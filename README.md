@@ -8,19 +8,28 @@
 ![GitHub license](https://img.shields.io/github/license/awesome-doge/TON_Paper)
 
 
-此專案旨在為 The Open Network 白皮書提供高品質的翻譯和編譯版本，以促進全球社群的接觸和了解。
+此專案旨在為 The Open Network 白皮書提供高品質的繁體中文（台灣）翻譯和編譯版本，以促進全球社群的接觸和了解。
+
+## 📊 翻譯進度
+
+四篇主要技術文件已完成繁體中文（台灣）翻譯：
+
+- ✅ **tw_fiftbase.tex**: 100% 完成（2,205 行）- Fift 語言文檔
+- ✅ **tw_tblkch.tex**: 100% 完成（2,329 行）- TON 區塊鏈規範
+- ✅ **tw_ton.tex**: 100% 完成（1,822 行，133 頁 PDF）- TON 主白皮書
+- ✅ **tw_tvm.tex**: 100% 完成（3,192 行，144 頁 PDF）- TVM 規範
 
 ## 📖 文件一覽
 
-以下表格提供了每篇文件的英文和中文版本連結：
+以下表格提供了每篇文件的英文和繁體中文（台灣）版本連結：
 
-|  文件名稱  |   英文版本 (.tex)  |   英文版本 (.pdf)  |   中文版本 (.tex)  |   中文版本 (.pdf)  |
+|  文件名稱  |   英文版本 (.tex)  |   英文版本 (.pdf)  |   繁體中文版本 (.tex)  |   繁體中文版本 (.pdf)  |
 |:---------:|:------------------:|:------------------:|:------------------:|:------------------:|
-| Catchain  | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_catchain.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_catchain.pdf) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/zh_catchain.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/zh_catchain.pdf) |
-| Fiftbase  | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_fiftbase.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_fiftbase.pdf) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/zh_fiftbase.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/zh_fiftbase.pdf) |
-| Tblkch    | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_tblkch.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_tblkch.pdf) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/zh_tblkch.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/zh_tblkch.pdf) |
-| TON       | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_ton.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_ton.pdf) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/zh_ton.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/zh_ton.pdf) |
-| TVM       | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_tvm.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_tvm.pdf) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/zh_tvm.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/zh_tvm.pdf) |
+| Catchain  | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_catchain.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_catchain.pdf) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/tw_catchain.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/tw_catchain.pdf) |
+| Fiftbase  | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_fiftbase.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_fiftbase.pdf) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/tw_fiftbase.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/tw_fiftbase.pdf) |
+| Tblkch    | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_tblkch.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_tblkch.pdf) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/tw_tblkch.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/tw_tblkch.pdf) |
+| TON       | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_ton.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_ton.pdf) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/tw_ton.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/tw_ton.pdf) |
+| TVM       | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_tvm.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/en_tvm.pdf) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/tw_tvm.tex) | [Link](https://github.com/awesome-doge/TON_Paper/blob/main/tw_tvm.pdf) |
 
 *注：當`.tex`文件被推送到主分支時，將由GitHub Actions工作流程自動編譯為PDF版本。*
 
